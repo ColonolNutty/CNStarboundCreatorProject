@@ -1,0 +1,17 @@
+{"ingredients": [
+  {
+   "itemName": "battersimpleMFM",
+   "price": 22.05,
+   "foodValue": 0
+  },
+  {
+   "itemName": "flourMFM",
+   "price": 21,
+   "foodValue": null
+  },
+  {
+   "itemName": "foulcocktailMFM",
+   "price": 75.89,
+   "foodValue": null
+  }
+ ]}

@@ -1,7 +1,7 @@
 {
-  "locationsToUpdate": ["C:/Users/Jack's Computer/IdeaProjects/MoreFarmingUpdateValues/Samples"],
-  "recipeLocations" : ["C:/Users/Jack's Computer/IdeaProjects/MoreFarmingUpdateValues/Samples"],
-  "ingredientLocations" : ["C:/Users/Jack's Computer/IdeaProjects/MoreFarmingUpdateValues/Samples"],
+  "locationsToUpdate": ["C:/Users/Jack's Computer/IdeaProjects/PriceFoodValueBalancer/Samples"],
+  "recipeLocations" : ["C:/Users/Jack's Computer/IdeaProjects/PriceFoodValueBalancer/Samples"],
+  "ingredientLocations" : ["C:/Users/Jack's Computer/IdeaProjects/PriceFoodValueBalancer/Samples"],
   "ingredientExtensionInclusionList" : [".item", ".consumable"],
   "extensionsToUpdate": [".item", ".consumable"],
   "increasePercentage" : 0.05,

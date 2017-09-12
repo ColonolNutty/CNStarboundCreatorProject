@@ -12,7 +12,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class ObjectBase {
     public String objectName;
     public Double price;
-
-    @JsonIgnore
     public Double foodValue;
 }

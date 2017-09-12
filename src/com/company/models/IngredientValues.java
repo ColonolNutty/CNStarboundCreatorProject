@@ -12,4 +12,8 @@ public class IngredientValues {
     public String itemName;
     public Double price;
     public Double foodValue;
+
+    public String toJson() {
+        return "{ \"itemName\":\"" + itemName + "\", \"price\": " + price + ", \"foodValue\": " + foodValue + "}";
+    }
 }

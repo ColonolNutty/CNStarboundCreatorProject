@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.Updaters.*;
-import com.company.locators.IngredientLocator;
+import com.company.updaters.*;
+import com.company.locators.IngredientStore;
 import com.company.locators.RecipeLocator;
 import com.company.models.ConfigSettings;
 
@@ -21,19 +21,22 @@ public class Main {
         if(settings == null) {
             return;
         }
+        String savedValuesLocation = System.getProperty("user.dir") + "/savedUpdatedValues.json";
         DebugLog log = new DebugLog(settings.enableDebug);
         JsonManipulator manipulator = new JsonManipulator();
-        IngredientLocator ingredientLocator = new IngredientLocator(log, settings, manipulator);
+        SavedValuesReadWriter readWriter = new SavedValuesReadWriter(log, settings, savedValuesLocation, manipulator);
+        IngredientStore ingredientStore = readWriter.readStore();
         RecipeLocator recipeLocator = new RecipeLocator(log, settings, manipulator);
-        ValueCalculator valueCalculator = new ValueCalculator(log, settings, recipeLocator, ingredientLocator);
+        ValueCalculator valueCalculator = new ValueCalculator(log, settings, recipeLocator, ingredientStore);
         ArrayList<Updater> updaters = new ArrayList<Updater>();
-        updaters.add(new ConsumableUpdater(log, manipulator, ingredientLocator, valueCalculator));
-        updaters.add(new ItemUpdater(log, manipulator));
-        updaters.add(new MatItemUpdater(log, manipulator));
-        updaters.add(new ObjectUpdater(log, manipulator));
-        updaters.add(new PatchFileUpdater(log, manipulator));
-        updaters.add(new ProjectileUpdater(log, manipulator));
+        updaters.add(new ConsumableUpdater(log, manipulator, ingredientStore, valueCalculator));
+        updaters.add(new ItemUpdater(log, manipulator, ingredientStore, valueCalculator));
+        updaters.add(new MatItemUpdater(log, manipulator, ingredientStore, valueCalculator));
+        updaters.add(new ObjectUpdater(log, manipulator, ingredientStore, valueCalculator));
+        updaters.add(new PatchFileUpdater(log, manipulator, ingredientStore, valueCalculator));
+        updaters.add(new ProjectileUpdater(log, manipulator, ingredientStore, valueCalculator));
         FileUpdater updater = new FileUpdater(log, settings, valueCalculator, manipulator, updaters);
         updater.updateValues();
+        readWriter.saveStore(ingredientStore);
     }
 }

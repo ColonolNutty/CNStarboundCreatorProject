@@ -1,7 +1,9 @@
-package com.company.Updaters;
+package com.company.updaters;
 
 import com.company.DebugLog;
 import com.company.JsonManipulator;
+import com.company.ValueCalculator;
+import com.company.locators.IngredientStore;
 
 /**
  * User: Jack's Computer
@@ -9,8 +11,9 @@ import com.company.JsonManipulator;
  * Time: 11:30 AM
  */
 public class ItemUpdater extends Updater {
-    public ItemUpdater(DebugLog log, JsonManipulator manipulator) {
-        super(log, manipulator);
+
+    public ItemUpdater(DebugLog log, JsonManipulator manipulator, IngredientStore ingredientStore, ValueCalculator valueCalculator) {
+        super(log, manipulator, ingredientStore, valueCalculator);
     }
 
     @Override

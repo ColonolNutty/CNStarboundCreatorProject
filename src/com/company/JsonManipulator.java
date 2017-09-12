@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -43,7 +44,7 @@ public class JsonManipulator {
         return read(path, ConsumableBase.class);
     }
 
-    public <T> T read(String filePath, Class<T> classOfT) throws IOException, JsonSyntaxException {
+    public <T> T read(String filePath, Class<T> classOfT) throws IOException, JsonSyntaxException, FileNotFoundException {
         Reader reader = new FileReader(filePath);
         return _mapper.readValue(reader, classOfT);
     }
@@ -51,32 +52,44 @@ public class JsonManipulator {
     public void write(String filePath, Object obj) {
         try {
             String fileData = readExistingFile(filePath);
-            JSONObject toWrite = combineWithExisting(obj, fileData);
+            String toWriteObj = _mapper.writeValueAsString(obj);
+            JSONObject toWrite = new JSONObject(toWriteObj);
+            if(fileData != null) {
+               toWrite = combineWithExisting(toWrite, fileData);
+            }
             Writer writer = new FileWriter(filePath);
             toWrite.write(writer, 1, 1);
             writer.close();
         }
         catch(IOException e) {
             System.out.println("Failed to write file: " + filePath);
+            e.printStackTrace();
         }
     }
 
-    private JSONObject combineWithExisting(Object dataToWrite, String existingJson) throws IOException {
-        String toWriteObj = _mapper.writeValueAsString(dataToWrite);
-        JSONObject toWrite = new JSONObject(toWriteObj);
-        JSONObject existingObject = new JSONObject(existingJson);
+    private JSONObject combineWithExisting(JSONObject toWrite, String existingJson) throws IOException {
+        try {
+            JSONObject existingObject = new JSONObject(existingJson);
 
-        Iterator<String> toUpdateKeys = toWrite.keys();
-        while(toUpdateKeys.hasNext()) {
-            String key = toUpdateKeys.next();
-            existingObject.put(key, toWrite.get(key));
+            Iterator<String> toUpdateKeys = toWrite.keys();
+            while (toUpdateKeys.hasNext()) {
+                String key = toUpdateKeys.next();
+                existingObject.put(key, toWrite.get(key));
+            }
+            return existingObject;
         }
-        return existingObject;
+        catch(JSONException e) {
+            return toWrite;
+        }
     }
 
     private String readExistingFile(String filePath) throws IOException {
         String fileData = "";
         try {
+            File file = new File(filePath);
+            if(!file.exists() || file.isDirectory()) {
+                return null;
+            }
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = br.readLine()) != null) {
@@ -86,6 +99,7 @@ public class JsonManipulator {
         }
         catch(FileNotFoundException e) {
             System.out.println("Failed to find file: " + filePath);
+            throw e;
         }
         return fileData;
     }

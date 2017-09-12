@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.locators.IngredientLocator;
+import com.company.locators.IngredientStore;
 import com.company.locators.RecipeLocator;
 import com.company.models.ConfigSettings;
 import com.company.models.IngredientValues;
@@ -14,15 +14,15 @@ import com.company.models.Recipe;
 public class ValueCalculator {
     private Double increasePercentage = 0.05;
     private RecipeLocator _recipeLocator;
-    private IngredientLocator _ingredientLocator;
+    private IngredientStore _ingredientStore;
     private DebugLog _log;
 
     public ValueCalculator(DebugLog log,
                            ConfigSettings configSettings,
                            RecipeLocator recipeLocator,
-                           IngredientLocator ingredientLocator) {
+                           IngredientStore ingredientStore) {
         _recipeLocator = recipeLocator;
-        _ingredientLocator = ingredientLocator;
+        _ingredientStore = ingredientStore;
         increasePercentage = configSettings.increasePercentage;
         _log = log;
     }
@@ -33,13 +33,7 @@ public class ValueCalculator {
             _log.logDebug("No recipe found for: " + ingredient.itemName);
             return null;
         }
-        IngredientValues newValues = calculateNewValues(recipe);
-        if(newValues.foodValue != null && newValues.foodValue.equals(ingredient.foodValue)
-                && newValues.price != null && newValues.price.equals(ingredient.price)) {
-            return null;
-        }
-        _ingredientLocator.updateValue(ingredient.itemName, ingredient);
-        return newValues;
+        return calculateNewValues(recipe);
     }
 
     private IngredientValues calculateNewValues(Recipe recipe) {
@@ -52,7 +46,7 @@ public class ValueCalculator {
             String inputName = input.item;
             Double inputCount = input.count;
 
-            IngredientValues values = _ingredientLocator.getValuesOf(inputName);
+            IngredientValues values = _ingredientStore.getValuesOf(inputName);
             if(values != null) {
                 newPrice += calculateValue(inputCount, values.price);
                 newFoodValue += calculateValue(inputCount, values.foodValue);

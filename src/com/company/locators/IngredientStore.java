@@ -7,6 +7,8 @@ import com.company.models.IngredientValues;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
@@ -14,17 +16,35 @@ import java.util.Hashtable;
  * Date: 09/11/2017
  * Time: 1:28 PM
  */
-public class IngredientLocator {
+public class IngredientStore {
     private Hashtable<String, IngredientValues> _itemValues;
     private JsonManipulator _manipulator;
     private ConfigSettings _settings;
     private DebugLog _log;
 
-    public IngredientLocator(DebugLog log, ConfigSettings settings, JsonManipulator manipulator) {
+    public IngredientStore(DebugLog log, ConfigSettings settings, JsonManipulator manipulator) {
         _log = log;
         _settings = settings;
         _manipulator = manipulator;
         _itemValues = new Hashtable<String, IngredientValues>();
+    }
+
+    public IngredientStore(DebugLog log, ConfigSettings settings, JsonManipulator manipulator, IngredientValues[] values) {
+        this(log, settings, manipulator);
+        storeValues();
+        for(int i = 0; i < values.length; i++) {
+            IngredientValues value = values[i];
+            if(_itemValues.containsKey(value.itemName)) {
+                IngredientValues existing = _itemValues.get(value.itemName);
+                if(existing.foodValue == null) {
+                    existing.foodValue = value.foodValue;
+                }
+                if(existing.price == null) {
+                    existing.price = value.price;
+                }
+                _itemValues.put(existing.itemName, existing);
+            }
+        }
     }
 
     public IngredientValues getValuesOf(String itemName) {
@@ -91,5 +111,20 @@ public class IngredientLocator {
             }
         }
         return isIncluded;
+    }
+
+    public IngredientValues[] getValues() {
+        ArrayList<IngredientValues> values = new ArrayList<IngredientValues>();
+        Enumeration<String> keys = _itemValues.keys();
+        while(keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            IngredientValues value = _itemValues.get(key);
+            values.add(value);
+        }
+        IngredientValues[] ingredientValues = new IngredientValues[values.size()];
+        for(int i = 0; i < ingredientValues.length; i++) {
+            ingredientValues[i] = values.get(i);
+        }
+        return ingredientValues;
     }
 }

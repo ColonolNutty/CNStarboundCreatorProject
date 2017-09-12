@@ -1,10 +1,9 @@
 package com.company;
 
-import com.company.Updaters.Updater;
+import com.company.updaters.Updater;
 import com.company.models.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -62,8 +61,7 @@ public class FileUpdater {
         //get all the files from a directory
         File[] fList = directory.listFiles();
         for (File file : fList){
-            if (file.isFile() && isFileIncluded(file.getName())){
-                _log.logDebug("Updating file with name: " + file.getName());
+            if (file.isFile()){
                 filePaths.add(file.getAbsolutePath());
             }
             else if (file.isDirectory()){
@@ -72,21 +70,7 @@ public class FileUpdater {
                     filePaths.add(subPaths.get(i));
                 }
             }
-            else {
-                _log.logDebug("Skipping file: " + file.getName());
-            }
         }
         return filePaths;
-    }
-
-    private boolean isFileIncluded(String fileName) {
-        boolean isIncluded = false;
-        for(int i = 0; i < _settings.extensionsToUpdate.length; i++) {
-            if(fileName.endsWith(_settings.extensionsToUpdate[i])) {
-                isIncluded = true;
-                i = _settings.extensionsToUpdate.length;
-            }
-        }
-        return isIncluded;
     }
 }
