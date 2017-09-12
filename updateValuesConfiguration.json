@@ -1,0 +1,9 @@
+{
+  "locationsToUpdate": ["C:/Users/Jack's Computer/IdeaProjects/MoreFarmingUpdateValues/Samples"],
+  "recipeLocations" : ["C:/Users/Jack's Computer/IdeaProjects/MoreFarmingUpdateValues/Samples"],
+  "ingredientLocations" : ["C:/Users/Jack's Computer/IdeaProjects/MoreFarmingUpdateValues/Samples"],
+  "ingredientExtensionInclusionList" : [".item", ".consumable"],
+  "extensionsToUpdate": [".item", ".consumable"],
+  "increasePercentage" : 0.05,
+  "enableDebug": true
+}
