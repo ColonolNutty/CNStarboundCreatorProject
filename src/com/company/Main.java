@@ -15,17 +15,17 @@ public class Main {
             configFile = args[0];
         }
         else {
-            configFile = System.getProperty("user.dir") + "/updateValuesConfiguration.json";
+            configFile = "updateValuesConfiguration.json";
+            System.out.println("No config file specified, using default: " + configFile);
         }
         ConfigSettings settings = new ConfigReader().readSettings(configFile);
         if(settings == null) {
             return;
         }
-        String savedValuesLocation = System.getProperty("user.dir") + "/savedUpdatedValues.json";
         DebugLog log = new DebugLog(settings.enableDebug);
         JsonManipulator manipulator = new JsonManipulator();
-        SavedValuesReadWriter readWriter = new SavedValuesReadWriter(log, settings, savedValuesLocation, manipulator);
-        IngredientStore ingredientStore = readWriter.readStore();
+        InitialValuesReadWriter readWriter = new InitialValuesReadWriter(log, settings, manipulator);
+        IngredientStore ingredientStore = readWriter.read();
         RecipeLocator recipeLocator = new RecipeLocator(log, settings, manipulator);
         ValueCalculator valueCalculator = new ValueCalculator(log, settings, recipeLocator, ingredientStore);
         ArrayList<Updater> updaters = new ArrayList<Updater>();
@@ -37,6 +37,6 @@ public class Main {
         updaters.add(new ProjectileUpdater(log, manipulator, ingredientStore, valueCalculator));
         FileUpdater updater = new FileUpdater(log, settings, valueCalculator, manipulator, updaters);
         updater.updateValues();
-        readWriter.saveStore(ingredientStore);
+        readWriter.save(ingredientStore);
     }
 }

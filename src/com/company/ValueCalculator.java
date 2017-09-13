@@ -3,8 +3,11 @@ package com.company;
 import com.company.locators.IngredientStore;
 import com.company.locators.RecipeLocator;
 import com.company.models.ConfigSettings;
-import com.company.models.IngredientValues;
+import com.company.models.Ingredient;
 import com.company.models.Recipe;
+import com.company.models.RecipeIngredient;
+
+import java.util.ArrayList;
 
 /**
  * User: Jack's Computer
@@ -27,49 +30,70 @@ public class ValueCalculator {
         _log = log;
     }
 
-    public IngredientValues updateValues(IngredientValues ingredient){
+    public Ingredient updateValues(Ingredient ingredient){
         Recipe recipe = _recipeLocator.locateRecipe(ingredient.itemName);
         if(recipe == null) {
             _log.logDebug("No recipe found for: " + ingredient.itemName);
-            return null;
+            return ingredient;
         }
         return calculateNewValues(recipe);
     }
 
-    private IngredientValues calculateNewValues(Recipe recipe) {
-        IngredientValues newValues = new IngredientValues();
-        newValues.itemName = recipe.output.item;
+    private Ingredient calculateNewValues(Recipe recipe) {
+        ArrayList<RecipeIngredient> recipeIngredients = findIngredientsFor(recipe);
+
         Double newFoodValue = 0.0;
         Double newPrice = 0.0;
-        for(int i = 0; i < recipe.input.length; i++) {
-            ItemDescriptor input = recipe.input[i];
-            String inputName = input.item;
-            Double inputCount = input.count;
 
-            IngredientValues values = _ingredientStore.getValuesOf(inputName);
-            if(values != null) {
-                newPrice += calculateValue(inputCount, values.price);
-                newFoodValue += calculateValue(inputCount, values.foodValue);
+        for(int i = 0; i < recipeIngredients.size(); i++) {
+            RecipeIngredient recipeIngredient = recipeIngredients.get(i);
+            Ingredient ingredient = recipeIngredient.ingredient;
+
+            if(ingredient != null) {
+                newPrice += calculateValue(recipeIngredient.count, ingredient.price);
+                newFoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue);
             }
         }
+
         Double outputCount = recipe.output.count;
         if(outputCount <= 0.0) {
             outputCount = 1.0;
         }
-        newFoodValue = newFoodValue / outputCount;
-        newPrice = newPrice / outputCount;
-        newValues.foodValue = (double)Math.round(newFoodValue * 100)/100;
-        newValues.price = (double)Math.round(newPrice * 100)/100;
-        return newValues;
+        newPrice = roundTwoDecimalPlaces(newPrice / outputCount);
+        newFoodValue = roundTwoDecimalPlaces(newFoodValue / outputCount);
+
+        return new Ingredient(recipe.output.item, newPrice, newFoodValue);
+    }
+
+    private ArrayList<RecipeIngredient> findIngredientsFor(Recipe recipe) {
+        ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
+        for(int i = 0; i < recipe.input.length; i++) {
+            ItemDescriptor input = recipe.input[i];
+            String ingredientName = input.item;
+            Double ingredientCount = input.count;
+
+            Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
+            if(ingredient == null) {
+                ingredient = new Ingredient(ingredientName);
+                _ingredientStore.updateIngredients(ingredientName, ingredient);
+            }
+            RecipeIngredient recipeIngredient = new RecipeIngredient(ingredient, ingredientCount);
+            recipeIngredients.add(recipeIngredient);
+        }
+        return recipeIngredients;
     }
 
     private Double calculateValue(Double count, Double value) {
         if(count <= 0.0) {
             count = 1.0;
         }
-        if(value == null) {
+        if(count == null || value == null) {
             return 0.0;
         }
         return (value * count) + (value * increasePercentage);
+    }
+
+    private Double roundTwoDecimalPlaces(Double val) {
+        return (double)Math.round(val * 100)/100;
     }
 }

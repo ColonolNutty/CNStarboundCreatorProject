@@ -1,9 +1,11 @@
 {
-  "locationsToUpdate": ["C:/Users/Jack's Computer/IdeaProjects/PriceFoodValueBalancer/Samples"],
-  "recipeLocations" : ["C:/Users/Jack's Computer/IdeaProjects/PriceFoodValueBalancer/Samples"],
-  "ingredientLocations" : ["C:/Users/Jack's Computer/IdeaProjects/PriceFoodValueBalancer/Samples"],
+  "locationsToUpdate": ["Samples"],
+  "recipeLocations" : ["Samples"],
+  "ingredientLocations" : ["Samples"],
   "ingredientExtensionInclusionList" : [".item", ".consumable"],
   "extensionsToUpdate": [".item", ".consumable"],
+  "ingredientValueOutputStoragePath": "savedUpdatedValues.json",
+  "ingredientValueOverridePath": "priceFoodValueOverrides.json",
   "increasePercentage" : 0.05,
   "enableDebug": true
 }

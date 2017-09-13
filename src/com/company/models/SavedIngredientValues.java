@@ -6,5 +6,5 @@ package com.company.models;
  * Time: 3:11 PM
  */
 public class SavedIngredientValues {
-    public IngredientValues[] ingredients;
+    public Ingredient[] ingredients;
 }

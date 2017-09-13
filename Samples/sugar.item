@@ -1,0 +1,10 @@
+{
+  "itemName" : "sugar",
+  "price" : 90,
+  "rarity" : "Common",
+  "category" : "cookingIngredient",
+  "inventoryIcon" : "flourMFM.png",
+  "description" : "Used in many recipes!",
+  "shortdescription" : "Flour",
+  "learnBlueprintsOnPickup" : [ "doughMFM" ]
+}

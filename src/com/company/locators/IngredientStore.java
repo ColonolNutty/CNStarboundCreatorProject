@@ -3,7 +3,7 @@ package com.company.locators;
 import com.company.DebugLog;
 import com.company.JsonManipulator;
 import com.company.models.ConfigSettings;
-import com.company.models.IngredientValues;
+import com.company.models.Ingredient;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.util.Hashtable;
  * Time: 1:28 PM
  */
 public class IngredientStore {
-    private Hashtable<String, IngredientValues> _itemValues;
+    private Hashtable<String, Ingredient> _ingredients;
     private JsonManipulator _manipulator;
     private ConfigSettings _settings;
     private DebugLog _log;
@@ -26,45 +26,79 @@ public class IngredientStore {
         _log = log;
         _settings = settings;
         _manipulator = manipulator;
-        _itemValues = new Hashtable<String, IngredientValues>();
+        _ingredients = new Hashtable<String, Ingredient>();
+        storeIngredients();
     }
 
-    public IngredientStore(DebugLog log, ConfigSettings settings, JsonManipulator manipulator, IngredientValues[] values) {
-        this(log, settings, manipulator);
-        storeValues();
-        for(int i = 0; i < values.length; i++) {
-            IngredientValues value = values[i];
-            if(_itemValues.containsKey(value.itemName)) {
-                IngredientValues existing = _itemValues.get(value.itemName);
-                if(existing.foodValue == null) {
-                    existing.foodValue = value.foodValue;
+    public void updateIngredients(Ingredient[] ingredients) {
+        for(int i = 0; i < ingredients.length; i++) {
+            Ingredient ingredient = ingredients[i];
+            if(_ingredients.containsKey(ingredient.itemName)) {
+                Ingredient existing = _ingredients.get(ingredient.itemName);
+                if(existing.foodValue == null || existing.foodValue <= 0.0) {
+                    if(ingredient.foodValue != null) {
+                        existing.foodValue = ingredient.foodValue;
+                    }
                 }
-                if(existing.price == null) {
-                    existing.price = value.price;
+                if(existing.price == null || existing.price <= 0.0) {
+                    if(ingredient.price != null) {
+                        existing.price = ingredient.price;
+                    }
                 }
-                _itemValues.put(existing.itemName, existing);
+                _ingredients.put(existing.itemName, existing);
             }
         }
     }
 
-    public IngredientValues getValuesOf(String itemName) {
-        if(_itemValues.isEmpty()) {
-            storeValues();
+    public void overrideIngredients(Ingredient[] ingredients) {
+        for(int i = 0; i < ingredients.length; i++) {
+            Ingredient ingredient = ingredients[i];
+            if(_ingredients.containsKey(ingredient.itemName)) {
+                _log.logInfo("Overriding ingredient: " + ingredient.itemName + " with p: " + ingredient.price + " and fv: " + ingredient.foodValue);
+                Ingredient existing = _ingredients.get(ingredient.itemName);
+                if(ingredient.foodValue != null) {
+                    existing.foodValue = ingredient.foodValue;
+                }
+                if(ingredient.price != null) {
+                    existing.price = ingredient.price;
+                }
+                _ingredients.put(existing.itemName, existing);
+            }
+            else {
+                _ingredients.put(ingredient.itemName, ingredient);
+            }
         }
-        if(_itemValues.containsKey(itemName)) {
-            return _itemValues.get(itemName);
+    }
+
+    public Ingredient getIngredient(String itemName) {
+        if(_ingredients.isEmpty()) {
+            storeIngredients();
+        }
+        if(_ingredients.containsKey(itemName)) {
+            return _ingredients.get(itemName);
         }
         return null;
     }
 
-    public void updateValue(String itemName, IngredientValues values) {
-        if(_itemValues.containsKey(itemName)) {
-            _itemValues.remove(itemName);
+    public Ingredient[] getIngredients() {
+        Enumeration<Ingredient> ingredientElements = _ingredients.elements();
+        Ingredient[] ingredientsArray = new Ingredient[_ingredients.size()];
+        int i = 0;
+        while(ingredientElements.hasMoreElements()) {
+            ingredientsArray[i] = ingredientElements.nextElement();
+            i += 1;
         }
-        _itemValues.put(itemName, values);
+        return ingredientsArray;
     }
 
-    private void storeValues() {
+    public void updateIngredients(String itemName, Ingredient ingredient) {
+        if(_ingredients.containsKey(itemName)) {
+            _ingredients.remove(itemName);
+        }
+        _ingredients.put(itemName, ingredient);
+    }
+
+    private void storeIngredients() {
         int locationCount = _settings.ingredientLocations.length;
         for(int i = 0; i < locationCount; i++) {
             String path = _settings.ingredientLocations[i];
@@ -78,7 +112,7 @@ public class IngredientStore {
         File[] fList = directory.listFiles();
         for (File file : fList){
             if (file.isFile() && isFileIncluded(file.getName())){
-                addIngredientValues(file.getAbsolutePath());
+                addIngredient(file.getAbsolutePath());
             }
             else if (file.isDirectory()){
                 findIngredients(file);
@@ -86,13 +120,13 @@ public class IngredientStore {
         }
     }
 
-    private void addIngredientValues(String filePath) {
+    private void addIngredient(String filePath) {
         try {
-            IngredientValues ingredientValues = _manipulator.readIngredientVal(filePath);
-            if(ingredientValues != null && ingredientValues.itemName != null) {
-                String itemName = ingredientValues.itemName;
-                if(!_itemValues.containsKey(itemName)) {
-                    _itemValues.put(itemName, ingredientValues);
+            Ingredient ingredient = _manipulator.readIngredientVal(filePath);
+            if(ingredient != null && ingredient.itemName != null) {
+                String itemName = ingredient.itemName;
+                if(!_ingredients.containsKey(itemName)) {
+                    _ingredients.put(itemName, ingredient);
                 }
             }
         }
@@ -111,20 +145,5 @@ public class IngredientStore {
             }
         }
         return isIncluded;
-    }
-
-    public IngredientValues[] getValues() {
-        ArrayList<IngredientValues> values = new ArrayList<IngredientValues>();
-        Enumeration<String> keys = _itemValues.keys();
-        while(keys.hasMoreElements()) {
-            String key = keys.nextElement();
-            IngredientValues value = _itemValues.get(key);
-            values.add(value);
-        }
-        IngredientValues[] ingredientValues = new IngredientValues[values.size()];
-        for(int i = 0; i < ingredientValues.length; i++) {
-            ingredientValues[i] = values.get(i);
-        }
-        return ingredientValues;
     }
 }

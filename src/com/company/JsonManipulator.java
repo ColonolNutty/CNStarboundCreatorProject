@@ -4,16 +4,11 @@ import com.company.models.*;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.util.Iterator;
-import java.util.Map;
 
 /**
  * User: Jack's Computer
@@ -22,11 +17,9 @@ import java.util.Map;
  */
 public class JsonManipulator {
 
-    private Gson _gson;
     private ObjectMapper _mapper;
 
     public JsonManipulator() {
-        _gson = new Gson();
         JsonFactory jf = new JsonFactory();
         jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
         _mapper = new ObjectMapper(jf);
@@ -36,15 +29,15 @@ public class JsonManipulator {
         return read(path, Recipe.class);
     }
 
-    public IngredientValues readIngredientVal(String path) throws IOException {
-        return read(path, IngredientValues.class);
+    public Ingredient readIngredientVal(String path) throws IOException {
+        return read(path, Ingredient.class);
     }
 
     public ConsumableBase readConsumable(String path) throws IOException {
         return read(path, ConsumableBase.class);
     }
 
-    public <T> T read(String filePath, Class<T> classOfT) throws IOException, JsonSyntaxException, FileNotFoundException {
+    public <T> T read(String filePath, Class<T> classOfT) throws IOException {
         Reader reader = new FileReader(filePath);
         return _mapper.readValue(reader, classOfT);
     }

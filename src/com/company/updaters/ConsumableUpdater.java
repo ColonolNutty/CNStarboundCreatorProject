@@ -5,7 +5,7 @@ import com.company.JsonManipulator;
 import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
 import com.company.models.ConsumableBase;
-import com.company.models.IngredientValues;
+import com.company.models.Ingredient;
 
 import java.io.IOException;
 
@@ -24,11 +24,11 @@ public class ConsumableUpdater extends Updater {
     @Override
     public void update(String filePath) {
         try {
-            IngredientValues values = _manipulator.readIngredientVal(filePath);
-            values = _ingredientStore.getValuesOf(values.itemName);
-            IngredientValues updatedValues = _valueCalculator.updateValues(values);
+            Ingredient ingredient = _manipulator.readIngredientVal(filePath);
+            ingredient = _ingredientStore.getIngredient(ingredient.itemName);
+            Ingredient updatedValues = _valueCalculator.updateValues(ingredient);
             if(updatedValues == null
-                    || (values.foodValue.equals(updatedValues.foodValue) && values.price.equals(updatedValues.price))) {
+                    || (ingredient.foodValue.equals(updatedValues.foodValue) && ingredient.price.equals(updatedValues.price))) {
                 _log.logInfo("Skipping file: " + filePath);
                 return;
             }
@@ -42,7 +42,7 @@ public class ConsumableUpdater extends Updater {
             _log.logInfo("Updating file: " + filePath);
             consumableBase.foodValue = updatedValues.foodValue;
             consumableBase.price = updatedValues.price;
-            _ingredientStore.updateValue(consumableBase.itemName, updatedValues);
+            _ingredientStore.updateIngredients(consumableBase.itemName, updatedValues);
             _manipulator.write(filePath, consumableBase);
         }
         catch(IOException e) {

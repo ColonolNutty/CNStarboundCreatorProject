@@ -1,13 +1,23 @@
 {"ingredients": [
   {
+   "itemName": "sugar",
+   "price": 90,
+   "foodValue": 2
+  },
+  {
    "itemName": "battersimpleMFM",
-   "price": 22.05,
-   "foodValue": 0
+   "price": 103.32,
+   "foodValue": 2.54
   },
   {
    "itemName": "flourMFM",
-   "price": 21,
-   "foodValue": null
+   "price": 8.4,
+   "foodValue": 0.42
+  },
+  {
+   "itemName": "wheat",
+   "price": 40,
+   "foodValue": 2
   },
   {
    "itemName": "foulcocktailMFM",

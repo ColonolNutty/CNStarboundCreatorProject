@@ -1,7 +1,9 @@
 package com.company;
 
 import com.company.models.ConfigSettings;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,11 +15,13 @@ import java.io.Reader;
  * Time: 2:33 PM
  */
 public class ConfigReader {
-    private Gson gson;
 
+    private ObjectMapper _mapper;
 
     public ConfigReader() {
-        gson = new Gson();
+        JsonFactory jf = new JsonFactory();
+        jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
+        _mapper = new ObjectMapper(jf);
     }
 
     public ConfigSettings readSettings(String configFile) {
@@ -25,7 +29,7 @@ public class ConfigReader {
         Reader reader = null;
         try {
             reader = new FileReader(configFile);
-            settings = gson.fromJson(reader, ConfigSettings.class);
+            settings = _mapper.readValue(reader, ConfigSettings.class);
         }
         catch(IOException e) {
             System.out.println("Could not read configuration settings file: " + configFile);

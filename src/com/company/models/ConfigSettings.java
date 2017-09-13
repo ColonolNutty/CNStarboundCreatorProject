@@ -12,5 +12,7 @@ public class ConfigSettings {
     public String[] ingredientExtensionInclusionList;
     public Double increasePercentage;
     public String[] extensionsToUpdate;
+    public String ingredientValueOutputStoragePath;
+    public String ingredientValueOverridePath;
     public boolean enableDebug;
 }
