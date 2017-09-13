@@ -1,18 +1,43 @@
 {"ingredients": [
   {
-   "itemName": "sugar",
-   "price": 90,
-   "foodValue": 2
-  },
-  {
-   "itemName": "battersimpleMFM",
-   "price": 103.32,
-   "foodValue": 2.54
-  },
-  {
    "itemName": "flourMFM",
    "price": 8.4,
    "foodValue": 0.42
+  },
+  {
+   "itemName": "sand",
+   "price": 2,
+   "foodValue": null
+  },
+  {
+   "itemName": "cocoa",
+   "price": null,
+   "foodValue": 2
+  },
+  {
+   "itemName": "darkwoodmaterial",
+   "price": 2,
+   "foodValue": null
+  },
+  {
+   "itemName": "shroom",
+   "price": null,
+   "foodValue": 2
+  },
+  {
+   "itemName": "kelp",
+   "price": 5,
+   "foodValue": 2
+  },
+  {
+   "itemName": "endomorphicjelly",
+   "price": null,
+   "foodValue": 2
+  },
+  {
+   "itemName": "petalyellow",
+   "price": 5,
+   "foodValue": 2
   },
   {
    "itemName": "wheat",
@@ -20,8 +45,78 @@
    "foodValue": 2
   },
   {
+   "itemName": "petalblue",
+   "price": 5,
+   "foodValue": 2
+  },
+  {
+   "itemName": "giantflowerpetal",
+   "price": 5,
+   "foodValue": 2
+  },
+  {
+   "itemName": "petalred",
+   "price": 5,
+   "foodValue": 2
+  },
+  {
+   "itemName": "paper",
+   "price": 3,
+   "foodValue": null
+  },
+  {
+   "itemName": "cacti",
+   "price": null,
+   "foodValue": 2
+  },
+  {
    "itemName": "foulcocktailMFM",
    "price": 75.89,
    "foodValue": null
+  },
+  {
+   "itemName": "rice",
+   "price": null,
+   "foodValue": 2
+  },
+  {
+   "itemName": "ice",
+   "price": 2,
+   "foodValue": null
+  },
+  {
+   "itemName": "fleshstrand",
+   "price": 5,
+   "foodValue": 2
+  },
+  {
+   "itemName": "plantfibre",
+   "price": 5,
+   "foodValue": 1
+  },
+  {
+   "itemName": "cobblestonematerial",
+   "price": 2,
+   "foodValue": null
+  },
+  {
+   "itemName": "battersimpleMFM",
+   "price": 103.32,
+   "foodValue": 2.54
+  },
+  {
+   "itemName": "crystalplant",
+   "price": 5,
+   "foodValue": 1
+  },
+  {
+   "itemName": "clay",
+   "price": 4,
+   "foodValue": null
+  },
+  {
+   "itemName": "sugar",
+   "price": 90,
+   "foodValue": 2
   }
  ]}

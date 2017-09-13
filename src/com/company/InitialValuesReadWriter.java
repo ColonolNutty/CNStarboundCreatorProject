@@ -40,8 +40,8 @@ public class InitialValuesReadWriter {
             e.printStackTrace();
         }
         try {
-            SavedIngredientValues replacementValues = _manipulator.read(_overridePath, SavedIngredientValues.class);
-            ingredientStore.overrideIngredients(replacementValues.ingredients);
+            SavedIngredientValues replacementIngredientValues = _manipulator.read(_overridePath, SavedIngredientValues.class);
+            ingredientStore.overrideIngredients(replacementIngredientValues.ingredients);
         }
         catch(FileNotFoundException e) { }
         catch (IOException e) {
