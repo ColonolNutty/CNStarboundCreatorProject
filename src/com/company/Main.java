@@ -35,7 +35,7 @@ public class Main {
         updaters.add(new ObjectUpdater(log, manipulator, ingredientStore, valueCalculator));
         updaters.add(new PatchFileUpdater(log, manipulator, ingredientStore, valueCalculator));
         updaters.add(new ProjectileUpdater(log, manipulator, ingredientStore, valueCalculator));
-        FileUpdater updater = new FileUpdater(log, settings, valueCalculator, manipulator, updaters);
+        FileUpdater updater = new FileUpdater(log, settings, valueCalculator, manipulator, updaters, ingredientStore);
         updater.updateValues();
         readWriter.save(ingredientStore);
     }

@@ -1,10 +1,11 @@
 {
-  "itemName" : "sugar",
-  "price" : 90,
-  "rarity" : "Common",
-  "category" : "cookingIngredient",
-  "inventoryIcon" : "flourMFM.png",
-  "description" : "Used in many recipes!",
-  "shortdescription" : "Flour",
-  "learnBlueprintsOnPickup" : [ "doughMFM" ]
-}
+  "shortdescription": "Flour",
+  "itemName": "sugar",
+  "price": 90,
+  "learnBlueprintsOnPickup": ["doughMFM"],
+  "description": "Used in many recipes!",
+  "inventoryIcon": "flourMFM.png",
+  "foodValue": 2,
+  "category": "cookingIngredient",
+  "rarity": "Common"
+ }

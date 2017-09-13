@@ -6,48 +6,47 @@ import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
 import com.company.models.ConsumableBase;
 import com.company.models.Ingredient;
-import com.company.models.ItemBase;
 
 import java.io.IOException;
 
 /**
  * User: Jack's Computer
  * Date: 09/12/2017
- * Time: 11:30 AM
+ * Time: 11:23 AM
  */
 public class ItemUpdater extends Updater {
 
-    public ItemUpdater(DebugLog log, JsonManipulator manipulator, IngredientStore ingredientStore, ValueCalculator valueCalculator) {
+    public ItemUpdater(DebugLog log, JsonManipulator manipulator, IngredientStore ingredientStore,
+                       ValueCalculator valueCalculator) {
         super(log, manipulator, ingredientStore, valueCalculator);
     }
 
     @Override
-    public void update(String filePath) {
+    public String update(String filePath) {
         try {
             Ingredient ingredient = _manipulator.readIngredientVal(filePath);
             ingredient = _ingredientStore.getIngredient(ingredient.itemName);
             Ingredient updatedValues = _valueCalculator.updateValues(ingredient);
-            if((ingredient.foodValue == null || ingredient.foodValue.equals(updatedValues.foodValue))
-                    && (ingredient.price == null || ingredient.price.equals(updatedValues.price))) {
-                _log.logInfo("Skipping file: " + filePath);
-                return;
+            if((updatedValues.foodValue == null || updatedValues.foodValue.equals(ingredient.foodValue))
+                    && (updatedValues.price == null || updatedValues.price.equals(ingredient.price))) {
+                return null;
             }
-            ItemBase base = _manipulator.read(filePath, ItemBase.class);
+            ConsumableBase base = _manipulator.readConsumable(filePath);
             if(base == null
-                    || (base.foodValue != null && base.foodValue.equals(updatedValues.foodValue)
-                    && base.price != null && base.price.equals(updatedValues.price))) {
-                _log.logInfo("Skipping file: " + filePath);
-                return;
+                    || ((updatedValues.price == null || updatedValues.price.equals(base.price))
+                    && (updatedValues.foodValue == null || updatedValues.foodValue.equals(base.foodValue)))) {
+                return null;
             }
-            _log.logInfo("Updating file: " + filePath);
-            base.foodValue = updatedValues.foodValue;
-            base.price = updatedValues.price;
             _ingredientStore.updateIngredients(base.itemName, updatedValues);
-            _manipulator.write(filePath, base);
+            if(updatedValues.price == null || updatedValues.price.equals(base.price)) {
+                return null;
+            }
+            return ingredient.itemName;
         }
         catch(IOException e) {
             _log.logDebug("[IOE] Big Problem: " + e.getMessage());
         }
+        return null;
     }
 
     @Override

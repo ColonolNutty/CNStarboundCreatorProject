@@ -67,7 +67,9 @@ public class JsonManipulator {
             Iterator<String> toUpdateKeys = toWrite.keys();
             while (toUpdateKeys.hasNext()) {
                 String key = toUpdateKeys.next();
-                existingObject.put(key, toWrite.get(key));
+                if(existingObject.has(key)) {
+                    existingObject.put(key, toWrite.get(key));
+                }
             }
             return existingObject;
         }

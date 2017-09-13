@@ -44,16 +44,19 @@ public class ValueCalculator {
 
         Double newFoodValue = 0.0;
         Double newPrice = 0.0;
+        _log.logDebug("Calculating new values for: " + recipe.output.item);
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
             Ingredient ingredient = recipeIngredient.ingredient;
+            _log.logDebug("Ingredient " + (i + 1) + " is " + ingredient.itemName + " with p: " + ingredient.price + " and fv: " + ingredient.foodValue);
 
             if(ingredient != null) {
                 newPrice += calculateValue(recipeIngredient.count, ingredient.price);
                 newFoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue);
             }
         }
+        _log.logDebug("New values of: " + recipe.output.item + " before output calculation are p: " + newPrice + " and fv: " + newFoodValue);
 
         Double outputCount = recipe.output.count;
         if(outputCount <= 0.0) {
@@ -61,6 +64,8 @@ public class ValueCalculator {
         }
         newPrice = roundTwoDecimalPlaces(newPrice / outputCount);
         newFoodValue = roundTwoDecimalPlaces(newFoodValue / outputCount);
+
+        _log.logDebug("New values for: " + recipe.output.item + " are p: " + newPrice + " and fv: " + newFoodValue);
 
         return new Ingredient(recipe.output.item, newPrice, newFoodValue);
     }

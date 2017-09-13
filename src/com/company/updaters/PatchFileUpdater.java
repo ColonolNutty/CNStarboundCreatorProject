@@ -4,6 +4,7 @@ import com.company.DebugLog;
 import com.company.JsonManipulator;
 import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
+import com.company.models.UpdateDetails;
 
 /**
  * User: Jack's Computer
@@ -17,8 +18,8 @@ public class PatchFileUpdater extends Updater {
     }
 
     @Override
-    public void update(String filePath) {
-
+    public String update(String filePath) {
+        return null;
     }
 
     @Override

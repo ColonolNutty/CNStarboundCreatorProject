@@ -6,6 +6,7 @@ import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
 import com.company.models.ConsumableBase;
 import com.company.models.Ingredient;
+import com.company.models.UpdateDetails;
 
 import java.io.IOException;
 
@@ -22,32 +23,28 @@ public class ConsumableUpdater extends Updater {
     }
 
     @Override
-    public void update(String filePath) {
+    public String update(String filePath) {
         try {
             Ingredient ingredient = _manipulator.readIngredientVal(filePath);
             ingredient = _ingredientStore.getIngredient(ingredient.itemName);
             Ingredient updatedValues = _valueCalculator.updateValues(ingredient);
-            if(updatedValues == null
-                    || (ingredient.foodValue.equals(updatedValues.foodValue) && ingredient.price.equals(updatedValues.price))) {
-                _log.logInfo("Skipping file: " + filePath);
-                return;
+            if((updatedValues.foodValue == null || updatedValues.foodValue.equals(ingredient.foodValue))
+                    && (updatedValues.price == null || updatedValues.price.equals(ingredient.price))) {
+                return null;
             }
-            ConsumableBase consumableBase = _manipulator.readConsumable(filePath);
-            if(consumableBase == null
-                    || (consumableBase.foodValue != null && consumableBase.foodValue.equals(updatedValues.foodValue)
-                    && consumableBase.price != null && consumableBase.price.equals(updatedValues.price))) {
-                _log.logInfo("Skipping file: " + filePath);
-                return;
+            ConsumableBase base = _manipulator.readConsumable(filePath);
+            if(base == null
+                    || ((updatedValues.price == null || updatedValues.price.equals(base.price))
+                    && (updatedValues.foodValue == null || updatedValues.foodValue.equals(base.foodValue)))) {
+                return null;
             }
-            _log.logInfo("Updating file: " + filePath);
-            consumableBase.foodValue = updatedValues.foodValue;
-            consumableBase.price = updatedValues.price;
-            _ingredientStore.updateIngredients(consumableBase.itemName, updatedValues);
-            _manipulator.write(filePath, consumableBase);
+            _ingredientStore.updateIngredients(base.itemName, updatedValues);
+            return ingredient.itemName;
         }
         catch(IOException e) {
             _log.logDebug("[IOE] Big Problem: " + e.getMessage());
         }
+        return null;
     }
 
     @Override

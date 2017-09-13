@@ -4,6 +4,7 @@ import com.company.DebugLog;
 import com.company.JsonManipulator;
 import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
+import com.company.models.UpdateDetails;
 
 /**
  * User: Jack's Computer
@@ -11,7 +12,7 @@ import com.company.locators.IngredientStore;
  * Time: 11:25 AM
  */
 public abstract class Updater {
-    public abstract void update(String filePath);
+    public abstract String update(String filePath);
     public abstract boolean canUpdate(String filePath);
     protected DebugLog _log;
     protected JsonManipulator _manipulator;

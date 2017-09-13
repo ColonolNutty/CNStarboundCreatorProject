@@ -7,11 +7,13 @@ package com.company.models;
  */
 public class ConfigSettings {
     public String[] locationsToUpdate;
+    public String[] locationsToFakeUpdate;
     public String[] recipeLocations;
     public String[] ingredientLocations;
     public String[] ingredientExtensionInclusionList;
     public Double increasePercentage;
     public String ingredientValueOutputStoragePath;
     public String ingredientValueOverridePath;
+    public Double numberOfPasses;
     public boolean enableDebug;
 }
