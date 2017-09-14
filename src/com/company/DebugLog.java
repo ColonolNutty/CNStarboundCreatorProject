@@ -23,6 +23,7 @@ public class DebugLog {
     public void logException(Exception e) {
         if(_enable) {
             e.printStackTrace();
+            System.out.println("[ERROR] " + e.getMessage());
             System.out.flush();
         }
     }

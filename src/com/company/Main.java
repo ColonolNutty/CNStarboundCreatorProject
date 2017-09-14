@@ -39,6 +39,5 @@ public class Main {
         updaters.add(new ProjectileUpdater(log, manipulator, ingredientStore, valueCalculator));
         FileUpdater updater = new FileUpdater(log, settings, valueCalculator, manipulator, updaters, ingredientStore);
         updater.updateValues();
-        readWriter.save(ingredientStore);
     }
 }

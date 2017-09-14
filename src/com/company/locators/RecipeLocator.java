@@ -70,9 +70,9 @@ public class RecipeLocator {
         //get all the files from a directory
         File[] fList = directory.listFiles();
         for (File file : fList){
-            String absoluteFilePath = file.getAbsolutePath();
-            if (file.isFile() && (absoluteFilePath.endsWith(".recipe") || absoluteFilePath.endsWith(".recipe.patch"))) {
-                filePaths.add(absoluteFilePath);
+            String filePath = file.getAbsolutePath();
+            if (file.isFile() && isValidFile(filePath)) {
+                filePaths.add(filePath);
             }
             else if (file.isDirectory()) {
                 ArrayList<String> filePathsFound = findRecipes(file);
@@ -101,5 +101,10 @@ public class RecipeLocator {
         catch(IOException e) {
             _log.logDebug("{IOE] Problem encountered reading recipe at path: " + filePath + "\n" + e.getMessage());
         }
+    }
+
+    public boolean isValidFile(String filePath) {
+        File file = new File(filePath);
+        return !file.getName().startsWith("obsolete") && (filePath.endsWith(".recipe") || filePath.endsWith(".recipe.patch"));
     }
 }

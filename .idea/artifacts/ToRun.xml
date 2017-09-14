@@ -5,6 +5,7 @@
       <element id="file-copy" path="$PROJECT_DIR$/runThing.bat" />
       <element id="file-copy" path="$PROJECT_DIR$/runThingWithLog.bat" />
       <element id="file-copy" path="$PROJECT_DIR$/updateValuesConfiguration.json" />
+      <element id="file-copy" path="$PROJECT_DIR$/priceFoodValueOverrides.json" />
     </root>
   </artifact>
 </component>

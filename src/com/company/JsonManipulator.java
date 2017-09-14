@@ -3,6 +3,7 @@ package com.company;
 import com.company.models.*;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
@@ -118,6 +119,29 @@ public class JsonManipulator {
             JsonNode modifiedAsNode = patchTool.apply(entityAsNode);
             return _mapper.treeToValue(modifiedAsNode, valueType);
         }
+        catch(JsonMappingException e) {
+            try {
+                _log.logDebug("Failed to parse patch file initial, trying a different way: " + patchFileName);
+                Reader reader = new FileReader(patchFileName);
+                JsonNode[] patchAsNode = _mapper.readValue(reader, JsonNode[].class);
+                patchFileAsJson = patchAsNode.toString();
+                JsonNode entityAsNode = _mapper.valueToTree(entity);
+                JsonNode modifiedAsNode = entityAsNode;
+                for(int i = 0; i < patchAsNode.length; i++) {
+                    JsonNode jsonNode = patchAsNode[i];
+                    try {
+                        JsonPatch patchTool = JsonPatch.fromJson(jsonNode);
+                        modifiedAsNode = patchTool.apply(modifiedAsNode);
+                    }
+                    catch(JsonPatchException e1) {}
+                }
+                return _mapper.treeToValue(modifiedAsNode, valueType);
+            }
+            catch (IOException e1) {
+                _log.logDebug("[IOE] Failed to read file: " + patchFileName);
+                _log.logException(e1);
+            }
+        }
         catch(JsonPatchException e) {
             if(patchFileAsJson != null) {
                 _log.logDebug("Json \"" + patchFileName + "\": " + patchFileAsJson);
@@ -126,7 +150,6 @@ public class JsonManipulator {
         }
         catch (IOException e) {
             _log.logDebug("[IOE] Failed to read file: " + patchFileName);
-            _log.logDebug("[IOE] " + e.getMessage());
             _log.logException(e);
         }
         return null;

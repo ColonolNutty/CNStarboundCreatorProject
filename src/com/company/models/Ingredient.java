@@ -17,6 +17,8 @@ public class Ingredient {
     public String description;
     public String shortdescription;
     public String inventoryIcon;
+    public Object stages;
+    public Object interactData;
 
     @JsonIgnore
     public String filePath;

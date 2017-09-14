@@ -1,7 +1,14 @@
 [
-	{
-		"op": "replace",
-		"path": "/price",
-		"value": 40
-	}
+    [
+        {
+            "op": "replace",
+            "path": "/price",
+            "value": 40
+        },
+        {
+            "op": "replace",
+            "path": "/description",
+            "value": "Nope"
+        }
+    ]
 ]

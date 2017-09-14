@@ -5,6 +5,6 @@ package com.company.models;
  * Date: 09/12/2017
  * Time: 3:11 PM
  */
-public class SavedIngredientValues {
+public class IngredientOverrides {
     public Ingredient[] ingredients;
 }

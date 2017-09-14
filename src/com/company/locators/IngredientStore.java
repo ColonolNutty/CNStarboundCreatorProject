@@ -30,14 +30,6 @@ public class IngredientStore {
         _settings = settings;
         _manipulator = manipulator;
         _patchLocator = patchLocator;
-    }
-
-    public void loadIngredients(Ingredient[] ingredients) {
-        _log.logInfo("Loading saved ingredient values");
-        for(int i = 0; i < ingredients.length; i++) {
-            Ingredient ingredient = ingredients[i];
-            _ingredients.put(ingredient.getName(), ingredient);
-        }
         storeIngredients();
     }
 
@@ -118,6 +110,7 @@ public class IngredientStore {
 
     private void addIngredient(String filePath, String patchFilePath) {
         try {
+            _log.logDebug("File found at: " + filePath);
             Ingredient ingredient = _manipulator.readIngredientVal(filePath);
             if(ingredient != null && ingredient.hasName()) {
                 String itemName = ingredient.getName();
@@ -160,6 +153,8 @@ public class IngredientStore {
             existing.filePath = ingredient.filePath;
             existing.inventoryIcon = ingredient.inventoryIcon;
             existing.shortdescription = ingredient.shortdescription;
+            existing.stages = ingredient.stages;
+            existing.interactData = ingredient.interactData;
             _ingredients.put(existing.getName(), existing);
         }
         else {

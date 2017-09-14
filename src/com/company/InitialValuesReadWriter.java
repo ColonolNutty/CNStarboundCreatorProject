@@ -3,7 +3,7 @@ package com.company;
 import com.company.locators.IngredientStore;
 import com.company.locators.PatchLocator;
 import com.company.models.ConfigSettings;
-import com.company.models.SavedIngredientValues;
+import com.company.models.IngredientOverrides;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,15 +36,7 @@ public class InitialValuesReadWriter {
     public IngredientStore read() {
         IngredientStore ingredientStore = new IngredientStore(_log, _settings, _manipulator, _patchLocator);
         try {
-            SavedIngredientValues savedIngredientValues = _manipulator.read(_storagePath, SavedIngredientValues.class);
-            ingredientStore.loadIngredients(savedIngredientValues.ingredients);
-        }
-        catch(FileNotFoundException e) { }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            SavedIngredientValues replacementIngredientValues = _manipulator.read(_overridePath, SavedIngredientValues.class);
+            IngredientOverrides replacementIngredientValues = _manipulator.read(_overridePath, IngredientOverrides.class);
             ingredientStore.overrideIngredients(replacementIngredientValues.ingredients);
         }
         catch(FileNotFoundException e) { }
@@ -52,11 +44,5 @@ public class InitialValuesReadWriter {
             e.printStackTrace();
         }
         return ingredientStore;
-    }
-
-    public void save(IngredientStore store) {
-        SavedIngredientValues savedIngredientValues = new SavedIngredientValues();
-        savedIngredientValues.ingredients = store.getIngredients();
-        _manipulator.write(_storagePath, savedIngredientValues);
     }
 }
