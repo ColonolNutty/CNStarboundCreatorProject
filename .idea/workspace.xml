@@ -2,54 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/btf-1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/guava-23.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-annotations-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-core-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-coreutils-1.8.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-databind-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/json-patch-1.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/msg-simple-1.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/btf_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/frozen_1_0_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/google_collect_0_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/google_collect_1_0_rc1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/guava_23_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jackson_annotations_2_2_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jackson_annotations_2_9_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jackson_core_2_9_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jackson_coreutils_1_8.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jackson_databind_2_2_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jackson_databind_2_9_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/json_patch_1_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/msg_simple_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Samples/battersimpleMFM.recipe.patch" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Samples/wheat.item.patch" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/locators/PatchLocator.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Samples/battersimpleMFM.consumable.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.0.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-2.0.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-databind-2.0.0.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/PriceFoodValueBalancer_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/PriceFoodValueBalancer_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PriceFoodValueBalancer.iml" afterPath="$PROJECT_DIR$/PriceFoodValueBalancer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Samples/battersimpleMFM.consumable" afterPath="$PROJECT_DIR$/Samples/battersimpleMFM.consumable" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Samples/battersimpleMFM.recipe" afterPath="$PROJECT_DIR$/Samples/battersimpleMFM.recipe" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Samples/flourMFM.item" afterPath="$PROJECT_DIR$/Samples/flourMFM.item" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/savedUpdatedValues.json" afterPath="$PROJECT_DIR$/savedUpdatedValues.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/DebugLog.java" afterPath="$PROJECT_DIR$/src/com/company/DebugLog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/InitialValuesReadWriter.java" afterPath="$PROJECT_DIR$/src/com/company/InitialValuesReadWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" afterPath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" afterPath="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/RecipeLocator.java" afterPath="$PROJECT_DIR$/src/com/company/locators/RecipeLocator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/ConsumableBase.java" afterPath="$PROJECT_DIR$/src/com/company/models/ConsumableBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/Ingredient.java" afterPath="$PROJECT_DIR$/src/com/company/models/Ingredient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/ItemBase.java" afterPath="$PROJECT_DIR$/src/com/company/models/ItemBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/ObjectBase.java" afterPath="$PROJECT_DIR$/src/com/company/models/ObjectBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/ProjectileBase.java" afterPath="$PROJECT_DIR$/src/com/company/models/ProjectileBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/Recipe.java" afterPath="$PROJECT_DIR$/src/com/company/models/Recipe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/updaters/PatchFileUpdater.java" afterPath="$PROJECT_DIR$/src/com/company/updaters/PatchFileUpdater.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -154,8 +107,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="695" />
-    <option name="y" value="67" />
+    <option name="x" value="5" />
     <option name="width" value="1222" />
     <option name="height" value="1005" />
   </component>
@@ -184,6 +136,24 @@
             <path>
               <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
               <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="PriceFoodValueBalancer_jar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
