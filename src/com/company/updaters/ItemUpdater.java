@@ -24,8 +24,13 @@ public class ItemUpdater extends Updater {
     @Override
     public String update(String filePath) {
         try {
+            _log.logDebug("Attempting to update: " + filePath);
             Ingredient ingredient = _manipulator.readIngredientVal(filePath);
-            ingredient = _ingredientStore.getIngredient(ingredient.itemName);
+            ingredient = _ingredientStore.getIngredient(ingredient.getName());
+            if(ingredient == null) {
+                _log.logDebug("No ingredient found in store for: " + filePath);
+                return null;
+            }
             Ingredient updatedValues = _valueCalculator.updateValues(ingredient);
             if((updatedValues.foodValue == null || updatedValues.foodValue.equals(ingredient.foodValue))
                     && (updatedValues.price == null || updatedValues.price.equals(ingredient.price))) {
@@ -37,11 +42,11 @@ public class ItemUpdater extends Updater {
                     && (updatedValues.foodValue == null || updatedValues.foodValue.equals(base.foodValue)))) {
                 return null;
             }
-            _ingredientStore.updateIngredients(base.itemName, updatedValues);
+            _ingredientStore.loadIngredients(base.itemName, updatedValues);
             if(updatedValues.price == null || updatedValues.price.equals(base.price)) {
                 return null;
             }
-            return ingredient.itemName;
+            return ingredient.getName();
         }
         catch(IOException e) {
             _log.logDebug("[IOE] Big Problem: " + e.getMessage());

@@ -1,6 +1,6 @@
 {
   "locationsToUpdate": ["Samples"],
-  "locationsToFakeUpdate": ["src"],
+  "locationsToFakeUpdate": ["NonStuff"],
   "recipeLocations" : ["Samples"],
   "ingredientLocations" : ["Samples"],
   "ingredientExtensionInclusionList" : [".item", ".consumable", ".object", ".matitem", ".liquid"],

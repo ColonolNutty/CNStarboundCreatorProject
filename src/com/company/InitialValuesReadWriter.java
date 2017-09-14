@@ -37,7 +37,7 @@ public class InitialValuesReadWriter {
         IngredientStore ingredientStore = new IngredientStore(_log, _settings, _manipulator, _patchLocator);
         try {
             SavedIngredientValues savedIngredientValues = _manipulator.read(_storagePath, SavedIngredientValues.class);
-            ingredientStore.updateIngredients(savedIngredientValues.ingredients);
+            ingredientStore.loadIngredients(savedIngredientValues.ingredients);
         }
         catch(FileNotFoundException e) { }
         catch (IOException e) {

@@ -20,6 +20,7 @@ public class FileUpdater {
     private JsonManipulator _manipulator;
     private ArrayList<Updater> _updaters;
     private IngredientStore _ingredientStore;
+    private ArrayList<String> _includedFileTypes;
 
     public FileUpdater(DebugLog log,
                        ConfigSettings settings,
@@ -33,6 +34,14 @@ public class FileUpdater {
         _manipulator = manipulator;
         _updaters = updaters;
         _ingredientStore = ingredientStore;
+        _includedFileTypes = new ArrayList<String>();
+        _includedFileTypes.add(".item");
+        _includedFileTypes.add(".consumable");
+        _includedFileTypes.add(".patch");
+        _includedFileTypes.add(".object");
+        _includedFileTypes.add(".matitem");
+        _includedFileTypes.add(".liquid");
+        _includedFileTypes.add(".projectile");
     }
 
     public void updateValues() {
@@ -62,7 +71,7 @@ public class FileUpdater {
                     String ingredientName = ingredientsToUpdate.get(filePath);
                     Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
                     if (ingredient != null) {
-                        _log.logInfo("Updating ingredient: " + ingredient.itemName);
+                        _log.logInfo("Updating ingredient: " + ingredient.getName());
                         _manipulator.write(filePath, ingredient);
                     }
                 } else {
@@ -77,16 +86,12 @@ public class FileUpdater {
         for(int i = 0; i < _settings.locationsToUpdate.length; i++) {
             File directory = new File(_settings.locationsToUpdate[i]);
             ArrayList<String> subFilePaths = getFileNames(directory);
-            for(int j = 0; j < subFilePaths.size(); j++) {
-                filePaths.add(subFilePaths.get(j));
-            }
+            filePaths.addAll(subFilePaths);
         }
         for(int i = 0; i < _settings.locationsToFakeUpdate.length; i++) {
-            File directory = new File(_settings.locationsToUpdate[i]);
+            File directory = new File(_settings.locationsToFakeUpdate[i]);
             ArrayList<String> subFilePaths = getFileNames(directory);
-            for(int j = 0; j < subFilePaths.size(); j++) {
-                filePaths.add(subFilePaths.get(j));
-            }
+            filePaths.addAll(subFilePaths);
         }
         return filePaths;
     }
@@ -96,7 +101,7 @@ public class FileUpdater {
         //get all the files from a directory
         File[] fList = directory.listFiles();
         for (File file : fList){
-            if (file.isFile()){
+            if (file.isFile() && isValidFileType(file.getName())){
                 filePaths.add(file.getAbsolutePath());
             }
             else if (file.isDirectory()){
@@ -113,11 +118,25 @@ public class FileUpdater {
         boolean isFakeLocation = false;
         for(int i = 0; i < _settings.locationsToFakeUpdate.length; i++) {
             String fakeLocation = _settings.locationsToFakeUpdate[i];
-            if(filePath.startsWith(fakeLocation)) {
+            File file = new File(fakeLocation);
+            _log.logDebug("Check for " + filePath + " to start with " + file.getAbsolutePath());
+            if(filePath.startsWith(file.getAbsolutePath())) {
                 isFakeLocation = true;
                 i = _settings.locationsToFakeUpdate.length;
             }
         }
         return isFakeLocation;
+    }
+
+    private boolean isValidFileType(String fileName) {
+        boolean included = false;
+        for(int i = 0; i < _includedFileTypes.size(); i++){
+            String fileType = _includedFileTypes.get(i);
+            if(fileName.endsWith(fileType)) {
+                included = true;
+                i = _includedFileTypes.size();
+            }
+        }
+        return included;
     }
 }

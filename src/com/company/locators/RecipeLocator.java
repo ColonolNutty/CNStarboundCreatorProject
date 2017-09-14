@@ -43,6 +43,7 @@ public class RecipeLocator {
     }
 
     private void setupRecipes() {
+        _log.logInfo("Locating recipes");
         ArrayList<String> filePaths = findRecipes();
         for(int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);

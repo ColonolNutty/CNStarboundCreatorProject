@@ -5,7 +5,7 @@
   "maxStack": 1000,
   "effects": [["regeneration3"]],
   "itemName": "battersimpleMFM",
-  "price": 138.6,
+  "price": 103.32,
   "builder": "/items/buildscripts/buildfood.lua",
   "rottingMultiplier": 1,
   "inventoryIcon": "battersimpleMFM.png",

@@ -60,8 +60,8 @@ public class JsonManipulator {
             writer.close();
         }
         catch(IOException e) {
-            System.out.println("Failed to write file: " + filePath);
-            e.printStackTrace();
+            _log.logDebug("[IOE] Failed to write file: " + filePath);
+            _log.logException(e);
         }
     }
 
@@ -108,19 +108,25 @@ public class JsonManipulator {
         if(patchFileName == null) {
             return null;
         }
+        String patchFileAsJson = null;
         try {
             Reader reader = new FileReader(patchFileName);
             JsonNode patchAsNode = _mapper.readTree(reader);
+            patchFileAsJson = patchAsNode.toString();
             JsonPatch patchTool = JsonPatch.fromJson(patchAsNode);
             JsonNode entityAsNode = _mapper.valueToTree(entity);
             JsonNode modifiedAsNode = patchTool.apply(entityAsNode);
             return _mapper.treeToValue(modifiedAsNode, valueType);
         }
-        catch (IOException e) {
-            _log.logDebug("[IOE] Failed to read file: " + patchFileName);
+        catch(JsonPatchException e) {
+            if(patchFileAsJson != null) {
+                _log.logDebug("Json \"" + patchFileName + "\": " + patchFileAsJson);
+            }
             _log.logException(e);
         }
-        catch(JsonPatchException e) {
+        catch (IOException e) {
+            _log.logDebug("[IOE] Failed to read file: " + patchFileName);
+            _log.logDebug("[IOE] " + e.getMessage());
             _log.logException(e);
         }
         return null;

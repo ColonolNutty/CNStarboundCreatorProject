@@ -11,8 +11,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Ingredient {
     public String itemName;
+    public String objectName;
     public Double price;
     public Double foodValue;
+    public String description;
+    public String shortdescription;
+    public String inventoryIcon;
 
     @JsonIgnore
     public String filePath;
@@ -25,7 +29,19 @@ public class Ingredient {
 
     public Ingredient(String itemName, Double price, Double foodValue) {
         this.itemName = itemName;
+        this.objectName = itemName;
         this.price = price;
         this.foodValue = foodValue;
+    }
+
+    public boolean hasName() {
+        return itemName != null || objectName != null;
+    }
+
+    public String getName() {
+        if(itemName != null) {
+            return itemName;
+        }
+        return objectName;
     }
 }

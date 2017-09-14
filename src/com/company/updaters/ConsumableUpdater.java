@@ -6,8 +6,8 @@ import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
 import com.company.models.ConsumableBase;
 import com.company.models.Ingredient;
-import com.company.models.UpdateDetails;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -25,8 +25,13 @@ public class ConsumableUpdater extends Updater {
     @Override
     public String update(String filePath) {
         try {
+            _log.logDebug("Attempting to update: " + filePath);
             Ingredient ingredient = _manipulator.readIngredientVal(filePath);
-            ingredient = _ingredientStore.getIngredient(ingredient.itemName);
+            ingredient = _ingredientStore.getIngredient(ingredient.getName());
+            if(ingredient == null) {
+                _log.logDebug("No ingredient found in store for: " + filePath);
+                return null;
+            }
             Ingredient updatedValues = _valueCalculator.updateValues(ingredient);
             if((updatedValues.foodValue == null || updatedValues.foodValue.equals(ingredient.foodValue))
                     && (updatedValues.price == null || updatedValues.price.equals(ingredient.price))) {
@@ -38,8 +43,8 @@ public class ConsumableUpdater extends Updater {
                     && (updatedValues.foodValue == null || updatedValues.foodValue.equals(base.foodValue)))) {
                 return null;
             }
-            _ingredientStore.updateIngredients(base.itemName, updatedValues);
-            return ingredient.itemName;
+            _ingredientStore.loadIngredients(base.itemName, updatedValues);
+            return ingredient.getName();
         }
         catch(IOException e) {
             _log.logDebug("[IOE] Big Problem: " + e.getMessage());

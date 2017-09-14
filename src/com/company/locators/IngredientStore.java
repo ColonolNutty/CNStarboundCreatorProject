@@ -30,46 +30,22 @@ public class IngredientStore {
         _settings = settings;
         _manipulator = manipulator;
         _patchLocator = patchLocator;
-        storeIngredients();
     }
 
-    public void updateIngredients(Ingredient[] ingredients) {
+    public void loadIngredients(Ingredient[] ingredients) {
+        _log.logInfo("Loading saved ingredient values");
         for(int i = 0; i < ingredients.length; i++) {
             Ingredient ingredient = ingredients[i];
-            if(_ingredients.containsKey(ingredient.itemName)) {
-                Ingredient existing = _ingredients.get(ingredient.itemName);
-                if(existing.foodValue == null || existing.foodValue <= 0.0) {
-                    if(ingredient.foodValue != null) {
-                        existing.foodValue = ingredient.foodValue;
-                    }
-                }
-                if(existing.price == null || existing.price <= 0.0) {
-                    if(ingredient.price != null) {
-                        existing.price = ingredient.price;
-                    }
-                }
-                _ingredients.put(existing.itemName, existing);
-            }
+            _ingredients.put(ingredient.getName(), ingredient);
         }
+        storeIngredients();
     }
 
     public void overrideIngredients(Ingredient[] ingredients) {
         for(int i = 0; i < ingredients.length; i++) {
             Ingredient ingredient = ingredients[i];
-            if(_ingredients.containsKey(ingredient.itemName)) {
-                _log.logInfo("Overriding ingredient: " + ingredient.itemName + " with p: " + ingredient.price + " and fv: " + ingredient.foodValue);
-                Ingredient existing = _ingredients.get(ingredient.itemName);
-                if(ingredient.foodValue != null) {
-                    existing.foodValue = ingredient.foodValue;
-                }
-                if(ingredient.price != null) {
-                    existing.price = ingredient.price;
-                }
-                _ingredients.put(existing.itemName, existing);
-            }
-            else {
-                _ingredients.put(ingredient.itemName, ingredient);
-            }
+            _log.logDebug("Overriding ingredient: " + ingredient.getName() + " with p: " + ingredient.price + " and fv: " + ingredient.foodValue);
+            updateIngredient(ingredient, true);
         }
     }
 
@@ -94,7 +70,7 @@ public class IngredientStore {
         return ingredientsArray;
     }
 
-    public void updateIngredients(String itemName, Ingredient ingredient) {
+    public void loadIngredients(String itemName, Ingredient ingredient) {
         if(_ingredients.containsKey(itemName)) {
             _ingredients.remove(itemName);
         }
@@ -102,6 +78,7 @@ public class IngredientStore {
     }
 
     private void storeIngredients() {
+        _log.logInfo("Loading ingredients from disk");
         ArrayList<String> filePaths = getIngredientPaths();
         for(int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);
@@ -142,21 +119,52 @@ public class IngredientStore {
     private void addIngredient(String filePath, String patchFilePath) {
         try {
             Ingredient ingredient = _manipulator.readIngredientVal(filePath);
-            if(ingredient != null && ingredient.itemName != null) {
-                String itemName = ingredient.itemName;
+            if(ingredient != null && ingredient.hasName()) {
+                String itemName = ingredient.getName();
                 if(!_ingredients.containsKey(itemName)) {
                     Ingredient patchedIngredient = _manipulator.patch(ingredient, patchFilePath, Ingredient.class);
+                    _log.logDebug("Pre-patch ingredient values: " + itemName + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
                     if(patchedIngredient != null) {
-                        _ingredients.put(itemName, patchedIngredient);
+                        updateIngredient(patchedIngredient, true);
                     }
                     else {
-                        _ingredients.put(itemName, ingredient);
+                        updateIngredient(ingredient, false);
                     }
+                }
+                else {
+                    updateIngredient(ingredient, false);
                 }
             }
         }
         catch(IOException e) {
             _log.logDebug("{IOE] Problem encountered reading recipe at path: " + filePath + "\n" + e.getMessage());
+        }
+    }
+
+    private void updateIngredient(Ingredient ingredient, boolean isOverride) {
+        String ingredientName = ingredient.getName();
+        if(_ingredients.containsKey(ingredientName)) {
+            Ingredient existing = _ingredients.get(ingredientName);
+            if(ingredient.foodValue != null && (isOverride || existing.foodValue == null)) {
+                _log.logDebug("Overriding ingredient foodValue: " + existing.getName() + " with " + ingredient.foodValue);
+                existing.foodValue = ingredient.foodValue;
+            }
+            if(ingredient.price != null && (isOverride || existing.price == null)) {
+                _log.logDebug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price);
+                existing.price = ingredient.price;
+            }
+            _log.logDebug("New values: " + existing.getName() + " p: " + existing.price + " fv: " + existing.foodValue);
+            existing.itemName = ingredient.itemName;
+            existing.objectName = ingredient.objectName;
+            existing.description = ingredient.description;
+            existing.filePath = ingredient.filePath;
+            existing.inventoryIcon = ingredient.inventoryIcon;
+            existing.shortdescription = ingredient.shortdescription;
+            _ingredients.put(existing.getName(), existing);
+        }
+        else {
+            _log.logDebug("No ingredient found, so adding: " + ingredientName + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
+            _ingredients.put(ingredientName, ingredient);
         }
     }
 

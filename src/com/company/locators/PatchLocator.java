@@ -33,7 +33,7 @@ public class PatchLocator {
             }
         }
         if(foundPatchFileName != null) {
-            _log.logInfo("Found patch file for: " + toCheckFileName);
+            _log.logDebug("Found patch file for: " + toCheckFileName);
         }
         return foundPatchFileName;
     }

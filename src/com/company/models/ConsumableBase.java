@@ -13,6 +13,7 @@ public class ConsumableBase {
     public String itemName;
     public Double price;
     public Double foodValue;
+    public String shortdescription;
 
     @JsonIgnore
     public String filePath;
