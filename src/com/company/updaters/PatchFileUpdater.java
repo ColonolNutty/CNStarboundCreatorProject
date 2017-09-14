@@ -5,6 +5,16 @@ import com.company.JsonManipulator;
 import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
 import com.company.models.UpdateDetails;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * User: Jack's Computer
@@ -12,9 +22,13 @@ import com.company.models.UpdateDetails;
  * Time: 11:28 AM
  */
 public class PatchFileUpdater extends Updater {
+    private ObjectMapper _mapper;
 
     public PatchFileUpdater(DebugLog log, JsonManipulator manipulator, IngredientStore ingredientStore, ValueCalculator valueCalculator) {
         super(log, manipulator, ingredientStore, valueCalculator);
+        JsonFactory jf = new JsonFactory();
+        jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
+        _mapper = new ObjectMapper(jf);
     }
 
     @Override
@@ -24,6 +38,6 @@ public class PatchFileUpdater extends Updater {
 
     @Override
     public boolean canUpdate(String filePath) {
-        return false;
+        return filePath.endsWith(".patch");
     }
 }

@@ -19,6 +19,12 @@ public class DebugLog {
         }
     }
 
+    public void logException(Exception e) {
+        if(_enable) {
+            e.printStackTrace();
+        }
+    }
+
     public void logInfo(String message) {
         System.out.println(message);
     }

@@ -1,7 +1,6 @@
 {
   "input" : [
-    { "item" : "flourMFM", "count" : 1 },
-    { "item" : "sugar", "count" : 1 }
+    { "item" : "flourMFM", "count" : 1 }
   ],
   "output" : { "item" : "battersimpleMFM", "count" : 1 },
   "groups" : [ "blendingMFM" ]

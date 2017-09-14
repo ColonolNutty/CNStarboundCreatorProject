@@ -4,6 +4,7 @@ import com.company.DebugLog;
 import com.company.JsonManipulator;
 import com.company.models.ConfigSettings;
 import com.company.models.Ingredient;
+import com.company.models.Recipe;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,12 +22,14 @@ public class IngredientStore {
     private JsonManipulator _manipulator;
     private ConfigSettings _settings;
     private DebugLog _log;
+    private PatchLocator _patchLocator;
 
-    public IngredientStore(DebugLog log, ConfigSettings settings, JsonManipulator manipulator) {
+    public IngredientStore(DebugLog log, ConfigSettings settings, JsonManipulator manipulator, PatchLocator patchLocator) {
+        _ingredients = new Hashtable<String, Ingredient>();
         _log = log;
         _settings = settings;
         _manipulator = manipulator;
-        _ingredients = new Hashtable<String, Ingredient>();
+        _patchLocator = patchLocator;
         storeIngredients();
     }
 
@@ -99,34 +102,56 @@ public class IngredientStore {
     }
 
     private void storeIngredients() {
-        int locationCount = _settings.ingredientLocations.length;
-        for(int i = 0; i < locationCount; i++) {
-            String path = _settings.ingredientLocations[i];
-            File directory = new File(path);
-            findIngredients(directory);
+        ArrayList<String> filePaths = getIngredientPaths();
+        for(int i = 0; i < filePaths.size(); i++) {
+            String filePath = filePaths.get(i);
+            if(!filePath.endsWith(".patch")) {
+                String patchFile = _patchLocator.locatePatchFileFor(filePath, filePaths);
+                addIngredient(filePath, patchFile);
+            }
         }
     }
 
-    private void findIngredients(File directory) {
+    private ArrayList<String> getIngredientPaths() {
+        ArrayList<String> filePaths = new ArrayList<String>();
+        for(int i = 0; i < _settings.ingredientLocations.length; i++) {
+            String path = _settings.ingredientLocations[i];
+            File directory = new File(path);
+            ArrayList<String> foundFilePaths = findIngredients(directory);
+            filePaths.addAll(foundFilePaths);
+        }
+        return filePaths;
+    }
+
+    private ArrayList<String> findIngredients(File directory) {
+        ArrayList<String> filePaths = new ArrayList<String>();
         //get all the files from a directory
         File[] fList = directory.listFiles();
         for (File file : fList){
             if (file.isFile() && isFileIncluded(file.getName())){
-                addIngredient(file.getAbsolutePath());
+                filePaths.add(file.getAbsolutePath());
             }
             else if (file.isDirectory()){
-                findIngredients(file);
+                ArrayList<String> foundFilePaths = findIngredients(file);
+                filePaths.addAll(foundFilePaths);
             }
         }
+        return filePaths;
     }
 
-    private void addIngredient(String filePath) {
+    private void addIngredient(String filePath, String patchFilePath) {
         try {
             Ingredient ingredient = _manipulator.readIngredientVal(filePath);
             if(ingredient != null && ingredient.itemName != null) {
                 String itemName = ingredient.itemName;
                 if(!_ingredients.containsKey(itemName)) {
-                    _ingredients.put(itemName, ingredient);
+                    Ingredient patchedIngredient = _manipulator.patch(ingredient, patchFilePath, Ingredient.class);
+                    if(patchedIngredient != null) {
+                        _ingredients.put(itemName, patchedIngredient);
+                    }
+                    else {
+                        _ingredients.put(itemName, ingredient);
+                    }
                 }
             }
         }
@@ -139,7 +164,7 @@ public class IngredientStore {
         boolean isIncluded = false;
         String[] exclusionList = _settings.ingredientExtensionInclusionList;
         for(int i = 0; i < exclusionList.length; i++) {
-            if(fileName.endsWith(exclusionList[i])) {
+            if(fileName.endsWith(".patch") || fileName.endsWith(exclusionList[i])) {
                 isIncluded = true;
                 i = exclusionList.length;
             }

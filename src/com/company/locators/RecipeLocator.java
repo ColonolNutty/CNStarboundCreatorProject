@@ -7,8 +7,7 @@ import com.company.models.Recipe;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Dictionary;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
@@ -18,24 +17,25 @@ import java.util.Hashtable;
  */
 public class RecipeLocator {
 
+    private Hashtable<String, Recipe> _recipes;
     private String[] _recipePaths;
-    private JsonManipulator manip;
+    private JsonManipulator _manipulator;
     private ConfigSettings _settings;
     private DebugLog _log;
-    private Hashtable<String, Recipe> _recipes;
+    private PatchLocator _patchLocator;
 
-    public RecipeLocator(DebugLog log, ConfigSettings settings, JsonManipulator manipulator) {
+    public RecipeLocator(DebugLog log, ConfigSettings settings, JsonManipulator manipulator,
+                         PatchLocator patchLocator) {
+        _recipes = new Hashtable<String, Recipe>();
         _settings = settings;
         _recipePaths = settings.recipeLocations;
-        manip = manipulator;
+        _manipulator = manipulator;
         _log = log;
-        _recipes = new Hashtable<String, Recipe>();
+        _patchLocator = patchLocator;
+        setupRecipes();
     }
 
     public Recipe locateRecipe(String itemName) {
-        if(_recipes.isEmpty()) {
-            setupRecipes();
-        }
         if(_recipes.containsKey(itemName)) {
             return _recipes.get(itemName);
         }
@@ -43,33 +43,57 @@ public class RecipeLocator {
     }
 
     private void setupRecipes() {
-        for(int i = 0; i < _recipePaths.length; i++) {
-            String recipePath = _recipePaths[i];
-            File directory = new File(recipePath);
-            findRecipes(directory);
+        ArrayList<String> filePaths = findRecipes();
+        for(int i = 0; i < filePaths.size(); i++) {
+            String filePath = filePaths.get(i);
+            if(!filePath.endsWith(".patch")) {
+                String patchFile = _patchLocator.locatePatchFileFor(filePath, filePaths);
+                addRecipe(filePath, patchFile);
+            }
         }
     }
 
-    private void findRecipes(File directory) {
+    private ArrayList<String> findRecipes() {
+        ArrayList<java.lang.String> filePaths = new ArrayList<java.lang.String>();
+        for(int i = 0; i < _recipePaths.length; i++) {
+            java.lang.String recipePath = _recipePaths[i];
+            File directory = new File(recipePath);
+            ArrayList<String> filePathsFound = findRecipes(directory);
+            filePaths.addAll(filePathsFound);
+        }
+        return filePaths;
+    }
+
+    private ArrayList<String> findRecipes(File directory) {
+        ArrayList<String> filePaths = new ArrayList<String>();
         //get all the files from a directory
         File[] fList = directory.listFiles();
         for (File file : fList){
-            if (file.isFile() && file.getAbsolutePath().endsWith(".recipe")){
-                addRecipe(file.getAbsolutePath());
+            String absoluteFilePath = file.getAbsolutePath();
+            if (file.isFile() && (absoluteFilePath.endsWith(".recipe") || absoluteFilePath.endsWith(".recipe.patch"))) {
+                filePaths.add(absoluteFilePath);
             }
-            else if (file.isDirectory()){
-                findRecipes(file);
+            else if (file.isDirectory()) {
+                ArrayList<String> filePathsFound = findRecipes(file);
+                filePaths.addAll(filePathsFound);
             }
         }
+        return filePaths;
     }
 
-    private void addRecipe(String filePath) {
+    private void addRecipe(String filePath, String patchFilePath) {
         try {
-            Recipe recipe = manip.readRecipe(filePath);
+            Recipe recipe = _manipulator.readRecipe(filePath);
             if(recipe.output != null && recipe.output.item != null) {
                 String itemName = recipe.output.item;
                 if(!_recipes.containsKey(itemName)) {
-                    _recipes.put(itemName, recipe);
+                    Recipe patchedRecipe = _manipulator.patch(recipe, patchFilePath, Recipe.class);
+                    if(patchedRecipe != null) {
+                        _recipes.put(itemName, patchedRecipe);
+                    }
+                    else {
+                        _recipes.put(itemName, recipe);
+                    }
                 }
             }
         }

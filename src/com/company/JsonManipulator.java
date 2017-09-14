@@ -3,7 +3,10 @@ package com.company;
 import com.company.models.*;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,11 +21,13 @@ import java.util.Iterator;
 public class JsonManipulator {
 
     private ObjectMapper _mapper;
+    private DebugLog _log;
 
-    public JsonManipulator() {
+    public JsonManipulator(DebugLog log) {
         JsonFactory jf = new JsonFactory();
         jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
         _mapper = new ObjectMapper(jf);
+        _log = log;
     }
 
     public Recipe readRecipe(String path) throws IOException {
@@ -97,5 +102,27 @@ public class JsonManipulator {
             throw e;
         }
         return fileData;
+    }
+
+    public <T> T patch(Object entity, String patchFileName, Class<T> valueType) {
+        if(patchFileName == null) {
+            return null;
+        }
+        try {
+            Reader reader = new FileReader(patchFileName);
+            JsonNode patchAsNode = _mapper.readTree(reader);
+            JsonPatch patchTool = JsonPatch.fromJson(patchAsNode);
+            JsonNode entityAsNode = _mapper.valueToTree(entity);
+            JsonNode modifiedAsNode = patchTool.apply(entityAsNode);
+            return _mapper.treeToValue(modifiedAsNode, valueType);
+        }
+        catch (IOException e) {
+            _log.logDebug("[IOE] Failed to read file: " + patchFileName);
+            _log.logException(e);
+        }
+        catch(JsonPatchException e) {
+            _log.logException(e);
+        }
+        return null;
     }
 }

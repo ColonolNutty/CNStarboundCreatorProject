@@ -1,7 +1,7 @@
 {"ingredients": [
   {
    "itemName": "flourMFM",
-   "price": 8.4,
+   "price": 42,
    "foodValue": 0.42
   },
   {
@@ -41,7 +41,7 @@
   },
   {
    "itemName": "wheat",
-   "price": 40,
+   "price": 200,
    "foodValue": 2
   },
   {
@@ -95,14 +95,14 @@
    "foodValue": 1
   },
   {
+   "itemName": "battersimpleMFM",
+   "price": 138.6,
+   "foodValue": 2.54
+  },
+  {
    "itemName": "cobblestonematerial",
    "price": 2,
    "foodValue": null
-  },
-  {
-   "itemName": "battersimpleMFM",
-   "price": 103.32,
-   "foodValue": 2.54
   },
   {
    "itemName": "crystalplant",

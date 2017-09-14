@@ -13,4 +13,7 @@ public class ObjectBase {
     public String objectName;
     public Double price;
     public Double foodValue;
+
+    @JsonIgnore
+    public String filePath;
 }

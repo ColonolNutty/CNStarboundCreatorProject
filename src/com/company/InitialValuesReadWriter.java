@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.locators.IngredientStore;
+import com.company.locators.PatchLocator;
 import com.company.models.ConfigSettings;
 import com.company.models.SavedIngredientValues;
 
@@ -18,19 +19,22 @@ public class InitialValuesReadWriter {
     private String _storagePath;
     private String _overridePath;
     private JsonManipulator _manipulator;
+    private PatchLocator _patchLocator;
 
     public InitialValuesReadWriter(DebugLog log,
                                    ConfigSettings settings,
-                                   JsonManipulator manipulator) {
+                                   JsonManipulator manipulator,
+                                   PatchLocator patchLocator) {
         _log = log;
         _settings = settings;
         _storagePath = settings.ingredientValueOutputStoragePath;
         _overridePath = settings.ingredientValueOverridePath;
         _manipulator = manipulator;
+        _patchLocator = patchLocator;
     }
 
     public IngredientStore read() {
-        IngredientStore ingredientStore = new IngredientStore(_log, _settings, _manipulator);
+        IngredientStore ingredientStore = new IngredientStore(_log, _settings, _manipulator, _patchLocator);
         try {
             SavedIngredientValues savedIngredientValues = _manipulator.read(_storagePath, SavedIngredientValues.class);
             ingredientStore.updateIngredients(savedIngredientValues.ingredients);

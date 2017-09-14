@@ -1,5 +1,6 @@
 package com.company.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -13,9 +14,10 @@ public class Ingredient {
     public Double price;
     public Double foodValue;
 
-    public Ingredient() {
+    @JsonIgnore
+    public String filePath;
 
-    }
+    public Ingredient() { }
 
     public Ingredient(String itemName) {
         this(itemName, 0.0, 0.0);

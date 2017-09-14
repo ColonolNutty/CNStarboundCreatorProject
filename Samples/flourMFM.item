@@ -1,7 +1,7 @@
 {
   "shortdescription": "Flour",
   "itemName": "flourMFM",
-  "price": 8.4,
+  "price": 42,
   "learnBlueprintsOnPickup": ["doughMFM"],
   "description": "Used in many recipes!",
   "inventoryIcon": "flourMFM.png",

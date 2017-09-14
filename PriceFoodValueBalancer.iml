@@ -12,5 +12,18 @@
     <orderEntry type="library" name="jackson-databind-2.0.0" level="project" />
     <orderEntry type="library" name="jackson-core-2.0.0" level="project" />
     <orderEntry type="library" name="jackson-annotations-2.0.0" level="project" />
+    <orderEntry type="library" name="json-patch-1.9" level="project" />
+    <orderEntry type="library" name="jackson-coreutils-1.8" level="project" />
+    <orderEntry type="library" name="msg-simple-1.1" level="project" />
+    <orderEntry type="library" name="frozen-1.0.4" level="project" />
+    <orderEntry type="library" name="btf-1.2" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.9.1" level="project" />
+    <orderEntry type="library" name="jackson-core-2.9.1" level="project" />
+    <orderEntry type="library" name="jackson-databind-2.9.1" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.2.4" level="project" />
+    <orderEntry type="library" name="jackson-databind-2.2.4" level="project" />
+    <orderEntry type="library" name="google-collect-0.5" level="project" />
+    <orderEntry type="library" name="google-collect-1.0-rc1" level="project" />
+    <orderEntry type="library" name="guava-23.0" level="project" />
   </component>
 </module>

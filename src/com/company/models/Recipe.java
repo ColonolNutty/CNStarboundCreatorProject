@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * Date: 09/11/2017
  * Time: 12:09 PM
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Recipe {
     public ItemDescriptor[] input;
     public ItemDescriptor output;
+    public String[] groups;
 }
