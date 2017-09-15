@@ -2,7 +2,7 @@
   "locationsToUpdate": ["Samples"],
   "locationsToFakeUpdate": ["NonStuff"],
   "recipeLocations" : ["Samples"],
-  "ingredientLocations" : ["Samples"],
+  "ingredientLocations" : ["Samples", "NonStuff"],
   "ingredientExtensionInclusionList" : [".item", ".consumable", ".object", ".matitem", ".liquid"],
   "ingredientValueOutputStoragePath": "savedUpdatedValues.json",
   "ingredientValueOverridePath": "priceFoodValueOverrides.json",

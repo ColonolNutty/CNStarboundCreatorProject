@@ -1,10 +1,10 @@
 {
-  "shortdescription": null,
+  "shortdescription": "No",
   "itemName": "flourMFM",
-  "price": 0,
+  "price": 8.4,
   "learnBlueprintsOnPickup": ["doughMFM"],
-  "description": null,
-  "inventoryIcon": null,
+  "description": "Maybe",
+  "inventoryIcon": "What",
   "foodValue": 0.42,
   "category": "cookingIngredient",
   "rarity": "Common"

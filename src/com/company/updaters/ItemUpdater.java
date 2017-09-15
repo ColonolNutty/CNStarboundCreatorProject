@@ -25,25 +25,25 @@ public class ItemUpdater extends Updater {
     public String update(String filePath) {
         try {
             _log.logDebug("Attempting to update: " + filePath);
-            Ingredient ingredient = _manipulator.readIngredientVal(filePath);
+            Ingredient ingredient = _manipulator.readIngredient(filePath);
             ingredient = _ingredientStore.getIngredient(ingredient.getName());
             if(ingredient == null) {
                 _log.logDebug("No ingredient found in store for: " + filePath);
                 return null;
             }
-            Ingredient updatedValues = _valueCalculator.updateValues(ingredient);
-            if((updatedValues.foodValue == null || updatedValues.foodValue.equals(ingredient.foodValue))
-                    && (updatedValues.price == null || updatedValues.price.equals(ingredient.price))) {
+            Ingredient updatedIngredient = _valueCalculator.updateValues(ingredient);
+            if((updatedIngredient.foodValue == null || updatedIngredient.foodValue.equals(ingredient.foodValue))
+                    && (updatedIngredient.price == null || updatedIngredient.price.equals(ingredient.price))) {
                 return null;
             }
             ConsumableBase base = _manipulator.readConsumable(filePath);
             if(base == null
-                    || ((updatedValues.price == null || updatedValues.price.equals(base.price))
-                    && (updatedValues.foodValue == null || updatedValues.foodValue.equals(base.foodValue)))) {
+                    || ((updatedIngredient.price == null || updatedIngredient.price.equals(base.price))
+                    && (updatedIngredient.foodValue == null || updatedIngredient.foodValue.equals(base.foodValue)))) {
                 return null;
             }
-            _ingredientStore.loadIngredients(base.itemName, updatedValues);
-            if(updatedValues.price == null || updatedValues.price.equals(base.price)) {
+            _ingredientStore.updateIngredient(updatedIngredient);
+            if(updatedIngredient.price == null || updatedIngredient.price.equals(base.price)) {
                 return null;
             }
             return ingredient.getName();
@@ -56,6 +56,6 @@ public class ItemUpdater extends Updater {
 
     @Override
     public boolean canUpdate(String filePath) {
-        return filePath.endsWith(".item");
+        return false;
     }
 }

@@ -26,8 +26,7 @@ public class Main {
         DebugLog log = new DebugLog(settings.enableDebug);
         JsonManipulator manipulator = new JsonManipulator(log);
         PatchLocator patchLocator = new PatchLocator(log);
-        InitialValuesReadWriter readWriter = new InitialValuesReadWriter(log, settings, manipulator, patchLocator);
-        IngredientStore ingredientStore = readWriter.read();
+        IngredientStore ingredientStore = new IngredientStore(log, settings, manipulator, patchLocator);
         RecipeLocator recipeLocator = new RecipeLocator(log, settings, manipulator, patchLocator);
         ValueCalculator valueCalculator = new ValueCalculator(log, settings, recipeLocator, ingredientStore);
         ArrayList<Updater> updaters = new ArrayList<Updater>();

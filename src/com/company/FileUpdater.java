@@ -61,21 +61,29 @@ public class FileUpdater {
                         j = _updaters.size();
                     }
                 }
+                if(!ingredientsToUpdate.containsKey(filePath) && !filePath.endsWith(".patch")) {
+                    Ingredient ingredient = _ingredientStore.getIngredientWithFilePathAndPatch(filePath);
+                    if(ingredient != null) {
+                        ingredientsToUpdate.put(filePath, ingredient.getName());
+                    }
+                }
             }
         }
         _log.logInfo("Finished passes, updating files");
         for (int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);
-            if(!isFakeLocation(filePath)) {
-                if (ingredientsToUpdate.containsKey(filePath)) {
-                    String ingredientName = ingredientsToUpdate.get(filePath);
-                    Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
-                    if (ingredient != null) {
+            if (ingredientsToUpdate.containsKey(filePath)) {
+                String ingredientName = ingredientsToUpdate.get(filePath);
+                Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
+                if (ingredient != null) {
+                    if (isFakeLocation(ingredient.filePath) || ingredient.patchFile != null) {
+                        _log.logInfo("Updating ingredient as patch file: " + ingredient.getName());
+                        _manipulator.writeIngredientAsPatch(ingredient);
+                    }
+                    else {
                         _log.logInfo("Updating ingredient: " + ingredient.getName());
                         _manipulator.write(filePath, ingredient);
                     }
-                } else {
-                    _log.logInfo("Skipping file: " + filePath);
                 }
             }
         }

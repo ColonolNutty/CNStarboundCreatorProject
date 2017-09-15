@@ -4,9 +4,10 @@ import com.company.DebugLog;
 import com.company.JsonManipulator;
 import com.company.models.ConfigSettings;
 import com.company.models.Ingredient;
-import com.company.models.Recipe;
+import com.company.models.IngredientOverrides;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -30,10 +31,13 @@ public class IngredientStore {
         _settings = settings;
         _manipulator = manipulator;
         _patchLocator = patchLocator;
-        storeIngredients();
+        initializeIngredientStore();
     }
 
     public void overrideIngredients(Ingredient[] ingredients) {
+        if(ingredients == null) {
+            return;
+        }
         for(int i = 0; i < ingredients.length; i++) {
             Ingredient ingredient = ingredients[i];
             _log.logDebug("Overriding ingredient: " + ingredient.getName() + " with p: " + ingredient.price + " and fv: " + ingredient.foodValue);
@@ -43,33 +47,38 @@ public class IngredientStore {
 
     public Ingredient getIngredient(String itemName) {
         if(_ingredients.isEmpty()) {
-            storeIngredients();
+            initializeIngredientStore();
         }
         if(_ingredients.containsKey(itemName)) {
             return _ingredients.get(itemName);
         }
-        return null;
-    }
-
-    public Ingredient[] getIngredients() {
-        Enumeration<Ingredient> ingredientElements = _ingredients.elements();
-        Ingredient[] ingredientsArray = new Ingredient[_ingredients.size()];
-        int i = 0;
-        while(ingredientElements.hasMoreElements()) {
-            ingredientsArray[i] = ingredientElements.nextElement();
-            i += 1;
+        else {
+            Ingredient ingredient = new Ingredient(itemName);
+            _ingredients.put(itemName, ingredient);
+            return ingredient;
         }
-        return ingredientsArray;
     }
 
-    public void loadIngredients(String itemName, Ingredient ingredient) {
-        if(_ingredients.containsKey(itemName)) {
-            _ingredients.remove(itemName);
+    public Ingredient getIngredientWithFilePathAndPatch(String filePath) {
+        Enumeration<Ingredient> ingredients = _ingredients.elements();
+        Ingredient found = null;
+        while(found == null && ingredients.hasMoreElements()) {
+            Ingredient ingredient = ingredients.nextElement();
+            if(ingredient.patchFile != null && ingredient.filePath.equals(filePath)) {
+                found = ingredient;
+            }
         }
-        _ingredients.put(itemName, ingredient);
+        return found;
     }
 
-    private void storeIngredients() {
+    public void updateIngredient(Ingredient ingredient) {
+        if(ingredient == null) {
+            return;
+        }
+        updateIngredient(ingredient, true);
+    }
+
+    private void initializeIngredientStore() {
         _log.logInfo("Loading ingredients from disk");
         ArrayList<String> filePaths = getIngredientPaths();
         for(int i = 0; i < filePaths.size(); i++) {
@@ -79,6 +88,7 @@ public class IngredientStore {
                 addIngredient(filePath, patchFile);
             }
         }
+        overrideIngredients(readOverrides());
     }
 
     private ArrayList<String> getIngredientPaths() {
@@ -111,13 +121,17 @@ public class IngredientStore {
     private void addIngredient(String filePath, String patchFilePath) {
         try {
             _log.logDebug("File found at: " + filePath);
-            Ingredient ingredient = _manipulator.readIngredientVal(filePath);
+            Ingredient ingredient = _manipulator.readIngredient(filePath);
             if(ingredient != null && ingredient.hasName()) {
+                ingredient.filePath = filePath;
+                ingredient.patchFile = patchFilePath;
                 String itemName = ingredient.getName();
                 if(!_ingredients.containsKey(itemName)) {
                     Ingredient patchedIngredient = _manipulator.patch(ingredient, patchFilePath, Ingredient.class);
                     _log.logDebug("Pre-patch ingredient values: " + itemName + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
                     if(patchedIngredient != null) {
+                        patchedIngredient.filePath = filePath;
+                        patchedIngredient.patchFile = patchFilePath;
                         updateIngredient(patchedIngredient, true);
                     }
                     else {
@@ -150,7 +164,6 @@ public class IngredientStore {
             existing.itemName = ingredient.itemName;
             existing.objectName = ingredient.objectName;
             existing.description = ingredient.description;
-            existing.filePath = ingredient.filePath;
             existing.inventoryIcon = ingredient.inventoryIcon;
             existing.shortdescription = ingredient.shortdescription;
             existing.stages = ingredient.stages;
@@ -173,5 +186,17 @@ public class IngredientStore {
             }
         }
         return isIncluded;
+    }
+
+    private Ingredient[] readOverrides() {
+        try {
+            IngredientOverrides replacementIngredientValues = _manipulator.read(_settings.ingredientValueOverridePath, IngredientOverrides.class);
+            return replacementIngredientValues.ingredients;
+        }
+        catch(FileNotFoundException e) { }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

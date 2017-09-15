@@ -78,10 +78,6 @@ public class ValueCalculator {
             Double ingredientCount = input.count;
 
             Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
-            if(ingredient == null) {
-                ingredient = new Ingredient(ingredientName);
-                _ingredientStore.loadIngredients(ingredientName, ingredient);
-            }
             RecipeIngredient recipeIngredient = new RecipeIngredient(ingredient, ingredientCount);
             recipeIngredients.add(recipeIngredient);
         }

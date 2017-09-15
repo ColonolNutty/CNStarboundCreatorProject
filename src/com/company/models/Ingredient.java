@@ -23,6 +23,9 @@ public class Ingredient {
     @JsonIgnore
     public String filePath;
 
+    @JsonIgnore
+    public String patchFile;
+
     public Ingredient() { }
 
     public Ingredient(String itemName) {

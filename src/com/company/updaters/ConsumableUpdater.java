@@ -7,7 +7,6 @@ import com.company.locators.IngredientStore;
 import com.company.models.ConsumableBase;
 import com.company.models.Ingredient;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -26,7 +25,7 @@ public class ConsumableUpdater extends Updater {
     public String update(String filePath) {
         try {
             _log.logDebug("Attempting to update: " + filePath);
-            Ingredient ingredient = _manipulator.readIngredientVal(filePath);
+            Ingredient ingredient = _manipulator.readIngredient(filePath);
             ingredient = _ingredientStore.getIngredient(ingredient.getName());
             if(ingredient == null) {
                 _log.logDebug("No ingredient found in store for: " + filePath);
@@ -43,7 +42,7 @@ public class ConsumableUpdater extends Updater {
                     && (updatedValues.foodValue == null || updatedValues.foodValue.equals(base.foodValue)))) {
                 return null;
             }
-            _ingredientStore.loadIngredients(base.itemName, updatedValues);
+            _ingredientStore.updateIngredient(updatedValues);
             return ingredient.getName();
         }
         catch(IOException e) {
@@ -54,6 +53,6 @@ public class ConsumableUpdater extends Updater {
 
     @Override
     public boolean canUpdate(String filePath) {
-        return filePath.endsWith(".consumable");
+        return filePath.endsWith(".consumable") || filePath.endsWith(".item");
     }
 }
