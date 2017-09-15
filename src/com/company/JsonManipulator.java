@@ -157,26 +157,29 @@ public class JsonManipulator {
                     objectNodes.add(patchNodes[i]);
                 }
                 if (!foundFood) {
-                    if(ingredient.filePath.endsWith("consumable")) {
+                    if(ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
                         ObjectNode node = _mapper.createObjectNode();
                         node.put("op", "replace");
                         node.put("path", "/foodValue");
                         node.put("value", ingredient.foodValue);
                         objectNodes.add(node);
+                        needsUpdate = true;
                     }
                 }
                 if (!foundPrice) {
-                    ObjectNode node = _mapper.createObjectNode();
-                    node.put("op", "replace");
-                    node.put("path", "/price");
-                    node.put("value", ingredient.price);
-                    objectNodes.add(node);
+                    if(ingredient.price != null) {
+                        ObjectNode node = _mapper.createObjectNode();
+                        node.put("op", "replace");
+                        node.put("path", "/price");
+                        node.put("value", ingredient.price);
+                        objectNodes.add(node);
+                        needsUpdate = true;
+                    }
                 }
                 patchNodes = new ObjectNode[objectNodes.size()];
                 for(int i = 0; i < objectNodes.size(); i++) {
                     patchNodes[i] = objectNodes.get(i);
                 }
-                needsUpdate = true;
             }
             if(needsUpdate) {
                 Writer writer = new FileWriter(ingredient.patchFile);
