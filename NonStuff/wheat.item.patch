@@ -1,14 +1,1 @@
-[
-    [
-        {
-            "op": "replace",
-            "path": "/price",
-            "value": 40
-        },
-        {
-            "op": "replace",
-            "path": "/description",
-            "value": "Nope"
-        }
-    ]
-]
+[[{"op":"replace","path":"/price","value":40.0},{"op":"replace","path":"/description","value":"Nope"}]]
