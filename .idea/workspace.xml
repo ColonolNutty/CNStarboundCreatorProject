@@ -2,28 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/StopWatchTimer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/ValueBalancer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/updaters/ConsumableUpdater.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/updaters/MatItemUpdater.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/updaters/ObjectUpdater.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/updaters/PatchFileUpdater.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/updaters/ProjectileUpdater.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/updaters/Updater.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/priceFoodValueOverrides.json" afterPath="$PROJECT_DIR$/valueOverrides.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/locators/RecipeLocator.java" afterPath="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/updaters/ItemUpdater.java" afterPath="$PROJECT_DIR$/src/com/company/IngredientUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ToRun.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ToRun.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Samples/battersimpleMFM.consumable.patch" afterPath="$PROJECT_DIR$/Samples/battersimpleMFM.consumable.patch" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/DebugLog.java" afterPath="$PROJECT_DIR$/src/com/company/DebugLog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/FileUpdater.java" afterPath="$PROJECT_DIR$/src/com/company/FileUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" afterPath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/IngredientUpdater.java" afterPath="$PROJECT_DIR$/src/com/company/IngredientUpdater.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ValueBalancer.java" afterPath="$PROJECT_DIR$/src/com/company/ValueBalancer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ValueCalculator.java" afterPath="$PROJECT_DIR$/src/com/company/ValueCalculator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" afterPath="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" afterPath="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/PatchLocator.java" afterPath="$PROJECT_DIR$/src/com/company/locators/PatchLocator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" afterPath="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" afterPath="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/Ingredient.java" afterPath="$PROJECT_DIR$/src/com/company/models/Ingredient.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/updateValuesConfiguration.json" afterPath="$PROJECT_DIR$/updateValuesConfiguration.json" />
@@ -38,118 +25,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="IngredientUpdater.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/IngredientUpdater.java">
+      <file leaf-file-name="JsonManipulator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/JsonManipulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="24" column="89" lean-forward="false" selection-start-line="24" selection-start-column="89" selection-end-line="24" selection-end-column="89" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StopWatchTimer.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/company/StopWatchTimer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="47" column="15" lean-forward="false" selection-start-line="47" selection-start-column="15" selection-end-line="47" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ingredient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/models/Ingredient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="53" column="19" lean-forward="false" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
+            <state relative-caret-position="150">
+              <caret line="163" column="34" lean-forward="false" selection-start-line="163" selection-start-column="34" selection-end-line="163" selection-end-column="34" />
               <folding>
-                <element signature="method#Ingredient#2;class#Ingredient#0" expanded="false" />
-                <element signature="method#getName#0;class#Ingredient#0" expanded="false" />
+                <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createTestNodes#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileLocator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/locators/FileLocator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#getFilePaths#1;class#FileLocator#0" expanded="false" />
-                <element signature="method#isValidFileType#0;class#FileLocator#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ValueBalancer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/ValueBalancer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="35" column="110" lean-forward="false" selection-start-line="35" selection-start-column="110" selection-end-line="35" selection-end-column="110" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileUpdater.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FileUpdater.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/FileUpdater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="41" column="55" lean-forward="true" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecipeStore.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/locators/RecipeStore.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IngredientStore.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/locators/IngredientStore.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-              <folding>
-                <element signature="docComment;class#IngredientStore#0" expanded="false" />
-                <element signature="method#IngredientStore#0;class#IngredientStore#0" expanded="false" />
-                <element signature="method#overrideIngredients#0;class#IngredientStore#0" expanded="false" />
-                <element signature="method#getIngredientWithFilePathAndPatch#0;class#IngredientStore#0" expanded="false" />
-                <element signature="method#updateIngredient#0;class#IngredientStore#0" expanded="false" />
-                <element signature="method#updateIngredient#1;class#IngredientStore#0" expanded="false" />
-                <element signature="method#readOverrides#0;class#IngredientStore#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PatchLocator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/locators/PatchLocator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="22" column="18" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+            <state relative-caret-position="138">
+              <caret line="40" column="32" lean-forward="true" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -189,6 +89,10 @@
       <find>patch</find>
       <find>updating</find>
       <find>patched</find>
+      <find>Attempting to update:</find>
+      <find>battersimpleMFM</find>
+      <find>Updating ingredi</find>
+      <find>fake</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -230,7 +134,6 @@
         <option value="$PROJECT_DIR$/src/com/company/locators/RecipeLocator.java" />
         <option value="$PROJECT_DIR$/NonStuff/wheat.item.patch" />
         <option value="$PROJECT_DIR$/src/com/company/InitialValuesReadWriter.java" />
-        <option value="$PROJECT_DIR$/src/com/company/ValueCalculator.java" />
         <option value="$PROJECT_DIR$/Samples/battersimpleMFM.consumable" />
         <option value="$PROJECT_DIR$/Samples/flourMFM.item" />
         <option value="$PROJECT_DIR$/NonStuff/battersimpleMFM.consumable" />
@@ -238,24 +141,25 @@
         <option value="$PROJECT_DIR$/updateValuesConfiguration.config" />
         <option value="$PROJECT_DIR$/runThing.bat" />
         <option value="$PROJECT_DIR$/runThingWithLog.bat" />
-        <option value="$PROJECT_DIR$/updateValuesConfiguration.json" />
-        <option value="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" />
-        <option value="$PROJECT_DIR$/src/com/company/DebugLog.java" />
         <option value="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
         <option value="$PROJECT_DIR$/src/com/company/updaters/ConsumableUpdater.java" />
         <option value="$PROJECT_DIR$/src/com/company/updaters/ItemUpdater.java" />
         <option value="$PROJECT_DIR$/src/com/company/updaters/Updater.java" />
         <option value="$PROJECT_DIR$/src/com/company/updaters/IngredientUpdater.java" />
-        <option value="$PROJECT_DIR$/src/com/company/models/Ingredient.java" />
-        <option value="$PROJECT_DIR$/src/com/company/IngredientUpdater.java" />
-        <option value="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" />
-        <option value="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" />
-        <option value="$PROJECT_DIR$/src/com/company/ValueBalancer.java" />
         <option value="$PROJECT_DIR$/src/com/company/locators/PatchLocator.java" />
-        <option value="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" />
-        <option value="$PROJECT_DIR$/src/com/company/FileUpdater.java" />
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/StopWatchTimer.java" />
+        <option value="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" />
+        <option value="$PROJECT_DIR$/updateValuesConfiguration.json" />
+        <option value="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" />
+        <option value="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" />
+        <option value="$PROJECT_DIR$/src/com/company/ValueBalancer.java" />
+        <option value="$PROJECT_DIR$/src/com/company/DebugLog.java" />
+        <option value="$PROJECT_DIR$/src/com/company/ValueCalculator.java" />
+        <option value="$PROJECT_DIR$/src/com/company/IngredientUpdater.java" />
+        <option value="$PROJECT_DIR$/src/com/company/models/Ingredient.java" />
+        <option value="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" />
+        <option value="$PROJECT_DIR$/src/com/company/FileUpdater.java" />
       </list>
     </option>
   </component>
@@ -317,6 +221,20 @@
               <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="company" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="locators" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -444,7 +362,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32900944" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3207547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -469,21 +387,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/locators/IngredientStore.java</url>
-          <line>57</line>
-          <properties />
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/IngredientUpdater.java</url>
-          <line>36</line>
-          <properties />
-          <option name="timeStamp" value="86" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="87" />
+      <option name="time" value="90" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -653,16 +557,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ValueCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/updaters/MatItemIngredientUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -693,57 +587,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/updateValuesConfiguration.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="50" lean-forward="false" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/models/ConfigSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="40" lean-forward="false" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DebugLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="39" column="20" lean-forward="false" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
-          <folding>
-            <element signature="e#1022#1023#0" expanded="true" />
-            <element signature="e#1054#1055#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/updaters/ObjectIngredientUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/JsonManipulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="34" column="39" lean-forward="true" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
-          <folding>
-            <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#writeIngredientAsPatch#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#createTestNodes#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -779,27 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/models/Ingredient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="53" column="19" lean-forward="false" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
-          <folding>
-            <element signature="method#Ingredient#2;class#Ingredient#0" expanded="false" />
-            <element signature="method#getName#0;class#Ingredient#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ValueBalancer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="35" column="110" lean-forward="false" selection-start-line="35" selection-start-column="110" selection-end-line="35" selection-end-column="110" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/locators/PatchLocator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
@@ -808,54 +635,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/locators/RecipeStore.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/StopWatchTimer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/locators/IngredientStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#IngredientStore#0" expanded="false" />
-            <element signature="method#IngredientStore#0;class#IngredientStore#0" expanded="false" />
-            <element signature="method#overrideIngredients#0;class#IngredientStore#0" expanded="false" />
-            <element signature="method#getIngredientWithFilePathAndPatch#0;class#IngredientStore#0" expanded="false" />
-            <element signature="method#updateIngredient#0;class#IngredientStore#0" expanded="false" />
-            <element signature="method#updateIngredient#1;class#IngredientStore#0" expanded="false" />
-            <element signature="method#readOverrides#0;class#IngredientStore#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/IngredientUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        <state relative-caret-position="346">
+          <caret line="47" column="15" lean-forward="false" selection-start-line="47" selection-start-column="15" selection-end-line="47" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/locators/FileLocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+        <state relative-caret-position="241">
+          <caret line="44" column="5" lean-forward="true" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getFilePaths#1;class#FileLocator#0" expanded="false" />
+            <element signature="method#getFilePaths#2;class#FileLocator#0" expanded="false" />
             <element signature="method#isValidFileType#0;class#FileLocator#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/FileUpdater.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/locators/RecipeStore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="41" column="55" lean-forward="true" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+        <state relative-caret-position="185">
+          <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -868,10 +671,105 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/StopWatchTimer.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/models/ConfigSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="47" column="15" lean-forward="false" selection-start-line="47" selection-start-column="15" selection-end-line="47" selection-end-column="15" />
+        <state relative-caret-position="189">
+          <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/updateValuesConfiguration.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/DebugLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="28" column="27" lean-forward="true" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ValueBalancer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="35" column="54" lean-forward="false" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ValueCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="64" column="3" lean-forward="false" selection-start-line="64" selection-start-column="3" selection-end-line="64" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/locators/IngredientStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="145" column="64" lean-forward="false" selection-start-line="145" selection-start-column="64" selection-end-line="145" selection-end-column="64" />
+          <folding>
+            <element signature="docComment;class#IngredientStore#0" expanded="false" />
+            <element signature="method#IngredientStore#0;class#IngredientStore#0" expanded="false" />
+            <element signature="method#overrideIngredients#0;class#IngredientStore#0" expanded="false" />
+            <element signature="method#getIngredientWithFilePathAndPatch#0;class#IngredientStore#0" expanded="false" />
+            <element signature="method#updateIngredient#0;class#IngredientStore#0" expanded="false" />
+            <element signature="method#readOverrides#0;class#IngredientStore#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/IngredientUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/models/Ingredient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <element signature="method#Ingredient#2;class#Ingredient#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/JsonManipulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="163" column="34" lean-forward="false" selection-start-line="163" selection-start-column="34" selection-end-line="163" selection-end-column="34" />
+          <folding>
+            <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#createTestNodes#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/FileUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="40" column="32" lean-forward="true" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
           <folding />
         </state>
       </provider>

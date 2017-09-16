@@ -41,10 +41,17 @@ public class IngredientUpdater {
             }
             Ingredient updatedIngredient = _valueCalculator.updateValues(ingredient);
             if(ingredient.equals(updatedIngredient)) {
+                _log.logDebug("1. Values were the same, so no update: " + filePath);
                 return null;
             }
             Ingredient base = _manipulator.readIngredient(filePath);
             if(base == null || base.equals(updatedIngredient)) {
+                if(base == null) {
+                    _log.logDebug("No base value found: " + filePath);
+                }
+                else {
+                    _log.logDebug("2. Values were the same, so no update: " + filePath);
+                }
                 return null;
             }
             _ingredientStore.updateIngredient(updatedIngredient);

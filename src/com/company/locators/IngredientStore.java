@@ -104,10 +104,10 @@ public class IngredientStore {
             if(ingredient != null && ingredient.hasName()) {
                 ingredient.filePath = filePath;
                 ingredient.patchFile = patchFilePath;
-                String itemName = ingredient.getName();
-                if(!_ingredients.containsKey(itemName)) {
+                String ingredientName = ingredient.getName();
+                if(!_ingredients.containsKey(ingredientName)) {
                     Ingredient patchedIngredient = _manipulator.patch(ingredient, patchFilePath, Ingredient.class);
-                    _log.logDebug("Pre-patch ingredient values: " + itemName + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
+                    _log.logDebug("Pre-patch ingredient values: " + ingredientName + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
                     if(patchedIngredient != null) {
                         patchedIngredient.filePath = filePath;
                         patchedIngredient.patchFile = patchFilePath;
@@ -142,6 +142,8 @@ public class IngredientStore {
             _log.logDebug("New values: " + existing.getName() + " p: " + existing.price + " fv: " + existing.foodValue);
             existing.itemName = ingredient.itemName;
             existing.objectName = ingredient.objectName;
+            existing.name = ingredient.name;
+            existing.projectileName = ingredient.projectileName;
             existing.description = ingredient.description;
             existing.inventoryIcon = ingredient.inventoryIcon;
             existing.shortdescription = ingredient.shortdescription;

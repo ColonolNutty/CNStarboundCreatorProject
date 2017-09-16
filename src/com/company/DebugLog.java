@@ -30,8 +30,7 @@ public class DebugLog {
     }
 
     public void logError(Exception e) {
-        e.printStackTrace();
-        System.out.println(errorPrefix + e.getMessage());
+        e.printStackTrace(System.out);
         System.out.flush();
     }
 

@@ -8,8 +8,6 @@ package com.company.models;
 public class ConfigSettings {
     public String[] locationsToUpdate;
     public String[] includeLocations;
-    public String[] recipeLocations;
-    public String[] ingredientLocations;
     public Double increasePercentage;
     public String ingredientOverridePath;
     public Double numberOfPasses;

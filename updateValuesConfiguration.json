@@ -1,8 +1,6 @@
 {
   "locationsToUpdate": ["Samples"],
   "includeLocations": ["NonStuff"],
-  "recipeLocations" : ["Samples"],
-  "ingredientLocations" : ["Samples", "NonStuff"],
   "ingredientOverridePath": "valueOverrides.json",
   "increasePercentage" : 0.05,
   "numberOfPasses": 8,

@@ -38,18 +38,20 @@ public class FileLocator {
             return _savedFileNames;
         }
         ArrayList<String> filePaths = new ArrayList<String>();
-        for(int i = 0; i < _settings.locationsToUpdate.length; i++) {
-            File directory = new File(_settings.locationsToUpdate[i]);
-            ArrayList<String> subFilePaths = getFilePaths(directory);
-            filePaths.addAll(subFilePaths);
-        }
-        for(int i = 0; i < _settings.includeLocations.length; i++) {
-            File directory = new File(_settings.includeLocations[i]);
-            ArrayList<String> subFilePaths = getFilePaths(directory);
-            filePaths.addAll(subFilePaths);
-        }
+        filePaths.addAll(getFilePaths(_settings.locationsToUpdate));
+        filePaths.addAll(getFilePaths(_settings.includeLocations));
         _savedFileNames = filePaths;
         return _savedFileNames;
+    }
+
+    private ArrayList<String> getFilePaths(String[] files) {
+        ArrayList<String> filePaths = new ArrayList<String>();
+        for(int i = 0; i < files.length; i++) {
+            File directory = new File(files[i]);
+            ArrayList<String> subFilePaths = getFilePaths(directory);
+            filePaths.addAll(subFilePaths);
+        }
+        return filePaths;
     }
 
     private ArrayList<String> getFilePaths(File directory) {

@@ -56,7 +56,6 @@ public class ValueCalculator {
                 newFoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue);
             }
         }
-        _log.logDebug("    New values of: " + recipe.output.item + " before output calculation are p: " + newPrice + " and fv: " + newFoodValue);
 
         Double outputCount = recipe.output.count;
         if(outputCount <= 0.0) {
@@ -65,7 +64,7 @@ public class ValueCalculator {
         newPrice = roundTwoDecimalPlaces(newPrice / outputCount);
         newFoodValue = roundTwoDecimalPlaces(newFoodValue / outputCount);
 
-        _log.logDebug("    New values for: " + recipe.output.item + " are p: " + newPrice + " and fv: " + newFoodValue);
+        _log.logDebug("New values for: " + recipe.output.item + " are p: " + newPrice + " and fv: " + newFoodValue);
 
         return new Ingredient(recipe.output.item, newPrice, newFoodValue);
     }

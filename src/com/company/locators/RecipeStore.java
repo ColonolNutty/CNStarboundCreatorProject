@@ -18,19 +18,16 @@ import java.util.Hashtable;
 public class RecipeStore {
 
     private Hashtable<String, Recipe> _recipes;
-    private String[] _recipePaths;
     private DebugLog _log;
     private JsonManipulator _manipulator;
     private PatchLocator _patchLocator;
     private FileLocator _fileLocator;
 
     public RecipeStore(DebugLog log,
-                       ConfigSettings settings,
                        JsonManipulator manipulator,
                        PatchLocator patchLocator,
                        FileLocator fileLocator) {
         _recipes = new Hashtable<String, Recipe>();
-        _recipePaths = settings.recipeLocations;
         _log = log;
         _manipulator = manipulator;
         _patchLocator = patchLocator;

@@ -45,12 +45,12 @@ public class FileUpdater {
             _log.logInfo("Beginning pass: " + (k + 1));
             for (int i = 0; i < filePaths.size(); i++) {
                 String filePath = filePaths.get(i);
-                if(!filePath.endsWith(".recipe")) {
+                if(!filePath.endsWith(".recipe") && !filePath.endsWith(".patch")) {
                     String ingredientName = _ingredientUpdater.update(filePath);
                     if (ingredientName != null && !ingredientsToUpdate.containsKey(filePath)) {
                         ingredientsToUpdate.put(filePath, ingredientName);
                     }
-                    if (!ingredientsToUpdate.containsKey(filePath) && !filePath.endsWith(".patch")) {
+                    if (!ingredientsToUpdate.containsKey(filePath)) {
                         Ingredient ingredient = _ingredientStore.getIngredientWithFilePathAndPatch(filePath);
                         if (ingredient != null) {
                             ingredientsToUpdate.put(filePath, ingredient.getName());
@@ -66,7 +66,7 @@ public class FileUpdater {
                 String ingredientName = ingredientsToUpdate.get(filePath);
                 Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
                 if (ingredient != null) {
-                    if (isFakeLocation(ingredient.filePath) || ingredient.patchFile != null) {
+                    if (isIncludeLocation(ingredient.filePath) && ingredient.patchFile != null) {
                         _log.logInfo("Updating ingredient as patch file: " + ingredient.getName());
                         _manipulator.writeIngredientAsPatch(ingredient);
                     }
@@ -79,17 +79,16 @@ public class FileUpdater {
         }
     }
 
-    private boolean isFakeLocation(String filePath) {
-        boolean isFakeLocation = false;
+    private boolean isIncludeLocation(String filePath) {
+        boolean isIncludeLocation = false;
         for(int i = 0; i < _settings.includeLocations.length; i++) {
-            String fakeLocation = _settings.includeLocations[i];
-            File file = new File(fakeLocation);
-            _log.logDebug("Check for " + filePath + " to start with " + file.getAbsolutePath());
+            String location = _settings.includeLocations[i];
+            File file = new File(location);
             if(filePath.startsWith(file.getAbsolutePath())) {
-                isFakeLocation = true;
+                isIncludeLocation = true;
                 i = _settings.includeLocations.length;
             }
         }
-        return isFakeLocation;
+        return isIncludeLocation;
     }
 }
