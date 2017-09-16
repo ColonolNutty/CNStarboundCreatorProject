@@ -66,13 +66,20 @@ public class FileUpdater {
                 String ingredientName = ingredientsToUpdate.get(filePath);
                 Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
                 if (ingredient != null) {
-                    if (isIncludeLocation(ingredient.filePath) && ingredient.patchFile != null) {
-                        _log.logInfo("Updating ingredient as patch file: " + ingredient.getName());
-                        _manipulator.writeIngredientAsPatch(ingredient);
-                    }
-                    else {
-                        _log.logInfo("Updating ingredient: " + ingredient.getName());
-                        _manipulator.write(filePath, ingredient);
+                    if(isIncludeLocation(ingredient.filePath)) {
+                        if (ingredient.patchFile != null) {
+                            _log.logInfo("Updating ingredient as patch file: " + ingredient.getName());
+                            _manipulator.writeIngredientAsPatch(ingredient);
+                        }
+                    } else {
+                        if (ingredient.patchFile != null) {
+                            _log.logInfo("Updating ingredient as patch file: " + ingredient.getName());
+                            _manipulator.writeIngredientAsPatch(ingredient);
+                        }
+                        else {
+                            _log.logInfo("Updating ingredient: " + ingredient.getName());
+                            _manipulator.write(filePath, ingredient);
+                        }
                     }
                 }
             }

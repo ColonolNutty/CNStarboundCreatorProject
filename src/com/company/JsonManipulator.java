@@ -155,7 +155,6 @@ public class JsonManipulator {
         }
         catch(JsonMappingException e) {
             try {
-                _log.logDebug("Attempting to write patch file differently");
                 Reader reader = new FileReader(ingredient.patchFile);
                 ObjectNode[][] patchNodes = _mapper.readValue(reader, ObjectNode[][].class);
                 reader.close();
