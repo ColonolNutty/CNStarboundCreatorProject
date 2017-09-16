@@ -10,7 +10,7 @@
 }, {
   "op" : "add",
   "path" : "/foodValue",
-  "value" : 0.0
+  "value" : 2.54
 } ], [ {
   "op" : "replace",
   "path" : "/foodValue",

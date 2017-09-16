@@ -1,27 +1,35 @@
-package com.company.updaters;
+package com.company;
 
 import com.company.DebugLog;
 import com.company.JsonManipulator;
 import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
-import com.company.models.ConsumableBase;
 import com.company.models.Ingredient;
+import com.company.models.UpdateDetails;
 
 import java.io.IOException;
 
 /**
  * User: Jack's Computer
  * Date: 09/12/2017
- * Time: 11:23 AM
+ * Time: 11:25 AM
  */
-public class ItemUpdater extends Updater {
+public class IngredientUpdater {
+    protected DebugLog _log;
+    protected JsonManipulator _manipulator;
+    protected IngredientStore _ingredientStore;
+    protected ValueCalculator _valueCalculator;
 
-    public ItemUpdater(DebugLog log, JsonManipulator manipulator, IngredientStore ingredientStore,
-                       ValueCalculator valueCalculator) {
-        super(log, manipulator, ingredientStore, valueCalculator);
+    public IngredientUpdater(DebugLog log,
+                             JsonManipulator manipulator,
+                             IngredientStore ingredientStore,
+                             ValueCalculator valueCalculator) {
+        _log = log;
+        _manipulator = manipulator;
+        _ingredientStore = ingredientStore;
+        _valueCalculator = valueCalculator;
     }
 
-    @Override
     public String update(String filePath) {
         try {
             _log.logDebug("Attempting to update: " + filePath);
@@ -32,30 +40,19 @@ public class ItemUpdater extends Updater {
                 return null;
             }
             Ingredient updatedIngredient = _valueCalculator.updateValues(ingredient);
-            if((updatedIngredient.foodValue == null || updatedIngredient.foodValue.equals(ingredient.foodValue))
-                    && (updatedIngredient.price == null || updatedIngredient.price.equals(ingredient.price))) {
+            if(ingredient.equals(updatedIngredient)) {
                 return null;
             }
-            ConsumableBase base = _manipulator.readConsumable(filePath);
-            if(base == null
-                    || ((updatedIngredient.price == null || updatedIngredient.price.equals(base.price))
-                    && (updatedIngredient.foodValue == null || updatedIngredient.foodValue.equals(base.foodValue)))) {
+            Ingredient base = _manipulator.readIngredient(filePath);
+            if(base == null || base.equals(updatedIngredient)) {
                 return null;
             }
             _ingredientStore.updateIngredient(updatedIngredient);
-            if(updatedIngredient.price == null || updatedIngredient.price.equals(base.price)) {
-                return null;
-            }
             return ingredient.getName();
         }
         catch(IOException e) {
             _log.logDebug("[IOE] Big Problem: " + e.getMessage());
         }
         return null;
-    }
-
-    @Override
-    public boolean canUpdate(String filePath) {
-        return false;
     }
 }

@@ -20,17 +20,23 @@ import java.util.Hashtable;
  */
 public class IngredientStore {
     private Hashtable<String, Ingredient> _ingredients;
-    private JsonManipulator _manipulator;
-    private ConfigSettings _settings;
     private DebugLog _log;
+    private ConfigSettings _settings;
+    private JsonManipulator _manipulator;
     private PatchLocator _patchLocator;
+    private FileLocator _fileLocator;
 
-    public IngredientStore(DebugLog log, ConfigSettings settings, JsonManipulator manipulator, PatchLocator patchLocator) {
+    public IngredientStore(DebugLog log,
+                           ConfigSettings settings,
+                           JsonManipulator manipulator,
+                           PatchLocator patchLocator,
+                           FileLocator fileLocator) {
         _ingredients = new Hashtable<String, Ingredient>();
         _log = log;
         _settings = settings;
         _manipulator = manipulator;
         _patchLocator = patchLocator;
+        _fileLocator = fileLocator;
         initializeIngredientStore();
     }
 
@@ -80,42 +86,15 @@ public class IngredientStore {
 
     private void initializeIngredientStore() {
         _log.logInfo("Loading ingredients from disk");
-        ArrayList<String> filePaths = getIngredientPaths();
+        ArrayList<String> filePaths = _fileLocator.getFilePaths();
         for(int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);
-            if(!filePath.endsWith(".patch")) {
+            if(!filePath.endsWith(".recipe") && !filePath.endsWith(".patch")) {
                 String patchFile = _patchLocator.locatePatchFileFor(filePath, filePaths);
                 addIngredient(filePath, patchFile);
             }
         }
         overrideIngredients(readOverrides());
-    }
-
-    private ArrayList<String> getIngredientPaths() {
-        ArrayList<String> filePaths = new ArrayList<String>();
-        for(int i = 0; i < _settings.ingredientLocations.length; i++) {
-            String path = _settings.ingredientLocations[i];
-            File directory = new File(path);
-            ArrayList<String> foundFilePaths = findIngredients(directory);
-            filePaths.addAll(foundFilePaths);
-        }
-        return filePaths;
-    }
-
-    private ArrayList<String> findIngredients(File directory) {
-        ArrayList<String> filePaths = new ArrayList<String>();
-        //get all the files from a directory
-        File[] fList = directory.listFiles();
-        for (File file : fList){
-            if (file.isFile() && isFileIncluded(file.getName())){
-                filePaths.add(file.getAbsolutePath());
-            }
-            else if (file.isDirectory()){
-                ArrayList<String> foundFilePaths = findIngredients(file);
-                filePaths.addAll(foundFilePaths);
-            }
-        }
-        return filePaths;
     }
 
     private void addIngredient(String filePath, String patchFilePath) {
@@ -176,21 +155,9 @@ public class IngredientStore {
         }
     }
 
-    private boolean isFileIncluded(String fileName) {
-        boolean isIncluded = false;
-        String[] exclusionList = _settings.ingredientExtensionInclusionList;
-        for(int i = 0; i < exclusionList.length; i++) {
-            if(fileName.endsWith(".patch") || fileName.endsWith(exclusionList[i])) {
-                isIncluded = true;
-                i = exclusionList.length;
-            }
-        }
-        return isIncluded;
-    }
-
     private Ingredient[] readOverrides() {
         try {
-            IngredientOverrides replacementIngredientValues = _manipulator.read(_settings.ingredientValueOverridePath, IngredientOverrides.class);
+            IngredientOverrides replacementIngredientValues = _manipulator.read(_settings.ingredientOverridePath, IngredientOverrides.class);
             return replacementIngredientValues.ingredients;
         }
         catch(FileNotFoundException e) { }

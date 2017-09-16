@@ -24,16 +24,15 @@ import java.util.Iterator;
  * Time: 12:32 PM
  */
 public class JsonManipulator {
-
-    private ObjectMapper _mapper;
     private DebugLog _log;
+    private ObjectMapper _mapper;
     private ArrayList<String> _keysToWrite;
 
     public JsonManipulator(DebugLog log) {
+        _log = log;
         JsonFactory jf = new JsonFactory();
         jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
         _mapper = new ObjectMapper(jf);
-        _log = log;
         _keysToWrite = new ArrayList<String>();
         _keysToWrite.add("foodValue");
         _keysToWrite.add("price");
@@ -47,10 +46,6 @@ public class JsonManipulator {
         return read(path, Ingredient.class);
     }
 
-    public ConsumableBase readConsumable(String path) throws IOException {
-        return read(path, ConsumableBase.class);
-    }
-
     public <T> T read(String filePath, Class<T> classOfT) throws IOException {
         Reader reader = new FileReader(filePath);
         return _mapper.readValue(reader, classOfT);
@@ -62,7 +57,7 @@ public class JsonManipulator {
             String toWriteObj = _mapper.writeValueAsString(obj);
             JSONObject toWrite = new JSONObject(toWriteObj);
             if(fileData != null) {
-               toWrite = combineWithExisting(toWrite, fileData);
+               toWrite = combineJsonValues(toWrite, fileData);
             }
             Writer writer = new FileWriter(filePath);
             toWrite.write(writer, 1, 1);
@@ -70,11 +65,11 @@ public class JsonManipulator {
         }
         catch(IOException e) {
             _log.logDebug("[IOE] Failed to write file: " + filePath);
-            _log.logException(e);
+            _log.logError(e);
         }
     }
 
-    private JSONObject combineWithExisting(JSONObject toWrite, String existingJson) throws IOException {
+    private JSONObject combineJsonValues(JSONObject toWrite, String existingJson) throws IOException {
         try {
             JSONObject existingObject = new JSONObject(existingJson);
 
@@ -126,23 +121,20 @@ public class JsonManipulator {
             Reader reader = new FileReader(ingredient.patchFile);
             ObjectNode[] patchNodes = _mapper.readValue(reader, ObjectNode[].class);
             reader.close();
-            PatchResult result = new PatchResult();
-            result = updateNodes(ingredient, patchNodes, result);
+            PatchResult result = updateNodes(ingredient, patchNodes, new PatchResult());
             boolean needsUpdate = result.needsUpdate;
-            boolean foundFood = result.foundFood;
-            boolean foundPrice = result.foundPrice;
-            if(!foundFood || !foundPrice) {
+            if(!result.foundFood || !result.foundPrice) {
                 ArrayList<ObjectNode> objectNodes = new ArrayList<ObjectNode>();
                 for (int i = 0; i < patchNodes.length; i++) {
                     objectNodes.add(patchNodes[i]);
                 }
-                if (!foundFood) {
+                if (!result.foundFood) {
                     if(ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
                         objectNodes.add(createReplaceNode("foodValue", ingredient.foodValue));
                         needsUpdate = true;
                     }
                 }
-                if (!foundPrice) {
+                if (!result.foundPrice) {
                     if(ingredient.price != null) {
                         objectNodes.add(createReplaceNode("price", ingredient.price));
                         needsUpdate = true;
@@ -170,6 +162,7 @@ public class JsonManipulator {
                 PatchResult result = new PatchResult();
                 for (int i = 0; i < patchNodes.length; i++) {
                     result = updateNodes(ingredient, patchNodes[i], result);
+
                     if(result.foundFood && result.foundPrice) {
                         i = patchNodes.length;
                     }
@@ -218,12 +211,12 @@ public class JsonManipulator {
                     prettyWriter.writeValue(new File(ingredient.patchFile), patchNodes);
                 }
             }
-            catch(JsonMappingException e1) {_log.logException(e1);}
-            catch(IOException e1) {_log.logException(e1);}
+            catch(JsonMappingException e1) {_log.logError(e1);}
+            catch(IOException e1) {_log.logError(e1);}
         }
         catch (IOException e) {
             _log.logDebug("[IOE] Failed to read file: " + ingredient.patchFile);
-            _log.logException(e);
+            _log.logError(e);
         }
     }
 
@@ -248,7 +241,6 @@ public class JsonManipulator {
                 Reader reader = new FileReader(patchFileName);
                 JsonNode[] patchAsNode = _mapper.readValue(reader, JsonNode[].class);
                 reader.close();
-                patchFileAsJson = patchAsNode.toString();
                 JsonNode entityAsNode = _mapper.valueToTree(entity);
                 JsonNode modifiedAsNode = entityAsNode;
                 for(int i = 0; i < patchAsNode.length; i++) {
@@ -263,18 +255,18 @@ public class JsonManipulator {
             }
             catch (IOException e1) {
                 _log.logDebug("[IOE] Failed to read file: " + patchFileName);
-                _log.logException(e1);
+                _log.logError(e1);
             }
         }
         catch(JsonPatchException e) {
             if(patchFileAsJson != null) {
                 _log.logDebug("Json \"" + patchFileName + "\": " + patchFileAsJson);
             }
-            _log.logException(e);
+            _log.logError(e);
         }
         catch (IOException e) {
             _log.logDebug("[IOE] Failed to read file: " + patchFileName);
-            _log.logException(e);
+            _log.logError(e);
         }
         return null;
     }
@@ -341,5 +333,11 @@ public class JsonManipulator {
         public boolean needsUpdate;
         public boolean foundFood;
         public boolean foundPrice;
+
+        public PatchResult() {
+            needsUpdate = false;
+            foundFood = false;
+            foundPrice = false;
+        }
     }
 }

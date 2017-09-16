@@ -1,7 +1,7 @@
 package com.company;
 
 import com.company.locators.IngredientStore;
-import com.company.locators.RecipeLocator;
+import com.company.locators.RecipeStore;
 import com.company.models.ConfigSettings;
 import com.company.models.Ingredient;
 import com.company.models.Recipe;
@@ -16,22 +16,22 @@ import java.util.ArrayList;
  */
 public class ValueCalculator {
     private Double increasePercentage = 0.05;
-    private RecipeLocator _recipeLocator;
+    private RecipeStore _recipeStore;
     private IngredientStore _ingredientStore;
     private DebugLog _log;
 
     public ValueCalculator(DebugLog log,
                            ConfigSettings configSettings,
-                           RecipeLocator recipeLocator,
+                           RecipeStore recipeStore,
                            IngredientStore ingredientStore) {
-        _recipeLocator = recipeLocator;
+        _recipeStore = recipeStore;
         _ingredientStore = ingredientStore;
         increasePercentage = configSettings.increasePercentage;
         _log = log;
     }
 
     public Ingredient updateValues(Ingredient ingredient){
-        Recipe recipe = _recipeLocator.locateRecipe(ingredient.getName());
+        Recipe recipe = _recipeStore.locateRecipe(ingredient.getName());
         if(recipe == null) {
             _log.logDebug("No recipe found for: " + ingredient.getName());
             return ingredient;

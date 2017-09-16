@@ -49,4 +49,17 @@ public class Ingredient {
         }
         return objectName;
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof Ingredient))return false;
+        Ingredient otherIngredient = (Ingredient)other;
+        return itemName != null && itemName.equals(otherIngredient.itemName)
+                && ((price == null && otherIngredient.price == null
+                    && foodValue == null && otherIngredient.foodValue == null)
+                        || (price != null && price.equals(otherIngredient.price)
+                            && foodValue != null && foodValue.equals(otherIngredient.foodValue)));
+    }
 }

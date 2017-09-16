@@ -22,6 +22,9 @@ public class PatchLocator {
 
     public String locatePatchFileFor(String toCheckFilePath, ArrayList<String> filePaths) {
         File toCheckFile = new File(toCheckFilePath);
+        if(!toCheckFile.exists()) {
+            return null;
+        }
         String toCheckFileName = toCheckFile.getName();
         String foundPatchFileName = null;
         for(int i = 0; i < filePaths.size(); i++) {

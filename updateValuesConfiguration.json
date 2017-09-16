@@ -1,11 +1,9 @@
 {
   "locationsToUpdate": ["Samples"],
-  "locationsToFakeUpdate": ["NonStuff"],
+  "includeLocations": ["NonStuff"],
   "recipeLocations" : ["Samples"],
   "ingredientLocations" : ["Samples", "NonStuff"],
-  "ingredientExtensionInclusionList" : [".item", ".consumable", ".object", ".matitem", ".liquid"],
-  "ingredientValueOutputStoragePath": "savedUpdatedValues.json",
-  "ingredientValueOverridePath": "priceFoodValueOverrides.json",
+  "ingredientOverridePath": "valueOverrides.json",
   "increasePercentage" : 0.05,
   "numberOfPasses": 8,
   "enableDebug": true

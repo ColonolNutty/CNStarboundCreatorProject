@@ -8,28 +8,39 @@ package com.company;
 public class DebugLog {
 
     private boolean _enable;
-
-    public DebugLog(boolean enable) {
-        _enable = enable;
-    }
+    private String debugPrefix = "[DEBUG] ";
+    private String errorPrefix = "[ERROR] ";
+    private String infoPrefix = "[INFO] ";
 
     public void logDebug(String message) {
         if(_enable) {
-            System.out.println("[DEBUG] " + message);
-            System.out.flush();
-        }
-    }
-
-    public void logException(Exception e) {
-        if(_enable) {
-            e.printStackTrace();
-            System.out.println("[ERROR] " + e.getMessage());
+            System.out.println(debugPrefix + message);
             System.out.flush();
         }
     }
 
     public void logInfo(String message) {
-        System.out.println("[INFO] " +message);
+        System.out.println(infoPrefix + message);
         System.out.flush();
+    }
+
+    public void logError(String message) {
+        System.out.println(errorPrefix + message);
+        System.out.flush();
+    }
+
+    public void logError(Exception e) {
+        e.printStackTrace();
+        System.out.println(errorPrefix + e.getMessage());
+        System.out.flush();
+    }
+
+    public void logError(String message, Exception e) {
+        logError(message);
+        logError(e);
+    }
+
+    public void enableDebug(boolean enable) {
+        _enable = enable;
     }
 }

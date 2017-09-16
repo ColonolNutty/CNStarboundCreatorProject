@@ -15,23 +15,26 @@ import java.util.Hashtable;
  * Date: 09/11/2017
  * Time: 1:50 PM
  */
-public class RecipeLocator {
+public class RecipeStore {
 
     private Hashtable<String, Recipe> _recipes;
     private String[] _recipePaths;
-    private JsonManipulator _manipulator;
-    private ConfigSettings _settings;
     private DebugLog _log;
+    private JsonManipulator _manipulator;
     private PatchLocator _patchLocator;
+    private FileLocator _fileLocator;
 
-    public RecipeLocator(DebugLog log, ConfigSettings settings, JsonManipulator manipulator,
-                         PatchLocator patchLocator) {
+    public RecipeStore(DebugLog log,
+                       ConfigSettings settings,
+                       JsonManipulator manipulator,
+                       PatchLocator patchLocator,
+                       FileLocator fileLocator) {
         _recipes = new Hashtable<String, Recipe>();
-        _settings = settings;
         _recipePaths = settings.recipeLocations;
-        _manipulator = manipulator;
         _log = log;
+        _manipulator = manipulator;
         _patchLocator = patchLocator;
+        _fileLocator = fileLocator;
         setupRecipes();
     }
 
@@ -44,42 +47,14 @@ public class RecipeLocator {
 
     private void setupRecipes() {
         _log.logInfo("Locating recipes");
-        ArrayList<String> filePaths = findRecipes();
+        ArrayList<String> filePaths = _fileLocator.getFilePaths();
         for(int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);
-            if(!filePath.endsWith(".patch")) {
+            if(filePath.endsWith(".recipe")) {
                 String patchFile = _patchLocator.locatePatchFileFor(filePath, filePaths);
                 addRecipe(filePath, patchFile);
             }
         }
-    }
-
-    private ArrayList<String> findRecipes() {
-        ArrayList<java.lang.String> filePaths = new ArrayList<java.lang.String>();
-        for(int i = 0; i < _recipePaths.length; i++) {
-            java.lang.String recipePath = _recipePaths[i];
-            File directory = new File(recipePath);
-            ArrayList<String> filePathsFound = findRecipes(directory);
-            filePaths.addAll(filePathsFound);
-        }
-        return filePaths;
-    }
-
-    private ArrayList<String> findRecipes(File directory) {
-        ArrayList<String> filePaths = new ArrayList<String>();
-        //get all the files from a directory
-        File[] fList = directory.listFiles();
-        for (File file : fList){
-            String filePath = file.getAbsolutePath();
-            if (file.isFile() && isValidFile(filePath)) {
-                filePaths.add(filePath);
-            }
-            else if (file.isDirectory()) {
-                ArrayList<String> filePathsFound = findRecipes(file);
-                filePaths.addAll(filePathsFound);
-            }
-        }
-        return filePaths;
     }
 
     private void addRecipe(String filePath, String patchFilePath) {
