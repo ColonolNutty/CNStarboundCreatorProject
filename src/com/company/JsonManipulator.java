@@ -124,10 +124,10 @@ public class JsonManipulator {
             boolean needsUpdate = result.needsUpdate;
             if(!result.foundFood || !result.foundPrice) {
                 if(!result.foundFood) {
-                    _log.logDebug("Food Value not found on patch file: " + ingredient.getName());
+                    _log.logDebug("    Food Value not found on patch file: " + ingredient.getName());
                 }
                 if(!result.foundPrice) {
-                    _log.logDebug("Price not found on patch file: " + ingredient.getName());
+                    _log.logDebug("    Price not found on patch file: " + ingredient.getName());
                 }
                 ArrayList<ObjectNode> objectNodes = new ArrayList<ObjectNode>();
                 for (int i = 0; i < patchNodes.length; i++) {
@@ -146,7 +146,7 @@ public class JsonManipulator {
                     }
                 }
                 if(!needsUpdate) {
-                    _log.logInfo("Skipping patch file for: " + ingredient.getName());
+                    _log.logInfo("    Skipping patch file for: " + ingredient.getName());
                     return;
                 }
                 patchNodes = new ObjectNode[objectNodes.size()];
@@ -155,12 +155,12 @@ public class JsonManipulator {
                 }
             }
             if(needsUpdate) {
-                _log.logInfo("Applying update to patch file: " + ingredient.getName());
+                _log.logInfo("    Applying update to patch file: " + ingredient.getName());
                 ObjectWriter prettyWriter = _mapper.writer(new DefaultPrettyPrinter());
                 prettyWriter.writeValue(new File(ingredient.patchFile), patchNodes);
             }
             else {
-                _log.logInfo("Skipping patch file for: " + ingredient.getName());
+                _log.logInfo("    Skipping patch file for: " + ingredient.getName());
             }
         }
         catch(JsonMappingException e) {
@@ -203,7 +203,7 @@ public class JsonManipulator {
                         }
                     }
                     if(!needsUpdate) {
-                        _log.logInfo("Skipping patch file for: " + ingredient.getName());
+                        _log.logInfo("    Skipping patch file for: " + ingredient.getName());
                         return;
                     }
                     patchNodes = new ObjectNode[objectNodes.size()][];
@@ -217,12 +217,12 @@ public class JsonManipulator {
                     }
                 }
                 if (needsUpdate) {
-                    _log.logInfo("Applying update to patch file: " + ingredient.getName());
+                    _log.logInfo("    Applying update to patch file: " + ingredient.getName());
                     ObjectWriter prettyWriter = _mapper.writer(new DefaultPrettyPrinter());
                     prettyWriter.writeValue(new File(ingredient.patchFile), patchNodes);
                 }
                 else {
-                    _log.logInfo("Skipping patch file for: " + ingredient.getName());
+                    _log.logInfo("    Skipping patch file for: " + ingredient.getName());
                 }
             }
             catch(JsonMappingException e1) {_log.logError(e1);}

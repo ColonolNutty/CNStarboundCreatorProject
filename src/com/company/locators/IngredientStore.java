@@ -143,7 +143,6 @@ public class IngredientStore {
                 _log.logDebug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price);
                 existing.price = ingredient.price;
             }
-            _log.logDebug("New values: " + existing.getName() + " p: " + existing.price + " fv: " + existing.foodValue);
             existing.itemName = ingredient.itemName;
             existing.objectName = ingredient.objectName;
             existing.name = ingredient.name;
@@ -153,6 +152,12 @@ public class IngredientStore {
             existing.shortdescription = ingredient.shortdescription;
             existing.stages = ingredient.stages;
             existing.interactData = ingredient.interactData;
+            if(ingredient.filePath != null) {
+                existing.filePath = ingredient.filePath;
+            }
+            if(ingredient.patchFile != null) {
+                existing.patchFile = ingredient.patchFile;
+            }
             _ingredients.put(existing.getName(), existing);
         }
         else {

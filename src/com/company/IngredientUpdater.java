@@ -47,10 +47,9 @@ public class IngredientUpdater {
             Ingredient updatedIngredient = _valueCalculator.updateValues(ingredient);
             Ingredient originalIngredient = _manipulator.readIngredient(ingredientFilePath);
             if(ingredientsAreEqual(originalIngredient, updatedIngredient)) {
-                _log.logDebug("Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName());
+                _log.logDebug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName());
                 return null;
             }
-            _ingredientStore.updateIngredient(updatedIngredient);
             return ingredient.getName();
         }
         catch(IOException e) {
@@ -64,11 +63,14 @@ public class IngredientUpdater {
             return false;
         }
         if(one.filePath != null && CNUtils.fileEndsWith(one.filePath, _fileTypesIgnoreFoodValues)) {
+            _log.logDebug("Comparing using only price: " + one.getName());
             return one.priceEquals(two);
         }
         if(two.filePath != null && CNUtils.fileEndsWith(two.filePath, _fileTypesIgnoreFoodValues)) {
+            _log.logDebug("Comparing using only price: " + one.getName());
             return one.priceEquals(two);
         }
+        _log.logDebug("Comparing using both price and foodValue: " + one.getName());
         return one.equals(two);
     }
 }

@@ -11,7 +11,6 @@ import com.company.models.ConfigSettings;
 public class ValueBalancer {
 
     private String _configFilePath;
-    private DebugLog _log;
 
     public ValueBalancer(String configSettingsFile) {
         _configFilePath = configSettingsFile;
@@ -22,9 +21,6 @@ public class ValueBalancer {
     }
 
     public void run() {
-        if(_log != null) {
-            _log.dispose();
-        }
         StopWatchTimer timer = new StopWatchTimer();
         timer.start();
         ConfigSettings configSettings = readConfigSettings(_configFilePath);
@@ -32,17 +28,19 @@ public class ValueBalancer {
             System.out.println("[ERROR] No configuration file found, exiting.");
             return;
         }
-        _log = new DebugLog(configSettings.logFile, configSettings.enableConsoleDebug);
-        JsonManipulator manipulator = new JsonManipulator(_log);
-        PatchLocator patchLocator = new PatchLocator(_log);
-        FileLocator fileLocator = new FileLocator(_log, configSettings);
-        IngredientStore ingredientStore = new IngredientStore(_log, configSettings, manipulator, patchLocator, fileLocator);
-        RecipeStore recipeStore = new RecipeStore(_log, manipulator, patchLocator, fileLocator);
-        ValueCalculator valueCalculator = new ValueCalculator(_log, configSettings, recipeStore, ingredientStore);
-        IngredientUpdater ingredientUpdater = new IngredientUpdater(_log, manipulator, ingredientStore, valueCalculator);
-        FileUpdater fileUpdater = new FileUpdater(_log, configSettings,
+        DebugLog debugLog = new DebugLog(configSettings.logFile, configSettings.enableConsoleDebug);
+        JsonManipulator manipulator = new JsonManipulator(debugLog);
+        PatchLocator patchLocator = new PatchLocator(debugLog);
+        FileLocator fileLocator = new FileLocator(debugLog, configSettings);
+        IngredientStore ingredientStore = new IngredientStore(debugLog, configSettings, manipulator, patchLocator, fileLocator);
+        RecipeStore recipeStore = new RecipeStore(debugLog, manipulator, patchLocator, fileLocator);
+        ValueCalculator valueCalculator = new ValueCalculator(debugLog, configSettings, recipeStore, ingredientStore);
+        IngredientUpdater ingredientUpdater = new IngredientUpdater(debugLog, manipulator, ingredientStore, valueCalculator);
+
+        FileUpdater fileUpdater = new FileUpdater(debugLog, configSettings,
                 valueCalculator, manipulator, ingredientUpdater, ingredientStore, fileLocator);
         fileUpdater.updateValues();
+
         timer.stop();
         long time = timer.timeInMinutes();
         String unitOfMeasurement = "minutes";
@@ -54,18 +52,13 @@ public class ValueBalancer {
             time = timer.timeInMilliseconds();
             unitOfMeasurement = "milliseconds";
         }
-        _log.logInfo("Finished running in " + time + " " + unitOfMeasurement);
+        debugLog.logInfo("Finished running in " + time + " " + unitOfMeasurement);
+        debugLog.dispose();
     }
 
     private ConfigSettings readConfigSettings(String configPath) {
         System.out.println("[INFO] Looking for configuration file with name: " + configPath);
         ConfigSettings configSettings = new ConfigReader().readSettings(configPath);
         return configSettings;
-    }
-
-    public void dispose() {
-        if(_log != null) {
-            _log.dispose();
-        }
     }
 }

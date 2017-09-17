@@ -9,6 +9,5 @@ public class Main {
         }
         ValueBalancer balancer = new ValueBalancer(configFile);
         balancer.run();
-        balancer.dispose();
     }
 }

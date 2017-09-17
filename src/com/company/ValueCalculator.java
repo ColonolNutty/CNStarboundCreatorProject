@@ -66,7 +66,9 @@ public class ValueCalculator {
 
         _log.logDebug("New values for: " + recipe.output.item + " are p: " + newPrice + " and fv: " + newFoodValue);
 
-        return new Ingredient(recipe.output.item, newPrice, newFoodValue);
+        Ingredient newIngredient = new Ingredient(recipe.output.item, newPrice, newFoodValue);
+        _ingredientStore.updateIngredient(newIngredient);
+        return _ingredientStore.getIngredient(recipe.output.item);
     }
 
     private ArrayList<RecipeIngredient> findIngredientsFor(Recipe recipe) {
