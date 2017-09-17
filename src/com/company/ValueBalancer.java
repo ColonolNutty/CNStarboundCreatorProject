@@ -25,6 +25,8 @@ public class ValueBalancer {
         if(_log != null) {
             _log.dispose();
         }
+        StopWatchTimer timer = new StopWatchTimer();
+        timer.start();
         ConfigSettings configSettings = readConfigSettings(_configFilePath);
         if(configSettings == null) {
             System.out.println("[ERROR] No configuration file found, exiting.");
@@ -41,6 +43,18 @@ public class ValueBalancer {
         FileUpdater fileUpdater = new FileUpdater(_log, configSettings,
                 valueCalculator, manipulator, ingredientUpdater, ingredientStore, fileLocator);
         fileUpdater.updateValues();
+        timer.stop();
+        long time = timer.timeInMinutes();
+        String unitOfMeasurement = "minutes";
+        if(time == 0) {
+            time = timer.timeInSeconds();
+            unitOfMeasurement = "seconds";
+        }
+        if(time == 0) {
+            time = timer.timeInMilliseconds();
+            unitOfMeasurement = "milliseconds";
+        }
+        _log.logInfo("Finished running in " + time + " " + unitOfMeasurement);
     }
 
     private ConfigSettings readConfigSettings(String configPath) {

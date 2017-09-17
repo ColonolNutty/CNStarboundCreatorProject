@@ -76,10 +76,16 @@ public class Ingredient {
     }
 
     private boolean valuesEqual(Double one, Double two) {
-        if(one == null && two == null) {
+        if(one == null) {
+            one = 0.0;
+        }
+        if(two == null) {
+            two = 0.0;
+        }
+        if(one == 0.0 && two == 0.0) {
             return true;
         }
-        if(one == null || two == null) {
+        if(one == 0.0 || two == 0.0) {
             return false;
         }
         return one.equals(two);
