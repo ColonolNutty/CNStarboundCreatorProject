@@ -2,7 +2,8 @@
   "locationsToUpdate": ["Samples"],
   "includeLocations": ["NonStuff"],
   "ingredientOverridePath": "valueOverrides.json",
+  "logFile": "updatelog.log",
   "increasePercentage" : 0.05,
   "numberOfPasses": 8,
-  "enableDebug": true
+  "enableConsoleDebug": true
 }

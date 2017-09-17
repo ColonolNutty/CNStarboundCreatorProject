@@ -74,9 +74,4 @@ public class RecipeStore {
             _log.logDebug("{IOE] Problem encountered reading recipe at path: " + filePath + "\n" + e.getMessage());
         }
     }
-
-    public boolean isValidFile(String filePath) {
-        File file = new File(filePath);
-        return !file.getName().startsWith("obsolete") && (filePath.endsWith(".recipe") || filePath.endsWith(".recipe.patch"));
-    }
 }

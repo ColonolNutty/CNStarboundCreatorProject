@@ -58,6 +58,10 @@ public class Ingredient {
         return objectName;
     }
 
+    public boolean priceEquals(Ingredient otherIngredient) {
+        return valuesEqual(price, otherIngredient.price);
+    }
+
     @Override
     public boolean equals(Object other){
         if (other == null) return false;
@@ -67,24 +71,17 @@ public class Ingredient {
         if(getName() == null || !getName().equals(otherIngredient.getName())) {
             return false;
         }
-        if(valuesEqual(price, otherIngredient.price)
-                && valuesEqual(foodValue, otherIngredient.foodValue)) {
-            return true;
-        }
-        return false;
+        return valuesEqual(price, otherIngredient.price)
+                && valuesEqual(foodValue, otherIngredient.foodValue);
     }
 
     private boolean valuesEqual(Double one, Double two) {
         if(one == null && two == null) {
             return true;
         }
-        if((one != null && two == null)
-                || (two != null && one == null)) {
+        if(one == null || two == null) {
             return false;
         }
-        if(one != null && one.equals(two)) {
-            return true;
-        }
-        return false;
+        return one.equals(two);
     }
 }

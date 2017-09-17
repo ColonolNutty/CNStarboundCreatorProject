@@ -1,0 +1,11 @@
+{
+  "shortdescription": "Sugarcane Stalk",
+  "itemName": "sugarcaneBMB",
+  "itemTags": ["reagent"],
+  "price": 80,
+  "learnBlueprintsOnPickup": ["paper"],
+  "description": "Freshly harvested Sugarcane stalk. Can be milled into Sugar.",
+  "inventoryIcon": "sugarcaneBMB.png",
+  "category": "craftingMaterial",
+  "rarity": "Common"
+ }

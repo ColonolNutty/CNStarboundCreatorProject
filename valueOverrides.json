@@ -90,5 +90,9 @@
   {
     "itemName": "endomorphicjelly",
     "foodValue": 2
+  },
+  {
+    "itemName": "sugarcaneBMB",
+    "foodValue": 5.7
   }
  ]}

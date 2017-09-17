@@ -1,13 +1,11 @@
 package com.company;
 
-import com.company.DebugLog;
-import com.company.JsonManipulator;
-import com.company.ValueCalculator;
 import com.company.locators.IngredientStore;
 import com.company.models.Ingredient;
-import com.company.models.UpdateDetails;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * User: Jack's Computer
@@ -19,6 +17,7 @@ public class IngredientUpdater {
     protected JsonManipulator _manipulator;
     protected IngredientStore _ingredientStore;
     protected ValueCalculator _valueCalculator;
+    protected ArrayList<String> _fileTypesIgnoreFoodValues;
 
     public IngredientUpdater(DebugLog log,
                              JsonManipulator manipulator,
@@ -28,30 +27,27 @@ public class IngredientUpdater {
         _manipulator = manipulator;
         _ingredientStore = ingredientStore;
         _valueCalculator = valueCalculator;
+        _fileTypesIgnoreFoodValues = new ArrayList<String>();
+        _fileTypesIgnoreFoodValues.add(".item");
+        _fileTypesIgnoreFoodValues.add(".object");
+        _fileTypesIgnoreFoodValues.add(".projectile");
+        _fileTypesIgnoreFoodValues.add(".matitem");
+        _fileTypesIgnoreFoodValues.add(".liquid");
     }
 
-    public String update(String filePath) {
+    public String update(String ingredientFilePath) {
         try {
-            _log.logDebug("Attempting to update: " + filePath);
-            Ingredient ingredient = _manipulator.readIngredient(filePath);
-            ingredient = _ingredientStore.getIngredient(ingredient.getName());
+            File ingredientFile = new File(ingredientFilePath);
+            _log.logDebug("Attempting to update: " + ingredientFile.getName());
+            Ingredient ingredient = _ingredientStore.getIngredientWithFilePath(ingredientFilePath);
             if(ingredient == null) {
-                _log.logDebug("No ingredient found in store for: " + filePath);
+                _log.logDebug("No ingredient found in store for: " + ingredientFilePath);
                 return null;
             }
             Ingredient updatedIngredient = _valueCalculator.updateValues(ingredient);
-            if(ingredient.equals(updatedIngredient)) {
-                _log.logDebug("1. Values were the same, so no update: " + filePath);
-                return null;
-            }
-            Ingredient base = _manipulator.readIngredient(filePath);
-            if(base == null || base.equals(updatedIngredient)) {
-                if(base == null) {
-                    _log.logDebug("No base value found: " + filePath);
-                }
-                else {
-                    _log.logDebug("2. Values were the same, so no update: " + filePath);
-                }
+            Ingredient originalIngredient = _manipulator.readIngredient(ingredientFilePath);
+            if(ingredientsAreEqual(originalIngredient, updatedIngredient)) {
+                _log.logDebug("Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName());
                 return null;
             }
             _ingredientStore.updateIngredient(updatedIngredient);
@@ -61,5 +57,18 @@ public class IngredientUpdater {
             _log.logDebug("[IOE] Big Problem: " + e.getMessage());
         }
         return null;
+    }
+
+    private boolean ingredientsAreEqual(Ingredient one, Ingredient two) {
+        if(one == null || two == null) {
+            return false;
+        }
+        if(one.filePath != null && CNUtils.fileEndsWith(one.filePath, _fileTypesIgnoreFoodValues)) {
+            return one.priceEquals(two);
+        }
+        if(two.filePath != null && CNUtils.fileEndsWith(two.filePath, _fileTypesIgnoreFoodValues)) {
+            return one.priceEquals(two);
+        }
+        return one.equals(two);
     }
 }

@@ -6,7 +6,6 @@ import com.company.models.ConfigSettings;
 import com.company.models.Ingredient;
 import com.company.models.IngredientOverrides;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +43,7 @@ public class IngredientStore {
         if(ingredients == null) {
             return;
         }
+        _log.logDebug("Found overrides, overriding values");
         for(int i = 0; i < ingredients.length; i++) {
             Ingredient ingredient = ingredients[i];
             _log.logDebug("Overriding ingredient: " + ingredient.getName() + " with p: " + ingredient.price + " and fv: " + ingredient.foodValue);
@@ -65,16 +65,17 @@ public class IngredientStore {
         }
     }
 
-    public Ingredient getIngredientWithFilePathAndPatch(String filePath) {
+    public Ingredient getIngredientWithFilePath(String filePath) {
+        initializeIngredientStore();
+        Ingredient foundIngredient = null;
         Enumeration<Ingredient> ingredients = _ingredients.elements();
-        Ingredient found = null;
-        while(found == null && ingredients.hasMoreElements()) {
+        while(foundIngredient == null && ingredients.hasMoreElements()) {
             Ingredient ingredient = ingredients.nextElement();
-            if(ingredient.patchFile != null && ingredient.filePath.equals(filePath)) {
-                found = ingredient;
+            if(ingredient.filePath != null && ingredient.filePath.equals(filePath)) {
+                foundIngredient = ingredient;
             }
         }
-        return found;
+        return foundIngredient;
     }
 
     public void updateIngredient(Ingredient ingredient) {
@@ -85,6 +86,9 @@ public class IngredientStore {
     }
 
     private void initializeIngredientStore() {
+        if(!_ingredients.isEmpty()) {
+            return;
+        }
         _log.logInfo("Loading ingredients from disk");
         ArrayList<String> filePaths = _fileLocator.getFilePaths();
         for(int i = 0; i < filePaths.size(); i++) {
@@ -94,7 +98,7 @@ public class IngredientStore {
                 addIngredient(filePath, patchFile);
             }
         }
-        overrideIngredients(readOverrides());
+        initializeIngredientOverrides();
     }
 
     private void addIngredient(String filePath, String patchFilePath) {
@@ -157,15 +161,14 @@ public class IngredientStore {
         }
     }
 
-    private Ingredient[] readOverrides() {
+    private void initializeIngredientOverrides() {
         try {
             IngredientOverrides replacementIngredientValues = _manipulator.read(_settings.ingredientOverridePath, IngredientOverrides.class);
-            return replacementIngredientValues.ingredients;
+            overrideIngredients(replacementIngredientValues.ingredients);
         }
         catch(FileNotFoundException e) { }
         catch (IOException e) {
-            e.printStackTrace();
+            _log.logError(e);
         }
-        return null;
     }
 }

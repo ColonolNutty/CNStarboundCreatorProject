@@ -10,25 +10,27 @@ import com.company.models.ConfigSettings;
  */
 public class ValueBalancer {
 
-    private String _configSettingsFile;
+    private String _configFilePath;
     private DebugLog _log;
 
     public ValueBalancer(String configSettingsFile) {
-        _log = new DebugLog();
-        _configSettingsFile = configSettingsFile;
-        if(_configSettingsFile == null) {
-            _configSettingsFile = "updateValuesConfiguration.json";
-            _log.logInfo("No configuration file specified, searching for default with path: " + _configSettingsFile);
+        _configFilePath = configSettingsFile;
+        if(_configFilePath == null) {
+            _configFilePath = "balancerConfiguration.json";
+            System.out.println("[INFO] No configuration file specified, using default configuration path: " + _configFilePath);
         }
     }
 
     public void run() {
-        ConfigSettings configSettings = readConfigSettings(_configSettingsFile);
+        if(_log != null) {
+            _log.dispose();
+        }
+        ConfigSettings configSettings = readConfigSettings(_configFilePath);
         if(configSettings == null) {
-            _log.logError("No configuration file found, exiting.");
+            System.out.println("[ERROR] No configuration file found, exiting.");
             return;
         }
-        _log.enableDebug(configSettings.enableDebug);
+        _log = new DebugLog(configSettings.logFile, configSettings.enableConsoleDebug);
         JsonManipulator manipulator = new JsonManipulator(_log);
         PatchLocator patchLocator = new PatchLocator(_log);
         FileLocator fileLocator = new FileLocator(_log, configSettings);
@@ -42,10 +44,14 @@ public class ValueBalancer {
     }
 
     private ConfigSettings readConfigSettings(String configPath) {
-        if(configPath == null) {
-        }
-        _log.logInfo("Looking for configuration file with name: " + configPath);
+        System.out.println("[INFO] Looking for configuration file with name: " + configPath);
         ConfigSettings configSettings = new ConfigReader().readSettings(configPath);
         return configSettings;
+    }
+
+    public void dispose() {
+        if(_log != null) {
+            _log.dispose();
+        }
     }
 }

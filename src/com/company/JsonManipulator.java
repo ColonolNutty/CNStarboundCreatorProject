@@ -64,8 +64,7 @@ public class JsonManipulator {
             writer.close();
         }
         catch(IOException e) {
-            _log.logDebug("[IOE] Failed to write file: " + filePath);
-            _log.logError(e);
+            _log.logError("[IOE] Failed to write file: " + filePath, e);
         }
     }
 
@@ -214,8 +213,7 @@ public class JsonManipulator {
             catch(IOException e1) {_log.logError(e1);}
         }
         catch (IOException e) {
-            _log.logDebug("[IOE] Failed to read file: " + ingredient.patchFile);
-            _log.logError(e);
+            _log.logError("[IOE] Failed to read file: " + ingredient.patchFile, e);
         }
     }
 
@@ -253,19 +251,19 @@ public class JsonManipulator {
                 return _mapper.treeToValue(modifiedAsNode, valueType);
             }
             catch (IOException e1) {
-                _log.logDebug("[IOE] Failed to read file: " + patchFileName);
-                _log.logError(e1);
+                _log.logError("[IOE] Failed to read file: " + patchFileName, e1);
             }
         }
         catch(JsonPatchException e) {
             if(patchFileAsJson != null) {
-                _log.logDebug("Json \"" + patchFileName + "\": " + patchFileAsJson);
+                _log.logError("Json \"" + patchFileName + "\": " + patchFileAsJson, e);
             }
-            _log.logError(e);
+            else {
+                _log.logError("When parsing patch file: " + patchFileName, e);
+            }
         }
         catch (IOException e) {
-            _log.logDebug("[IOE] Failed to read file: " + patchFileName);
-            _log.logError(e);
+            _log.logError("[IOE] Failed to read file: " + patchFileName, e);
         }
         return null;
     }

@@ -2,9 +2,8 @@
   <artifact build-on-make="true" name="ToRun">
     <output-path>$PROJECT_DIR$/out/artifacts/ToRun</output-path>
     <root id="root">
-      <element id="file-copy" path="$PROJECT_DIR$/runThing.bat" />
-      <element id="file-copy" path="$PROJECT_DIR$/runThingWithLog.bat" />
-      <element id="file-copy" path="$PROJECT_DIR$/updateValuesConfiguration.json" />
+      <element id="file-copy" path="$PROJECT_DIR$/runBalancer.bat" />
+      <element id="file-copy" path="$PROJECT_DIR$/balancerConfiguration.json" />
       <element id="file-copy" path="$PROJECT_DIR$/valueOverrides.json" />
     </root>
   </artifact>

@@ -1,6 +1,6 @@
 {
-  "shortdescription": "No",
   "itemName": "flourMFM",
+  "shortdescription": "No",
   "price": 8.4,
   "learnBlueprintsOnPickup": ["doughMFM"],
   "description": "Maybe",

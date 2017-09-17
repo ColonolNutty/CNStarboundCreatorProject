@@ -11,6 +11,7 @@ public class Main {
         }
         ValueBalancer balancer = new ValueBalancer(configFile);
         balancer.run();
+        balancer.dispose();
         timer.stop();
         long time = timer.timeInMinutes();
         String unitOfMeasurement = "minutes";

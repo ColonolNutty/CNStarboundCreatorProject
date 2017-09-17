@@ -6,7 +6,9 @@ import com.company.models.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 /**
  * User: Jack's Computer
@@ -47,40 +49,36 @@ public class FileUpdater {
                 String filePath = filePaths.get(i);
                 if(!filePath.endsWith(".recipe") && !filePath.endsWith(".patch")) {
                     String ingredientName = _ingredientUpdater.update(filePath);
-                    if (ingredientName != null && !ingredientsToUpdate.containsKey(filePath)) {
-                        ingredientsToUpdate.put(filePath, ingredientName);
-                    }
-                    if (!ingredientsToUpdate.containsKey(filePath)) {
-                        Ingredient ingredient = _ingredientStore.getIngredientWithFilePathAndPatch(filePath);
-                        if (ingredient != null) {
-                            ingredientsToUpdate.put(filePath, ingredient.getName());
+                    //If ingredientName is null, it means the file doesn't need an update
+                    if(ingredientName == null) {
+                        if(ingredientsToUpdate.containsKey(filePath)) {
+                            ingredientsToUpdate.remove(filePath);
                         }
+                    }
+                    else if (!ingredientsToUpdate.containsKey(filePath)) {
+                        ingredientsToUpdate.put(filePath, ingredientName);
                     }
                 }
             }
         }
+
+        if(ingredientsToUpdate.isEmpty()) {
+            _log.logInfo("No files to update");
+            return;
+        }
         _log.logInfo("Finished passes, updating files");
-        for (int i = 0; i < filePaths.size(); i++) {
-            String filePath = filePaths.get(i);
-            if (ingredientsToUpdate.containsKey(filePath)) {
-                String ingredientName = ingredientsToUpdate.get(filePath);
-                Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
-                if (ingredient != null) {
-                    if(isIncludeLocation(ingredient.filePath)) {
-                        if (ingredient.patchFile != null) {
-                            _log.logInfo("Updating ingredient as patch file: " + ingredient.getName());
-                            _manipulator.writeIngredientAsPatch(ingredient);
-                        }
-                    } else {
-                        if (ingredient.patchFile != null) {
-                            _log.logInfo("Updating ingredient as patch file: " + ingredient.getName());
-                            _manipulator.writeIngredientAsPatch(ingredient);
-                        }
-                        else {
-                            _log.logInfo("Updating ingredient: " + ingredient.getName());
-                            _manipulator.write(filePath, ingredient);
-                        }
-                    }
+        Enumeration<String> ingredientNames = ingredientsToUpdate.elements();
+        while(ingredientNames.hasMoreElements()) {
+            String ingredientName = ingredientNames.nextElement();
+            Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
+            if (ingredient != null) {
+                if(ingredient.patchFile != null) {
+                    _log.logInfo("Updating patch file: " + ingredient.getName());
+                    _manipulator.writeIngredientAsPatch(ingredient);
+                }
+                else if(!isIncludeLocation(ingredient.filePath)) {
+                    _log.logInfo("Updating ingredient: " + ingredient.getName());
+                    _manipulator.write(ingredient.filePath, ingredient);
                 }
             }
         }

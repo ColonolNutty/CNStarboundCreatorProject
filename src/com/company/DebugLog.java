@@ -1,5 +1,7 @@
 package com.company;
 
+import java.io.*;
+
 /**
  * User: Jack's Computer
  * Date: 09/11/2017
@@ -7,31 +9,54 @@ package com.company;
  */
 public class DebugLog {
 
-    private boolean _enable;
+    private boolean _enableConsoleDebug;
+    private String defaultLogFile = "updateLog.log";
     private String debugPrefix = "[DEBUG] ";
     private String errorPrefix = "[ERROR] ";
     private String infoPrefix = "[INFO] ";
+    private PrintWriter writer;
 
-    public void logDebug(String message) {
-        if(_enable) {
-            System.out.println(debugPrefix + message);
-            System.out.flush();
+    public DebugLog(String debugLogFile, boolean enableConsoleDebug) {
+        _enableConsoleDebug = enableConsoleDebug;
+        if(debugLogFile == null) {
+            logInfo("No output file specified, using default log file: " + defaultLogFile);
+            debugLogFile = defaultLogFile;
+        }
+        try {
+            File file = new File(debugLogFile);
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+            writer = new PrintWriter(file);
+        }
+        catch(IOException e) {
+            logError(e);
         }
     }
 
+    public void logDebug(String message) {
+        if(_enableConsoleDebug) {
+            writeOutput(debugPrefix + message);
+            return;
+        }
+        writeToLog(debugPrefix + message);
+    }
+
     public void logInfo(String message) {
-        System.out.println(infoPrefix + message);
-        System.out.flush();
+        writeOutput(infoPrefix + message);
     }
 
     public void logError(String message) {
-        System.out.println(errorPrefix + message);
-        System.out.flush();
+        writeOutput(errorPrefix + message);
     }
 
     public void logError(Exception e) {
         e.printStackTrace(System.out);
         System.out.flush();
+        if(writer != null) {
+            e.printStackTrace(writer);
+        }
     }
 
     public void logError(String message, Exception e) {
@@ -39,7 +64,22 @@ public class DebugLog {
         logError(e);
     }
 
-    public void enableDebug(boolean enable) {
-        _enable = enable;
+    private void writeOutput(String message) {
+        System.out.println(message);
+        System.out.flush();
+        writeToLog(message);
+    }
+
+    private void writeToLog(String message) {
+        if(writer != null) {
+            writer.println(message);
+        }
+    }
+
+    public void dispose() {
+        if(writer != null) {
+            writer.flush();
+            writer.close();
+        }
     }
 }

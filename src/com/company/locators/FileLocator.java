@@ -1,5 +1,6 @@
 package com.company.locators;
 
+import com.company.CNUtils;
 import com.company.DebugLog;
 import com.company.models.ConfigSettings;
 
@@ -73,14 +74,9 @@ public class FileLocator {
     }
 
     private boolean isValidFileType(String fileName) {
-        boolean included = false;
-        for(int i = 0; i < _includedFileTypes.size(); i++){
-            String fileType = _includedFileTypes.get(i);
-            if(fileName.endsWith(fileType)) {
-                included = true;
-                i = _includedFileTypes.size();
-            }
+        if(fileName.startsWith("obsolete")) {
+            return false;
         }
-        return included;
+        return CNUtils.fileEndsWith(fileName, _includedFileTypes);
     }
 }
