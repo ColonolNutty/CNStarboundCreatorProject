@@ -58,7 +58,7 @@ Rounded((((90 * 3) + (90 * 0.05)) + ((40 * 2) + (40 * 0.05)))/5)
 = Rounded(356.5/5) = 71.3
 
 Alien Fruit Jam Food Value:
-RoundedToTwoDecimalPlaces((((0 * 3) + (0 * 0.05)) + ((10 * 2) + (10 * 0.05)))/5)
+Rounded((((0 * 3) + (0 * 0.05)) + ((10 * 2) + (10 * 0.05)))/5)
 = Rounded((0 + 20.5)/5)
 = Rounded(20.5/5) = 4.1
 
