@@ -92,3 +92,42 @@ Other things to note:
 * This configuration will also tell the program to run through and calculate all ingredient prices and food values 15 times (Each time getting more and more accurate with the values), as denoted by the `numberOfPasses` property.
 * If you'd like to see how the `increasePercentage` has an effect, see the example formula provided above
 * `enableConsoleDebug` false here will not print debug output to the console, but it will continue to write debug output to the `updatelog.log` file, located next to where the program ran
+* The program will override the initial values it has with values located within the file specified with `ingredientOverridePath`, see below for an example of how that file is formatted
+
+### Value Overrides
+An example file that overrides the values of `sugar`, `watercooler`, `coconut`, and `healingliquid`
+```javascript
+{
+  "ingredients": [
+    //items and consumables
+    {
+      "itemName": "sugar",
+      "foodValue": 2,
+    },
+    //objects
+    {
+      "objectName": "watercooler",
+      "price": 12,
+      "foodValue": 24
+    },
+    //projectiles
+    {
+      "projectileName": "coconut",
+      "foodValue": 5
+    },
+    //liquids
+    {
+      "name": "healingliquid",
+      "price": 16
+    }
+  ]
+}
+
+```
+The property name depends on the type of object being overriden, refer to the table below for a list of property names and their uses, if you don't see something listed, try using `itemName` as your goto
+| Object Type(s) | Property Name |
+| -------------- | ------------- |
+| Projectile | projectileName |
+| Objects | objectName |
+| Consumables and Items | itemName |
+| Liquids | name |
