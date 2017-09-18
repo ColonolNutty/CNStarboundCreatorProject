@@ -74,3 +74,21 @@ RoundedToTwoDecimalPlaces((((0 * 3) + (0 * 0.05)) + ((10 * 2) + (10 * 0.05)))/5)
 | Double | increasePercentage | A percentage of the total price you would like to add to resulting food values and prices. |
 | int | numberOfPasses | The total number of times you would like the program to run through ingredients, recommended value is 8 (The higher the number, the more accurate the food values and prices will be, but the longer it will take) |
 | boolean | enableConsoleDebug | If set to true, you will see [Debug] message in the console |
+
+### Configuration Example
+```javascript
+{
+  "locationsToUpdate" : ["mods/ModA/items", "mods/ModA/objects"],
+  "includeLocations" : ["VanillaAssets", "mods/ModA/recipes", "mods/ModA/objects/farmables", "mods/ModB/objects", "mods/ModB/recipes"],
+  "ingredientOverridePath": "valueOverrides.json",
+  "increasePercentage" : 0.05,
+  "numberOfPasses": 15,
+  "enableConsoleDebug": true
+}
+```
+The above configuration will go through all locations listed in `locationsToUpdate` and `includeLocations` and it will pick up ingredients there. It will update everything within `locationsToUpdate` but will not update the folders or their assets specified in `includeLocations`. If you notice, both `locationsToUpdate` and `includeLocations` contain `mods/ModA/objects` except `includeLocations` specified `mods/ModA/objects/farmables`. The program will go through and update everything in the `mods/ModA/objects` folder but will NOT update anything within the `mods/ModA/objects/farmables` folder, even though the farmables folder is part of the `mods/ModA/objects` path.
+Other things to note:
+
+* This configuration will also tell the program to run through and calculate all ingredient prices and food values 15 times (Each time getting more and more accurate with the values), as denoted by the `numberOfPasses` property.
+* If you'd like to see how the `increasePercentage` has an effect, see the example formula provided above
+* `enableConsoleDebug` false here will not print debug output to the console, but it will continue to write debug output to the `updatelog.log` file, located next to where the program ran
