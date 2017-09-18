@@ -124,7 +124,7 @@ An example file that overrides the values of `sugar`, `watercooler`, `coconut`, 
 }
 
 ```
-The property name depends on the type of object being overriden, refer to the table below for a list of property names and their uses, if you don't see something listed, try using `itemName` as your goto
+The property name depends on the type of object being overriden, refer to the table below for a list of property names and their uses. If you don't see something listed, try using `itemName` as your goto
 
 | Object Type(s) | Property Name |
 | -------------- | ------------- |
