@@ -4,10 +4,7 @@ import com.company.models.*;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
@@ -33,6 +30,7 @@ public class JsonManipulator {
         JsonFactory jf = new JsonFactory();
         jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
         _mapper = new ObjectMapper(jf);
+        _mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         _keysToWrite = new ArrayList<String>();
         _keysToWrite.add("foodValue");
         _keysToWrite.add("price");
@@ -56,11 +54,12 @@ public class JsonManipulator {
             String fileData = readExistingFile(filePath);
             String toWriteObj = _mapper.writeValueAsString(obj);
             JSONObject toWrite = new JSONObject(toWriteObj);
-            if(fileData != null) {
-               toWrite = combineJsonValues(toWrite, fileData);
+            JSONObject combined = combineJsonValues(toWrite, fileData);
+            if(combined == null) {
+                return;
             }
             Writer writer = new FileWriter(filePath);
-            toWrite.write(writer, 1, 1);
+            combined.write(writer, 1, 0);
             writer.close();
         }
         catch(IOException e) {
@@ -69,6 +68,9 @@ public class JsonManipulator {
     }
 
     private JSONObject combineJsonValues(JSONObject toWrite, String existingJson) throws IOException {
+        if(existingJson == null) {
+            return null;
+        }
         try {
             JSONObject existingObject = new JSONObject(existingJson);
 
@@ -83,7 +85,8 @@ public class JsonManipulator {
             return existingObject;
         }
         catch(JSONException e) {
-            return toWrite;
+            _log.logError("Problem when parsing: " + existingJson, e);
+            return null;
         }
     }
 
@@ -101,7 +104,9 @@ public class JsonManipulator {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = br.readLine()) != null) {
-                fileData += line;
+                if(!line.trim().startsWith("//")) {
+                    fileData += line;
+                }
             }
             br.close();
         }
