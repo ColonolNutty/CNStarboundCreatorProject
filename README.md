@@ -1,4 +1,4 @@
-# PriceFoodValueBalancer
+# Price Food Value Balancer by ColonolNutty
 Balances food values and prices using recipes and the ingredients used to make those recipes
 
 ### What does this program do?
