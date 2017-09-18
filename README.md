@@ -1,8 +1,8 @@
 # Price Food Value Balancer by ColonolNutty
-Balances food values and prices using recipes and the ingredients used to make those recipes
 
 ### What does this program do?
-This program is designed to make it easy to set prices and food values for a mod that has a ton of ingredients
+
+This program is designed to make it easy to set prices and food values for a mod that has a ton of ingredients. It balances food values and prices using recipes and the ingredients used to make those recipes, it isn't limited to single step recipes either. It goes through each recipe, and each of the ingredients recipes, and the ingredients of the ingredients recipes. Basically, it can go through any number of hoops, calculating values every step of the way.
 
 ### What is the formula for determining the values?
 This will scale with the number of ingredients
