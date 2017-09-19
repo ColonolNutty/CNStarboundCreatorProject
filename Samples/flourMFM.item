@@ -1,11 +1,11 @@
 {
-  "itemName": "flourMFM",
-  "shortdescription": "No",
-  "price": 8.4,
-  "learnBlueprintsOnPickup": ["doughMFM"],
-  "description": "Maybe",
-  "inventoryIcon": "What",
-  "foodValue": 0.42,
-  "category": "cookingIngredient",
-  "rarity": "Common"
- }
+  "itemName" : "flourMFM",
+  "rarity" : "Common",
+  "description" : "Maybe",
+  "shortdescription" : "No",
+  "category" : "cookingIngredient",
+  "price" : 8.4,
+  "inventoryIcon" : "What",
+  "learnBlueprintsOnPickup" : ["doughMFM"],
+  "foodValue" : 0.42
+}

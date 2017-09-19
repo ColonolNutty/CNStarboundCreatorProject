@@ -5,6 +5,7 @@
       <element id="file-copy" path="$PROJECT_DIR$/runBalancer.bat" />
       <element id="file-copy" path="$PROJECT_DIR$/balancerConfiguration.json" />
       <element id="file-copy" path="$PROJECT_DIR$/valueOverrides.json" />
+      <element id="file-copy" path="$PROJECT_DIR$/propertyOrder.json" />
     </root>
   </artifact>
 </component>

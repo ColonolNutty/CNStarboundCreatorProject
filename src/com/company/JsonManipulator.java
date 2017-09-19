@@ -24,6 +24,8 @@ public class JsonManipulator {
     private DebugLog _log;
     private ObjectMapper _mapper;
     private ArrayList<String> _keysToWrite;
+    private String[] _propertyOrder;
+    private JsonPrettyPrinter _prettyPrinter;
 
     public JsonManipulator(DebugLog log) {
         _log = log;
@@ -34,6 +36,13 @@ public class JsonManipulator {
         _keysToWrite = new ArrayList<String>();
         _keysToWrite.add("foodValue");
         _keysToWrite.add("price");
+        try {
+            _propertyOrder = read("propertyOrder.json", PropertyOrder.class).order;
+            _prettyPrinter = new JsonPrettyPrinter(_propertyOrder);
+        }
+        catch(IOException e) {
+            _log.logError("propertyOrder.json file not found", e);
+        }
     }
 
     public Recipe readRecipe(String path) throws IOException {
@@ -59,7 +68,7 @@ public class JsonManipulator {
                 return;
             }
             Writer writer = new FileWriter(filePath);
-            combined.write(writer, 1, 0);
+            writer.write(_prettyPrinter.makePretty(combined, 0));
             writer.close();
         }
         catch(IOException e) {
@@ -104,8 +113,9 @@ public class JsonManipulator {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = br.readLine()) != null) {
-                if(!line.trim().startsWith("//")) {
-                    fileData += line;
+                String[] texts = line.split("//");
+                if(texts.length != 0 && !texts[0].trim().equals("")) {
+                    fileData += texts[0];
                 }
             }
             br.close();
@@ -344,6 +354,7 @@ public class JsonManipulator {
         node.put("value", value);
         return node;
     }
+
 
     private class PatchResult {
         public boolean needsUpdate;
