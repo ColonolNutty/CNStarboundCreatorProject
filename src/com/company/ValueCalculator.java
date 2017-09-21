@@ -33,7 +33,7 @@ public class ValueCalculator {
     public Ingredient updateValues(Ingredient ingredient){
         Recipe recipe = _recipeStore.locateRecipe(ingredient.getName());
         if(recipe == null) {
-            _log.logDebug("No recipe found for: " + ingredient.getName());
+            _log.logDebug("No recipe found for: " + ingredient.getName(), true);
             return ingredient;
         }
         return calculateNewValues(recipe);
@@ -44,12 +44,12 @@ public class ValueCalculator {
 
         Double newFoodValue = 0.0;
         Double newPrice = 0.0;
-        _log.logDebug("Calculating new values for: " + recipe.output.item);
+        _log.logDebug("Calculating new values for: " + recipe.output.item, true);
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
             Ingredient ingredient = recipeIngredient.ingredient;
-            _log.logDebug("    Ingredient " + (i + 1) + " is " + ingredient.getName() + " with count: " + recipeIngredient.count + " p: " + ingredient.price + " and fv: " + ingredient.foodValue);
+            _log.logDebug("    Ingredient " + (i + 1) + " is " + ingredient.getName() + " with count: " + recipeIngredient.count + " p: " + ingredient.price + " and fv: " + ingredient.foodValue, true);
 
             if(ingredient != null) {
                 newPrice += calculateValue(recipeIngredient.count, ingredient.price);
@@ -64,7 +64,7 @@ public class ValueCalculator {
         newPrice = roundTwoDecimalPlaces(newPrice / outputCount);
         newFoodValue = roundTwoDecimalPlaces(newFoodValue / outputCount);
 
-        _log.logDebug("New values for: " + recipe.output.item + " are p: " + newPrice + " and fv: " + newFoodValue);
+        _log.logDebug("New values for: " + recipe.output.item + " are p: " + newPrice + " and fv: " + newFoodValue, true);
 
         Ingredient newIngredient = new Ingredient(recipe.output.item, newPrice, newFoodValue);
         _ingredientStore.updateIngredient(newIngredient);

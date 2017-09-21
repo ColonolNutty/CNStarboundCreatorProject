@@ -21,14 +21,14 @@ public class ValueBalancer {
     }
 
     public void run() {
-        StopWatchTimer timer = new StopWatchTimer();
-        timer.start();
         ConfigSettings configSettings = readConfigSettings(_configFilePath);
         if(configSettings == null) {
             System.out.println("[ERROR] No configuration file found, exiting.");
             return;
         }
-        DebugLog debugLog = new DebugLog(configSettings.logFile, configSettings.enableConsoleDebug);
+        DebugLog debugLog = new DebugLog(configSettings);
+        StopWatchTimer timer = new StopWatchTimer(debugLog);
+        timer.start();
         JsonManipulator manipulator = new JsonManipulator(debugLog);
         PatchLocator patchLocator = new PatchLocator(debugLog);
         FileLocator fileLocator = new FileLocator(debugLog, configSettings);
@@ -42,17 +42,7 @@ public class ValueBalancer {
         fileUpdater.updateValues();
 
         timer.stop();
-        long time = timer.timeInMinutes();
-        String unitOfMeasurement = "minutes";
-        if(time == 0) {
-            time = timer.timeInSeconds();
-            unitOfMeasurement = "seconds";
-        }
-        if(time == 0) {
-            time = timer.timeInMilliseconds();
-            unitOfMeasurement = "milliseconds";
-        }
-        debugLog.logInfo("Finished running in " + time + " " + unitOfMeasurement);
+        timer.logTime();
         debugLog.dispose();
     }
 

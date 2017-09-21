@@ -44,7 +44,7 @@ public class FileUpdater {
         ArrayList<String> filePaths = _fileLocator.getFilePaths();
         Hashtable<String, String> ingredientsToUpdate = new Hashtable<String, String>();
         for(int k = 0; k < _settings.numberOfPasses; k++) {
-            _log.logInfo("Beginning pass: " + (k + 1));
+            _log.logInfo("Beginning pass: " + (k + 1), false);
             for (int i = 0; i < filePaths.size(); i++) {
                 String filePath = filePaths.get(i);
                 if(!filePath.endsWith(".recipe") && !filePath.endsWith(".patch")) {
@@ -63,21 +63,21 @@ public class FileUpdater {
         }
 
         if(ingredientsToUpdate.isEmpty()) {
-            _log.logInfo("No files to update");
+            _log.logInfo("No files to update", false);
             return;
         }
-        _log.logInfo("Finished passes, updating files");
+        _log.logInfo("Finished passes, updating files", false);
         Enumeration<String> ingredientNames = ingredientsToUpdate.elements();
         while(ingredientNames.hasMoreElements()) {
             String ingredientName = ingredientNames.nextElement();
             Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
             if (ingredient != null) {
                 if(ingredient.patchFile != null) {
-                    _log.logInfo("Attempting to update patch file: " + ingredient.getName());
+                    _log.logInfo("Attempting to update patch file: " + ingredient.getName(), false);
                     _manipulator.writeIngredientAsPatch(ingredient);
                 }
                 else if(!isIncludeLocation(ingredient.filePath)) {
-                    _log.logInfo("Updating ingredient: " + ingredient.getName());
+                    _log.logInfo("Updating ingredient: " + ingredient.getName(), false);
                     _manipulator.write(ingredient.filePath, ingredient);
                 }
             }

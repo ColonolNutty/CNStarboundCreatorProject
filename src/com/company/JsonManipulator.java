@@ -13,7 +13,9 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * User: Jack's Computer
@@ -136,32 +138,28 @@ public class JsonManipulator {
             ObjectNode[] patchNodes = _mapper.readValue(reader, ObjectNode[].class);
             reader.close();
             PatchResult result = updateNodes(ingredient, patchNodes, new PatchResult());
-            boolean needsUpdate = result.needsUpdate;
             if(!result.foundFood || !result.foundPrice) {
                 if(!result.foundFood) {
-                    _log.logDebug("    Food Value not found on patch file: " + ingredient.getName());
+                    _log.logDebug("    Food Value not found on patch file: " + ingredient.getName(), true);
                 }
                 if(!result.foundPrice) {
-                    _log.logDebug("    Price not found on patch file: " + ingredient.getName());
+                    _log.logDebug("    Price not found on patch file: " + ingredient.getName(), true);
                 }
-                ArrayList<ObjectNode> objectNodes = new ArrayList<ObjectNode>();
-                for (int i = 0; i < patchNodes.length; i++) {
-                    objectNodes.add(patchNodes[i]);
-                }
+                List<ObjectNode> objectNodes = Arrays.asList(patchNodes);
                 if (!result.foundFood) {
                     if(ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
                         objectNodes.add(createReplaceNode("foodValue", ingredient.foodValue));
-                        needsUpdate = true;
+                        result.needsUpdate = true;
                     }
                 }
                 if (!result.foundPrice) {
                     if(ingredient.price != null) {
                         objectNodes.add(createReplaceNode("price", ingredient.price));
-                        needsUpdate = true;
+                        result.needsUpdate = true;
                     }
                 }
-                if(!needsUpdate) {
-                    _log.logInfo("    Skipping patch file for: " + ingredient.getName());
+                if(!result.needsUpdate) {
+                    _log.logInfo("    Skipping patch file for: " + ingredient.getName(), false);
                     return;
                 }
                 patchNodes = new ObjectNode[objectNodes.size()];
@@ -169,83 +167,83 @@ public class JsonManipulator {
                     patchNodes[i] = objectNodes.get(i);
                 }
             }
-            if(needsUpdate) {
-                _log.logInfo("    Applying update to patch file: " + ingredient.getName());
-                ObjectWriter prettyWriter = _mapper.writer(new DefaultPrettyPrinter());
-                prettyWriter.writeValue(new File(ingredient.patchFile), patchNodes);
+            if(result.needsUpdate) {
+                _log.logInfo("    Applying update to patch file: " + ingredient.getName(), false);
+                Writer writer = new FileWriter(ingredient.patchFile);
+                writer.write( _prettyPrinter.makePretty(patchNodes, 0));
+                writer.close();
             }
             else {
-                _log.logInfo("    Skipping patch file for: " + ingredient.getName());
+                _log.logInfo("    Skipping patch file for: " + ingredient.getName(), false);
             }
         }
         catch(JsonMappingException e) {
-            try {
-                Reader reader = new FileReader(ingredient.patchFile);
-                ObjectNode[][] patchNodes = _mapper.readValue(reader, ObjectNode[][].class);
-                reader.close();
-                PatchResult result = new PatchResult();
-                for (int i = 0; i < patchNodes.length; i++) {
-                    result = updateNodes(ingredient, patchNodes[i], result);
-
-                    if(result.foundFood && result.foundPrice) {
-                        i = patchNodes.length;
-                    }
-                }
-                boolean needsUpdate = result.needsUpdate;
-                boolean foundFood = result.foundFood;
-                boolean foundPrice = result.foundPrice;
-                if (!foundFood || !foundPrice) {
-                    ArrayList<ObjectNode[]> objectNodes = new ArrayList<ObjectNode[]>();
-                    for (int i = 0; i < patchNodes.length; i++) {
-                        objectNodes.add(patchNodes[i]);
-                    }
-                    if (!foundFood) {
-                        if (ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
-                            objectNodes.add(createTestNodes("foodValue", ingredient.foodValue));
-                            ObjectNode[] replaceNodes = new ObjectNode[1];
-                            replaceNodes[0] = createReplaceNode("foodValue", ingredient.foodValue);
-                            objectNodes.add(replaceNodes);
-                            needsUpdate = true;
-                        }
-                    }
-                    if (!foundPrice) {
-                        if(ingredient.price != null) {
-                            objectNodes.add(createTestNodes("price", ingredient.price));
-                            ObjectNode[] replaceNodes = new ObjectNode[1];
-                            replaceNodes[0] = createReplaceNode("price", ingredient.price);
-                            objectNodes.add(replaceNodes);
-                            needsUpdate = true;
-                        }
-                    }
-                    if(!needsUpdate) {
-                        _log.logInfo("    Skipping patch file for: " + ingredient.getName());
-                        return;
-                    }
-                    patchNodes = new ObjectNode[objectNodes.size()][];
-                    for (int i = 0; i < objectNodes.size(); i++) {
-                        ObjectNode[] nodes = new ObjectNode[objectNodes.get(i).length];
-                        for(int j = 0; j < objectNodes.get(i).length; j++) {
-                            ObjectNode node = objectNodes.get(i)[j];
-                            nodes[j] = node;
-                        }
-                        patchNodes[i] = nodes;
-                    }
-                }
-                if (needsUpdate) {
-                    _log.logInfo("    Applying update to patch file: " + ingredient.getName());
-                    ObjectWriter prettyWriter = _mapper.writer(new DefaultPrettyPrinter());
-                    prettyWriter.writeValue(new File(ingredient.patchFile), patchNodes);
-                }
-                else {
-                    _log.logInfo("    Skipping patch file for: " + ingredient.getName());
-                }
-            }
-            catch(JsonMappingException e1) {_log.logError(e1);}
-            catch(IOException e1) {_log.logError(e1);}
+            writeIngredientPatchAlt(ingredient);
         }
         catch (IOException e) {
             _log.logError("[IOE] Failed to read file: " + ingredient.patchFile, e);
         }
+    }
+
+    private void writeIngredientPatchAlt(Ingredient ingredient) {
+        try {
+            Reader reader = new FileReader(ingredient.patchFile);
+            ObjectNode[][] patchNodes = _mapper.readValue(reader, ObjectNode[][].class);
+            reader.close();
+            PatchResult result = new PatchResult();
+            for (int i = 0; i < patchNodes.length; i++) {
+                result = updateNodes(ingredient, patchNodes[i], result);
+
+                if(result.foundFood && result.foundPrice) {
+                    i = patchNodes.length;
+                }
+            }
+            if (!result.foundFood || !result.foundPrice) {
+                List<ObjectNode[]> objectNodes = Arrays.asList(patchNodes);
+                if (!result.foundFood) {
+                    if (ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
+                        objectNodes.add(createTestNodes("foodValue", ingredient.foodValue));
+                        ObjectNode[] replaceNodes = new ObjectNode[1];
+                        replaceNodes[0] = createReplaceNode("foodValue", ingredient.foodValue);
+                        objectNodes.add(replaceNodes);
+                        result.needsUpdate = true;
+                    }
+                }
+                if (!result.foundPrice) {
+                    if(ingredient.price != null) {
+                        objectNodes.add(createTestNodes("price", ingredient.price));
+                        ObjectNode[] replaceNodes = new ObjectNode[1];
+                        replaceNodes[0] = createReplaceNode("price", ingredient.price);
+                        objectNodes.add(replaceNodes);
+                        result.needsUpdate = true;
+                    }
+                }
+                if(!result.needsUpdate) {
+                    _log.logInfo("    Skipping patch file for: " + ingredient.getName(), false);
+                    return;
+                }
+                patchNodes = new ObjectNode[objectNodes.size()][];
+                for (int i = 0; i < objectNodes.size(); i++) {
+                    ObjectNode[] nodes = new ObjectNode[objectNodes.get(i).length];
+                    for(int j = 0; j < objectNodes.get(i).length; j++) {
+                        ObjectNode node = objectNodes.get(i)[j];
+                        nodes[j] = node;
+                    }
+                    patchNodes[i] = nodes;
+                }
+            }
+            if (result.needsUpdate) {
+                _log.logInfo("    Applying update to patch file: " + ingredient.getName(), false);
+                Writer writer = new FileWriter(ingredient.patchFile);
+                writer.write( _prettyPrinter.makePretty(patchNodes, 0));
+                writer.close();
+            }
+            else {
+                _log.logInfo("    Skipping patch file for: " + ingredient.getName(), true);
+            }
+        }
+        catch(JsonMappingException e1) {_log.logError(e1);}
+        catch(IOException e1) {_log.logError(e1);}
     }
 
     public <T> T patch(Object entity, String patchFileName, Class<T> valueType) {
@@ -264,26 +262,7 @@ public class JsonManipulator {
             return _mapper.treeToValue(modifiedAsNode, valueType);
         }
         catch(JsonMappingException e) {
-            try {
-                _log.logDebug("Failed to parse patch file initial, trying a different way: " + patchFileName);
-                Reader reader = new FileReader(patchFileName);
-                JsonNode[] patchAsNode = _mapper.readValue(reader, JsonNode[].class);
-                reader.close();
-                JsonNode entityAsNode = _mapper.valueToTree(entity);
-                JsonNode modifiedAsNode = entityAsNode;
-                for(int i = 0; i < patchAsNode.length; i++) {
-                    JsonNode jsonNode = patchAsNode[i];
-                    try {
-                        JsonPatch patchTool = JsonPatch.fromJson(jsonNode);
-                        modifiedAsNode = patchTool.apply(modifiedAsNode);
-                    }
-                    catch(JsonPatchException e1) {}
-                }
-                return _mapper.treeToValue(modifiedAsNode, valueType);
-            }
-            catch (IOException e1) {
-                _log.logError("[IOE] Failed to read file: " + patchFileName, e1);
-            }
+            return patchAlt(entity, patchFileName, valueType);
         }
         catch(JsonPatchException e) {
             if(patchFileAsJson != null) {
@@ -294,7 +273,31 @@ public class JsonManipulator {
             }
         }
         catch (IOException e) {
-            _log.logError("[IOE] Failed to read file: " + patchFileName, e);
+            _log.logError("[IOE1] Failed to read file: " + patchFileName, e);
+        }
+        return null;
+    }
+
+    private <T> T patchAlt(Object entity, String patchFileName, Class<T> valueType) {
+        try {
+            _log.logDebug("Failed to parse patch file initial, trying a different way: " + patchFileName, true);
+            Reader reader = new FileReader(patchFileName);
+            JsonNode[] patchAsNode = _mapper.readValue(reader, JsonNode[].class);
+            reader.close();
+            JsonNode entityAsNode = _mapper.valueToTree(entity);
+            JsonNode modifiedAsNode = entityAsNode;
+            for(int i = 0; i < patchAsNode.length; i++) {
+                JsonNode jsonNode = patchAsNode[i];
+                try {
+                    JsonPatch patchTool = JsonPatch.fromJson(jsonNode);
+                    modifiedAsNode = patchTool.apply(modifiedAsNode);
+                }
+                catch(JsonPatchException e1) {}
+            }
+            return _mapper.treeToValue(modifiedAsNode, valueType);
+        }
+        catch (IOException e1) {
+            _log.logError("[IOE2] Failed to read file: " + patchFileName, e1);
         }
         return null;
     }
@@ -307,26 +310,27 @@ public class JsonManipulator {
             ObjectNode node = nodes[j];
             String nodeOperation = node.get("op").asText();
             String nodePath = node.get("path").asText();
-            if(nodeOperation.equals("add") || nodeOperation.equals("replace")) {
+            boolean isReplaceOperation = nodeOperation.equals("replace");
+            if(nodeOperation.equals("add") || isReplaceOperation) {
                 if (nodePath.contains("foodValue")) {
                     Double nodeValue = node.get("value").asDouble();
                     if (!nodeValue.equals(ingredient.foodValue)) {
                         node.put("value", ingredient.foodValue);
                         result.needsUpdate = true;
                     }
-                    result.foundFood = true;
+                    if(isReplaceOperation) {
+                        result.foundFood = true;
+                    }
                 } else if (nodePath.contains("price")) {
                     Double nodeValue = node.get("value").asDouble();
                     if (!nodeValue.equals(ingredient.price)) {
                         node.put("value", ingredient.price);
                         result.needsUpdate = true;
                     }
-                    result.foundPrice = true;
+                    if(isReplaceOperation) {
+                        result.foundPrice = true;
+                    }
                 }
-            }
-
-            if (result.foundFood && result.foundPrice) {
-                j = nodes.length;
             }
         }
         return result;

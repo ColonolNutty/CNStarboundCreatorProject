@@ -1,17 +1,28 @@
-[ [ {
-  "op" : "replace",
-  "path" : "/price",
-  "value" : 38.22
-} ], [ {
-  "op" : "test",
-  "path" : "/foodValue",
-  "inverse" : true
-}, {
-  "op" : "add",
-  "path" : "/foodValue",
-  "value" : 2.54
-} ], [ {
-  "op" : "replace",
-  "path" : "/foodValue",
-  "value" : 2.54
-} ] ]
+[
+  [
+    {
+      "op" : "replace",
+      "path" : "/price",
+      "value" : 38.22
+    }
+  ],
+  [
+    {
+      "op" : "test",
+      "path" : "/foodValue",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/foodValue",
+      "value" : 2.54
+    }
+  ],
+  [
+    {
+      "op" : "replace",
+      "path" : "/foodValue",
+      "value" : 2.54
+    }
+  ]
+]

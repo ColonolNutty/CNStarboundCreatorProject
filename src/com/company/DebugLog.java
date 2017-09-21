@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.models.ConfigSettings;
+
 import java.io.*;
 
 /**
@@ -10,16 +12,19 @@ import java.io.*;
 public class DebugLog {
 
     private boolean _enableConsoleDebug;
+    private boolean _enableVerboseLogging;
     private String defaultLogFile = "updateLog.log";
     private String debugPrefix = "[DEBUG] ";
     private String errorPrefix = "[ERROR] ";
     private String infoPrefix = "[INFO] ";
     private PrintWriter writer;
 
-    public DebugLog(String debugLogFile, boolean enableConsoleDebug) {
-        _enableConsoleDebug = enableConsoleDebug;
+    public DebugLog(ConfigSettings settings) {
+        _enableConsoleDebug = settings.enableConsoleDebug;
+        _enableVerboseLogging = settings.enableVerboseLogging;
+        String debugLogFile = settings.logFile;
         if(debugLogFile == null) {
-            logInfo("No output file specified, using default log file: " + defaultLogFile);
+            logInfo("'logFile' not specified in configuration file, using default: " + defaultLogFile, false);
             debugLogFile = defaultLogFile;
         }
         try {
@@ -35,20 +40,20 @@ public class DebugLog {
         }
     }
 
-    public void logDebug(String message) {
+    public void logDebug(String message, boolean isVerbose) {
         if(_enableConsoleDebug) {
-            writeOutput(debugPrefix + message);
+            writeOutput(debugPrefix + message, isVerbose);
             return;
         }
-        writeToLog(debugPrefix + message);
+        writeToLog(debugPrefix + message, isVerbose);
     }
 
-    public void logInfo(String message) {
-        writeOutput(infoPrefix + message);
+    public void logInfo(String message, boolean isVerbose) {
+        writeOutput(infoPrefix + message, isVerbose);
     }
 
-    public void logError(String message) {
-        writeOutput(errorPrefix + message);
+    public void logError(String message, boolean isVerbose) {
+        writeOutput(errorPrefix + message, isVerbose);
     }
 
     public void logError(Exception e) {
@@ -60,17 +65,23 @@ public class DebugLog {
     }
 
     public void logError(String message, Exception e) {
-        logError(message);
+        logError(message, false);
         logError(e);
     }
 
-    private void writeOutput(String message) {
+    private void writeOutput(String message, boolean isVerbose) {
+        if(isVerbose && !_enableVerboseLogging) {
+            return;
+        }
         System.out.println(message);
         System.out.flush();
-        writeToLog(message);
+        writeToLog(message, isVerbose);
     }
 
-    private void writeToLog(String message) {
+    private void writeToLog(String message, boolean isVerbose) {
+        if(isVerbose && !_enableVerboseLogging) {
+            return;
+        }
         if(writer != null) {
             writer.println(message);
         }

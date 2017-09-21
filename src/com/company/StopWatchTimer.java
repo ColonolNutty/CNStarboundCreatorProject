@@ -10,12 +10,25 @@ public class StopWatchTimer {
     private long _startTime;
     private long _endTime;
     private long _duration;
+    private String _actionBeingPerformed;
+    private DebugLog _log;
+
+    public StopWatchTimer(DebugLog log) {
+        _log = log;
+    }
 
     public void start() {
         if(!started) {
             reset();
             _startTime = System.nanoTime();
             started = true;
+        }
+    }
+
+    public void start(String action) {
+        if(!started) {
+            start();
+            _actionBeingPerformed = action;
         }
     }
 
@@ -32,6 +45,7 @@ public class StopWatchTimer {
         _startTime = 0;
         _endTime = 0;
         _duration = 0;
+        _actionBeingPerformed = null;
     }
 
     public long timeInMilliseconds() {
@@ -47,5 +61,29 @@ public class StopWatchTimer {
     public long timeInMinutes() {
         stop();
         return timeInSeconds() / 60;
+    }
+
+    public void logTime() {
+        if(_log == null) {
+            return;
+        }
+        long time = timeInMinutes();
+        String unitOfMeasurement = "minutes";
+        if(time == 0) {
+            time = timeInSeconds();
+            unitOfMeasurement = "seconds";
+        }
+        if(time == 0) {
+            time = timeInMilliseconds();
+            unitOfMeasurement = "milliseconds";
+        }
+        if(time == 0) {
+            return;
+        }
+        String action = "running";
+        if(_actionBeingPerformed != null) {
+            action = _actionBeingPerformed;
+        }
+        _log.logInfo("Finished " + action + " in " + time + " " + unitOfMeasurement, false);
     }
 }

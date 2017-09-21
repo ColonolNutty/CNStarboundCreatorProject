@@ -1,15 +1,15 @@
 {
   "objectName" : "handmillMFM",
+  "rarity" : "Common",
+  "price" : 170.1,
+  "category" : "crafting",
   "colonyTags" : ["farm", "cooking"],
   "printable" : false,
-  "rarity" : "Common",
   "objectType" : "container",
   "tooltipKind" : "container",
   "description" : "A mill. Used for grinding up things.",
   "shortdescription" : "Hand Mill (Mill)",
   "race" : "generic",
-  "category" : "crafting",
-  "price" : 170.1,
   "apexDescription" : "A wooden hand mill. Anything inside?",
   "avianDescription" : "Wooden hand mill crafted from wood.",
   "floranDescription" : "Floran can put thingsss insside and crunch them.",
@@ -34,8 +34,7 @@
       "spaces" : [[0, 1],[0, 2],[1, 1],[1, 2],[1, 0]],
       "fgAnchors" : [[0, 0]],
       "collision" : "platform",
-      "flipImages" : true,
-
+      "flipImages" : true
     },
 
     {
@@ -54,8 +53,7 @@
       "spaces" : [[0, 1],[0, 2],[1, 1],[1, 2],[1, 0]],
       "fgAnchors" : [[1, -1]],
       "collision" : "platform",
-      "flipImages" : true,
-
+      "flipImages" : true
     },
 
     {
@@ -74,8 +72,7 @@
       "spaces" : [[0, 1],[0, 2],[1, 1],[1, 2],[1, 0]],
       "fgAnchors" : [[2, 0],[2, 1],[2, 2]],
       "collision" : "platform",
-      "flipImages" : true,
-
+      "flipImages" : true
     }],
   "recipeGroup" : "millingMFM",
   "openSounds" : ["/sfx/objects/woodenbox_open.ogg"],

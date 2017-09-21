@@ -38,22 +38,22 @@ public class IngredientUpdater {
     public String update(String ingredientFilePath) {
         try {
             File ingredientFile = new File(ingredientFilePath);
-            _log.logDebug("Attempting to update: " + ingredientFile.getName());
+            _log.logDebug("Attempting to update: " + ingredientFile.getName(), true);
             Ingredient ingredient = _ingredientStore.getIngredientWithFilePath(ingredientFilePath);
             if(ingredient == null) {
-                _log.logDebug("No ingredient found in store for: " + ingredientFilePath);
+                _log.logDebug("No ingredient found in store for: " + ingredientFilePath, true);
                 return null;
             }
             Ingredient updatedIngredient = _valueCalculator.updateValues(ingredient);
             Ingredient originalIngredient = _manipulator.readIngredient(ingredientFilePath);
             if(ingredientsAreEqual(originalIngredient, updatedIngredient)) {
-                _log.logDebug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName());
+                _log.logDebug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), true);
                 return null;
             }
             return ingredient.getName();
         }
         catch(IOException e) {
-            _log.logDebug("[IOE] Big Problem: " + e.getMessage());
+            _log.logError("[IOE] While attempting to update: " + ingredientFilePath, e);
         }
         return null;
     }
@@ -63,14 +63,14 @@ public class IngredientUpdater {
             return false;
         }
         if(one.filePath != null && CNUtils.fileEndsWith(one.filePath, _fileTypesIgnoreFoodValues)) {
-            _log.logDebug("Comparing using only price: " + one.getName());
+            _log.logDebug("Comparing using only price: " + one.getName(), true);
             return one.priceEquals(two);
         }
         if(two.filePath != null && CNUtils.fileEndsWith(two.filePath, _fileTypesIgnoreFoodValues)) {
-            _log.logDebug("Comparing using only price: " + one.getName());
+            _log.logDebug("Comparing using only price: " + one.getName(), true);
             return one.priceEquals(two);
         }
-        _log.logDebug("Comparing using both price and foodValue: " + one.getName());
+        _log.logDebug("Comparing using both price and foodValue: " + one.getName(), true);
         return one.equals(two);
     }
 }

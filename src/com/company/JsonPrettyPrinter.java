@@ -1,5 +1,7 @@
 package com.company;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -179,5 +181,79 @@ public class JsonPrettyPrinter {
             indent += " ";
         }
         return indent;
+    }
+
+    public String makePretty(ObjectNode[][] objNodes, int indentSize) {
+        String result = makeIndent(indentSize) + "[\r\n";
+        for(int i = 0; i < objNodes.length; i++) {
+            ObjectNode[] objectNode = objNodes[i];
+            result += makePretty(objectNode, indentSize + 2);
+            if(i + 1 < objNodes.length) {
+                result += ",\r\n";
+            }
+        }
+        result += "\r\n" + makeIndent(indentSize) + "]";
+        return result;
+    }
+
+    public String makePretty(ObjectNode[] objNode, int indentSize) {
+        String result = makeIndent(indentSize) + "[\r\n";
+        for(int i = 0; i < objNode.length; i++) {
+            ObjectNode objectNode = objNode[i];
+            result += makeIndent(indentSize + 2) + formatAsIntended(objectNode, indentSize + 2);
+            if(i + 1 < objNode.length) {
+                result += ",\r\n";
+            }
+        }
+        result += "\r\n" + makeIndent(indentSize) + "]";
+        return result;
+    }
+
+    private String formatAsIntended(ObjectNode node, int indentSize) {
+        if(node.isNumber() || node.isInt() || node.isBoolean()) {
+            return node.asText();
+        }
+        if(node.isTextual()) {
+            return "\"" + node.asText() + "\"";
+        }
+        if(!node.isObject())
+        {
+            return "";
+        }
+        String result = "{\r\n";
+        Iterator<String> fieldNames = node.fieldNames();
+        while(fieldNames.hasNext()) {
+            String fieldName = fieldNames.next();
+            result += makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + formatAsIntended(node.get(fieldName), indentSize + 2);
+            if(fieldNames.hasNext()) {
+                result += ",\r\n";
+            }
+        }
+        result += "\r\n" + makeIndent(indentSize) + "}";
+        return result;
+    }
+
+    private String formatAsIntended(JsonNode node, int indentSize) {
+        if(node.isNumber() || node.isInt() || node.isBoolean()) {
+            return node.asText();
+        }
+        if(node.isTextual()) {
+            return "\"" + node.asText() + "\"";
+        }
+        if(!node.isObject())
+        {
+            return "";
+        }
+        String result = "{\r\n";
+        Iterator<String> fieldNames = node.fieldNames();
+        while(fieldNames.hasNext()) {
+            String fieldName = fieldNames.next();
+            result += makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + formatAsIntended(node.get(fieldName), indentSize + 2);
+            if(fieldNames.hasNext()) {
+                result += ",\r\n";
+            }
+        }
+        result += "\r\n" + makeIndent(indentSize) + "}";
+        return result;
     }
 }

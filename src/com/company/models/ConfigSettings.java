@@ -16,4 +16,5 @@ public class ConfigSettings {
     public String logFile;
     public Double numberOfPasses;
     public boolean enableConsoleDebug;
+    public boolean enableVerboseLogging;
 }

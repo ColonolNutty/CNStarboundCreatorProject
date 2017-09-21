@@ -2,6 +2,7 @@ package com.company.locators;
 
 import com.company.DebugLog;
 import com.company.JsonManipulator;
+import com.company.StopWatchTimer;
 import com.company.models.ConfigSettings;
 import com.company.models.Recipe;
 
@@ -22,6 +23,7 @@ public class RecipeStore {
     private JsonManipulator _manipulator;
     private PatchLocator _patchLocator;
     private FileLocator _fileLocator;
+    private StopWatchTimer _stopWatchTimer;
 
     public RecipeStore(DebugLog log,
                        JsonManipulator manipulator,
@@ -32,6 +34,7 @@ public class RecipeStore {
         _manipulator = manipulator;
         _patchLocator = patchLocator;
         _fileLocator = fileLocator;
+        _stopWatchTimer = new StopWatchTimer(_log);
         setupRecipes();
     }
 
@@ -43,7 +46,8 @@ public class RecipeStore {
     }
 
     private void setupRecipes() {
-        _log.logInfo("Locating recipes");
+        _log.logInfo("Locating recipes", false);
+        _stopWatchTimer.start("location recipes");
         ArrayList<String> filePaths = _fileLocator.getFilePaths();
         for(int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);
@@ -52,6 +56,8 @@ public class RecipeStore {
                 addRecipe(filePath, patchFile);
             }
         }
+        _stopWatchTimer.stop();
+        _stopWatchTimer.logTime();
     }
 
     private void addRecipe(String filePath, String patchFilePath) {
@@ -71,7 +77,7 @@ public class RecipeStore {
             }
         }
         catch(IOException e) {
-            _log.logDebug("{IOE] Problem encountered reading recipe at path: " + filePath + "\n" + e.getMessage());
+            _log.logError("{IOE] Adding recipe at path: " + filePath, e);
         }
     }
 }
