@@ -8,9 +8,10 @@ import com.company.models.Recipe;
 import com.company.models.RecipeIngredient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -54,6 +55,7 @@ public class IngredientDataCalculator {
         Double newFoodValue = 0.0;
         Double newPrice = 0.0;
         _log.logDebug("Calculating new values for: " + recipe.output.item, true);
+        Hashtable<String, Integer> effectValues = new Hashtable<String, Integer>();
         ArrayNode totalEffects = _manipulator.createArrayNode();
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
@@ -69,6 +71,7 @@ public class IngredientDataCalculator {
                                 if(subEffect == null) {
                                     continue;
                                 }
+                                int duration = Ingredient.DefaultEffectDuration;
                                 String subEffectName;
                                 if(CNUtils.isValueType(subEffect)) {
                                     subEffectName = subEffect.asText();
@@ -80,8 +83,14 @@ public class IngredientDataCalculator {
                                     else {
                                         subEffectName = "No Effect Name";
                                     }
+                                    if(subEffect.has("duration")) {
+                                        duration = subEffect.get("duration").asInt(Ingredient.DefaultEffectDuration);
+                                    }
                                 }
-                                _log.logDebug("    Ingredient " + (i + 1) + " has effect " + subEffectName, true);
+                                if(!effectValues.containsKey(subEffectName)) {
+                                    effectValues.put(subEffectName, duration);
+                                }
+                                _log.logDebug("    Ingredient " + (i + 1) + " has effect " + subEffectName + " with duration: " + duration, true);
                                 totalEffects.add(subEffect);
                             }
                         }
@@ -100,6 +109,15 @@ public class IngredientDataCalculator {
 
             combined = _manipulator.createArrayNode();
             combined.add(combinedEffects);
+
+            if(!effectValues.isEmpty()) {
+                _log.logDebug("New effects for " + recipe.output.item, true);
+                Enumeration<String>  effectKeys = effectValues.keys();
+                while(effectKeys.hasMoreElements()){
+                    String effectName = effectKeys.nextElement();
+                    _log.logDebug("    name: " + effectName + " with duration: " + effectValues.get(effectName), true);
+                }
+            }
         }
 
         Double outputCount = recipe.output.count;

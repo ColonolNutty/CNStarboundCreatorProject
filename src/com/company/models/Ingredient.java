@@ -32,6 +32,9 @@ public class Ingredient {
     public ArrayNode effects;
 
     @JsonIgnore
+    public static int DefaultEffectDuration = 20;
+
+    @JsonIgnore
     public String filePath;
 
     @JsonIgnore
@@ -215,6 +218,14 @@ public class Ingredient {
             }
         }
         return isSame;
+    }
+
+    public boolean hasPrice() {
+        return price != null && price > 0.0;
+    }
+
+    public boolean hasFoodValue() {
+        return foodValue != null && foodValue > 0.0;
     }
 
     public boolean hasEffects() {

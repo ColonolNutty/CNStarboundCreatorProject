@@ -38,7 +38,7 @@ public class IngredientUpdater {
     public String update(String ingredientFilePath) {
         try {
             File ingredientFile = new File(ingredientFilePath);
-            _log.logDebug("Attempting to update: " + ingredientFile.getName(), true);
+            _log.logDebug("Calculating values for: " + ingredientFile.getName(), true);
             Ingredient ingredient = _ingredientStore.getIngredientWithFilePath(ingredientFilePath);
             if(ingredient == null) {
                 _log.logDebug("No ingredient found in store for: " + ingredientFilePath, true);

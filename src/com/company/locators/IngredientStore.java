@@ -150,11 +150,11 @@ public class IngredientStore {
             return;
         }
         Ingredient existing = _ingredients.get(ingredientName);
-        if(ingredient.foodValue != null && (isOverride || existing.foodValue == null)) {
+        if(ingredient.hasFoodValue() && (isOverride || !existing.hasFoodValue())) {
             _log.logDebug("Overriding ingredient foodValue: " + existing.getName() + " with " + ingredient.foodValue, true);
             existing.foodValue = ingredient.foodValue;
         }
-        if(ingredient.price != null && (isOverride || existing.price == null)) {
+        if(ingredient.hasPrice() && (isOverride || !existing.hasPrice())) {
             _log.logDebug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price, true);
             existing.price = ingredient.price;
         }

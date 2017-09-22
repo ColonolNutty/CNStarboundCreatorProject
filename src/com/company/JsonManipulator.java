@@ -156,13 +156,13 @@ public class JsonManipulator {
                     nodes.add(patchNodes.get(i));
                 }
                 if (!result.foundFood) {
-                    if(ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
+                    if(ingredient.hasFoodValue() && ingredient.filePath.endsWith("consumable")) {
                         nodes.add(createReplaceNode("foodValue", ingredient.foodValue));
                         result.needsUpdate = true;
                     }
                 }
                 if (!result.foundPrice) {
-                    if(ingredient.price != null) {
+                    if(ingredient.hasPrice()) {
                         nodes.add(createReplaceNode("price", ingredient.price));
                         result.needsUpdate = true;
                     }
@@ -230,7 +230,7 @@ public class JsonManipulator {
                     objectNodes.add(patchNodes.get(i));
                 }
                 if (!result.foundFood) {
-                    if (ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
+                    if (ingredient.hasFoodValue() && ingredient.filePath.endsWith("consumable")) {
                         objectNodes.add(createTestNodes("foodValue", ingredient.foodValue));
                         ArrayNode replaceNodes = _mapper.createArrayNode();
                         replaceNodes.add(createReplaceNode("foodValue", ingredient.foodValue));
@@ -239,7 +239,7 @@ public class JsonManipulator {
                     }
                 }
                 if (!result.foundPrice) {
-                    if(ingredient.price != null) {
+                    if(ingredient.hasPrice()) {
                         objectNodes.add(createTestNodes("price", ingredient.price));
                         ArrayNode replaceNodes = _mapper.createArrayNode();
                         replaceNodes.add(createReplaceNode("price", ingredient.price));
@@ -454,8 +454,6 @@ public class JsonManipulator {
         return node;
     }
 
-    private int defaultDuration = 20;
-
     public ArrayNode combineEffects(ArrayNode nodes) {
         ArrayNode combined = _mapper.createArrayNode();
         Hashtable<String, ObjectNode> objNodes = new Hashtable<String, ObjectNode>();
@@ -463,26 +461,26 @@ public class JsonManipulator {
             JsonNode node = nodes.get(i);
             ObjectNode objNode = _mapper.createObjectNode();
             String key;
-            if(node.isDouble() || node.isInt() || node.isBoolean() || node.isTextual()) {
+            if(CNUtils.isValueType(node)) {
                 key = node.asText();
                 objNode.put("effect", key);
-                objNode.put("duration", defaultDuration);
+                objNode.put("duration", Ingredient.DefaultEffectDuration);
             }
             else {
                 key = node.get("effect").asText();
                 objNode.put("effect", key);
                 if(node.has("duration")) {
-                    objNode.put("duration", node.get("duration").asDouble(defaultDuration));
+                    objNode.put("duration", node.get("duration").asDouble(Ingredient.DefaultEffectDuration));
                 }
                 else {
-                    objNode.put("duration", defaultDuration);
+                    objNode.put("duration", Ingredient.DefaultEffectDuration);
                 }
             }
             objNode.put("effect", key);
             if(objNodes.containsKey(key)) {
                 ObjectNode existing = objNodes.get(key);
-                Double existingDuration = existing.get("duration").asDouble(defaultDuration);
-                existing.put("duration", existingDuration + objNode.get("duration").asDouble(defaultDuration));
+                Double existingDuration = existing.get("duration").asDouble(Ingredient.DefaultEffectDuration);
+                existing.put("duration", existingDuration + objNode.get("duration").asDouble(Ingredient.DefaultEffectDuration));
             }
             else {
                 objNodes.put(key, objNode);
