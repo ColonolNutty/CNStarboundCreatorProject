@@ -141,7 +141,7 @@ public class JsonManipulator {
         }
         try {
             Reader reader = new FileReader(ingredient.patchFile);
-            ObjectNode[] patchNodes = _mapper.readValue(reader, ObjectNode[].class);
+            ArrayNode patchNodes = _mapper.readValue(reader, ArrayNode.class);
             reader.close();
             PatchResult result = updateNodes(ingredient, patchNodes, new PatchResult());
             if(!result.foundFood || !result.foundPrice || !result.foundEffects) {
@@ -151,25 +151,26 @@ public class JsonManipulator {
                 if(!result.foundPrice) {
                     _log.logDebug("    Price not found on patch file: " + ingredient.getName(), true);
                 }
-                ArrayList<ObjectNode> objectNodes = new ArrayList<ObjectNode>();
-                for(int i = 0; i < patchNodes.length; i++) {
-                    objectNodes.add(patchNodes[i]);
+                ArrayNode nodes = _mapper.createArrayNode();
+                for(int i = 0; i < patchNodes.size(); i++) {
+                    nodes.add(patchNodes.get(i));
                 }
                 if (!result.foundFood) {
                     if(ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
-                        objectNodes.add(createReplaceNode("foodValue", ingredient.foodValue));
+                        nodes.add(createReplaceNode("foodValue", ingredient.foodValue));
                         result.needsUpdate = true;
                     }
                 }
                 if (!result.foundPrice) {
                     if(ingredient.price != null) {
-                        objectNodes.add(createReplaceNode("price", ingredient.price));
+                        nodes.add(createReplaceNode("price", ingredient.price));
                         result.needsUpdate = true;
                     }
                 }
                 if (!result.foundEffects) {
-                    if(ingredient.effects != null) {
-                        objectNodes.add(createReplaceNode("effects", toArrayNode(ingredient.effects)));
+                    if(ingredient.hasEffects()) {
+                        _log.logDebug("Adding replace node for effects: " + ingredient.effects.toString(), true);
+                        nodes.add(createReplaceNode("effects", ingredient.effects));
                         result.needsUpdate = true;
                     }
                 }
@@ -177,9 +178,9 @@ public class JsonManipulator {
                     _log.logInfo("    Skipping patch file for: " + ingredient.getName(), false);
                     return;
                 }
-                patchNodes = new ObjectNode[objectNodes.size()];
-                for(int i = 0; i < objectNodes.size(); i++) {
-                    patchNodes[i] = objectNodes.get(i);
+                patchNodes = _mapper.createArrayNode();
+                for(int i = 0; i < nodes.size(); i++) {
+                    patchNodes.add(nodes.get(i));
                 }
             }
             if(result.needsUpdate) {
@@ -207,26 +208,32 @@ public class JsonManipulator {
     private void writeIngredientPatchAlt(Ingredient ingredient) {
         try {
             Reader reader = new FileReader(ingredient.patchFile);
-            ObjectNode[][] patchNodes = _mapper.readValue(reader, ObjectNode[][].class);
+            ArrayNode patchNodes = _mapper.readValue(reader, ArrayNode.class);
             reader.close();
             PatchResult result = new PatchResult();
-            for (int i = 0; i < patchNodes.length; i++) {
-                result = updateNodes(ingredient, patchNodes[i], result);
+            for (int i = 0; i < patchNodes.size(); i++) {
+                JsonNode patchNode = patchNodes.get(i);
+                if(patchNode.isArray()) {
+                    result = updateNodes(ingredient, (ArrayNode)patchNodes.get(i), result);
+                }
+                else {
+                    continue;
+                }
 
                 if(result.foundFood && result.foundPrice && result.foundEffects) {
-                    i = patchNodes.length;
+                    i = patchNodes.size();
                 }
             }
             if (!result.foundFood || !result.foundPrice || !result.foundEffects) {
-                ArrayList<ObjectNode[]> objectNodes = new ArrayList<ObjectNode[]>();
-                for(int i = 0; i < patchNodes.length; i++) {
-                    objectNodes.add(patchNodes[i]);
+                ArrayNode objectNodes = _mapper.createArrayNode();
+                for(int i = 0; i < patchNodes.size(); i++) {
+                    objectNodes.add(patchNodes.get(i));
                 }
                 if (!result.foundFood) {
                     if (ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
                         objectNodes.add(createTestNodes("foodValue", ingredient.foodValue));
-                        ObjectNode[] replaceNodes = new ObjectNode[1];
-                        replaceNodes[0] = createReplaceNode("foodValue", ingredient.foodValue);
+                        ArrayNode replaceNodes = _mapper.createArrayNode();
+                        replaceNodes.add(createReplaceNode("foodValue", ingredient.foodValue));
                         objectNodes.add(replaceNodes);
                         result.needsUpdate = true;
                     }
@@ -234,18 +241,18 @@ public class JsonManipulator {
                 if (!result.foundPrice) {
                     if(ingredient.price != null) {
                         objectNodes.add(createTestNodes("price", ingredient.price));
-                        ObjectNode[] replaceNodes = new ObjectNode[1];
-                        replaceNodes[0] = createReplaceNode("price", ingredient.price);
+                        ArrayNode replaceNodes = _mapper.createArrayNode();
+                        replaceNodes.add(createReplaceNode("price", ingredient.price));
                         objectNodes.add(replaceNodes);
                         result.needsUpdate = true;
                     }
                 }
                 if (!result.foundEffects) {
-                    if(ingredient.effects != null) {
-                        ObjectNode[] testNodes = createTestNodes("effects", toArrayNode(ingredient.effects));
+                    if(ingredient.hasEffects()) {
+                        ArrayNode testNodes = createTestNodes("effects", ingredient.effects);
                         objectNodes.add(testNodes);
-                        ObjectNode[] replaceNodes = new ObjectNode[1];
-                        replaceNodes[0] = createReplaceNode("effects", toArrayNode(ingredient.effects));
+                        ArrayNode replaceNodes = _mapper.createArrayNode();
+                        replaceNodes.add(createReplaceNode("effects", ingredient.effects));
                         objectNodes.add(replaceNodes);
                         result.needsUpdate = true;
                     }
@@ -254,14 +261,9 @@ public class JsonManipulator {
                     _log.logInfo("    Skipping patch file for: " + ingredient.getName(), false);
                     return;
                 }
-                patchNodes = new ObjectNode[objectNodes.size()][];
+                patchNodes = _mapper.createArrayNode();
                 for (int i = 0; i < objectNodes.size(); i++) {
-                    ObjectNode[] nodes = new ObjectNode[objectNodes.get(i).length];
-                    for(int j = 0; j < objectNodes.get(i).length; j++) {
-                        ObjectNode node = objectNodes.get(i)[j];
-                        nodes[j] = node;
-                    }
-                    patchNodes[i] = nodes;
+                    patchNodes.add(objectNodes.get(i));
                 }
             }
             if (result.needsUpdate) {
@@ -286,19 +288,50 @@ public class JsonManipulator {
         if(patchFileName == null) {
             return null;
         }
+        String patchedFileAsJson = null;
         String patchFileAsJson = null;
         try {
             Reader reader = new FileReader(patchFileName);
-            JsonNode patchAsNode = _mapper.readTree(reader);
+            ArrayNode patchAsNode = _mapper.readValue(reader, ArrayNode.class);
             reader.close();
             patchFileAsJson = patchAsNode.toString();
-            JsonPatch patchTool = JsonPatch.fromJson(patchAsNode);
-            JsonNode entityAsNode = _mapper.valueToTree(entity);
-            JsonNode modifiedAsNode = patchTool.apply(entityAsNode);
+            if(!patchAsNode.isArray()) {
+                return null;
+            }
+            JsonNode modifiedAsNode = null;
+            if(patchAsNode.size() > 0 && patchAsNode.get(0).isArray()) {
+                for(JsonNode patch : patchAsNode) {
+                    try {
+                        patchFileAsJson = patch.toString();
+                        JsonPatch patchTool = JsonPatch.fromJson(patch);
+                        JsonNode entityAsNode = _mapper.valueToTree(entity);
+                        modifiedAsNode = patchTool.apply(entityAsNode);
+                        patchedFileAsJson = modifiedAsNode.toString();
+                    }
+                    catch(JsonPatchException e) {
+                        _log.logError("Json \"" + patchFileName + "\" " + patchFileAsJson, e);
+                    }
+                }
+            }
+            else if (patchAsNode.size() == 0) {
+                return null;
+            }
+            else {
+                JsonPatch patchTool = JsonPatch.fromJson(patchAsNode);
+                JsonNode entityAsNode = _mapper.valueToTree(entity);
+                modifiedAsNode = patchTool.apply(entityAsNode);
+            }
+            if(modifiedAsNode == null) {
+                return null;
+            }
+            if(modifiedAsNode.has("effects")) {
+                ((ObjectNode)modifiedAsNode).put("effects", _mapper.createArrayNode());
+            }
+            patchedFileAsJson = modifiedAsNode.toString();
             return _mapper.treeToValue(modifiedAsNode, valueType);
         }
         catch(JsonMappingException e) {
-            return patchAlt(entity, patchFileName, valueType);
+            _log.logError("Json \"" + patchFileName + "\"" + patchedFileAsJson, e);
         }
         catch(JsonPatchException e) {
             if(patchFileAsJson != null) {
@@ -314,53 +347,37 @@ public class JsonManipulator {
         return null;
     }
 
-    private <T> T patchAlt(Object entity, String patchFileName, Class<T> valueType) {
-        try {
-            _log.logDebug("Failed to parse patch file initial, trying a different way: " + patchFileName, true);
-            Reader reader = new FileReader(patchFileName);
-            JsonNode[] patchAsNode = _mapper.readValue(reader, JsonNode[].class);
-            reader.close();
-            JsonNode entityAsNode = _mapper.valueToTree(entity);
-            JsonNode modifiedAsNode = entityAsNode;
-            for(int i = 0; i < patchAsNode.length; i++) {
-                JsonNode jsonNode = patchAsNode[i];
-                try {
-                    JsonPatch patchTool = JsonPatch.fromJson(jsonNode);
-                    modifiedAsNode = patchTool.apply(modifiedAsNode);
-                }
-                catch(JsonPatchException e1) {}
-            }
-            return _mapper.treeToValue(modifiedAsNode, valueType);
-        }
-        catch (IOException e1) {
-            _log.logError("[IOE2] Failed to read file: " + patchFileName, e1);
-        }
-        return null;
-    }
-
-    private PatchResult updateNodes(Ingredient ingredient, ObjectNode[] nodes, PatchResult result) {
+    private PatchResult updateNodes(Ingredient ingredient, ArrayNode nodes, PatchResult result) {
         if(result.foundFood && result.foundPrice && result.foundEffects) {
             return result;
         }
-        for(int j = 0; j < nodes.length; j++) {
-            ObjectNode node = nodes[j];
-            String nodeOperation = node.get("op").asText();
-            String nodePath = node.get("path").asText();
+        for(int j = 0; j < nodes.size(); j++) {
+            JsonNode node = nodes.get(j);
+            if(node.isArray()) {
+                result = updateNodes(ingredient, (ArrayNode)node, result);
+                continue;
+            }
+            if(!node.isObject()) {
+                continue;
+            }
+            ObjectNode objNode = (ObjectNode)nodes.get(j);
+            String nodeOperation = objNode.get("op").asText();
+            String nodePath = objNode.get("path").asText();
             boolean isReplaceOperation = nodeOperation.equals("replace");
             if(nodeOperation.equals("add") || isReplaceOperation) {
                 if (nodePath.contains("foodValue")) {
-                    Double nodeValue = node.get("value").asDouble();
+                    Double nodeValue = objNode.get("value").asDouble();
                     if (!nodeValue.equals(ingredient.foodValue)) {
-                        node.put("value", ingredient.foodValue);
+                        objNode.put("value", ingredient.foodValue);
                         result.needsUpdate = true;
                     }
                     if(isReplaceOperation) {
                         result.foundFood = true;
                     }
                 } else if (nodePath.contains("price")) {
-                    Double nodeValue = node.get("value").asDouble();
+                    Double nodeValue = objNode.get("value").asDouble();
                     if (!nodeValue.equals(ingredient.price)) {
-                        node.put("value", ingredient.price);
+                        objNode.put("value", ingredient.price);
                         result.needsUpdate = true;
                     }
                     if(isReplaceOperation) {
@@ -368,9 +385,12 @@ public class JsonManipulator {
                     }
                 }
                 else if (nodePath.contains("effects")) {
-                    JsonNode[][] effects = CNUtils.toDoubleArray(node.get("value"));
+                    JsonNode effects = objNode.get("value");
                     if(!ingredient.effectsAreEqual(effects)) {
-                        node.put("value", toArrayNode(ingredient.effects));
+                        ArrayNode arrNode = objNode.putArray("value");
+                        for(int i = 0; i < ingredient.effects.size(); i++) {
+                            arrNode.add(ingredient.effects.get(i));
+                        }
                         result.needsUpdate = true;
                     }
                     if(isReplaceOperation) {
@@ -382,30 +402,13 @@ public class JsonManipulator {
         return result;
     }
 
-    private ArrayNode toArrayNode(JsonNode[][] jsonNodes) {
-        ArrayNode node = _mapper.createArrayNode();
-        for(int i = 0; i < jsonNodes.length; i++) {
-            ArrayNode subNode = toArrayNode(jsonNodes[i]);
-            node.add(subNode);
-        }
-        return node;
-    }
-
-    private ArrayNode toArrayNode(JsonNode[] jsonNodes) {
-        ArrayNode node = _mapper.createArrayNode();
-        for(int i = 0; i < jsonNodes.length; i++) {
-            node.add(jsonNodes[i]);
-        }
-        return node;
-    }
-
-    private ObjectNode[] createTestNodes(String pathName, ArrayNode value) throws IOException {
-        ObjectNode[] nodeArray = new ObjectNode[2];
+    private ArrayNode createTestNodes(String pathName, ArrayNode value) throws IOException {
+        ArrayNode nodeArray = _mapper.createArrayNode();
         ObjectNode testNode = _mapper.createObjectNode();
         testNode.put("op", "test");
         testNode.put("path", "/" + pathName);
         testNode.put("inverse", true);
-        nodeArray[0] = testNode;
+        nodeArray.add(testNode);
         ObjectNode node = _mapper.createObjectNode();
         node.put("op", "add");
         node.put("path", "/" + pathName);
@@ -413,7 +416,7 @@ public class JsonManipulator {
         for(int i = 0; i < value.size(); i++) {
             arrNode.add(value.get(i));
         }
-        nodeArray[1] = node;
+        nodeArray.add(node);
         return nodeArray;
     }
 
@@ -428,18 +431,18 @@ public class JsonManipulator {
         return node;
     }
 
-    private ObjectNode[] createTestNodes(String pathName, Double value) {
-        ObjectNode[] nodeArray = new ObjectNode[2];
+    private ArrayNode createTestNodes(String pathName, Double value) {
+        ArrayNode nodeArray = _mapper.createArrayNode();
         ObjectNode testNode = _mapper.createObjectNode();
         testNode.put("op", "test");
         testNode.put("path", "/" + pathName);
         testNode.put("inverse", true);
-        nodeArray[0] = testNode;
+        nodeArray.add(testNode);
         ObjectNode node = _mapper.createObjectNode();
         node.put("op", "add");
         node.put("path", "/" + pathName);
         node.put("value", value);
-        nodeArray[1] = node;
+        nodeArray.add(node);
         return nodeArray;
     }
 
@@ -453,8 +456,8 @@ public class JsonManipulator {
 
     private int defaultDuration = 20;
 
-    public ArrayList<JsonNode> combineEffects(ArrayList<JsonNode> nodes) {
-        ArrayList<JsonNode> combined = new ArrayList<JsonNode>();
+    public ArrayNode combineEffects(ArrayNode nodes) {
+        ArrayNode combined = _mapper.createArrayNode();
         Hashtable<String, ObjectNode> objNodes = new Hashtable<String, ObjectNode>();
         for(int i = 0; i < nodes.size(); i++) {
             JsonNode node = nodes.get(i);
@@ -498,6 +501,10 @@ public class JsonManipulator {
         }
 
         return combined;
+    }
+
+    public ArrayNode createArrayNode() {
+        return _mapper.createArrayNode();
     }
 
     private class PatchResult {

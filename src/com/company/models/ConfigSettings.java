@@ -17,4 +17,5 @@ public class ConfigSettings {
     public Double numberOfPasses;
     public boolean enableConsoleDebug;
     public boolean enableVerboseLogging;
+    public boolean enableEffectsUpdate;
 }

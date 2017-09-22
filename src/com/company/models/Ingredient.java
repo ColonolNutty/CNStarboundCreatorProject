@@ -1,9 +1,13 @@
 package com.company.models;
 
+import com.company.CNUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.util.Iterator;
 
 /**
  * User: Jack's Computer
@@ -24,7 +28,8 @@ public class Ingredient {
     public String inventoryIcon;
     public Object stages;
     public Object interactData;
-    public JsonNode[][] effects;
+    public Object breakDropOptions;
+    public ArrayNode effects;
 
     @JsonIgnore
     public String filePath;
@@ -38,7 +43,7 @@ public class Ingredient {
         this(name, 0.0, 0.0, null);
     }
 
-    public Ingredient(String name, Double price, Double foodValue, JsonNode[][] effects) {
+    public Ingredient(String name, Double price, Double foodValue, ArrayNode effects) {
         this.itemName = name;
         this.objectName = name;
         this.projectileName = name;
@@ -101,75 +106,118 @@ public class Ingredient {
         return one.equals(two);
     }
 
-    public boolean effectsAreEqual(Ingredient otherIngredient) {
-        if(effects == null || otherIngredient.effects == null) {
+    public boolean effectsAreEqual(JsonNode otherIngEffects) {
+        if(effects == null && otherIngEffects == null) {
+            return true;
+        }
+        if(effects == null || otherIngEffects == null) {
             return false;
         }
-        if(effects.length != otherIngredient.effects.length) {
+        if(effects.isArray() != otherIngEffects.isArray()) {
             return false;
         }
-        return effectsAreEqual(otherIngredient.effects);
-    }
-
-    public boolean effectsAreEqual(JsonNode[][] otherIngEffects) {
-        if(otherIngEffects.length != effects.length) {
+        if(effects.size() != otherIngEffects.size()) {
             return false;
         }
         boolean isSame = true;
-        for(int i = 0; i < effects.length; i++) {
-            JsonNode[] selfEffects = effects[i];
-            JsonNode[] otherEffects = otherIngEffects[i];
-            if(selfEffects.length != otherEffects.length) {
+        Iterator<JsonNode> selfEffects = effects.elements();
+        Iterator<JsonNode> otherEffects = otherIngEffects.elements();
+        while(selfEffects.hasNext()) {
+            if(!otherEffects.hasNext()) {
                 isSame = false;
-                i = effects.length;
-                continue;
+                break;
             }
-            for(int j = 0; j < selfEffects.length; j++) {
-                JsonNode selfEffect = selfEffects[j];
-                JsonNode otherEffect = otherEffects[j];
-                if(isValueType(otherEffect) || isValueType(selfEffect)) {
-                    if(!otherEffect.asText().equals(selfEffect.asText())) {
-                        isSame = false;
-                    }
-                }
-                else {
-                    if(selfEffect.has("effect")) {
-                        if (!otherEffect.has("effect")) {
-                            isSame = false;
-                        }
-                        else if(!selfEffect.get("effect").asText().equals(otherEffect.get("effect").asText())) {
-                            isSame = false;
-                        }
-                    }
-                    if(selfEffect.has("duration")) {
-                        if(!otherEffect.has("duration")) {
-                            isSame = false;
-                        }
-                        else if(selfEffect.get("duration").asDouble() != otherEffect.get("duration").asDouble()) {
-                            isSame = false;
-                        }
-                    }
-                }
-
-                if(!isSame) {
-                    j = effects[i].length;
-                }
-            }
-            if(!isSame) {
-                i = effects.length;
+            JsonNode selfEffect = selfEffects.next();
+            JsonNode otherEffect = otherEffects.next();
+            if(!effectsAreEqual(selfEffect, otherEffect)) {
+                isSame = false;
+                break;
             }
         }
         return isSame;
     }
 
-    private boolean isValueType(JsonNode node) {
-        return node.isDouble()
-                || node.isInt()
-                || node.isBoolean()
-                || node.isTextual();
+    private boolean effectsAreEqual(JsonNode effectsOne, JsonNode effectsTwo) {
+        if(effectsOne == null && effectsTwo == null) {
+            return true;
+        }
+        if(effectsOne == null || effectsTwo == null) {
+            return false;
+        }
+        if(effectsOne.isArray() != effectsTwo.isArray()) {
+            return false;
+        }
+        if(!effectsOne.isArray()) {
+            boolean effectsOneIsValueType = CNUtils.isValueType(effectsOne);
+            if(effectsOneIsValueType != CNUtils.isValueType(effectsTwo)) {
+                return false;
+            }
+            if(effectsOneIsValueType) {
+                if(!effectsOne.asText().equals(effectsTwo.asText())) {
+                    return false;
+                }
+            }
+        }
+        if(effectsOne.size() != effectsTwo.size()) {
+            return false;
+        }
+        boolean isSame = true;
+        Iterator<JsonNode> selfEffects = effectsOne.elements();
+        Iterator<JsonNode> otherEffects = effectsTwo.elements();
+        while(selfEffects.hasNext()) {
+            if(!otherEffects.hasNext()) {
+                isSame = false;
+                break;
+            }
+            JsonNode selfEffect = selfEffects.next();
+            JsonNode otherEffect = otherEffects.next();
+            if(selfEffect.isArray() && otherEffect.isArray()) {
+                if(!effectsAreEqual(selfEffect, otherEffect)) {
+                    isSame = false;
+                    break;
+                }
+                continue;
+            }
+            boolean selfIsValueType = CNUtils.isValueType(selfEffect);
+            boolean otherIsValueType = CNUtils.isValueType(otherEffect);
+            if(selfIsValueType && otherIsValueType) {
+                if(!selfEffect.asText().equals(otherEffect.asText())) {
+                    isSame = false;
+                    break;
+                }
+            }
+            else if(selfIsValueType || otherIsValueType) {
+                isSame = false;
+                break;
+            }
+            else {
+                if(!fieldIsSame(selfEffect, otherEffect, "effect")) {
+                    isSame = false;
+                    break;
+                }
+                else if(!fieldIsSame(selfEffect, otherEffect, "duration")) {
+                    isSame = false;
+                    break;
+                }
+            }
+        }
+        return isSame;
+    }
+
+    private boolean fieldIsSame(JsonNode selfEffect, JsonNode otherEffect, String fieldName) {
+        boolean isSame = false;
+        if(selfEffect.has(fieldName)) {
+            if (!otherEffect.has(fieldName)) {
+                isSame = false;
+            }
+            else if(!selfEffect.get(fieldName).asText().equals(otherEffect.get(fieldName).asText())) {
+                isSame = false;
+            }
+        }
+        return isSame;
     }
 
     public boolean hasEffects() {
-        return effects != null && effects.length > 0 && effects[0].length > 0;
+        return effects != null && effects.isArray() && effects.size() > 0 && effects.get(0).isArray() && effects.get(0).size() > 0;
     }
 }

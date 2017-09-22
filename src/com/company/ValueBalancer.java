@@ -34,7 +34,7 @@ public class ValueBalancer {
         FileLocator fileLocator = new FileLocator(debugLog, configSettings);
         IngredientStore ingredientStore = new IngredientStore(debugLog, configSettings, manipulator, patchLocator, fileLocator);
         RecipeStore recipeStore = new RecipeStore(debugLog, manipulator, patchLocator, fileLocator);
-        IngredientDataCalculator ingredientDataCalculator = new IngredientDataCalculator(debugLog, configSettings, recipeStore, ingredientStore, manipulator);
+        IngredientDataCalculator ingredientDataCalculator = new IngredientDataCalculator(debugLog, configSettings, configSettings, recipeStore, ingredientStore, manipulator);
         IngredientUpdater ingredientUpdater = new IngredientUpdater(debugLog, manipulator, ingredientStore, ingredientDataCalculator);
 
         FileUpdater fileUpdater = new FileUpdater(debugLog, configSettings,

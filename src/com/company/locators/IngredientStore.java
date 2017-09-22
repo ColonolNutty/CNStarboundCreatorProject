@@ -144,40 +144,39 @@ public class IngredientStore {
 
     private void updateIngredient(Ingredient ingredient, boolean isOverride) {
         String ingredientName = ingredient.getName();
-        if(_ingredients.containsKey(ingredientName)) {
-            Ingredient existing = _ingredients.get(ingredientName);
-            if(ingredient.foodValue != null && (isOverride || existing.foodValue == null)) {
-                _log.logDebug("Overriding ingredient foodValue: " + existing.getName() + " with " + ingredient.foodValue, true);
-                existing.foodValue = ingredient.foodValue;
-            }
-            if(ingredient.price != null && (isOverride || existing.price == null)) {
-                _log.logDebug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price, true);
-                existing.price = ingredient.price;
-            }
-            existing.itemName = ingredient.itemName;
-            existing.objectName = ingredient.objectName;
-            existing.name = ingredient.name;
-            existing.projectileName = ingredient.projectileName;
-            existing.description = ingredient.description;
-            existing.inventoryIcon = ingredient.inventoryIcon;
-            existing.shortdescription = ingredient.shortdescription;
-            existing.stages = ingredient.stages;
-            existing.interactData = ingredient.interactData;
-            if(ingredient.effects != null && ingredient.effects.length > 0) {
-                existing.effects = ingredient.effects;
-            }
-            if(ingredient.filePath != null) {
-                existing.filePath = ingredient.filePath;
-            }
-            if(ingredient.patchFile != null) {
-                existing.patchFile = ingredient.patchFile;
-            }
-            _ingredients.put(existing.getName(), existing);
-        }
-        else {
+        if(!_ingredients.containsKey(ingredientName)) {
             _log.logDebug("No ingredient found, so adding: " + ingredientName + " p: " + ingredient.price + " fv: " + ingredient.foodValue, true);
             _ingredients.put(ingredientName, ingredient);
+            return;
         }
+        Ingredient existing = _ingredients.get(ingredientName);
+        if(ingredient.foodValue != null && (isOverride || existing.foodValue == null)) {
+            _log.logDebug("Overriding ingredient foodValue: " + existing.getName() + " with " + ingredient.foodValue, true);
+            existing.foodValue = ingredient.foodValue;
+        }
+        if(ingredient.price != null && (isOverride || existing.price == null)) {
+            _log.logDebug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price, true);
+            existing.price = ingredient.price;
+        }
+        if(ingredient.hasEffects() && (isOverride || !existing.hasEffects())) {
+            existing.effects = ingredient.effects;
+        }
+        existing.itemName = ingredient.itemName;
+        existing.objectName = ingredient.objectName;
+        existing.name = ingredient.name;
+        existing.projectileName = ingredient.projectileName;
+        existing.description = ingredient.description;
+        existing.inventoryIcon = ingredient.inventoryIcon;
+        existing.shortdescription = ingredient.shortdescription;
+        existing.stages = ingredient.stages;
+        existing.interactData = ingredient.interactData;
+        if(ingredient.filePath != null) {
+            existing.filePath = ingredient.filePath;
+        }
+        if(ingredient.patchFile != null) {
+            existing.patchFile = ingredient.patchFile;
+        }
+        _ingredients.put(existing.getName(), existing);
     }
 
     private void initializeIngredientOverrides() {

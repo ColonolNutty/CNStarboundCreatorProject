@@ -1,6 +1,7 @@
 package com.company;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,46 +25,24 @@ public abstract class CNUtils {
         return hasExtension;
     }
 
-    public static JsonNode[] toArray(JsonNode node) {
-        ArrayList<JsonNode> nodes = new ArrayList<JsonNode>();
-        if(node.isArray()) {
-            return toArray(nodes);
-        }
-        Iterator<JsonNode> elements = node.elements();
-        while(elements.hasNext()) {
-            nodes.add(elements.next());
-        }
-        return toArray(nodes);
-    }
-
-    public static JsonNode[][] toDoubleArray(JsonNode node) {
-        ArrayList<JsonNode[]> nodes = new ArrayList<JsonNode[]>();
-        if(node.isArray()) {
-            return toDoubleArray(nodes);
-        }
-        Iterator<JsonNode> elements = node.elements();
-        while(elements.hasNext()) {
-            JsonNode jsonNode = elements.next();
-            if(jsonNode.isArray()) {
-                nodes.add(toArray(jsonNode));
+    public static boolean fileStartsWith(String filePath, String[] values) {
+        boolean hasExtension = false;
+        for(int i = 0; i < values.length; i++) {
+            String value = values[i];
+            File valueFilePath = new File(value);
+            if(filePath.startsWith(valueFilePath.getAbsolutePath())) {
+                hasExtension = true;
+                i = values.length;
             }
         }
-        return toDoubleArray(nodes);
+        return hasExtension;
     }
 
-    public static JsonNode[] toArray(ArrayList<JsonNode> list) {
-        JsonNode[] array = new JsonNode[list.size()];
-        for(int i = 0; i < list.size(); i++) {
-            array[i] = list.get(i);
-        }
-        return array;
+    public static boolean isValueType(JsonNode node) {
+        return node.isDouble()
+                || node.isInt()
+                || node.isBoolean()
+                || node.isTextual();
     }
 
-    public static JsonNode[][] toDoubleArray(ArrayList<JsonNode[]> list) {
-        JsonNode[][] array = new JsonNode[list.size()][];
-        for(int i = 0; i < list.size(); i++) {
-            array[i] = list.get(i);
-        }
-        return array;
-    }
 }

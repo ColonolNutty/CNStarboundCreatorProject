@@ -42,23 +42,25 @@ public class DebugLog {
 
     public void logDebug(String message, boolean isVerbose) {
         if(_enableConsoleDebug) {
-            writeOutput(debugPrefix + message, isVerbose);
+            writeOutput(debugPrefix + message, isVerbose, true);
             return;
         }
         writeToLog(debugPrefix + message, isVerbose);
     }
 
     public void logInfo(String message, boolean isVerbose) {
-        writeOutput(infoPrefix + message, isVerbose);
+        writeOutput(infoPrefix + message, isVerbose, false);
     }
 
     public void logError(String message, boolean isVerbose) {
-        writeOutput(errorPrefix + message, isVerbose);
+        writeOutput(errorPrefix + message, isVerbose, true);
     }
 
     public void logError(Exception e) {
-        e.printStackTrace(System.out);
-        System.out.flush();
+        if(_enableConsoleDebug) {
+            e.printStackTrace(System.out);
+            System.out.flush();
+        }
         if(writer != null) {
             e.printStackTrace(writer);
         }
@@ -69,12 +71,14 @@ public class DebugLog {
         logError(e);
     }
 
-    private void writeOutput(String message, boolean isVerbose) {
+    private void writeOutput(String message, boolean isVerbose, boolean isDebug) {
         if(isVerbose && !_enableVerboseLogging) {
             return;
         }
-        System.out.println(message);
-        System.out.flush();
+        if(!isDebug ||  _enableConsoleDebug) {
+            System.out.println(message);
+            System.out.flush();
+        }
         writeToLog(message, isVerbose);
     }
 

@@ -6,5 +6,6 @@
   "increasePercentage" : 0.05,
   "numberOfPasses": 8,
   "enableConsoleDebug": true,
-  "enableVerboseLogging": true
+  "enableVerboseLogging": true,
+  "enableEffectsUpdate": true
 }

@@ -71,7 +71,7 @@ public class IngredientUpdater {
             return one.priceEquals(two);
         }
         boolean shouldCheckEffects = (one.filePath != null && one.filePath.endsWith(".consumable")) || (two.filePath != null && two.filePath.endsWith(".consumable"));
-        if(shouldCheckEffects && !one.effectsAreEqual(two)) {
+        if(shouldCheckEffects && !one.effectsAreEqual(two.effects)) {
             return false;
         }
         _log.logDebug("Comparing using both price and foodValue: " + one.getName(), true);

@@ -7,6 +7,7 @@ import com.company.models.Ingredient;
 import com.company.models.Recipe;
 import com.company.models.RecipeIngredient;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.ArrayList;
@@ -18,17 +19,20 @@ import java.util.ArrayList;
  */
 public class IngredientDataCalculator {
     private DebugLog _log;
+    private ConfigSettings _settings;
     private RecipeStore _recipeStore;
     private IngredientStore _ingredientStore;
     private JsonManipulator _manipulator;
     private Double _increasePercentage;
 
     public IngredientDataCalculator(DebugLog log,
+                                    ConfigSettings settings,
                                     ConfigSettings configSettings,
                                     RecipeStore recipeStore,
                                     IngredientStore ingredientStore,
                                     JsonManipulator manipulator) {
         _log = log;
+        _settings = settings;
         _recipeStore = recipeStore;
         _ingredientStore = ingredientStore;
         _increasePercentage = configSettings.increasePercentage;
@@ -50,40 +54,53 @@ public class IngredientDataCalculator {
         Double newFoodValue = 0.0;
         Double newPrice = 0.0;
         _log.logDebug("Calculating new values for: " + recipe.output.item, true);
-        ArrayList<JsonNode> totalEffects = new ArrayList<JsonNode>();
+        ArrayNode totalEffects = _manipulator.createArrayNode();
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
             Ingredient ingredient = recipeIngredient.ingredient;
-            if(ingredient.effects != null) {
-                for (int j = 0; j < ingredient.effects.length; j++) {
-                    JsonNode[] subEffects = ingredient.effects[j];
-                    if(subEffects == null) {
-                        continue;
-                    }
-                    for (int k = 0; k < subEffects.length; k++) {
-                        totalEffects.add(ingredient.effects[j][k]);
+            _log.logDebug("    Ingredient " + (i + 1) + " is " + ingredient.getName() + " with count: " + recipeIngredient.count + " p: " + ingredient.price + " and fv: " + ingredient.foodValue, true);
+
+            if(_settings.enableEffectsUpdate && ingredient.hasEffects()) {
+                if(ingredient.effects.isArray()) {
+                    for(JsonNode effect : ingredient.effects) {
+                        if(effect.isArray()) {
+                            for(JsonNode subEffect : effect) {
+                                if(subEffect == null) {
+                                    continue;
+                                }
+                                String subEffectName;
+                                if(CNUtils.isValueType(subEffect)) {
+                                    subEffectName = subEffect.asText();
+                                }
+                                else {
+                                    if(subEffect.has("effect")) {
+                                        subEffectName = subEffect.get("effect").asText();
+                                    }
+                                    else {
+                                        subEffectName = "No Effect Name";
+                                    }
+                                }
+                                _log.logDebug("    Ingredient " + (i + 1) + " has effect " + subEffectName, true);
+                                totalEffects.add(subEffect);
+                            }
+                        }
                     }
                 }
             }
-            _log.logDebug("    Ingredient " + (i + 1) + " is " + ingredient.getName() + " with count: " + recipeIngredient.count + " p: " + ingredient.price + " and fv: " + ingredient.foodValue, true);
 
             if(ingredient != null) {
                 newPrice += calculateValue(recipeIngredient.count, ingredient.price);
                 newFoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue);
             }
         }
+        ArrayNode combined = null;
+        if(_settings.enableEffectsUpdate) {
+            ArrayNode combinedEffects = _manipulator.combineEffects(totalEffects);
 
-        ArrayList<JsonNode> combinedEffects = _manipulator.combineEffects(totalEffects);
-
-        JsonNode[] jsonNode = new JsonNode[combinedEffects.size()];
-
-        for(int i = 0; i < combinedEffects.size(); i++) {
-            jsonNode[i] = combinedEffects.get(i);
+            combined = _manipulator.createArrayNode();
+            combined.add(combinedEffects);
         }
-
-        JsonNode[][] combined = new JsonNode[1][];
-        combined[0] = jsonNode;
 
         Double outputCount = recipe.output.count;
         if(outputCount <= 0.0) {

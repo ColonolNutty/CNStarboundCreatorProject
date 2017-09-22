@@ -72,10 +72,16 @@ public class FileUpdater {
             Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
             if (ingredient != null) {
                 if(ingredient.patchFile != null) {
+                    if(CNUtils.fileStartsWith(ingredient.patchFile, _settings.includeLocations)) {
+                        continue;
+                    }
                     _log.logInfo("Attempting to update patch file: " + ingredient.getName(), false);
                     _manipulator.writeIngredientAsPatch(ingredient);
                 }
-                else if(!isIncludeLocation(ingredient.filePath)) {
+                else {
+                    if(CNUtils.fileStartsWith(ingredient.filePath, _settings.includeLocations)) {
+                        continue;
+                    }
                     _log.logInfo("Updating ingredient: " + ingredient.getName(), false);
                     _manipulator.write(ingredient.filePath, ingredient);
                 }
