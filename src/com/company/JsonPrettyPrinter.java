@@ -1,6 +1,7 @@
 package com.company;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -210,14 +211,16 @@ public class JsonPrettyPrinter {
     }
 
     private String formatAsIntended(ObjectNode node, int indentSize) {
-        if(node.isNumber() || node.isInt() || node.isBoolean()) {
+        if(node.isDouble() || node.isInt() || node.isBoolean()) {
             return node.asText();
         }
         if(node.isTextual()) {
             return "\"" + node.asText() + "\"";
         }
-        if(!node.isObject())
-        {
+        if(node.isArray()) {
+            return formatAsArray(node, indentSize);
+        }
+        if(!node.isObject()) {
             return "";
         }
         String result = "{\r\n";
@@ -240,8 +243,10 @@ public class JsonPrettyPrinter {
         if(node.isTextual()) {
             return "\"" + node.asText() + "\"";
         }
-        if(!node.isObject())
-        {
+        if(node.isArray()) {
+            return formatAsArray(node, indentSize);
+        }
+        if(!node.isObject()) {
             return "";
         }
         String result = "{\r\n";
@@ -255,5 +260,18 @@ public class JsonPrettyPrinter {
         }
         result += "\r\n" + makeIndent(indentSize) + "}";
         return result;
+    }
+
+    private String formatAsArray(JsonNode nodes, int indentSize) {
+        String prettyJson = "[\r\n";
+        for(int i = 0; i < nodes.size(); i++) {
+            JsonNode node = nodes.get(i);
+            prettyJson += makeIndent(indentSize + 2) + formatAsIntended(node, indentSize + 2);
+            if(i + 1 < nodes.size()) {
+                prettyJson += ",\r\n";
+            }
+        }
+        prettyJson += "\r\n" + makeIndent(indentSize) + "]";
+        return prettyJson;
     }
 }

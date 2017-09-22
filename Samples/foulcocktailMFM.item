@@ -1,10 +1,9 @@
 {
-  "shortdescription": "Alcohol - Foul Cocktail",
-  "itemName": "foulcocktailMFM",
-  "price": 75.89,
-  "description": "An inexplicable mix of oil and acidic swill.",
-  "inventoryIcon": "foulcocktailMFM.png",
-  "foodValue": null,
-  "category": "cookingIngredient",
-  "rarity": "Common"
- }
+  "itemName" : "foulcocktailMFM",
+  "rarity" : "Common",
+  "price" : 75.89,
+  "category" : "cookingIngredient",
+  "description" : "An inexplicable mix of oil and acidic swill.",
+  "shortdescription" : "Alcohol - Foul Cocktail",
+  "inventoryIcon" : "foulcocktailMFM.png"
+}

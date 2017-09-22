@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
@@ -12,10 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: Jack's Computer
@@ -38,6 +36,7 @@ public class JsonManipulator {
         _keysToWrite = new ArrayList<String>();
         _keysToWrite.add("foodValue");
         _keysToWrite.add("price");
+        _keysToWrite.add("effects");
         try {
             _propertyOrder = read("propertyOrder.json", PropertyOrder.class).order;
             _prettyPrinter = new JsonPrettyPrinter(_propertyOrder);
@@ -65,12 +64,17 @@ public class JsonManipulator {
             String fileData = readExistingFile(filePath);
             String toWriteObj = _mapper.writeValueAsString(obj);
             JSONObject toWrite = new JSONObject(toWriteObj);
-            JSONObject combined = combineJsonValues(toWrite, fileData);
+            JSONObject combined = combineJsonValues(toWrite, fileData, filePath.endsWith(".consumable"));
             if(combined == null) {
                 return;
             }
+
+            String result = _prettyPrinter.makePretty(combined, 0);
+            if(result == null || result.equals("")) {
+                return;
+            }
             Writer writer = new FileWriter(filePath);
-            writer.write(_prettyPrinter.makePretty(combined, 0));
+            writer.write(result);
             writer.close();
         }
         catch(IOException e) {
@@ -78,7 +82,7 @@ public class JsonManipulator {
         }
     }
 
-    private JSONObject combineJsonValues(JSONObject toWrite, String existingJson) throws IOException {
+    private JSONObject combineJsonValues(JSONObject toWrite, String existingJson, boolean canUpdateEffects) throws IOException {
         if(existingJson == null) {
             return null;
         }
@@ -88,7 +92,7 @@ public class JsonManipulator {
             Iterator<String> toUpdateKeys = toWrite.keys();
             while (toUpdateKeys.hasNext()) {
                 String key = toUpdateKeys.next();
-                if(canWriteKey(key) && existingObject.has(key)) {
+                if(canWriteKey(key) && (existingObject.has(key) || (key.equals("effects") && canUpdateEffects))) {
                     Object value = toWrite.get(key);
                     existingObject.put(key, value);
                 }
@@ -138,14 +142,17 @@ public class JsonManipulator {
             ObjectNode[] patchNodes = _mapper.readValue(reader, ObjectNode[].class);
             reader.close();
             PatchResult result = updateNodes(ingredient, patchNodes, new PatchResult());
-            if(!result.foundFood || !result.foundPrice) {
+            if(!result.foundFood || !result.foundPrice || !result.foundEffects) {
                 if(!result.foundFood) {
                     _log.logDebug("    Food Value not found on patch file: " + ingredient.getName(), true);
                 }
                 if(!result.foundPrice) {
                     _log.logDebug("    Price not found on patch file: " + ingredient.getName(), true);
                 }
-                List<ObjectNode> objectNodes = Arrays.asList(patchNodes);
+                ArrayList<ObjectNode> objectNodes = new ArrayList<ObjectNode>();
+                for(int i = 0; i < patchNodes.length; i++) {
+                    objectNodes.add(patchNodes[i]);
+                }
                 if (!result.foundFood) {
                     if(ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
                         objectNodes.add(createReplaceNode("foodValue", ingredient.foodValue));
@@ -155,6 +162,12 @@ public class JsonManipulator {
                 if (!result.foundPrice) {
                     if(ingredient.price != null) {
                         objectNodes.add(createReplaceNode("price", ingredient.price));
+                        result.needsUpdate = true;
+                    }
+                }
+                if (!result.foundEffects) {
+                    if(ingredient.effects != null) {
+                        objectNodes.add(createReplaceNode("effects", toArrayNode(ingredient.effects)));
                         result.needsUpdate = true;
                     }
                 }
@@ -169,8 +182,12 @@ public class JsonManipulator {
             }
             if(result.needsUpdate) {
                 _log.logInfo("    Applying update to patch file: " + ingredient.getName(), false);
+                String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
+                if(prettyJson == null || prettyJson.equals("")) {
+                    return;
+                }
                 Writer writer = new FileWriter(ingredient.patchFile);
-                writer.write( _prettyPrinter.makePretty(patchNodes, 0));
+                writer.write(prettyJson);
                 writer.close();
             }
             else {
@@ -194,12 +211,15 @@ public class JsonManipulator {
             for (int i = 0; i < patchNodes.length; i++) {
                 result = updateNodes(ingredient, patchNodes[i], result);
 
-                if(result.foundFood && result.foundPrice) {
+                if(result.foundFood && result.foundPrice && result.foundEffects) {
                     i = patchNodes.length;
                 }
             }
-            if (!result.foundFood || !result.foundPrice) {
-                List<ObjectNode[]> objectNodes = Arrays.asList(patchNodes);
+            if (!result.foundFood || !result.foundPrice || !result.foundEffects) {
+                ArrayList<ObjectNode[]> objectNodes = new ArrayList<ObjectNode[]>();
+                for(int i = 0; i < patchNodes.length; i++) {
+                    objectNodes.add(patchNodes[i]);
+                }
                 if (!result.foundFood) {
                     if (ingredient.foodValue != null && ingredient.filePath.endsWith("consumable")) {
                         objectNodes.add(createTestNodes("foodValue", ingredient.foodValue));
@@ -214,6 +234,16 @@ public class JsonManipulator {
                         objectNodes.add(createTestNodes("price", ingredient.price));
                         ObjectNode[] replaceNodes = new ObjectNode[1];
                         replaceNodes[0] = createReplaceNode("price", ingredient.price);
+                        objectNodes.add(replaceNodes);
+                        result.needsUpdate = true;
+                    }
+                }
+                if (!result.foundEffects) {
+                    if(ingredient.effects != null) {
+                        ObjectNode[] testNodes = createTestNodes("effects", toArrayNode(ingredient.effects));
+                        objectNodes.add(testNodes);
+                        ObjectNode[] replaceNodes = new ObjectNode[1];
+                        replaceNodes[0] = createReplaceNode("effects", toArrayNode(ingredient.effects));
                         objectNodes.add(replaceNodes);
                         result.needsUpdate = true;
                     }
@@ -234,8 +264,12 @@ public class JsonManipulator {
             }
             if (result.needsUpdate) {
                 _log.logInfo("    Applying update to patch file: " + ingredient.getName(), false);
+                String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
+                if(prettyJson == null || prettyJson.equals("")) {
+                    return;
+                }
                 Writer writer = new FileWriter(ingredient.patchFile);
-                writer.write( _prettyPrinter.makePretty(patchNodes, 0));
+                writer.write(prettyJson);
                 writer.close();
             }
             else {
@@ -303,7 +337,7 @@ public class JsonManipulator {
     }
 
     private PatchResult updateNodes(Ingredient ingredient, ObjectNode[] nodes, PatchResult result) {
-        if(result.foundFood && result.foundPrice) {
+        if(result.foundFood && result.foundPrice && result.foundEffects) {
             return result;
         }
         for(int j = 0; j < nodes.length; j++) {
@@ -331,9 +365,65 @@ public class JsonManipulator {
                         result.foundPrice = true;
                     }
                 }
+                else if (nodePath.contains("effects")) {
+                    JsonNode[][] effects = CNUtils.toDoubleArray(node.get("value"));
+                    if(!ingredient.effectsAreEqual(effects)) {
+                        node.put("value", toArrayNode(ingredient.effects));
+                        result.needsUpdate = true;
+                    }
+                    if(isReplaceOperation) {
+                        result.foundEffects = true;
+                    }
+                }
             }
         }
         return result;
+    }
+
+    private ArrayNode toArrayNode(JsonNode[][] jsonNodes) {
+        ArrayNode node = _mapper.createArrayNode();
+        for(int i = 0; i < jsonNodes.length; i++) {
+            ArrayNode subNode = toArrayNode(jsonNodes[i]);
+            node.add(subNode);
+        }
+        return node;
+    }
+
+    private ArrayNode toArrayNode(JsonNode[] jsonNodes) {
+        ArrayNode node = _mapper.createArrayNode();
+        for(int i = 0; i < jsonNodes.length; i++) {
+            node.add(jsonNodes[i]);
+        }
+        return node;
+    }
+
+    private ObjectNode[] createTestNodes(String pathName, ArrayNode value) throws IOException {
+        ObjectNode[] nodeArray = new ObjectNode[2];
+        ObjectNode testNode = _mapper.createObjectNode();
+        testNode.put("op", "test");
+        testNode.put("path", "/" + pathName);
+        testNode.put("inverse", true);
+        nodeArray[0] = testNode;
+        ObjectNode node = _mapper.createObjectNode();
+        node.put("op", "add");
+        node.put("path", "/" + pathName);
+        ArrayNode arrNode = node.putArray("value");
+        for(int i = 0; i < value.size(); i++) {
+            arrNode.add(value.get(i));
+        }
+        nodeArray[1] = node;
+        return nodeArray;
+    }
+
+    private ObjectNode createReplaceNode(String pathName, ArrayNode value) throws IOException {
+        ObjectNode node = _mapper.createObjectNode();
+        node.put("op", "replace");
+        node.put("path", "/" + pathName);
+        ArrayNode arrNode = node.putArray("value");
+        for(int i = 0; i < value.size(); i++) {
+            arrNode.add(value.get(i));
+        }
+        return node;
     }
 
     private ObjectNode[] createTestNodes(String pathName, Double value) {
@@ -359,16 +449,66 @@ public class JsonManipulator {
         return node;
     }
 
+    private int defaultDuration = 20;
+
+    public ArrayList<JsonNode> combineEffects(ArrayList<JsonNode> nodes) {
+        ArrayList<JsonNode> combined = new ArrayList<JsonNode>();
+        Hashtable<String, ObjectNode> objNodes = new Hashtable<String, ObjectNode>();
+        for(int i = 0; i < nodes.size(); i++) {
+            JsonNode node = nodes.get(i);
+            ObjectNode objNode = _mapper.createObjectNode();
+            String key;
+            if(node.isDouble() || node.isInt() || node.isBoolean() || node.isTextual()) {
+                key = node.asText();
+                objNode.put("effect", key);
+                objNode.put("duration", defaultDuration);
+            }
+            else {
+                key = node.get("effect").asText();
+                objNode.put("effect", key);
+                if(node.has("duration")) {
+                    objNode.put("duration", node.get("duration").asDouble(defaultDuration));
+                }
+                else {
+                    objNode.put("duration", defaultDuration);
+                }
+            }
+            objNode.put("effect", key);
+            if(objNodes.containsKey(key)) {
+                ObjectNode existing = objNodes.get(key);
+                Double existingDuration = existing.get("duration").asDouble(defaultDuration);
+                existing.put("duration", existingDuration + objNode.get("duration").asDouble(defaultDuration));
+            }
+            else {
+                objNodes.put(key, objNode);
+            }
+        }
+
+        Enumeration<ObjectNode> objNodesValues = objNodes.elements();
+        while(objNodesValues.hasMoreElements()) {
+            ObjectNode objNode = objNodesValues.nextElement();
+            try {
+                JsonNode node = _mapper.readTree(objNode.toString());
+                combined.add(node);
+            }
+            catch(IOException e) {
+            }
+        }
+
+        return combined;
+    }
 
     private class PatchResult {
         public boolean needsUpdate;
         public boolean foundFood;
         public boolean foundPrice;
+        public boolean foundEffects;
 
         public PatchResult() {
             needsUpdate = false;
             foundFood = false;
             foundPrice = false;
+            foundEffects = false;
         }
     }
 }

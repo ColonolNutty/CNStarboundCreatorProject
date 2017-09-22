@@ -2,6 +2,8 @@ package com.company.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * User: Jack's Computer
@@ -14,6 +16,7 @@ public class Ingredient {
     public String itemName;
     public String objectName;
     public String projectileName;
+
     public Double price;
     public Double foodValue;
     public String description;
@@ -21,6 +24,7 @@ public class Ingredient {
     public String inventoryIcon;
     public Object stages;
     public Object interactData;
+    public JsonNode[][] effects;
 
     @JsonIgnore
     public String filePath;
@@ -30,15 +34,18 @@ public class Ingredient {
 
     public Ingredient() { }
 
-    public Ingredient(String itemName) {
-        this(itemName, 0.0, 0.0);
+    public Ingredient(String name) {
+        this(name, 0.0, 0.0, null);
     }
 
-    public Ingredient(String itemName, Double price, Double foodValue) {
-        this.itemName = itemName;
-        this.objectName = itemName;
+    public Ingredient(String name, Double price, Double foodValue, JsonNode[][] effects) {
+        this.itemName = name;
+        this.objectName = name;
+        this.projectileName = name;
+        this.name = name;
         this.price = price;
         this.foodValue = foodValue;
+        this.effects = effects;
     }
 
     public boolean hasName() {
@@ -89,5 +96,68 @@ public class Ingredient {
             return false;
         }
         return one.equals(two);
+    }
+
+    public boolean effectsAreEqual(Ingredient otherIngredient) {
+        if(effects == null || otherIngredient.effects == null) {
+            return false;
+        }
+        if(effects.length != otherIngredient.effects.length) {
+            return false;
+        }
+        return effectsAreEqual(otherIngredient.effects);
+    }
+
+    public boolean effectsAreEqual(JsonNode[][] otherIngEffects) {
+        if(otherIngEffects.length != effects.length) {
+            return false;
+        }
+        boolean isSame = true;
+        for(int i = 0; i < effects.length; i++) {
+            JsonNode[] selfEffects = effects[i];
+            JsonNode[] otherEffects = otherIngEffects[i];
+            for(int j = 0; j < selfEffects.length; j++) {
+                JsonNode selfEffect = selfEffects[j];
+                JsonNode otherEffect = otherEffects[j];
+                if(isValueType(otherEffect) || isValueType(selfEffect)) {
+                    if(!otherEffect.asText().equals(selfEffect.asText())) {
+                        isSame = false;
+                    }
+                }
+                else {
+                    if(selfEffect.has("effect")) {
+                        if (!otherEffect.has("effect")) {
+                            isSame = false;
+                        }
+                        else if(!selfEffect.get("effect").asText().equals(otherEffect.get("effect").asText())) {
+                            isSame = false;
+                        }
+                    }
+                    if(selfEffect.has("duration")) {
+                        if(!otherEffect.has("duration")) {
+                            isSame = false;
+                        }
+                        else if(selfEffect.get("duration").asDouble() != otherEffect.get("duration").asDouble()) {
+                            isSame = false;
+                        }
+                    }
+                }
+
+                if(!isSame) {
+                    j = effects[i].length;
+                }
+            }
+            if(!isSame) {
+                i = effects.length;
+            }
+        }
+        return isSame;
+    }
+
+    private boolean isValueType(JsonNode node) {
+        return node.isDouble()
+                || node.isInt()
+                || node.isBoolean()
+                || node.isTextual();
     }
 }

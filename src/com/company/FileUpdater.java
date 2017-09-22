@@ -8,7 +8,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 /**
  * User: Jack's Computer
@@ -18,7 +17,7 @@ import java.util.Iterator;
 public class FileUpdater {
     private DebugLog _log;
     private ConfigSettings _settings;
-    private ValueCalculator _valueCalculator;
+    private IngredientDataCalculator _ingredientDataCalculator;
     private JsonManipulator _manipulator;
     private IngredientUpdater _ingredientUpdater;
     private IngredientStore _ingredientStore;
@@ -26,14 +25,14 @@ public class FileUpdater {
 
     public FileUpdater(DebugLog log,
                        ConfigSettings settings,
-                       ValueCalculator valueCalculator,
+                       IngredientDataCalculator ingredientDataCalculator,
                        JsonManipulator manipulator,
                        IngredientUpdater ingredientUpdater,
                        IngredientStore ingredientStore,
                        FileLocator fileLocator) {
         _log = log;
         _settings = settings;
-        _valueCalculator = valueCalculator;
+        _ingredientDataCalculator = ingredientDataCalculator;
         _manipulator = manipulator;
         _ingredientUpdater = ingredientUpdater;
         _ingredientStore = ingredientStore;

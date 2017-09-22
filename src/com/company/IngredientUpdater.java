@@ -16,17 +16,17 @@ public class IngredientUpdater {
     protected DebugLog _log;
     protected JsonManipulator _manipulator;
     protected IngredientStore _ingredientStore;
-    protected ValueCalculator _valueCalculator;
+    protected IngredientDataCalculator _ingredientDataCalculator;
     protected ArrayList<String> _fileTypesIgnoreFoodValues;
 
     public IngredientUpdater(DebugLog log,
                              JsonManipulator manipulator,
                              IngredientStore ingredientStore,
-                             ValueCalculator valueCalculator) {
+                             IngredientDataCalculator ingredientDataCalculator) {
         _log = log;
         _manipulator = manipulator;
         _ingredientStore = ingredientStore;
-        _valueCalculator = valueCalculator;
+        _ingredientDataCalculator = ingredientDataCalculator;
         _fileTypesIgnoreFoodValues = new ArrayList<String>();
         _fileTypesIgnoreFoodValues.add(".item");
         _fileTypesIgnoreFoodValues.add(".object");
@@ -44,7 +44,7 @@ public class IngredientUpdater {
                 _log.logDebug("No ingredient found in store for: " + ingredientFilePath, true);
                 return null;
             }
-            Ingredient updatedIngredient = _valueCalculator.updateValues(ingredient);
+            Ingredient updatedIngredient = _ingredientDataCalculator.updateIngredient(ingredient);
             Ingredient originalIngredient = _manipulator.readIngredient(ingredientFilePath);
             if(ingredientsAreEqual(originalIngredient, updatedIngredient)) {
                 _log.logDebug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), true);
@@ -60,6 +60,9 @@ public class IngredientUpdater {
 
     private boolean ingredientsAreEqual(Ingredient one, Ingredient two) {
         if(one == null || two == null) {
+            return false;
+        }
+        if(!one.effectsAreEqual(two)) {
             return false;
         }
         if(one.filePath != null && CNUtils.fileEndsWith(one.filePath, _fileTypesIgnoreFoodValues)) {

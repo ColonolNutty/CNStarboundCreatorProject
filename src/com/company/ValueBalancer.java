@@ -34,11 +34,11 @@ public class ValueBalancer {
         FileLocator fileLocator = new FileLocator(debugLog, configSettings);
         IngredientStore ingredientStore = new IngredientStore(debugLog, configSettings, manipulator, patchLocator, fileLocator);
         RecipeStore recipeStore = new RecipeStore(debugLog, manipulator, patchLocator, fileLocator);
-        ValueCalculator valueCalculator = new ValueCalculator(debugLog, configSettings, recipeStore, ingredientStore);
-        IngredientUpdater ingredientUpdater = new IngredientUpdater(debugLog, manipulator, ingredientStore, valueCalculator);
+        IngredientDataCalculator ingredientDataCalculator = new IngredientDataCalculator(debugLog, configSettings, recipeStore, ingredientStore, manipulator);
+        IngredientUpdater ingredientUpdater = new IngredientUpdater(debugLog, manipulator, ingredientStore, ingredientDataCalculator);
 
         FileUpdater fileUpdater = new FileUpdater(debugLog, configSettings,
-                valueCalculator, manipulator, ingredientUpdater, ingredientStore, fileLocator);
+                ingredientDataCalculator, manipulator, ingredientUpdater, ingredientStore, fileLocator);
         fileUpdater.updateValues();
 
         timer.stop();

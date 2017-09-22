@@ -163,6 +163,9 @@ public class IngredientStore {
             existing.shortdescription = ingredient.shortdescription;
             existing.stages = ingredient.stages;
             existing.interactData = ingredient.interactData;
+            if(ingredient.effects != null && ingredient.effects.length > 0) {
+                existing.effects = ingredient.effects;
+            }
             if(ingredient.filePath != null) {
                 existing.filePath = ingredient.filePath;
             }
