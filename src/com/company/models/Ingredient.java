@@ -46,6 +46,9 @@ public class Ingredient {
         this.price = price;
         this.foodValue = foodValue;
         this.effects = effects;
+        if(!hasEffects()) {
+            this.effects = null;
+        }
     }
 
     public boolean hasName() {
@@ -116,6 +119,11 @@ public class Ingredient {
         for(int i = 0; i < effects.length; i++) {
             JsonNode[] selfEffects = effects[i];
             JsonNode[] otherEffects = otherIngEffects[i];
+            if(selfEffects.length != otherEffects.length) {
+                isSame = false;
+                i = effects.length;
+                continue;
+            }
             for(int j = 0; j < selfEffects.length; j++) {
                 JsonNode selfEffect = selfEffects[j];
                 JsonNode otherEffect = otherEffects[j];
@@ -159,5 +167,9 @@ public class Ingredient {
                 || node.isInt()
                 || node.isBoolean()
                 || node.isTextual();
+    }
+
+    public boolean hasEffects() {
+        return effects != null && effects.length > 0 && effects[0].length > 0;
     }
 }

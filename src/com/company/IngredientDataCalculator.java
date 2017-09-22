@@ -58,6 +58,9 @@ public class IngredientDataCalculator {
             if(ingredient.effects != null) {
                 for (int j = 0; j < ingredient.effects.length; j++) {
                     JsonNode[] subEffects = ingredient.effects[j];
+                    if(subEffects == null) {
+                        continue;
+                    }
                     for (int k = 0; k < subEffects.length; k++) {
                         totalEffects.add(ingredient.effects[j][k]);
                     }

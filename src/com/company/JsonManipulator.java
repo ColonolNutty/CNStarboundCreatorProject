@@ -39,7 +39,7 @@ public class JsonManipulator {
         _keysToWrite.add("effects");
         try {
             _propertyOrder = read("propertyOrder.json", PropertyOrder.class).order;
-            _prettyPrinter = new JsonPrettyPrinter(_propertyOrder);
+            _prettyPrinter = new JsonPrettyPrinter(_log, _propertyOrder);
         }
         catch(IOException e) {
             _log.logError("propertyOrder.json file not found", e);
@@ -94,7 +94,9 @@ public class JsonManipulator {
                 String key = toUpdateKeys.next();
                 if(canWriteKey(key) && (existingObject.has(key) || (key.equals("effects") && canUpdateEffects))) {
                     Object value = toWrite.get(key);
-                    existingObject.put(key, value);
+                    if(value != null) {
+                        existingObject.put(key, value);
+                    }
                 }
             }
             return existingObject;

@@ -62,9 +62,6 @@ public class IngredientUpdater {
         if(one == null || two == null) {
             return false;
         }
-        if(!one.effectsAreEqual(two)) {
-            return false;
-        }
         if(one.filePath != null && CNUtils.fileEndsWith(one.filePath, _fileTypesIgnoreFoodValues)) {
             _log.logDebug("Comparing using only price: " + one.getName(), true);
             return one.priceEquals(two);
@@ -72,6 +69,10 @@ public class IngredientUpdater {
         if(two.filePath != null && CNUtils.fileEndsWith(two.filePath, _fileTypesIgnoreFoodValues)) {
             _log.logDebug("Comparing using only price: " + one.getName(), true);
             return one.priceEquals(two);
+        }
+        boolean shouldCheckEffects = (one.filePath != null && one.filePath.endsWith(".consumable")) || (two.filePath != null && two.filePath.endsWith(".consumable"));
+        if(shouldCheckEffects && !one.effectsAreEqual(two)) {
+            return false;
         }
         _log.logDebug("Comparing using both price and foodValue: " + one.getName(), true);
         return one.equals(two);

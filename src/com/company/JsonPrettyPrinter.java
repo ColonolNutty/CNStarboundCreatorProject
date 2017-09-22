@@ -17,8 +17,10 @@ import java.util.Iterator;
  */
 public class JsonPrettyPrinter {
     private String[] _propertyOrder;
+    private DebugLog _log;
 
-    public JsonPrettyPrinter(String[] propertyOrder) {
+    public JsonPrettyPrinter(DebugLog log, String[] propertyOrder) {
+        _log = log;
         _propertyOrder = propertyOrder;
     }
 
@@ -33,8 +35,11 @@ public class JsonPrettyPrinter {
         }
         for(int i = 0; i < foundProperties.size(); i++) {
             String propertyName = foundProperties.get(i);
+            if(obj.isNull(propertyName)) {
+                continue;
+            }
             prettyJson += makeIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
-            if(i + 1 < foundProperties.size()) {
+            if (i + 1 < foundProperties.size()) {
                 prettyJson += ",\r\n";
             }
         }
@@ -43,6 +48,9 @@ public class JsonPrettyPrinter {
         while(propertyNames.hasNext()) {
             String propertyName = propertyNames.next();
             if(!foundProperties.contains(propertyName)) {
+                if(obj.isNull(propertyName)) {
+                    continue;
+                }
                 if(!appendedComma) {
                     prettyJson += ",\r\n";
                     appendedComma = true;
@@ -58,8 +66,14 @@ public class JsonPrettyPrinter {
     }
 
     private String formatArray(JSONArray array, int indentSize) {
+        if(array.length() == 0) {
+            return null;
+        }
         String prettyJson = "[";
         for(int i = 0; i < array.length(); i++) {
+            if(array.isNull(i)) {
+                continue;
+            }
             prettyJson += formatAsIntended(array, i, indentSize + 2);
         }
         prettyJson += "]";
@@ -68,92 +82,100 @@ public class JsonPrettyPrinter {
 
     private String formatAsIntended(JSONObject obj, String key, int indentSize) {
         try {
-            JSONObject val = obj.getJSONObject(key);
-            return makePretty(val, indentSize);
+            try {
+                JSONObject val = obj.getJSONObject(key);
+                return makePretty(val, indentSize);
+            } catch (JSONException e) {
+                try {
+                    JSONArray val = obj.getJSONArray(key);
+                    return formatArray(val, indentSize);
+                } catch (JSONException e1) {
+                    try {
+                        String result;
+                        if (isDouble(obj, key)) {
+                            Double val = obj.getDouble(key);
+                            result = val.toString();
+                        } else {
+                            int val = obj.getInt(key);
+                            result = val + "";
+                        }
+                        return result;
+                    } catch (JSONException e2) {
+                        try {
+                            Boolean val = obj.getBoolean(key);
+                            return val.toString();
+                        } catch (JSONException e4) {
+                        }
+                    }
+                }
+            }
+            return "\"" + obj.getString(key) + "\"";
         }
         catch(JSONException e) {
-            try {
-                JSONArray val = obj.getJSONArray(key);
-                return formatArray(val, indentSize);
-            }
-            catch(JSONException e1) {
-                try {
-                    String result;
-                    if(isDouble(obj, key)) {
-                        Double val = obj.getDouble(key);
-                        result = val.toString();
-                    }
-                    else {
-                        int val = obj.getInt(key);
-                        result = val + "";
-                    }
-                    return result;
-                }
-                catch(JSONException e2) {
-                    try {
-                        Boolean val = obj.getBoolean(key);
-                        return val.toString();
-                    }
-                    catch(JSONException e4) { }
-                }
-            }
+            _log.logError("When parsing: " + key, e);
         }
-        return "\"" + obj.getString(key) + "\"";
+        return "";
     }
 
     private String formatAsIntended(JSONArray obj, int key, int indentSize) {
-        boolean isNotLast = key + 1 < obj.length();
         try {
-            JSONObject val = obj.getJSONObject(key);
-            String result = "\r\n" + makePretty(val, indentSize);
-            if(isNotLast) {
-                result += ",\r\n";
-            }
-            return result;
-        }
-        catch(JSONException e) {
+            boolean isNotLast = key + 1 < obj.length();
             try {
-                JSONArray val = obj.getJSONArray(key);
-                String result = formatArray(val, indentSize);
+                JSONObject val = obj.getJSONObject(key);
+                String result = "\r\n" + makePretty(val, indentSize);
                 if(isNotLast) {
-                    result += ",";
+                    result += ",\r\n";
                 }
                 return result;
             }
-            catch(JSONException e1) {
+            catch(JSONException e) {
                 try {
-                    String result;
-                    if(isDouble(obj, key)) {
-                        Double val = obj.getDouble(key);
-                        result = val.toString();
-                    }
-                    else {
-                        int val = obj.getInt(key);
-                        result = val + "";
-                    }
+                    JSONArray val = obj.getJSONArray(key);
+                    String result = formatArray(val, indentSize);
                     if(isNotLast) {
-                        result += ", ";
+                        result += ",";
                     }
                     return result;
                 }
-                catch(JSONException e2) {
+                catch(JSONException e1) {
                     try {
-                        Boolean val = obj.getBoolean(key);
-                        String result = val.toString();
+                        String result;
+                        if(isDouble(obj, key)) {
+                            Double val = obj.getDouble(key);
+                            result = val.toString();
+                        }
+                        else {
+                            int val = obj.getInt(key);
+                            result = val + "";
+                        }
                         if(isNotLast) {
                             result += ", ";
                         }
                         return result;
                     }
-                    catch(JSONException e4) { }
+                    catch(JSONException e2) {
+                        try {
+                            Boolean val = obj.getBoolean(key);
+                            String result = val.toString();
+                            if(isNotLast) {
+                                result += ", ";
+                            }
+                            return result;
+                        }
+                        catch(JSONException e4) { }
+                    }
                 }
             }
+            String result = "\"" + obj.getString(key) + "\"";
+            if(isNotLast) {
+                result += ", ";
+            }
+            return result;
         }
-        String result = "\"" + obj.getString(key) + "\"";
-        if(isNotLast) {
-            result += ", ";
+        catch(JSONException e) {
+            _log.logError("When parsing: " + key, e);
         }
-        return result;
+        return "";
     }
 
     private boolean isDouble(JSONObject obj, String key) {
@@ -185,29 +207,29 @@ public class JsonPrettyPrinter {
     }
 
     public String makePretty(ObjectNode[][] objNodes, int indentSize) {
-        String result = makeIndent(indentSize) + "[\r\n";
+        String prettyJson = makeIndent(indentSize) + "[\r\n";
         for(int i = 0; i < objNodes.length; i++) {
             ObjectNode[] objectNode = objNodes[i];
-            result += makePretty(objectNode, indentSize + 2);
+            prettyJson += makePretty(objectNode, indentSize + 2);
             if(i + 1 < objNodes.length) {
-                result += ",\r\n";
+                prettyJson += ",\r\n";
             }
         }
-        result += "\r\n" + makeIndent(indentSize) + "]";
-        return result;
+        prettyJson += "\r\n" + makeIndent(indentSize) + "]";
+        return prettyJson;
     }
 
     public String makePretty(ObjectNode[] objNode, int indentSize) {
-        String result = makeIndent(indentSize) + "[\r\n";
+        String prettyJson = makeIndent(indentSize) + "[\r\n";
         for(int i = 0; i < objNode.length; i++) {
             ObjectNode objectNode = objNode[i];
-            result += makeIndent(indentSize + 2) + formatAsIntended(objectNode, indentSize + 2);
+            prettyJson += makeIndent(indentSize + 2) + formatAsIntended(objectNode, indentSize + 2);
             if(i + 1 < objNode.length) {
-                result += ",\r\n";
+                prettyJson += ",\r\n";
             }
         }
-        result += "\r\n" + makeIndent(indentSize) + "]";
-        return result;
+        prettyJson += "\r\n" + makeIndent(indentSize) + "]";
+        return prettyJson;
     }
 
     private String formatAsIntended(ObjectNode node, int indentSize) {
@@ -223,17 +245,20 @@ public class JsonPrettyPrinter {
         if(!node.isObject()) {
             return "";
         }
-        String result = "{\r\n";
+        String prettyJson = "{\r\n";
         Iterator<String> fieldNames = node.fieldNames();
         while(fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
-            result += makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + formatAsIntended(node.get(fieldName), indentSize + 2);
+            if(node.isNull()) {
+                continue;
+            }
+            prettyJson +=  makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + formatAsIntended(node.get(fieldName), indentSize + 2);
             if(fieldNames.hasNext()) {
-                result += ",\r\n";
+                prettyJson += ",\r\n";
             }
         }
-        result += "\r\n" + makeIndent(indentSize) + "}";
-        return result;
+        prettyJson += "\r\n" + makeIndent(indentSize) + "}";
+        return prettyJson;
     }
 
     private String formatAsIntended(JsonNode node, int indentSize) {
@@ -249,17 +274,20 @@ public class JsonPrettyPrinter {
         if(!node.isObject()) {
             return "";
         }
-        String result = "{\r\n";
+        String prettyJson = "{\r\n";
         Iterator<String> fieldNames = node.fieldNames();
         while(fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
-            result += makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + formatAsIntended(node.get(fieldName), indentSize + 2);
+            if(node.isNull()) {
+                continue;
+            }
+            prettyJson += makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + formatAsIntended(node.get(fieldName), indentSize + 2);
             if(fieldNames.hasNext()) {
-                result += ",\r\n";
+                prettyJson += ",\r\n";
             }
         }
-        result += "\r\n" + makeIndent(indentSize) + "}";
-        return result;
+        prettyJson += "\r\n" + makeIndent(indentSize) + "}";
+        return prettyJson;
     }
 
     private String formatAsArray(JsonNode nodes, int indentSize) {
