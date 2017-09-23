@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class ConfigSettings {
     public String[] locationsToUpdate;
     public String[] includeLocations;
+    public String[] excludedEffects;
     public Double increasePercentage;
     public String ingredientOverridePath;
     public String logFile;

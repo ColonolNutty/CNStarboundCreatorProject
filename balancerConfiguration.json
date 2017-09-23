@@ -1,6 +1,7 @@
 {
   "locationsToUpdate": ["Samples"],
   "includeLocations": ["NonStuff"],
+  "excludedEffects": ["foodpoison"],
   "ingredientOverridePath": "valueOverrides.json",
   "logFile": "updatelog.log",
   "increasePercentage" : 0.05,

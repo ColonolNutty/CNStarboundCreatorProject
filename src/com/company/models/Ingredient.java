@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -32,6 +33,9 @@ public class Ingredient {
     public ArrayNode effects;
 
     @JsonIgnore
+    public HashMap<String, Integer> ingredientEffects;
+
+    @JsonIgnore
     public static int DefaultEffectDuration = 20;
 
     @JsonIgnore
@@ -53,14 +57,25 @@ public class Ingredient {
         this.name = name;
         this.price = price;
         this.foodValue = foodValue;
-        this.effects = effects;
-        if(!hasEffects()) {
-            this.effects = null;
+        if(hasEffects(effects)) {
+            this.effects = effects;
         }
     }
 
     public boolean hasName() {
         return itemName != null || objectName != null || name != null || projectileName != null;
+    }
+
+    public boolean hasPrice() {
+        return price != null && price > 0.0;
+    }
+
+    public boolean hasFoodValue() {
+        return foodValue != null && foodValue > 0.0;
+    }
+
+    public boolean hasEffects() {
+        return hasEffects(effects);
     }
 
     public String getName() {
@@ -109,42 +124,35 @@ public class Ingredient {
         return one.equals(two);
     }
 
-    public boolean effectsAreEqual(JsonNode otherIngEffects) {
-        if(effects == null && otherIngEffects == null) {
+    public boolean effectsAreEqual(JsonNode otherEffects) {
+        boolean selfHasEffects = hasEffects();
+        boolean otherHasEffects = hasEffects(otherEffects);
+        if(!selfHasEffects && !otherHasEffects) {
             return true;
         }
-        if(effects == null || otherIngEffects == null) {
+        if(selfHasEffects != otherHasEffects) {
             return false;
         }
-        if(effects.isArray() != otherIngEffects.isArray()) {
-            return false;
-        }
-        if(effects.size() != otherIngEffects.size()) {
+        if(effects.size() != otherEffects.size()) {
             return false;
         }
         boolean isSame = true;
-        Iterator<JsonNode> selfEffects = effects.elements();
-        Iterator<JsonNode> otherEffects = otherIngEffects.elements();
-        while(selfEffects.hasNext()) {
-            if(!otherEffects.hasNext()) {
+        for(int i = 0; i < effects.size(); i++) {
+            if(!effectsAreEqual(effects.get(i), otherEffects.get(i))) {
                 isSame = false;
-                break;
-            }
-            JsonNode selfEffect = selfEffects.next();
-            JsonNode otherEffect = otherEffects.next();
-            if(!effectsAreEqual(selfEffect, otherEffect)) {
-                isSame = false;
-                break;
+                i = effects.size();
             }
         }
         return isSame;
     }
 
     private boolean effectsAreEqual(JsonNode effectsOne, JsonNode effectsTwo) {
-        if(effectsOne == null && effectsTwo == null) {
+        boolean selfHasEffects = effectsNotEmpty(effectsOne);
+        boolean otherHasEffects = effectsNotEmpty(effectsTwo);
+        if(!selfHasEffects && !otherHasEffects) {
             return true;
         }
-        if(effectsOne == null || effectsTwo == null) {
+        if(selfHasEffects != otherHasEffects) {
             return false;
         }
         if(effectsOne.isArray() != effectsTwo.isArray()) {
@@ -152,32 +160,27 @@ public class Ingredient {
         }
         if(!effectsOne.isArray()) {
             boolean effectsOneIsValueType = CNUtils.isValueType(effectsOne);
-            if(effectsOneIsValueType != CNUtils.isValueType(effectsTwo)) {
+            boolean effectsTwoIsValueType = CNUtils.isValueType(effectsTwo);
+            if(effectsOneIsValueType && effectsTwoIsValueType) {
+                return effectsOne.asText().equals(effectsTwo.asText());
+            }
+            if(effectsOneIsValueType || effectsTwoIsValueType) {
                 return false;
             }
-            if(effectsOneIsValueType) {
-                if(!effectsOne.asText().equals(effectsTwo.asText())) {
-                    return false;
-                }
-            }
+            return false;
         }
         if(effectsOne.size() != effectsTwo.size()) {
             return false;
         }
+
         boolean isSame = true;
-        Iterator<JsonNode> selfEffects = effectsOne.elements();
-        Iterator<JsonNode> otherEffects = effectsTwo.elements();
-        while(selfEffects.hasNext()) {
-            if(!otherEffects.hasNext()) {
-                isSame = false;
-                break;
-            }
-            JsonNode selfEffect = selfEffects.next();
-            JsonNode otherEffect = otherEffects.next();
+        for(int i = 0; i < effectsOne.size(); i++) {
+            JsonNode selfEffect = effectsOne.get(i);
+            JsonNode otherEffect = effectsTwo.get(i);
             if(selfEffect.isArray() && otherEffect.isArray()) {
                 if(!effectsAreEqual(selfEffect, otherEffect)) {
                     isSame = false;
-                    break;
+                    i = effectsOne.size();
                 }
                 continue;
             }
@@ -186,49 +189,43 @@ public class Ingredient {
             if(selfIsValueType && otherIsValueType) {
                 if(!selfEffect.asText().equals(otherEffect.asText())) {
                     isSame = false;
-                    break;
                 }
             }
             else if(selfIsValueType || otherIsValueType) {
                 isSame = false;
-                break;
             }
             else {
                 if(!fieldIsSame(selfEffect, otherEffect, "effect")) {
                     isSame = false;
-                    break;
                 }
                 else if(!fieldIsSame(selfEffect, otherEffect, "duration")) {
                     isSame = false;
-                    break;
                 }
+            }
+            if(!isSame) {
+                i = effectsOne.size();
             }
         }
         return isSame;
     }
 
     private boolean fieldIsSame(JsonNode selfEffect, JsonNode otherEffect, String fieldName) {
-        boolean isSame = false;
-        if(selfEffect.has(fieldName)) {
-            if (!otherEffect.has(fieldName)) {
-                isSame = false;
-            }
-            else if(!selfEffect.get(fieldName).asText().equals(otherEffect.get(fieldName).asText())) {
-                isSame = false;
+        if(selfEffect.has(fieldName) && otherEffect.has(fieldName)) {
+            if(!selfEffect.get(fieldName).asText().equals(otherEffect.get(fieldName).asText())) {
+                return false;
             }
         }
-        return isSame;
+        else if(selfEffect.has(fieldName) || otherEffect.has(fieldName)) {
+            return false;
+        }
+        return true;
     }
 
-    public boolean hasPrice() {
-        return price != null && price > 0.0;
+    public boolean hasEffects(JsonNode eff) {
+        return effectsNotEmpty(eff) && effectsNotEmpty(eff.get(0));
     }
 
-    public boolean hasFoodValue() {
-        return foodValue != null && foodValue > 0.0;
-    }
-
-    public boolean hasEffects() {
-        return effects != null && effects.isArray() && effects.size() > 0 && effects.get(0).isArray() && effects.get(0).size() > 0;
+    public boolean effectsNotEmpty(JsonNode eff) {
+        return eff != null && eff.isArray() && eff.size() > 0;
     }
 }

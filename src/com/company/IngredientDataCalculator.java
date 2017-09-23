@@ -54,70 +54,68 @@ public class IngredientDataCalculator {
 
         Double newFoodValue = 0.0;
         Double newPrice = 0.0;
-        _log.logDebug("Calculating new values for: " + recipe.output.item, true);
+
+        String outputName = recipe.output.item;
+        boolean outputIsRaw = outputName.startsWith("raw");
+        _log.logDebug("Calculating new values for: " + outputName, true);
         Hashtable<String, Integer> effectValues = new Hashtable<String, Integer>();
-        ArrayNode totalEffects = _manipulator.createArrayNode();
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
             Ingredient ingredient = recipeIngredient.ingredient;
             _log.logDebug("    Ingredient " + (i + 1) + " is " + ingredient.getName() + " with count: " + recipeIngredient.count + " p: " + ingredient.price + " and fv: " + ingredient.foodValue, true);
+            if(ingredient == null) {
+                continue;
+            }
+            newPrice += calculateValue(recipeIngredient.count, ingredient.price);
+            newFoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue);
 
             if(_settings.enableEffectsUpdate && ingredient.hasEffects()) {
-                if(ingredient.effects.isArray()) {
-                    for(JsonNode effect : ingredient.effects) {
-                        if(effect.isArray()) {
-                            for(JsonNode subEffect : effect) {
-                                if(subEffect == null) {
-                                    continue;
-                                }
-                                int duration = Ingredient.DefaultEffectDuration;
-                                String subEffectName;
-                                if(CNUtils.isValueType(subEffect)) {
-                                    subEffectName = subEffect.asText();
-                                }
-                                else {
-                                    if(subEffect.has("effect")) {
-                                        subEffectName = subEffect.get("effect").asText();
-                                    }
-                                    else {
-                                        subEffectName = "No Effect Name";
-                                    }
-                                    if(subEffect.has("duration")) {
-                                        duration = subEffect.get("duration").asInt(Ingredient.DefaultEffectDuration);
-                                    }
-                                }
-                                if(!effectValues.containsKey(subEffectName)) {
-                                    effectValues.put(subEffectName, duration);
-                                }
-                                _log.logDebug("    Ingredient " + (i + 1) + " has effect " + subEffectName + " with duration: " + duration, true);
-                                totalEffects.add(subEffect);
-                            }
+                for(JsonNode effect : ingredient.effects) {
+                    if(!effect.isArray()) {
+                        continue;
+                    }
+                    for(JsonNode subEffect : effect) {
+                        if(subEffect == null) {
+                            continue;
                         }
+                        int duration = Ingredient.DefaultEffectDuration;
+                        String subEffectName;
+                        if(CNUtils.isValueType(subEffect)) {
+                            subEffectName = subEffect.asText();
+                        }
+                        else if(subEffect.has("effect")) {
+                            subEffectName = subEffect.get("effect").asText();
+                        }
+                        else {
+                            _log.logDebug("Effect with no name found on ingredient: " + ingredient.getName(), true);
+                            continue;
+                        }
+                        if(subEffect.has("duration")) {
+                            duration = subEffect.get("duration").asInt(Ingredient.DefaultEffectDuration);
+                        }
+                        boolean isFoodPoisonOnRawFood = subEffectName.equals("foodpoison")
+                                && outputIsRaw;
+                        if(!isFoodPoisonOnRawFood && CNUtils.contains(subEffectName, _settings.excludedEffects)) {
+                            continue;
+                        }
+                        if(!effectValues.containsKey(subEffectName)) {
+                            effectValues.put(subEffectName, duration);
+                        }
+                        else {
+                            effectValues.put(subEffectName, effectValues.get(subEffectName) + (int)(duration * recipeIngredient.count));
+                        }
+                        _log.logDebug("    Ingredient " + (i + 1) + " has effect " + subEffectName + " with duration: " + duration, true);
                     }
                 }
             }
-
-            if(ingredient != null) {
-                newPrice += calculateValue(recipeIngredient.count, ingredient.price);
-                newFoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue);
-            }
         }
+
         ArrayNode combined = null;
         if(_settings.enableEffectsUpdate) {
-            ArrayNode combinedEffects = _manipulator.combineEffects(totalEffects);
-
+            ArrayNode combinedEffects = _manipulator.toEffectsArrayNode(outputName, effectValues);
             combined = _manipulator.createArrayNode();
             combined.add(combinedEffects);
-
-            if(!effectValues.isEmpty()) {
-                _log.logDebug("New effects for " + recipe.output.item, true);
-                Enumeration<String>  effectKeys = effectValues.keys();
-                while(effectKeys.hasMoreElements()){
-                    String effectName = effectKeys.nextElement();
-                    _log.logDebug("    name: " + effectName + " with duration: " + effectValues.get(effectName), true);
-                }
-            }
         }
 
         Double outputCount = recipe.output.count;
@@ -127,11 +125,11 @@ public class IngredientDataCalculator {
         newPrice = roundTwoDecimalPlaces(newPrice / outputCount);
         newFoodValue = roundTwoDecimalPlaces(newFoodValue / outputCount);
 
-        _log.logDebug("New values for: " + recipe.output.item + " are p: " + newPrice + " and fv: " + newFoodValue, true);
+        _log.logDebug("New values for: " + outputName + " are p: " + newPrice + " and fv: " + newFoodValue, true);
 
-        Ingredient newIngredient = new Ingredient(recipe.output.item, newPrice, newFoodValue, combined);
+        Ingredient newIngredient = new Ingredient(outputName, newPrice, newFoodValue, combined);
         _ingredientStore.updateIngredient(newIngredient);
-        return _ingredientStore.getIngredient(recipe.output.item);
+        return _ingredientStore.getIngredient(outputName);
     }
 
     private ArrayList<RecipeIngredient> findIngredientsFor(Recipe recipe) {

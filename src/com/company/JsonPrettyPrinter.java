@@ -67,16 +67,16 @@ public class JsonPrettyPrinter {
 
     private String formatArray(JSONArray array, int indentSize) {
         if(array.length() == 0) {
-            return null;
+            return "[ ]";
         }
-        String prettyJson = "[";
+        String prettyJson = "[ ";
         for(int i = 0; i < array.length(); i++) {
             if(array.isNull(i)) {
                 continue;
             }
             prettyJson += formatAsIntended(array, i, indentSize + 2);
         }
-        prettyJson += "]";
+        prettyJson += " ]";
         return prettyJson;
     }
 
@@ -199,6 +199,14 @@ public class JsonPrettyPrinter {
     }
 
     public String makePretty(ArrayNode node, int indentSize) {
+        if(node.isArray()) {
+            if(node.size() == 0) {
+                return "[]";
+            }
+            else if(node.get(0).size() == 0) {
+                return "[[ ]]";
+            }
+        }
         String prettyJson = makeIndent(indentSize) + "[\r\n";
         for(int i = 0; i < node.size(); i++) {
             JsonNode subNode = node.get(i);
@@ -234,18 +242,26 @@ public class JsonPrettyPrinter {
         return null;
     }
 
-    private String formatAsArray(JsonNode nodes, int indentSize) {
+    private String formatAsArray(JsonNode arrNode, int indentSize) {
+        if(arrNode.isArray()) {
+            if(arrNode.size() == 0) {
+                return "[]";
+            }
+            else if(arrNode.get(0).size() == 0) {
+                return "[[ ]]";
+            }
+        }
         boolean hasValue = false;
         String prettyJson = "[\r\n";
-        for(int i = 0; i < nodes.size(); i++) {
-            JsonNode node = nodes.get(i);
+        for(int i = 0; i < arrNode.size(); i++) {
+            JsonNode node = arrNode.get(i);
             String result = formatAsIntended(node, indentSize + 2);
             if(result == null) {
                 continue;
             }
             hasValue = true;
             prettyJson += makeIndent(indentSize + 2) + result;
-            if(i + 1 < nodes.size()) {
+            if(i + 1 < arrNode.size()) {
                 prettyJson += ",\r\n";
             }
         }

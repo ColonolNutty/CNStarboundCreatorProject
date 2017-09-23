@@ -13,6 +13,21 @@ import java.util.Iterator;
  * Time: 11:37 AM
  */
 public abstract class CNUtils {
+    public static boolean contains(String name, String[] names) {
+        if(name == null || names == null) {
+            return false;
+        }
+        boolean contains = false;
+        for(int i = 0; i < names.length; i++) {
+            String value = names[i];
+            if(name.equals(value)) {
+                contains = true;
+                i = names.length;
+            }
+        }
+        return contains;
+    }
+
     public static boolean fileEndsWith(String filePath, ArrayList<String> values) {
         boolean hasExtension = false;
         for(int i = 0; i < values.size(); i++) {
