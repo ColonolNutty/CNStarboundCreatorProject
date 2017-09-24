@@ -105,6 +105,7 @@ public class JsonPrettyPrinter {
                             Boolean val = obj.getBoolean(key);
                             return val.toString();
                         } catch (JSONException e4) {
+                            _log.logError("Unknown object type: " + key, e4);
                         }
                     }
                 }
@@ -162,7 +163,9 @@ public class JsonPrettyPrinter {
                             }
                             return result;
                         }
-                        catch(JSONException e4) { }
+                        catch(JSONException e4) {
+                            _log.logError("Unknown object type: " + key, e4);
+                        }
                     }
                 }
             }
@@ -266,7 +269,7 @@ public class JsonPrettyPrinter {
             }
         }
         if(!hasValue) {
-            return null;
+            return "[]";
         }
         prettyJson += "\r\n" + makeIndent(indentSize) + "]";
         return prettyJson;
@@ -292,7 +295,7 @@ public class JsonPrettyPrinter {
             }
         }
         if(!hasValue) {
-            return null;
+            return "{}";
         }
         prettyJson += "\r\n" + makeIndent(indentSize) + "}";
         return prettyJson;
