@@ -40,7 +40,14 @@ public class FileUpdater {
     }
 
     public void updateValues() {
-        ArrayList<String> filePaths = _fileLocator.getFilePaths();
+        String[] ingredientFileExts = new String[6];
+        ingredientFileExts[0] = ".item";
+        ingredientFileExts[1] = ".consumable";
+        ingredientFileExts[2] = ".object";
+        ingredientFileExts[3] = ".matitem";
+        ingredientFileExts[4] = ".liquid";
+        ingredientFileExts[5] = ".projectile";
+        ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(ingredientFileExts);
         Hashtable<String, String> ingredientsToUpdate = new Hashtable<String, String>();
         for(int k = 0; k < _settings.numberOfPasses; k++) {
             _log.logInfo("Beginning pass: " + (k + 1), false);
@@ -70,35 +77,30 @@ public class FileUpdater {
         while(ingredientNames.hasMoreElements()) {
             String ingredientName = ingredientNames.nextElement();
             Ingredient ingredient = _ingredientStore.getIngredient(ingredientName);
-            if (ingredient != null) {
-                if(ingredient.patchFile != null) {
-                    if(CNUtils.fileStartsWith(ingredient.patchFile, _settings.includeLocations)) {
-                        continue;
-                    }
-                    _log.logInfo("Attempting to update patch file: " + ingredient.getName(), false);
-                    _manipulator.writeIngredientAsPatch(ingredient);
+            if (ingredient == null) {
+                continue;
+            }
+            verifyMinimumValues(ingredient);
+            if(ingredient.patchFile != null) {
+                if(!CNUtils.fileStartsWith(ingredient.patchFile, _settings.locationsToUpdate)) {
+                    continue;
                 }
-                else {
-                    if(CNUtils.fileStartsWith(ingredient.filePath, _settings.includeLocations)) {
-                        continue;
-                    }
-                    _log.logInfo("Updating ingredient: " + ingredient.getName(), false);
-                    _manipulator.write(ingredient.filePath, ingredient);
+                _log.logInfo("Attempting to update patch file: " + ingredientName, false);
+                _manipulator.writeIngredientAsPatch(ingredient);
+            }
+            else {
+                if(!CNUtils.fileStartsWith(ingredient.filePath, _settings.locationsToUpdate)) {
+                    continue;
                 }
+                _log.logInfo("Updating ingredient: " + ingredientName, false);
+                _manipulator.write(ingredient.filePath, ingredient);
             }
         }
     }
 
-    private boolean isIncludeLocation(String filePath) {
-        boolean isIncludeLocation = false;
-        for(int i = 0; i < _settings.includeLocations.length; i++) {
-            String location = _settings.includeLocations[i];
-            File file = new File(location);
-            if(filePath.startsWith(file.getAbsolutePath())) {
-                isIncludeLocation = true;
-                i = _settings.includeLocations.length;
-            }
+    private void verifyMinimumValues(Ingredient ingredient) {
+        if(ingredient.foodValue != null && ingredient.foodValue < _settings.minimumFoodValue) {
+            ingredient.foodValue = (double)_settings.minimumFoodValue;
         }
-        return isIncludeLocation;
     }
 }

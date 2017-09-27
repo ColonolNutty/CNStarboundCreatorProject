@@ -2,15 +2,12 @@ package com.company;
 
 import com.company.locators.IngredientStore;
 import com.company.locators.RecipeStore;
-import com.company.models.ConfigSettings;
-import com.company.models.Ingredient;
-import com.company.models.Recipe;
-import com.company.models.RecipeIngredient;
+import com.company.locators.StatusEffectStore;
+import com.company.models.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
@@ -24,19 +21,19 @@ public class IngredientDataCalculator {
     private RecipeStore _recipeStore;
     private IngredientStore _ingredientStore;
     private JsonManipulator _manipulator;
-    private Double _increasePercentage;
+    private StatusEffectStore _statusEffectStore;
 
     public IngredientDataCalculator(DebugLog log,
                                     ConfigSettings settings,
-                                    ConfigSettings configSettings,
                                     RecipeStore recipeStore,
                                     IngredientStore ingredientStore,
+                                    StatusEffectStore statusEffectStore,
                                     JsonManipulator manipulator) {
         _log = log;
         _settings = settings;
         _recipeStore = recipeStore;
         _ingredientStore = ingredientStore;
-        _increasePercentage = configSettings.increasePercentage;
+        _statusEffectStore = statusEffectStore;
         _manipulator = manipulator;
     }
 
@@ -79,7 +76,6 @@ public class IngredientDataCalculator {
                         if(subEffect == null) {
                             continue;
                         }
-                        int duration = Ingredient.DefaultEffectDuration;
                         String subEffectName;
                         if(CNUtils.isValueType(subEffect)) {
                             subEffectName = subEffect.asText();
@@ -91,8 +87,10 @@ public class IngredientDataCalculator {
                             _log.logDebug("Effect with no name found on ingredient: " + ingredient.getName(), true);
                             continue;
                         }
+                        int defaultDuration = findDefaultDuration(subEffectName);
+                        int duration = defaultDuration;
                         if(subEffect.has("duration")) {
-                            duration = subEffect.get("duration").asInt(Ingredient.DefaultEffectDuration);
+                            duration = subEffect.get("duration").asInt(defaultDuration);
                         }
                         boolean isFoodPoisonOnRawFood = subEffectName.equals("foodpoison")
                                 && outputIsRaw;
@@ -111,14 +109,14 @@ public class IngredientDataCalculator {
             }
         }
 
+        Double outputCount = recipe.output.count;
         ArrayNode combined = null;
         if(_settings.enableEffectsUpdate) {
-            ArrayNode combinedEffects = _manipulator.toEffectsArrayNode(outputName, effectValues);
+            ArrayNode combinedEffects = _manipulator.toEffectsArrayNode(outputName, effectValues, outputCount);
             combined = _manipulator.createArrayNode();
             combined.add(combinedEffects);
         }
 
-        Double outputCount = recipe.output.count;
         if(outputCount <= 0.0) {
             outputCount = 1.0;
         }
@@ -153,10 +151,18 @@ public class IngredientDataCalculator {
         if(count == null || value == null) {
             return 0.0;
         }
-        return (value * count) + (value * _increasePercentage);
+        return (value * count) + (value * _settings.increasePercentage);
     }
 
     private Double roundTwoDecimalPlaces(Double val) {
         return (double)Math.round(val * 100)/100;
+    }
+
+    private int findDefaultDuration(String effectName) {
+        StatusEffect statusEffect = _statusEffectStore.getStatusEffect(effectName);
+        if(statusEffect == null || statusEffect.defaultDuration == 0) {
+            return Ingredient.DefaultEffectDuration;
+        }
+        return statusEffect.defaultDuration;
     }
 }

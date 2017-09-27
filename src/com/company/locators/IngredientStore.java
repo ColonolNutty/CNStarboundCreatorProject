@@ -99,13 +99,26 @@ public class IngredientStore {
         _stopWatch.reset();
         _stopWatch.start("loading ingredients from disk");
         _log.logInfo("Loading ingredients from disk", false);
-        ArrayList<String> filePaths = _fileLocator.getFilePaths();
+        String[] ingredientFileExtensions = new String[6];
+        ingredientFileExtensions[0] = ".item";
+        ingredientFileExtensions[1] = ".consumable";
+        ingredientFileExtensions[2] = ".object";
+        ingredientFileExtensions[3] = ".matitem";
+        ingredientFileExtensions[4] = ".liquid";
+        ingredientFileExtensions[5] = ".projectile";
+        String[] ingredientPatchFileExt = new String[6];
+        ingredientPatchFileExt[0] = ".item.patch";
+        ingredientPatchFileExt[1] = ".consumable.patch";
+        ingredientPatchFileExt[2] = ".object.patch";
+        ingredientPatchFileExt[3] = ".matitem.patch";
+        ingredientPatchFileExt[4] = ".liquid.patch";
+        ingredientPatchFileExt[5] = ".projectile.patch";
+        ArrayList<String> ingredientPatchFiles = _fileLocator.getFilePathsByExtension(ingredientPatchFileExt);
+        ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(ingredientFileExtensions);
         for(int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);
-            if(!filePath.endsWith(".recipe") && !filePath.endsWith(".patch")) {
-                String patchFile = _patchLocator.locatePatchFileFor(filePath, filePaths);
+                String patchFile = _patchLocator.locatePatchFileFor(filePath, ingredientPatchFiles);
                 addIngredient(filePath, patchFile);
-            }
         }
         _stopWatch.stop();
         _stopWatch.logTime();
@@ -158,7 +171,7 @@ public class IngredientStore {
             _log.logDebug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price, true);
             existing.price = ingredient.price;
         }
-        if(ingredient.hasEffects() && (isOverride || !existing.hasEffects())) {
+        if(_settings.enableEffectsUpdate || (existing.hasPatchFile() && ingredient.effects == null)) {
             existing.effects = ingredient.effects;
         }
         existing.itemName = ingredient.itemName;

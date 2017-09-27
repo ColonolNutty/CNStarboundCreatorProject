@@ -13,10 +13,11 @@ public class ConfigSettings {
     public String[] includeLocations;
     public String[] excludedEffects;
     public Double increasePercentage;
+    public int minimumFoodValue;
     public String ingredientOverridePath;
     public String logFile;
-    public Double numberOfPasses;
-    public boolean enableConsoleDebug;
-    public boolean enableVerboseLogging;
-    public boolean enableEffectsUpdate;
+    public int numberOfPasses;
+    public Boolean enableConsoleDebug;
+    public Boolean enableVerboseLogging;
+    public Boolean enableEffectsUpdate;
 }

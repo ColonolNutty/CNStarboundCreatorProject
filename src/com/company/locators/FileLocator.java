@@ -32,6 +32,7 @@ public class FileLocator {
         _includedFileTypes.add(".liquid");
         _includedFileTypes.add(".projectile");
         _includedFileTypes.add(".recipe");
+        _includedFileTypes.add(".statuseffect");
     }
 
     public ArrayList<String> getFilePaths() {
@@ -43,6 +44,39 @@ public class FileLocator {
         filePaths.addAll(getFilePaths(_settings.includeLocations));
         _savedFileNames = filePaths;
         return _savedFileNames;
+    }
+
+    public ArrayList<String> getFilePathsByExtension(String extension) {
+        if(extension == null) {
+            return new ArrayList<String>();
+        }
+        ArrayList<String> filePaths = getFilePaths();
+        ArrayList<String> matchingFilePaths = new ArrayList<String>();
+        for(String filePath : filePaths) {
+            if (filePath.endsWith(extension)) {
+                matchingFilePaths.add(filePath);
+            }
+        }
+        return matchingFilePaths;
+    }
+
+
+    public ArrayList<String> getFilePathsByExtension(String[] extensions) {
+        int extensionsArrLength = extensions.length;
+        if(extensionsArrLength == 0) {
+            return new ArrayList<String>();
+        }
+        ArrayList<String> filePaths = getFilePaths();
+        ArrayList<String> matchingFilePaths = new ArrayList<String>();
+        for(String filePath : filePaths) {
+            for(int i = 0; i < extensionsArrLength; i++) {
+                if (filePath.endsWith(extensions[i])) {
+                    matchingFilePaths.add(filePath);
+                    i = extensionsArrLength;
+                }
+            }
+        }
+        return matchingFilePaths;
     }
 
     private ArrayList<String> getFilePaths(String[] files) {
@@ -57,7 +91,7 @@ public class FileLocator {
 
     private ArrayList<String> getFilePaths(File directory) {
         ArrayList<String> filePaths = new ArrayList<String>();
-        //get all the files from a directory
+        //getTextArea all the files from a directory
         File[] fList = directory.listFiles();
         for (File file : fList){
             if (file.isFile() && isValidFileType(file.getName())){

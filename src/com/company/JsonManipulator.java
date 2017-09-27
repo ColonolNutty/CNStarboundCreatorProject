@@ -269,7 +269,7 @@ public class JsonManipulator {
             if(modifiedAsNode == null) {
                 return null;
             }
-            if(modifiedAsNode.has("effects")) {
+            if(!modifiedAsNode.has("effects")) {
                 ((ObjectNode)modifiedAsNode).put("effects", _mapper.createArrayNode());
             }
             patchedFileAsJson = modifiedAsNode.toString();
@@ -408,7 +408,7 @@ public class JsonManipulator {
         return node;
     }
 
-    public ArrayNode toEffectsArrayNode(String ingredientName, Hashtable<String, Integer> effects) {
+    public ArrayNode toEffectsArrayNode(String ingredientName, Hashtable<String, Integer> effects, Double outputCount) {
         ArrayNode arrayNode = _mapper.createArrayNode();
         if(effects.isEmpty()) {
             return arrayNode;
@@ -418,11 +418,11 @@ public class JsonManipulator {
         Enumeration<String> effectKeys = effects.keys();
         while(effectKeys.hasMoreElements()) {
             String effectName = effectKeys.nextElement();
-            Integer effectDuration = effects.get(effectName);
-            _log.logDebug("    Effect name: \"" + effectName + "\", duration: " + effectDuration, true);
+            int effectDuration = (int)(effects.get(effectName)/outputCount);
             ObjectNode objNode = _mapper.createObjectNode();
             objNode.put("effect", effectName);
             objNode.put("duration", effectDuration);
+            _log.logDebug("    Effect name: \"" + effectName + "\", duration: " + effectDuration, true);
             arrayNode.add(objNode);
         }
         return arrayNode;

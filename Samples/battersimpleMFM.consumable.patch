@@ -1,10 +1,18 @@
 [
+  [],
   [
     {
-      "op" : "replace",
-      "path" : "/price",
-      "value" : 38.22
+      "op" : "test",
+      "path" : "/foodValue",
+      "inverse" : true
     },
+    {
+      "op" : "add",
+      "path" : "/foodValue",
+      "value" : 0.0
+    }
+  ],
+  [
     {
       "op" : "replace",
       "path" : "/foodValue",
@@ -14,50 +22,20 @@
   [
     {
       "op" : "test",
-      "path" : "/effects",
+      "path" : "/price",
       "inverse" : true
     },
     {
       "op" : "add",
-      "path" : "/effects",
-      "value" : [
-        [
-          {
-            "effect" : "maxenergyscalingboostfood",
-            "duration" : 210
-          },
-          {
-            "effect" : "jumpboostfood",
-            "duration" : 20
-          },
-          {
-            "effect" : "runboostfood",
-            "duration" : 10
-          }
-        ]
-      ]
+      "path" : "/price",
+      "value" : 0.0
     }
   ],
   [
     {
       "op" : "replace",
-      "path" : "/effects",
-      "value" : [
-        [
-          {
-            "effect" : "maxenergyscalingboostfood",
-            "duration" : 210
-          },
-          {
-            "effect" : "jumpboostfood",
-            "duration" : 20
-          },
-          {
-            "effect" : "runboostfood",
-            "duration" : 10
-          }
-        ]
-      ]
+      "path" : "/price",
+      "value" : 38.22
     }
   ]
 ]

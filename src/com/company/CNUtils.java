@@ -60,4 +60,40 @@ public abstract class CNUtils {
                 || node.isTextual();
     }
 
+    public static String toCommaSeparated(String[] values) {
+        if(values.length == 0) {
+            return "";
+        }
+        if(values.length == 1) {
+            return values[0];
+        }
+        String commaSeparated = "";
+        for(int i = 0; i < values.length; i++) {
+            String value = values[i];
+            if(value == null || value.isEmpty()) {
+                continue;
+            }
+            commaSeparated += values[i].trim();
+            if(i + 1 < values.length) {
+                commaSeparated += ", ";
+            }
+        }
+        return commaSeparated;
+    }
+
+    public static String[] fromCommaSeparated(String value) {
+        ArrayList<String> values = new ArrayList<String>();
+        String[] split = value.split(",\\s");
+        for (int i = 0; i < split.length; i++) {
+            String val = split[i].trim();
+            if(!val.isEmpty()) {
+                values.add(val);
+            }
+        }
+        String[] vals = new String[values.size()];
+        for(int i = 0; i < values.size(); i++) {
+            vals[i] = values.get(i);
+        }
+        return split;
+    }
 }

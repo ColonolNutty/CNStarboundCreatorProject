@@ -3,7 +3,6 @@
   "description": "Waty",
   "itemAgingScripts": ["/scripts/items/rotting.lua"],
   "maxStack": 1000,
-  "effects": [["regeneration3"]],
   "itemName": "battersimpleMFM",
   "price": 12,
   "builder": "/items/buildscripts/buildfood.lua",

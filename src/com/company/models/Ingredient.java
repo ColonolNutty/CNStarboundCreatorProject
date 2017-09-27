@@ -36,7 +36,7 @@ public class Ingredient {
     public HashMap<String, Integer> ingredientEffects;
 
     @JsonIgnore
-    public static int DefaultEffectDuration = 20;
+    public static int DefaultEffectDuration = 60;
 
     @JsonIgnore
     public String filePath;
@@ -227,5 +227,9 @@ public class Ingredient {
 
     public boolean effectsNotEmpty(JsonNode eff) {
         return eff != null && eff.isArray() && eff.size() > 0;
+    }
+
+    public boolean hasPatchFile() {
+        return patchFile != null;
     }
 }

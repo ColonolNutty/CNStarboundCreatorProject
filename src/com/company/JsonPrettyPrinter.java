@@ -105,12 +105,17 @@ public class JsonPrettyPrinter {
                             Boolean val = obj.getBoolean(key);
                             return val.toString();
                         } catch (JSONException e4) {
-                            _log.logError("Unknown object type: " + key, e4);
+                            try {
+                                return "\"" + obj.getString(key) + "\"";
+                            }
+                            catch(JSONException e5) {
+                                _log.logError("Unknown object type: " + key, e5);
+                            }
                         }
                     }
                 }
             }
-            return "\"" + obj.getString(key) + "\"";
+            return null;
         }
         catch(JSONException e) {
             _log.logError("When parsing: " + key, e);
@@ -163,9 +168,7 @@ public class JsonPrettyPrinter {
                             }
                             return result;
                         }
-                        catch(JSONException e4) {
-                            _log.logError("Unknown object type: " + key, e4);
-                        }
+                        catch(JSONException e4) {}
                     }
                 }
             }
@@ -176,7 +179,7 @@ public class JsonPrettyPrinter {
             return result;
         }
         catch(JSONException e) {
-            _log.logError("When parsing: " + key, e);
+            _log.logError("Unknown object type: " + key, e);
         }
         return "";
     }
@@ -202,13 +205,8 @@ public class JsonPrettyPrinter {
     }
 
     public String makePretty(ArrayNode node, int indentSize) {
-        if(node.isArray()) {
-            if(node.size() == 0) {
-                return "[]";
-            }
-            else if(node.get(0).size() == 0) {
-                return "[[ ]]";
-            }
+        if(node.isArray() && node.size() == 0) {
+            return makeIndent(indentSize) + "[]";
         }
         String prettyJson = makeIndent(indentSize) + "[\r\n";
         for(int i = 0; i < node.size(); i++) {
@@ -217,7 +215,7 @@ public class JsonPrettyPrinter {
             if(result == null) {
                 continue;
             }
-            prettyJson += makeIndent(indentSize + 2) + result;
+            prettyJson += result;
             if(i + 1 < node.size()) {
                 prettyJson += ",\r\n";
             }
@@ -232,12 +230,12 @@ public class JsonPrettyPrinter {
         }
         if(CNUtils.isValueType(node)) {
             if(node.isTextual()) {
-                return "\"" + node.asText() + "\"";
+                return makeIndent(indentSize) + "\"" + node.asText() + "\"";
             }
-            return node.asText();
+            return makeIndent(indentSize) + node.asText();
         }
         if(node.isArray()) {
-            return formatAsArray(node, indentSize);
+            return makePretty((ArrayNode)node, indentSize);
         }
         if(node.isObject()) {
             return formatAsObject(node, indentSize);
@@ -245,39 +243,9 @@ public class JsonPrettyPrinter {
         return null;
     }
 
-    private String formatAsArray(JsonNode arrNode, int indentSize) {
-        if(arrNode.isArray()) {
-            if(arrNode.size() == 0) {
-                return "[]";
-            }
-            else if(arrNode.get(0).size() == 0) {
-                return "[[ ]]";
-            }
-        }
-        boolean hasValue = false;
-        String prettyJson = "[\r\n";
-        for(int i = 0; i < arrNode.size(); i++) {
-            JsonNode node = arrNode.get(i);
-            String result = formatAsIntended(node, indentSize + 2);
-            if(result == null) {
-                continue;
-            }
-            hasValue = true;
-            prettyJson += makeIndent(indentSize + 2) + result;
-            if(i + 1 < arrNode.size()) {
-                prettyJson += ",\r\n";
-            }
-        }
-        if(!hasValue) {
-            return "[]";
-        }
-        prettyJson += "\r\n" + makeIndent(indentSize) + "]";
-        return prettyJson;
-    }
-
     private String formatAsObject(JsonNode node, int indentSize) {
         boolean hasValue = false;
-        String prettyJson = "{\r\n";
+        String prettyJson = makeIndent(indentSize) + "{\r\n";
         Iterator<String> fieldNames = node.fieldNames();
         while(fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
@@ -289,7 +257,7 @@ public class JsonPrettyPrinter {
                 continue;
             }
             hasValue = true;
-            prettyJson += makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + result;
+            prettyJson += makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + result.trim();
             if(fieldNames.hasNext()) {
                 prettyJson += ",\r\n";
             }

@@ -30,7 +30,8 @@ public class PatchLocator {
         for(int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);
             File file = new File(filePath);
-            if(filePath.endsWith(".patch") && file.getName().startsWith(toCheckFileName)) {
+            String fileName = file.getName();
+            if(fileName.endsWith(".patch") && fileName.startsWith(toCheckFileName)) {
                 foundPatchFileName = filePath;
                 i = filePaths.size();
             }

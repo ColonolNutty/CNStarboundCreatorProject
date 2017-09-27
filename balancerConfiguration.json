@@ -5,8 +5,9 @@
   "ingredientOverridePath": "valueOverrides.json",
   "logFile": "updatelog.log",
   "increasePercentage" : 0.05,
+  "minimumFoodValue" : 2.0,
   "numberOfPasses": 8,
   "enableConsoleDebug": true,
   "enableVerboseLogging": true,
-  "enableEffectsUpdate": true
+  "enableEffectsUpdate": false
 }

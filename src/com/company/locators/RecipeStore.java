@@ -48,13 +48,12 @@ public class RecipeStore {
     private void setupRecipes() {
         _log.logInfo("Locating recipes", false);
         _stopWatchTimer.start("location recipes");
-        ArrayList<String> filePaths = _fileLocator.getFilePaths();
+        ArrayList<String> filePathPatches = _fileLocator.getFilePathsByExtension(".recipe.patch");
+        ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(".recipe");
         for(int i = 0; i < filePaths.size(); i++) {
             String filePath = filePaths.get(i);
-            if(filePath.endsWith(".recipe")) {
-                String patchFile = _patchLocator.locatePatchFileFor(filePath, filePaths);
-                addRecipe(filePath, patchFile);
-            }
+            String patchFile = _patchLocator.locatePatchFileFor(filePath, filePathPatches);
+            addRecipe(filePath, patchFile);
         }
         _stopWatchTimer.stop();
         _stopWatchTimer.logTime();

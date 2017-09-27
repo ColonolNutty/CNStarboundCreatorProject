@@ -1,16 +1,21 @@
 {
   "itemName" : "flourMFM",
-  "rarity" : "Common",
+  "rarity" : "ommon",
   "price" : 8.4,
   "category" : "cookingIngredient",
   "description" : "Maybe",
   "shortdescription" : "No",
-  "foodValue" : 0.42,
-  "effects" : [[
+  "foodValue" : 2.0,
+  "effects" : [ [ 
+      {
+        "effect" : "jumpboostfood",
+        "duration" : 5
+      },
+
       {
         "effect" : "runboostfood",
-        "duration" : 10.0
-      }]],
+        "duration" : 2
+      } ] ],
   "inventoryIcon" : "What",
-  "learnBlueprintsOnPickup" : ["doughMFM"]
+  "learnBlueprintsOnPickup" : [ "doughMFM" ]
 }

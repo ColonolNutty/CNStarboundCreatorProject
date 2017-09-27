@@ -1,7 +1,9 @@
 package com.company;
 
 import com.company.locators.IngredientStore;
+import com.company.models.ConfigSettings;
 import com.company.models.Ingredient;
+import sun.security.krb5.Config;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,16 +16,19 @@ import java.util.ArrayList;
  */
 public class IngredientUpdater {
     protected DebugLog _log;
+    protected ConfigSettings _settings;
     protected JsonManipulator _manipulator;
     protected IngredientStore _ingredientStore;
     protected IngredientDataCalculator _ingredientDataCalculator;
     protected ArrayList<String> _fileTypesIgnoreFoodValues;
 
     public IngredientUpdater(DebugLog log,
+                             ConfigSettings settings,
                              JsonManipulator manipulator,
                              IngredientStore ingredientStore,
                              IngredientDataCalculator ingredientDataCalculator) {
         _log = log;
+        _settings = settings;
         _manipulator = manipulator;
         _ingredientStore = ingredientStore;
         _ingredientDataCalculator = ingredientDataCalculator;
@@ -46,7 +51,7 @@ public class IngredientUpdater {
             }
             Ingredient updatedIngredient = _ingredientDataCalculator.updateIngredient(ingredient);
             Ingredient originalIngredient = _manipulator.readIngredient(ingredientFilePath);
-            if(ingredientsAreEqual(originalIngredient, updatedIngredient)) {
+            if(meetsMinimumValues(updatedIngredient) && ingredientsAreEqual(originalIngredient, updatedIngredient)) {
                 _log.logDebug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), true);
                 return null;
             }
@@ -76,5 +81,12 @@ public class IngredientUpdater {
         }
         _log.logDebug("Comparing using both price and foodValue: " + one.getName(), true);
         return one.equals(two);
+    }
+
+    private boolean meetsMinimumValues(Ingredient ingredient) {
+        if(ingredient.foodValue == null) {
+            return true;
+        }
+        return ingredient.foodValue >= _settings.minimumFoodValue;
     }
 }
