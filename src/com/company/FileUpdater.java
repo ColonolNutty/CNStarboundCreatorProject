@@ -50,9 +50,13 @@ public class FileUpdater {
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(ingredientFileExts);
         Hashtable<String, String> ingredientsToUpdate = new Hashtable<String, String>();
         for(int k = 0; k < _settings.numberOfPasses; k++) {
-            _log.logInfo("Beginning pass: " + (k + 1), false);
+            String currentPass = "Beginning pass: " + (k + 1);
+            _log.logInfo(currentPass, false);
             for (int i = 0; i < filePaths.size(); i++) {
                 String filePath = filePaths.get(i);
+                File file = new File(filePath);
+                _log.setCurrentBundle(file.getName(), file.getName());
+                _log.addToCurrentBundle(currentPass, true);
                 if(!filePath.endsWith(".recipe") && !filePath.endsWith(".patch")) {
                     String ingredientName = _ingredientUpdater.update(filePath);
                     //If ingredientName is null, it means the file doesn't need an update
@@ -67,6 +71,8 @@ public class FileUpdater {
                 }
             }
         }
+
+        _log.clearCurrentBundle();
 
         if(ingredientsToUpdate.isEmpty()) {
             _log.logInfo("No files to update", false);

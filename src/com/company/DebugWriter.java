@@ -6,6 +6,5 @@ package com.company;
  * Time: 4:12 PM
  */
 public abstract class DebugWriter {
-    public abstract void write(String text);
     public abstract void writeln(String text);
 }

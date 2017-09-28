@@ -1,10 +1,15 @@
 package com.company.ui;
 
 import com.company.DebugWriter;
+import com.company.models.MessageBundle;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -14,6 +19,8 @@ import java.awt.*;
 public class OutputDisplay extends DebugWriter {
     private JPanel _displayPanel;
     private JTextArea _outputDisplay;
+    private DefaultMutableTreeNode _topLevelOutputNode;
+    private JTree _outputTree;
 
     public JPanel get() {
         setup();
@@ -36,26 +43,62 @@ public class OutputDisplay extends DebugWriter {
         _outputDisplay.setEditable(false);
         _outputDisplay.setRows(20);
         _outputDisplay.setName(ComponentNames.CONSOLEDISPLAY);
-        Border border = BorderFactory.createLineBorder(Color.BLACK);
-        _outputDisplay.setBorder(BorderFactory.createCompoundBorder(border,
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        CNUIExtensions.addInternalPadding(_outputDisplay, 10);
         JScrollPane scrollPanel = new JScrollPane(_outputDisplay);
+
+        _topLevelOutputNode = new DefaultMutableTreeNode("File Events");
+        _outputTree = new JTree(_topLevelOutputNode);
+        _outputTree.setEditable(false);
+        _outputTree.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(_outputTree.isCollapsed(_outputTree.getRowForLocation(e.getX(),e.getY()))) {
+                    _outputTree.expandRow(_outputTree.getRowForLocation(e.getX(),e.getY()));
+                }
+                else {
+                    _outputTree.collapseRow(_outputTree.getRowForLocation(e.getX(),e.getY()));
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) { }
+
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+
+            @Override
+            public void mouseExited(MouseEvent e) { }
+        });
+        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) _outputTree.getCellRenderer();
+        renderer.setLeafIcon(null);
+        renderer.setClosedIcon(null);
+        renderer.setOpenIcon(null);
+        CNUIExtensions.addInternalPadding(_outputTree, 10);
+
+        JScrollPane outputTree = new JScrollPane(_outputTree);
+
         layout.setHorizontalGroup(
-                layout.createParallelGroup()
-                .addComponent(label)
-                .addComponent(scrollPanel)
+                layout.createSequentialGroup()
+                    .addGroup(
+                        layout.createParallelGroup()
+                            .addComponent(label)
+                            .addComponent(scrollPanel)
+                    )
+                .addComponent(outputTree)
         );
         layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                .addComponent(label)
-                .addComponent(scrollPanel)
+                layout.createParallelGroup()
+                        .addGroup(
+                                layout.createSequentialGroup()
+                                        .addComponent(label)
+                                        .addComponent(scrollPanel)
+                        )
+                .addComponent(outputTree)
         );
         _displayPanel.setVisible(true);
-    }
-
-    @Override
-    public void write(String text) {
-        _outputDisplay.append(text);
     }
 
     @Override
@@ -65,5 +108,27 @@ public class OutputDisplay extends DebugWriter {
             return;
         }
         _outputDisplay.append("\n" + text);
+    }
+
+    public void updateTreeDisplay(Hashtable<String, MessageBundle> bundles) {
+        _topLevelOutputNode.removeAllChildren();
+        Enumeration<String> keys = bundles.keys();
+        while(keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            MessageBundle bundle = bundles.get(key);
+            _topLevelOutputNode.add(addNode(bundle));
+        }
+        if(bundles.isEmpty()) {
+            return;
+        }
+        _outputTree.expandRow(0);
+    }
+
+    private DefaultMutableTreeNode addNode(MessageBundle bundle) {
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode(bundle.toString());
+        for(int i = 0; i < bundle.size(); i++) {
+            top.add(addNode(bundle.get(i)));
+        }
+        return top;
     }
 }

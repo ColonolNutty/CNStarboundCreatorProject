@@ -1,9 +1,11 @@
 package com.company;
 
 import com.company.models.ConfigSettings;
+import com.company.models.MessageBundle;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -21,6 +23,7 @@ public class DebugLog {
     private PrintWriter writer;
     private ArrayList<String> _ignoredErrors;
     private DebugWriter _debugWriter;
+    private MessageBundler _messageBundler;
 
     public DebugLog(DebugWriter debugWriter, ConfigSettings settings) {
         _debugWriter = debugWriter;
@@ -29,6 +32,7 @@ public class DebugLog {
         _ignoredErrors = new ArrayList<String>();
         _ignoredErrors.add("value differs from expectations");
         String debugLogFile = settings.logFile;
+        _messageBundler = new MessageBundler();
         if(debugLogFile == null) {
             logInfo("'logFile' not specified in configuration file, using default: " + defaultLogFile, false);
             debugLogFile = defaultLogFile;
@@ -46,20 +50,42 @@ public class DebugLog {
         }
     }
 
+    private MessageBundle _currentBundle;
+
+    public void setCurrentBundle(String name) {
+        _currentBundle = _messageBundler.getBundle(name);
+    }
+
+    public void setCurrentBundle(String name, String message) {
+        _currentBundle = _messageBundler.getBundle(name, message);
+    }
+
+    public void clearCurrentBundle() {
+        _currentBundle = null;
+    }
+
+    public void addToCurrentBundle(String message, boolean setAsCurrent) {
+        MessageBundle bundle = writeToCurrentBundle(message);
+        if(setAsCurrent) {
+            _currentBundle = bundle;
+        }
+    }
+
     public void logDebug(String message, boolean isVerbose) {
+        String toWrite = debugPrefix + message;
         if(_enableConsoleDebug) {
-            writeOutput(debugPrefix + message, isVerbose, true);
+            writeOutput(toWrite, isVerbose, true);
+            writeToCurrentBundle(toWrite);
             return;
         }
-        writeToLog(debugPrefix + message, isVerbose);
+        writeToLog(toWrite, isVerbose);
+        writeToCurrentBundle(toWrite);
     }
 
     public void logInfo(String message, boolean isVerbose) {
-        writeOutput(infoPrefix + message, isVerbose, false);
-    }
-
-    public void logError(String message, boolean isVerbose) {
-        writeOutput(errorPrefix + message, isVerbose, true);
+        String toWrite = infoPrefix + message;
+        writeToCurrentBundle(toWrite);
+        writeOutput(toWrite, isVerbose, false);
     }
 
     public void logError(Exception e) {
@@ -70,11 +96,15 @@ public class DebugLog {
         if(_enableConsoleDebug) {
             System.out.println("Exception:");
             e.printStackTrace(System.out);
-            writeToWriter("Exception: " + e.toString());
             System.out.flush();
         }
         if(writer != null) {
+            writeToWriter("Exception: ");
             e.printStackTrace(writer);
+        }
+        MessageBundle exceptionBundle = writeToCurrentBundle("Exception: ");
+        if(exceptionBundle != null) {
+            exceptionBundle.add(e.toString());
         }
     }
 
@@ -83,8 +113,14 @@ public class DebugLog {
         if(isIgnoredError(errMessage)) {
             return;
         }
-        logError(message, false);
-        logError(e);
+        String toWrite = errorPrefix + message;
+        writeOutput(toWrite, false, true);
+        writeToCurrentBundle(toWrite);
+        MessageBundle subBundle = writeToCurrentBundle("Exception:");
+        if(subBundle == null) {
+            return;
+        }
+        subBundle.add(e.toString());
     }
 
     private boolean isIgnoredError(String errMessage) {
@@ -116,6 +152,17 @@ public class DebugLog {
         if(_debugWriter != null) {
             _debugWriter.writeln(text);
         }
+    }
+
+    private MessageBundle writeToCurrentBundle(String message) {
+        if(_currentBundle == null) {
+            return null;
+        }
+        return _currentBundle.add(message);
+    }
+
+    public Hashtable<String, MessageBundle> getMessages() {
+        return _messageBundler.getBundles();
     }
 
     public void dispose() {

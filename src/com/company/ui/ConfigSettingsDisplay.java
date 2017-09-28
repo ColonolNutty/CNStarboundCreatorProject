@@ -334,18 +334,14 @@ public class ConfigSettingsDisplay {
         textArea.setAutoscrolls(true);
         textArea.setRows(3);
         textArea.setLineWrap(true);
-        Border border = BorderFactory.createLineBorder(Color.BLACK);
-        textArea.setBorder(BorderFactory.createCompoundBorder(border,
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        CNUIExtensions.addInternalPadding(textArea, 5);
         return textArea;
     }
 
     private JTextField createTextField(String name) {
         JTextField textField = new JTextField();
         textField.setName(name);
-        Border border = BorderFactory.createLineBorder(Color.BLACK);
-        textField.setBorder(BorderFactory.createCompoundBorder(border,
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        CNUIExtensions.addInternalPadding(textField, 5);
         return textField;
     }
 

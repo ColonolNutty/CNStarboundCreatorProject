@@ -4,11 +4,13 @@ import com.company.DebugLog;
 import com.company.SettingsWriter;
 import com.company.ValueBalancer;
 import com.company.models.ConfigSettings;
+import com.company.models.MessageBundle;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -21,6 +23,7 @@ public class MainWindow {
     private ValueBalancer _valueBalancer;
     private DebugLog _log;
     private SettingsWriter _settingsWriter;
+    private OutputDisplay _outputDisplay;
 
     public MainWindow(ConfigSettings settings, SettingsWriter settingsWriter) {
         _configSettings = settings;
@@ -70,12 +73,12 @@ public class MainWindow {
         mainPanel.setLayout(layout);
         ConfigSettingsDisplay settings = new ConfigSettingsDisplay();
 
-        OutputDisplay outputDisplay = new OutputDisplay();
-        JPanel outputDisplayPanel = outputDisplay.get();
+        _outputDisplay = new OutputDisplay();
+        JPanel outputDisplayPanel = _outputDisplay.get();
         if(_log != null) {
             _log.dispose();
         }
-        _log = new DebugLog(outputDisplay, _configSettings);
+        _log = new DebugLog(_outputDisplay, _configSettings);
         mainPanel.setVisible(true);
         JPanel settingsPanel = settings.setup(_configSettings, new ActionListener() {
             @Override
@@ -86,6 +89,8 @@ public class MainWindow {
                     _settingsWriter.write(_configSettings);
                     _valueBalancer = new ValueBalancer(_configSettings, _log);
                     _valueBalancer.run();
+                    Hashtable<String, MessageBundle> messages = _log.getMessages();
+                    _outputDisplay.updateTreeDisplay(messages);
                 }
                 catch(Exception e1) {
                     e1.printStackTrace();
