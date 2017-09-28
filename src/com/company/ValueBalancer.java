@@ -39,6 +39,5 @@ public class ValueBalancer {
 
         timer.stop();
         timer.logTime();
-        _debugLog.dispose();
     }
 }

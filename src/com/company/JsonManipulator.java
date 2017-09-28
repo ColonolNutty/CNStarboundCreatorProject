@@ -254,7 +254,7 @@ public class JsonManipulator {
                         patchedFileAsJson = modifiedAsNode.toString();
                     }
                     catch(JsonPatchException e) {
-                        _log.logError("Json \"" + patchFileName + "\" " + patchFileAsJson, e);
+                        _log.logError("Json Test Patch \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
                     }
                 }
             }
@@ -269,18 +269,25 @@ public class JsonManipulator {
             if(modifiedAsNode == null) {
                 return null;
             }
+            ObjectNode modNode = (ObjectNode) modifiedAsNode;
             if(!modifiedAsNode.has("effects")) {
-                ((ObjectNode)modifiedAsNode).put("effects", _mapper.createArrayNode());
+                modNode.putArray("effects");
             }
-            patchedFileAsJson = modifiedAsNode.toString();
-            return _mapper.treeToValue(modifiedAsNode, valueType);
+            else {
+                JsonNode node = modifiedAsNode.get("effects");
+                if(node != null && node.isNull()) {
+                    modNode.putArray("effects");
+                }
+            }
+            patchedFileAsJson = modNode.toString();
+            return _mapper.treeToValue(modNode, valueType);
         }
         catch(JsonMappingException e) {
-            _log.logError("Json \"" + patchFileName + "\"" + patchedFileAsJson, e);
+            _log.logError("Json file being patched:\n    " + patchedFileAsJson, e);
         }
         catch(JsonPatchException e) {
             if(patchFileAsJson != null) {
-                _log.logError("Json \"" + patchFileName + "\": " + patchFileAsJson, e);
+                _log.logError("Json \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
             }
             else {
                 _log.logError("When parsing patch file: " + patchFileName, e);

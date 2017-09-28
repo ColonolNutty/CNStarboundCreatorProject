@@ -15,9 +15,8 @@ public class Main {
             System.out.println("[INFO] No configuration file specified, using default configuration path: " + configFile);
         }
         ConfigSettings configSettings = readConfigSettings(configFile);
-        //ValueBalancer balancer = new ValueBalancer(configSettings);
-        //balancer.run();
-        MainWindow main = new MainWindow(configSettings);
+        SettingsWriter settingsWriter = new SettingsWriter(configFile);
+        MainWindow main = new MainWindow(configSettings, settingsWriter);
         main.start();
     }
 

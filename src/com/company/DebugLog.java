@@ -68,8 +68,9 @@ public class DebugLog {
             return;
         }
         if(_enableConsoleDebug) {
+            System.out.println("Exception:");
             e.printStackTrace(System.out);
-            writeToWriter(e.toString());
+            writeToWriter("Exception: " + e.toString());
             System.out.flush();
         }
         if(writer != null) {

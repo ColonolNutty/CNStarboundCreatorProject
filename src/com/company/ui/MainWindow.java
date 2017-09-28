@@ -1,6 +1,7 @@
 package com.company.ui;
 
 import com.company.DebugLog;
+import com.company.SettingsWriter;
 import com.company.ValueBalancer;
 import com.company.models.ConfigSettings;
 
@@ -19,15 +20,15 @@ public class MainWindow {
     private ConfigSettings _configSettings;
     private ValueBalancer _valueBalancer;
     private DebugLog _log;
+    private SettingsWriter _settingsWriter;
 
-    public MainWindow(ConfigSettings settings) {
+    public MainWindow(ConfigSettings settings, SettingsWriter settingsWriter) {
         _configSettings = settings;
-        setup();
+        _settingsWriter = settingsWriter;
     }
 
     public void start() {
         setup();
-        _valueBalancer = new ValueBalancer(_configSettings, _log);
         _mainFrame.setVisible(true);
     }
 
@@ -44,50 +45,66 @@ public class MainWindow {
                 _mainFrame = null;
             }
         });
-        _mainFrame.setBounds(0, 0, 1080, 800);
         _mainFrame.setLayout(new BorderLayout());
         _mainFrame.getContentPane().setBackground(Color.BLUE);
         JPanel mainPanel = setupMainPanel(_mainFrame.getSize());
         _mainFrame.add(mainPanel);
+        _mainFrame.pack();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameDimensions = _mainFrame.getSize();
+        int newX = screenSize.width/2 - frameDimensions.width/2;
+        if(newX < 0) {
+            newX = 0;
+        }
+        int newY = screenSize.height/2 - frameDimensions.height/2;
+        if(newY < 0) {
+            newY = 0;
+        }
+        _mainFrame.setLocation(newX, newY);
     }
 
     private JPanel setupMainPanel(Dimension size) {
         JPanel mainPanel = new JPanel();
         mainPanel.setSize(size);
-        mainPanel.setLayout(new GridLayout(2, 1));
+        GroupLayout layout = new GroupLayout(mainPanel);
+        mainPanel.setLayout(layout);
         ConfigSettingsDisplay settings = new ConfigSettingsDisplay();
-        JPanel settingsPanel = settings.setup(_configSettings);
-        settingsPanel.add(setupRunButton());
-        mainPanel.add(settingsPanel);
+
         OutputDisplay outputDisplay = new OutputDisplay();
-        mainPanel.add(outputDisplay.get(_mainFrame.getWidth(), _mainFrame.getHeight()/2));
+        JPanel outputDisplayPanel = outputDisplay.get();
         if(_log != null) {
             _log.dispose();
         }
         _log = new DebugLog(outputDisplay, _configSettings);
         mainPanel.setVisible(true);
-        return mainPanel;
-    }
-
-    private JButton setupRunButton() {
-        final JButton runButton = new JButton("Run");
-        runButton.setDefaultCapable(true);
-        runButton.setEnabled(true);
-        runButton.addActionListener(new ActionListener() {
+        JPanel settingsPanel = settings.setup(_configSettings, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                runButton.setEnabled(false);
+                JButton source = (JButton) e.getSource();
+                source.setEnabled(false);
                 try {
+                    _settingsWriter.write(_configSettings);
+                    _valueBalancer = new ValueBalancer(_configSettings, _log);
                     _valueBalancer.run();
                 }
                 catch(Exception e1) {
                     e1.printStackTrace();
                 }
                 finally {
-                    runButton.setEnabled(true);
+                    source.setEnabled(true);
                 }
             }
         });
-        return runButton;
+        layout.setHorizontalGroup(
+                layout.createParallelGroup()
+                .addComponent(settingsPanel)
+                .addComponent(outputDisplayPanel)
+        );
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                .addComponent(settingsPanel)
+                .addComponent(outputDisplayPanel)
+        );
+        return mainPanel;
     }
 }

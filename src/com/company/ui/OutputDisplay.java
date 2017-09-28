@@ -15,13 +15,8 @@ public class OutputDisplay extends DebugWriter {
     private JPanel _displayPanel;
     private JTextArea _outputDisplay;
 
-    public OutputDisplay() {
+    public JPanel get() {
         setup();
-    }
-
-    public JPanel get(int maxWidth, int maxHeight) {
-        setup();
-        _displayPanel.setMaximumSize(new Dimension(maxWidth, maxHeight));
         return _displayPanel;
     }
 
@@ -39,7 +34,7 @@ public class OutputDisplay extends DebugWriter {
 
         _outputDisplay = new JTextArea();
         _outputDisplay.setEditable(false);
-        _outputDisplay.setVisible(true);
+        _outputDisplay.setRows(20);
         _outputDisplay.setName(ComponentNames.CONSOLEDISPLAY);
         Border border = BorderFactory.createLineBorder(Color.BLACK);
         _outputDisplay.setBorder(BorderFactory.createCompoundBorder(border,
@@ -55,12 +50,7 @@ public class OutputDisplay extends DebugWriter {
                 .addComponent(label)
                 .addComponent(scrollPanel)
         );
-        _displayPanel.add(scrollPanel);
         _displayPanel.setVisible(true);
-    }
-
-    public void clear() {
-        _outputDisplay.setText("");
     }
 
     @Override
