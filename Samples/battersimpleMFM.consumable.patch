@@ -37,5 +37,41 @@
       "path" : "/price",
       "value" : 38.22
     }
+  ],
+  [
+    {
+      "op" : "test",
+      "path" : "/effects",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/effects",
+      "value" : [
+        []
+      ]
+    }
+  ],
+  [
+    {
+      "op" : "replace",
+      "path" : "/effects",
+      "value" : [
+        [
+          {
+            "effect" : "maxenergyscalingboostfood",
+            "duration" : 70
+          },
+          {
+            "effect" : "jumpboostfood",
+            "duration" : 11
+          },
+          {
+            "effect" : "runboostfood",
+            "duration" : 2
+          }
+        ]
+      ]
+    }
   ]
 ]

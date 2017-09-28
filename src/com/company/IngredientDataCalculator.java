@@ -54,60 +54,74 @@ public class IngredientDataCalculator {
 
         String outputName = recipe.output.item;
         boolean outputIsRaw = outputName.startsWith("raw");
-        _log.logDebug("Calculating new values for: " + outputName, true);
+        String subName = "Calculating new values for: " + outputName;
+        _log.startSubBundle(subName);
+        _log.logDebug(subName, true);
         Hashtable<String, Integer> effectValues = new Hashtable<String, Integer>();
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
             Ingredient ingredient = recipeIngredient.ingredient;
-            _log.logDebug("    Ingredient " + (i + 1) + " is " + ingredient.getName() + " with count: " + recipeIngredient.count + " p: " + ingredient.price + " and fv: " + ingredient.foodValue, true);
+            _log.startSubBundle("Ingredient " + (i + 1) + " name: " + ingredient.getName());
+            _log.logDebug("    count: " + recipeIngredient.count, true);
+            _log.logDebug("    price: " + ingredient.price, true);
+            _log.logDebug("    food value: " + ingredient.foodValue, true);
+
             if(ingredient == null) {
                 continue;
             }
             newPrice += calculateValue(recipeIngredient.count, ingredient.price);
             newFoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue);
 
-            if(_settings.enableEffectsUpdate && ingredient.hasEffects()) {
-                for(JsonNode effect : ingredient.effects) {
-                    if(!effect.isArray()) {
+            if(!_settings.enableEffectsUpdate || !ingredient.hasEffects()) {
+                _log.endSubBundle();
+                continue;
+            }
+
+            _log.startSubBundle("    Effects: ");
+            for(JsonNode effect : ingredient.effects) {
+                if(!effect.isArray()) {
+                    continue;
+                }
+                for(JsonNode subEffect : effect) {
+                    if(subEffect == null) {
                         continue;
                     }
-                    for(JsonNode subEffect : effect) {
-                        if(subEffect == null) {
-                            continue;
-                        }
-                        String subEffectName;
-                        if(CNUtils.isValueType(subEffect)) {
-                            subEffectName = subEffect.asText();
-                        }
-                        else if(subEffect.has("effect")) {
-                            subEffectName = subEffect.get("effect").asText();
-                        }
-                        else {
-                            _log.logDebug("Effect with no name found on ingredient: " + ingredient.getName(), true);
-                            continue;
-                        }
-                        int defaultDuration = findDefaultDuration(subEffectName);
-                        int duration = defaultDuration;
-                        if(subEffect.has("duration")) {
-                            duration = subEffect.get("duration").asInt(defaultDuration);
-                        }
-                        boolean isFoodPoisonOnRawFood = subEffectName.equals("foodpoison")
-                                && outputIsRaw;
-                        if(!isFoodPoisonOnRawFood && CNUtils.contains(subEffectName, _settings.excludedEffects)) {
-                            continue;
-                        }
-                        if(!effectValues.containsKey(subEffectName)) {
-                            effectValues.put(subEffectName, duration);
-                        }
-                        else {
-                            effectValues.put(subEffectName, effectValues.get(subEffectName) + (int)(duration * recipeIngredient.count));
-                        }
-                        _log.logDebug("    Ingredient " + (i + 1) + " has effect " + subEffectName + " with duration: " + duration, true);
+                    String subEffectName;
+                    if(CNUtils.isValueType(subEffect)) {
+                        subEffectName = subEffect.asText();
                     }
+                    else if(subEffect.has("effect")) {
+                        subEffectName = subEffect.get("effect").asText();
+                    }
+                    else {
+                        _log.logDebug("Effect with no name found on ingredient: " + ingredient.getName(), true);
+                        continue;
+                    }
+                    int defaultDuration = findDefaultDuration(subEffectName);
+                    int duration = defaultDuration;
+                    if(subEffect.has("duration")) {
+                        duration = subEffect.get("duration").asInt(defaultDuration);
+                    }
+                    boolean isFoodPoisonOnRawFood = subEffectName.equals("foodpoison")
+                            && outputIsRaw;
+                    if(!isFoodPoisonOnRawFood && CNUtils.contains(subEffectName, _settings.excludedEffects)) {
+                        continue;
+                    }
+                    if(!effectValues.containsKey(subEffectName)) {
+                        effectValues.put(subEffectName, duration);
+                    }
+                    else {
+                        effectValues.put(subEffectName, effectValues.get(subEffectName) + (int)(duration * recipeIngredient.count));
+                    }
+                    _log.logDebug("    " + subEffectName + " with duration: " + duration, true);
                 }
             }
+            _log.endSubBundle();
+            _log.endSubBundle();
         }
+
+        _log.endSubBundle();
 
         Double outputCount = recipe.output.count;
         ArrayNode combined = null;

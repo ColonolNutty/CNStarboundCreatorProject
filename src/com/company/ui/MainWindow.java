@@ -24,6 +24,7 @@ public class MainWindow {
     private DebugLog _log;
     private SettingsWriter _settingsWriter;
     private OutputDisplay _outputDisplay;
+    private ConfigSettingsDisplay _configSettingsDisplay;
 
     public MainWindow(ConfigSettings settings, SettingsWriter settingsWriter) {
         _configSettings = settings;
@@ -71,7 +72,7 @@ public class MainWindow {
         mainPanel.setSize(size);
         GroupLayout layout = new GroupLayout(mainPanel);
         mainPanel.setLayout(layout);
-        ConfigSettingsDisplay settings = new ConfigSettingsDisplay();
+        _configSettingsDisplay = new ConfigSettingsDisplay();
 
         _outputDisplay = new OutputDisplay();
         JPanel outputDisplayPanel = _outputDisplay.get();
@@ -80,13 +81,15 @@ public class MainWindow {
         }
         _log = new DebugLog(_outputDisplay, _configSettings);
         mainPanel.setVisible(true);
-        JPanel settingsPanel = settings.setup(_configSettings, new ActionListener() {
+        JPanel settingsPanel = _configSettingsDisplay.setup(_configSettings, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton source = (JButton) e.getSource();
                 source.setEnabled(false);
                 try {
                     _settingsWriter.write(_configSettings);
+                    _log.clear();
+                    _configSettingsDisplay.updateConfigSettings(_configSettings);
                     _valueBalancer = new ValueBalancer(_configSettings, _log);
                     _valueBalancer.run();
                     Hashtable<String, MessageBundle> messages = _log.getMessages();

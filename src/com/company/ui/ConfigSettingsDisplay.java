@@ -472,6 +472,81 @@ public class ConfigSettingsDisplay {
         });
     }
 
+    public void updateConfigSettings(ConfigSettings settings) {
+        String[] newLocToUpdate = CNUtils.fromCommaSeparated(getCurrentText("locationsToUpdate"));
+        if(newLocToUpdate != null) {
+            settings.locationsToUpdate = newLocToUpdate;
+        }
+        String[] includeLocations = CNUtils.fromCommaSeparated(getCurrentText("includeLocations"));
+        if(includeLocations != null) {
+            settings.includeLocations = includeLocations;
+        }
+        String[] excludedEffects = CNUtils.fromCommaSeparated(getCurrentText("excludedEffects"));
+        if(excludedEffects != null) {
+            settings.excludedEffects = excludedEffects;
+        }
+
+        String ingredientOverridePath = getCurrentText("ingredientOverridePath");
+        if(ingredientOverridePath != null) {
+            settings.ingredientOverridePath = ingredientOverridePath;
+        }
+
+        String logFile = getCurrentText("logFile");
+        if(logFile != null) {
+            settings.logFile = logFile;
+        }
+
+        Integer minimumFoodValue = getCurrentValue("minimumFoodValue");
+        if(minimumFoodValue != null) {
+            settings.minimumFoodValue = minimumFoodValue;
+        }
+        Integer increasePercentage = getCurrentValue("increasePercentage");
+        if(increasePercentage != null) {
+            settings.increasePercentage = increasePercentage/100.0;
+        }
+        Integer numberOfPasses = getCurrentValue("numberOfPasses");
+        if(numberOfPasses != null) {
+            settings.numberOfPasses = numberOfPasses;
+        }
+
+        Boolean enableConsoleDebug = getIsSelected("enableConsoleDebug");
+        if(enableConsoleDebug != null) {
+            settings.enableConsoleDebug = enableConsoleDebug;
+        }
+        Boolean enableVerboseLogging = getIsSelected("enableVerboseLogging");
+        if(enableVerboseLogging != null) {
+            settings.enableVerboseLogging = enableVerboseLogging;
+        }
+        Boolean enableEffectsUpdate = getIsSelected("enableEffectsUpdate");
+        if(enableEffectsUpdate != null) {
+            settings.enableEffectsUpdate = enableEffectsUpdate;
+        }
+    }
+
+    private Integer getCurrentValue(String name) {
+        if(!_sliders.containsKey(name)) {
+            return null;
+        }
+        JSlider comp = _sliders.get(name);
+        return comp.getValue();
+    }
+
+    private Boolean getIsSelected(String name) {
+        if (!_checkBoxes.containsKey(name)) {
+            return null;
+        }
+        JCheckBox comp = _checkBoxes.get(name);
+        return comp.isSelected();
+    }
+
+    private String getCurrentText(String name) {
+        if(!_textFields.containsKey(name)) {
+            return null;
+        }
+        JTextComponent comp = _textFields.get(name);
+        return comp.getText();
+    }
+
     private void setupTextEntryFocusListener(String name, FocusListener listener) {
         if(!_textFields.containsKey(name)) {
             return;

@@ -43,7 +43,9 @@ public class IngredientUpdater {
     public String update(String ingredientFilePath) {
         try {
             File ingredientFile = new File(ingredientFilePath);
-            _log.logDebug("Calculating values for: " + ingredientFile.getName(), true);
+            String messageOne = "Calculating values for: " + ingredientFile.getName();
+            _log.startSubBundle(messageOne);
+            _log.logDebug(messageOne, true);
             Ingredient ingredient = _ingredientStore.getIngredientWithFilePath(ingredientFilePath);
             if(ingredient == null) {
                 _log.logDebug("No ingredient found in store for: " + ingredientFilePath, true);
@@ -59,6 +61,9 @@ public class IngredientUpdater {
         }
         catch(IOException e) {
             _log.logError("[IOE] While attempting to update: " + ingredientFilePath, e);
+        }
+        finally {
+            _log.endSubBundle();
         }
         return null;
     }

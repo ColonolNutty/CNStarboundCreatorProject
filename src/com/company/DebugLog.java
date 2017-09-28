@@ -51,17 +51,44 @@ public class DebugLog {
     }
 
     private MessageBundle _currentBundle;
-
-    public void setCurrentBundle(String name) {
-        _currentBundle = _messageBundler.getBundle(name);
-    }
+    private ArrayList<MessageBundle> _subBundles;
 
     public void setCurrentBundle(String name, String message) {
         _currentBundle = _messageBundler.getBundle(name, message);
     }
 
+    public void startSubBundle(String name) {
+        if(_currentBundle == null) {
+            setCurrentBundle(name, name);
+            return;
+        }
+        if(_subBundles == null) {
+            _subBundles = new ArrayList<MessageBundle>();
+        }
+        if(_subBundles.isEmpty()) {
+            _subBundles.add(_currentBundle.add(name));
+            return;
+        }
+        _subBundles.add(_subBundles.get(_subBundles.size() - 1).add(name));
+    }
+
+    public void endSubBundle() {
+        if(_subBundles.isEmpty()) {
+            return;
+        }
+        if(_subBundles.size() == 1) {
+            _subBundles.clear();
+            return;
+        }
+        _subBundles.remove(_subBundles.size() - 1);
+    }
+
     public void clearCurrentBundle() {
         _currentBundle = null;
+    }
+
+    public void clear() {
+        _messageBundler.clear();
     }
 
     public void addToCurrentBundle(String message, boolean setAsCurrent) {
@@ -73,19 +100,17 @@ public class DebugLog {
 
     public void logDebug(String message, boolean isVerbose) {
         String toWrite = debugPrefix + message;
+        writeToCurrentBundle(message);
         if(_enableConsoleDebug) {
             writeOutput(toWrite, isVerbose, true);
-            writeToCurrentBundle(toWrite);
             return;
         }
         writeToLog(toWrite, isVerbose);
-        writeToCurrentBundle(toWrite);
     }
 
     public void logInfo(String message, boolean isVerbose) {
-        String toWrite = infoPrefix + message;
-        writeToCurrentBundle(toWrite);
-        writeOutput(toWrite, isVerbose, false);
+        writeToCurrentBundle(message);
+        writeOutput(infoPrefix + message, isVerbose, false);
     }
 
     public void logError(Exception e) {
@@ -113,9 +138,8 @@ public class DebugLog {
         if(isIgnoredError(errMessage)) {
             return;
         }
-        String toWrite = errorPrefix + message;
-        writeOutput(toWrite, false, true);
-        writeToCurrentBundle(toWrite);
+        writeOutput(errorPrefix + message, false, true);
+        writeToCurrentBundle(message);
         MessageBundle subBundle = writeToCurrentBundle("Exception:");
         if(subBundle == null) {
             return;
@@ -158,7 +182,10 @@ public class DebugLog {
         if(_currentBundle == null) {
             return null;
         }
-        return _currentBundle.add(message);
+        if(_subBundles == null || _subBundles.isEmpty()) {
+            return _currentBundle.add(message);
+        }
+        return _subBundles.get(_subBundles.size() - 1).add(message);
     }
 
     public Hashtable<String, MessageBundle> getMessages() {

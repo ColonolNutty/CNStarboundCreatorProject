@@ -6,6 +6,7 @@ import com.company.models.MessageBundle;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Enumeration;
@@ -82,21 +83,21 @@ public class OutputDisplay extends DebugWriter {
 
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
+                        .addComponent(outputTree, 500, 500, 500)
                     .addGroup(
                         layout.createParallelGroup()
                             .addComponent(label)
-                            .addComponent(scrollPanel)
+                            .addComponent(scrollPanel, 500, 500, 10000)
                     )
-                .addComponent(outputTree)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup()
+                        .addComponent(outputTree)
                         .addGroup(
                                 layout.createSequentialGroup()
                                         .addComponent(label)
                                         .addComponent(scrollPanel)
                         )
-                .addComponent(outputTree)
         );
         _displayPanel.setVisible(true);
     }
@@ -112,6 +113,8 @@ public class OutputDisplay extends DebugWriter {
 
     public void updateTreeDisplay(Hashtable<String, MessageBundle> bundles) {
         _topLevelOutputNode.removeAllChildren();
+        DefaultTreeModel model = (DefaultTreeModel)_outputTree.getModel();
+        model.reload();
         Enumeration<String> keys = bundles.keys();
         while(keys.hasMoreElements()) {
             String key = keys.nextElement();

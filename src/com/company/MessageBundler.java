@@ -32,4 +32,8 @@ public class MessageBundler {
     public Hashtable<String, MessageBundle> getBundles() {
         return _bundles;
     }
+
+    public void clear() {
+        _bundles = new Hashtable<String, MessageBundle>();
+    }
 }

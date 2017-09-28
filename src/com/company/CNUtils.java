@@ -82,6 +82,9 @@ public abstract class CNUtils {
     }
 
     public static String[] fromCommaSeparated(String value) {
+        if(value == null || value.isEmpty()) {
+            return null;
+        }
         ArrayList<String> values = new ArrayList<String>();
         String[] split = value.split(",\\s");
         for (int i = 0; i < split.length; i++) {

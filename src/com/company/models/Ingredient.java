@@ -232,4 +232,9 @@ public class Ingredient {
     public boolean hasPatchFile() {
         return patchFile != null;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

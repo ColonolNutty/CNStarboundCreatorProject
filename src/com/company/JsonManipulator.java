@@ -420,7 +420,7 @@ public class JsonManipulator {
         if(effects.isEmpty()) {
             return arrayNode;
         }
-        _log.logDebug("New effects for " + ingredientName, true);
+        _log.startSubBundle("New effects for " + ingredientName);
 
         Enumeration<String> effectKeys = effects.keys();
         while(effectKeys.hasMoreElements()) {
@@ -432,6 +432,7 @@ public class JsonManipulator {
             _log.logDebug("    Effect name: \"" + effectName + "\", duration: " + effectDuration, true);
             arrayNode.add(objNode);
         }
+        _log.endSubBundle();
         return arrayNode;
     }
 

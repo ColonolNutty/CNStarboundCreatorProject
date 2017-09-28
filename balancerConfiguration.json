@@ -9,5 +9,5 @@
   "numberOfPasses" : 8,
   "enableConsoleDebug" : true,
   "enableVerboseLogging" : true,
-  "enableEffectsUpdate" : false
+  "enableEffectsUpdate" : true
 }
