@@ -70,29 +70,45 @@ Rounded((((0 * 3) + (0 * 0.05)) + ((10 * 2) + (10 * 0.05)))/5)
 | ---- | ------------- | ----------- |
 | String[] | locationsToUpdate | The file paths you would like food values and prices to updated in (It will overwrite your files within these locations) |
 | String[] | includeLocations | The file paths of locations you would like to include when the program calculates  the prices and food values (The program will also NOT write to these locations, even if they are a sub folder listed in locationsToUpdate) |
+| String[] | excludedEffects | The names of effects that will not propogate to recipe outputs when found on recipe ingredients |
 | String | ingredientOverridePath | A path to a file that provides food values and prices for items that don't have them. This is where you list food values and prices you would like to initially start with, for example sugar.item doesn't have a food value, so with this file you can specify a food value |
+| String | logFile | A path to a file where debug and other information will be logged |
 | Double | increasePercentage | A percentage of the total price you would like to add to resulting food values and prices. |
+| Double | minimumFoodValue | This value is to ensure that all foods and consumables will always have a food value above or at this value. For example a minimumFoodValue of `2` is set, `toast` by default has a food value `0.06` this value is below the `minimumFoodValue` so the new food value of `toast` is `2` |
 | int | numberOfPasses | The total number of times you would like the program to run through ingredients, recommended value is 8 (The higher the number, the more accurate the food values and prices will be, but the longer it will take) |
-| boolean | enableConsoleDebug | If set to true, you will see [Debug] message in the console |
+| boolean | enableConsoleDebug | If set to true, [Debug] message will be displayed in the console (Requires `enabledVerboseLogging` set to `true` also) |
+| boolean | enableVerboseLogging | If set to true, [Debug] messages will be displayed in the log file |
+| boolean | enableEffectsUpdate | If set to true, effects from ingredients will propogate through recipes to output values |
 
 ### Configuration Example
 ```javascript
 {
   "locationsToUpdate" : ["mods/ModA/items", "mods/ModA/objects"],
   "includeLocations" : ["VanillaAssets", "mods/ModA/recipes", "mods/ModA/objects/farmables", "mods/ModB/objects", "mods/ModB/recipes"],
+  "excludedEffects": ["foodpoison", "fireblock"],
   "ingredientOverridePath": "valueOverrides.json",
+  "logFile": "updatelog.log",
   "increasePercentage" : 0.05,
+  "minimumFoodValue" : 5.0,
   "numberOfPasses": 15,
-  "enableConsoleDebug": true
+  "enableConsoleDebug": true,
+  "enableVerboseLogging": true,
+  "enableEffectsUpdate": true
 }
 ```
-The above configuration will go through all locations listed in `locationsToUpdate` and `includeLocations` and it will pick up ingredients there. It will update everything within `locationsToUpdate` but will not update the folders or their assets specified in `includeLocations`. If you notice, both `locationsToUpdate` and `includeLocations` contain `mods/ModA/objects` except `includeLocations` specified `mods/ModA/objects/farmables`. The program will go through and update everything in the `mods/ModA/objects` folder but will NOT update anything within the `mods/ModA/objects/farmables` folder, even though the farmables folder is part of the `mods/ModA/objects` path.
+The above configuration will go through all locations listed in `locationsToUpdate` and `includeLocations` and will pick up ingredients there. It will update everything within `locationsToUpdate` but will not update the folders or their assets specified in `includeLocations`. 
+Both `locationsToUpdate` and `includeLocations` contain `mods/ModA/objects` except `includeLocations` specifies `mods/ModA/objects/farmables`. The program will go through and update everything in the `mods/ModA/objects` folder but will NOT update anything within the `mods/ModA/objects/farmables` folder, even though the farmables folder is part of the `mods/ModA/objects` path.
 Other things to note:
 
 * This configuration will also tell the program to run through and calculate all ingredient prices and food values 15 times (Each time getting more and more accurate with the values), as denoted by the `numberOfPasses` property.
 * If you'd like to see how the `increasePercentage` has an effect, see the example formula provided above
 * `enableConsoleDebug` false here will not print debug output to the console, but it will continue to write debug output to the `updatelog.log` file, located next to where the program ran
 * The program will override the initial values it has with values located within the file specified with `ingredientOverridePath`, see below for an example of how that file is formatted
+* If the effect `foodpoison` or the effect `fireblock` is found on any ingredient, it will not propogate to meals the ingredients are used in (An exception to this, consumables with `raw` at the start of their name will *always* have `foodpoison` propogate to them whether it is within the `excludeEffects` list or not)
+* All output will be logged to the `logFile` folder
+* All consumables will have a `foodValue` at or above `5`
+* `enableVerboseLogging` is set to `true`, so within the `logFile` `[DEBUG]` messages will appear
+* `enableEffectsUpdate` is `true` which will enable effect propogation. If recipe has an output of `A` uses ingredient `B` and ingredient `B` has effect `iceblock`, output `A` will also have the effect `iceblock`.
 
 ### Value Overrides
 An example file that overrides the values of `sugar`, `watercooler`, `coconut`, and `healingliquid`
@@ -124,7 +140,7 @@ An example file that overrides the values of `sugar`, `watercooler`, `coconut`, 
 }
 
 ```
-The property name depends on the type of object being overriden, refer to the table below for a list of property names and their uses. If you don't see something listed, try using `itemName` as your goto
+The property name depends on the type of object being overriden, refer to the table below for a list of property names and their uses. If you don't see an object type listed, try using `itemName` as your goto
 
 | Object Type(s) | Property Name |
 | -------------- | ------------- |
