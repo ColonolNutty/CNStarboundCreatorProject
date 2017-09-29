@@ -164,9 +164,9 @@ public class DebugLog {
 
     private MessageBundle writeToCurrentBundle(String message) {
         if(_subBundles == null || _subBundles.isEmpty()) {
-            return _messageBundler.getBundle("Root").add(message);
+            return _messageBundler.getBundle("Root").add(message.trim());
         }
-        return _subBundles.get(_subBundles.size() - 1).add(message);
+        return _subBundles.get(_subBundles.size() - 1).add(message.trim());
     }
 
     public Hashtable<String, MessageBundle> getMessages() {

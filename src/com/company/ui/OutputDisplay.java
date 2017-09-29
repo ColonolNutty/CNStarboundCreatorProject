@@ -9,6 +9,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -129,6 +131,12 @@ public class OutputDisplay extends DebugWriter {
 
     private DefaultMutableTreeNode addNode(MessageBundle bundle) {
         DefaultMutableTreeNode top = new DefaultMutableTreeNode(bundle.toString());
+        bundle.orderBy(new Comparator<MessageBundle>() {
+            @Override
+            public int compare(MessageBundle o1, MessageBundle o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
         for(int i = 0; i < bundle.size(); i++) {
             top.add(addNode(bundle.get(i)));
         }

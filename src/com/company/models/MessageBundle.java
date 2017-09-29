@@ -1,6 +1,8 @@
 package com.company.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * User: Jack's Computer
@@ -54,6 +56,10 @@ public class MessageBundle {
 
     public boolean hasMessage(String message) {
         return _name != null && message != null && _name.equals(message);
+    }
+
+    public void orderBy(Comparator<MessageBundle> comparator) {
+        Collections.sort(_subBundles, comparator);
     }
 
     @Override

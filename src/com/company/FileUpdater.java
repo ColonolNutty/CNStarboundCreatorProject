@@ -58,13 +58,7 @@ public class FileUpdater {
                 if(filePath.endsWith(".recipe") || filePath.endsWith(".patch")) {
                     continue;
                 }
-                File file = new File(filePath);
-                String fileNameParentDirectories = file.getParentFile().getAbsolutePath().substring(currentDirectory.length() + 1);
-                String[] relativePathNames = fileNameParentDirectories.split("\\\\");
-                for(String relativePathName : relativePathNames) {
-                    _log.startSubBundle(relativePathName);
-                }
-                _log.startSubBundle(file.getName());
+                String[] relativePathNames = startPathBundle(filePath, currentDirectory);
                 _log.startSubBundle(currentPass);
                 String ingredientName = _ingredientUpdater.update(filePath);
                 //If ingredientName is null, it means the file doesn't need an update
@@ -78,10 +72,7 @@ public class FileUpdater {
                 }
                 _log.endSubBundle();
                 _log.endSubBundle();
-                _log.endSubBundle();
-                for(String relativePathName : relativePathNames) {
-                    _log.endSubBundle();
-                }
+                endPathBundle(relativePathNames);
             }
         }
 
@@ -104,16 +95,45 @@ public class FileUpdater {
                 if(!CNUtils.fileStartsWith(ingredient.patchFile, _settings.locationsToUpdate)) {
                     continue;
                 }
-                _log.logInfo("Attempting to update patch file: " + ingredientName, false);
+                String[] relativePathNames = startPathBundle(ingredient.patchFile, currentDirectory);
+                _log.startSubBundle("Update");
+                _log.startSubBundle("Attempting to update patch file: " + ingredientName);
                 _manipulator.writeIngredientAsPatch(ingredient);
+                _log.endSubBundle();
+                _log.endSubBundle();
+                _log.endSubBundle();
+                endPathBundle(relativePathNames);
             }
             else {
                 if(!CNUtils.fileStartsWith(ingredient.filePath, _settings.locationsToUpdate)) {
                     continue;
                 }
+                String[] relativePathNames = startPathBundle(ingredient.filePath, currentDirectory);
+                _log.startSubBundle("Update");
                 _log.logInfo("Updating ingredient: " + ingredientName, false);
                 _manipulator.write(ingredient.filePath, ingredient);
+                _log.endSubBundle();
+                _log.endSubBundle();
+                endPathBundle(relativePathNames);
             }
+        }
+    }
+
+    private String[] startPathBundle(String fileName, String rootDir) {
+        File file = new File(fileName);
+        String fileNameParentDirectories = file.getParentFile().getAbsolutePath().substring(rootDir.length() + 1);
+        String[] relativePathNames = fileNameParentDirectories.split("\\\\");
+        for(String relativePathName : relativePathNames) {
+            _log.startSubBundle(relativePathName);
+        }
+        _log.startSubBundle(file.getName());
+        return relativePathNames;
+    }
+
+    private void endPathBundle(String[] pathNames) {
+        _log.endSubBundle();
+        for(String pathName : pathNames) {
+            _log.endSubBundle();
         }
     }
 

@@ -6,25 +6,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/battersimpleMFM.consumable.patch" afterPath="$PROJECT_DIR$/Samples/Stuff/battersimpleMFM.consumable.patch" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/battersimpleMFM.recipe" afterPath="$PROJECT_DIR$/Samples/Stuff/battersimpleMFM.recipe" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/battersimpleMFM.recipe.patch" afterPath="$PROJECT_DIR$/Samples/Stuff/battersimpleMFM.recipe.patch" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/flourMFM.consumable" afterPath="$PROJECT_DIR$/Samples/Stuff/flourMFM.consumable" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/flourMFM.recipe" afterPath="$PROJECT_DIR$/Samples/Stuff/flourMFM.recipe" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/foulcocktailMFM.item" afterPath="$PROJECT_DIR$/Samples/Stuff/foulcocktailMFM.item" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/handmillMFM.object" afterPath="$PROJECT_DIR$/Samples/Stuff/handmillMFM.object" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/handmillMFM.object1" afterPath="$PROJECT_DIR$/Samples/Stuff/handmillMFM.object1" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/handmillMFM.recipe" afterPath="$PROJECT_DIR$/Samples/Stuff/handmillMFM.recipe" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/ironbar.item" afterPath="$PROJECT_DIR$/Samples/Stuff/ironbar.item" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/jumpboostfood.statuseffect.patch" afterPath="$PROJECT_DIR$/Samples/Stuff/jumpboostfood.statuseffect.patch" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/sugarMFM.recipe" afterPath="$PROJECT_DIR$/Samples/Stuff/sugarMFM.recipe" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/sugarcaneBMB.item" afterPath="$PROJECT_DIR$/Samples/Stuff/sugarcaneBMB.item" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/DebugLog.java" afterPath="$PROJECT_DIR$/src/com/company/DebugLog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/FileUpdater.java" afterPath="$PROJECT_DIR$/src/com/company/FileUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/MessageBundler.java" afterPath="$PROJECT_DIR$/src/com/company/MessageBundler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" afterPath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/MessageBundle.java" afterPath="$PROJECT_DIR$/src/com/company/models/MessageBundle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java" afterPath="$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" afterPath="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -122,11 +109,34 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="OutputDisplay.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
+              <folding>
+                <element signature="docComment;class#OutputDisplay#0" expanded="false" />
+                <element signature="method#get#0;class#OutputDisplay#0" expanded="false" />
+                <element signature="method#setup#0;class#OutputDisplay#0" expanded="false" />
+                <element signature="class#1711:2481" expanded="false" />
+                <element signature="method#mouseClicked#0;class#1711:2481" expanded="false" />
+                <element signature="method#mousePressed#0;class#1711:2481" expanded="false" />
+                <element signature="method#mouseReleased#0;class#1711:2481" expanded="false" />
+                <element signature="method#mouseEntered#0;class#1711:2481" expanded="false" />
+                <element signature="method#mouseExited#0;class#1711:2481" expanded="false" />
+                <element signature="method#writeln#0;class#OutputDisplay#0" expanded="false" />
+                <element signature="e#4622#4833#0" expanded="true" />
+                <element signature="e#4832#4833#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FileUpdater.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/FileUpdater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="72" column="22" lean-forward="true" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
+            <state relative-caret-position="334">
+              <caret line="103" column="36" lean-forward="false" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -135,8 +145,8 @@
       <file leaf-file-name="DebugLog.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/DebugLog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="38" column="9" lean-forward="true" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
+            <state relative-caret-position="103">
+              <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
               <folding>
                 <element signature="e#2352#2353#0" expanded="true" />
                 <element signature="e#2412#2413#0" expanded="true" />
@@ -148,8 +158,8 @@
       <file leaf-file-name="MessageBundler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/MessageBundler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="18" column="45" lean-forward="true" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+            <state relative-caret-position="313">
+              <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -160,11 +170,45 @@
       <file leaf-file-name="MessageBundle.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/models/MessageBundle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+            <state relative-caret-position="124">
+              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding>
-                <element signature="e#1277#1278#0" expanded="true" />
-                <element signature="e#1357#1358#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#MessageBundle#0" expanded="false" />
+                <element signature="method#MessageBundle#0;class#MessageBundle#0" expanded="false" />
+                <element signature="method#add#0;class#MessageBundle#0" expanded="false" />
+                <element signature="e#1481#1482#0" expanded="true" />
+                <element signature="e#1538#1539#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JsonManipulator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/JsonManipulator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="222" column="13" lean-forward="true" selection-start-line="222" selection-start-column="13" selection-end-line="222" selection-end-column="13" />
+              <folding>
+                <element signature="docComment;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#JsonManipulator#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#readRecipe#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#readIngredient#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#addReplaceNode#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#addReplaceNode#1;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createTestNodes#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createTestNodes#1;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createReplaceNode#1;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#toEffectsArrayNode#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#PatchResult#0;class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -271,14 +315,14 @@
         <option value="$PROJECT_DIR$/src/com/company/CNUtils.java" />
         <option value="$PROJECT_DIR$/src/com/company/models/Ingredient.java" />
         <option value="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" />
-        <option value="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" />
         <option value="$PROJECT_DIR$/src/com/company/IngredientDataCalculator.java" />
-        <option value="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
         <option value="$PROJECT_DIR$/src/com/company/ui/MainWindow.java" />
         <option value="$PROJECT_DIR$/src/com/company/MessageBundler.java" />
-        <option value="$PROJECT_DIR$/src/com/company/models/MessageBundle.java" />
-        <option value="$PROJECT_DIR$/src/com/company/DebugLog.java" />
         <option value="$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java" />
+        <option value="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" />
+        <option value="$PROJECT_DIR$/src/com/company/models/MessageBundle.java" />
+        <option value="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
+        <option value="$PROJECT_DIR$/src/com/company/DebugLog.java" />
         <option value="$PROJECT_DIR$/src/com/company/FileUpdater.java" />
       </list>
     </option>
@@ -319,25 +363,18 @@
             <path>
               <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
               <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-              <item name="PriceFoodValueBalancer_jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
               <item name="Samples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -454,6 +491,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -468,7 +506,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32918918" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32918918" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37382075" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -791,26 +829,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/JsonManipulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="422" column="34" lean-forward="false" selection-start-line="422" selection-start-column="34" selection-end-line="422" selection-end-column="34" />
-          <folding>
-            <element signature="docComment;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#readRecipe#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#readIngredient#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#createTestNodes#1;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#createReplaceNode#1;class#JsonManipulator#0" expanded="false" />
-            <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#PatchResult#0;class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/locators/IngredientStore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -860,27 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="119" column="22" lean-forward="false" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="22" />
-          <folding>
-            <element signature="class#1652:2422" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/models/MessageBundle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding>
-            <element signature="e#1277#1278#0" expanded="true" />
-            <element signature="e#1357#1358#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/IngredientDataCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1680">
@@ -888,35 +885,6 @@
           <folding>
             <element signature="method#findIngredientsFor#0;class#IngredientDataCalculator#0" expanded="false" />
             <element signature="method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/IngredientUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DebugLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="38" column="9" lean-forward="true" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
-          <folding>
-            <element signature="e#2352#2353#0" expanded="true" />
-            <element signature="e#2412#2413#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/MessageBundler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="18" column="45" lean-forward="true" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -969,10 +937,103 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/IngredientUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
+          <folding>
+            <element signature="docComment;class#OutputDisplay#0" expanded="false" />
+            <element signature="method#get#0;class#OutputDisplay#0" expanded="false" />
+            <element signature="method#setup#0;class#OutputDisplay#0" expanded="false" />
+            <element signature="class#1711:2481" expanded="false" />
+            <element signature="method#mouseClicked#0;class#1711:2481" expanded="false" />
+            <element signature="method#mousePressed#0;class#1711:2481" expanded="false" />
+            <element signature="method#mouseReleased#0;class#1711:2481" expanded="false" />
+            <element signature="method#mouseEntered#0;class#1711:2481" expanded="false" />
+            <element signature="method#mouseExited#0;class#1711:2481" expanded="false" />
+            <element signature="method#writeln#0;class#OutputDisplay#0" expanded="false" />
+            <element signature="e#4622#4833#0" expanded="true" />
+            <element signature="e#4832#4833#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/models/MessageBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#MessageBundle#0" expanded="false" />
+            <element signature="method#MessageBundle#0;class#MessageBundle#0" expanded="false" />
+            <element signature="method#add#0;class#MessageBundle#0" expanded="false" />
+            <element signature="e#1481#1482#0" expanded="true" />
+            <element signature="e#1538#1539#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/JsonManipulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="222" column="13" lean-forward="true" selection-start-line="222" selection-start-column="13" selection-end-line="222" selection-end-column="13" />
+          <folding>
+            <element signature="docComment;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#JsonManipulator#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#readRecipe#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#readIngredient#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#addReplaceNode#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#addReplaceNode#1;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#createTestNodes#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#createTestNodes#1;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#createReplaceNode#1;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#toEffectsArrayNode#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#PatchResult#0;class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/MessageBundler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/DebugLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+          <folding>
+            <element signature="e#2352#2353#0" expanded="true" />
+            <element signature="e#2412#2413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/FileUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="72" column="22" lean-forward="true" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
+        <state relative-caret-position="334">
+          <caret line="103" column="36" lean-forward="false" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
           <folding />
         </state>
       </provider>

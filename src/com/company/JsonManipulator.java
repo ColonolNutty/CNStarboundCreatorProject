@@ -200,6 +200,28 @@ public class JsonManipulator {
                 return;
             }
             _log.logInfo("    Applying update to patch file: " + ingredient.getName(), false);
+            _log.startSubBundle("New Values");
+            if(ingredient.hasPrice()) {
+                _log.logDebug("Price: " + ingredient.price, true);
+            }
+            if(ingredient.hasFoodValue()) {
+                _log.logDebug("Food Value: " + ingredient.foodValue, true);
+            }
+            if(ingredient.hasEffects()) {
+                _log.startSubBundle("New Effects");
+                for(int i = 0; i < ingredient.effects.size(); i++) {
+                    ArrayNode subEffects = (ArrayNode)ingredient.effects.get(i);
+                    for(int j = 0; j < subEffects.size(); j++) {
+                        JsonNode subEffect = subEffects.get(j);
+                        String name = subEffect.get("effect").asText();
+                        String duration = subEffect.get("duration").asText();
+
+                        _log.logDebug("Name: " + name + " Duration: " + duration, true);
+                    }
+                }
+                _log.endSubBundle();
+            }
+            _log.endSubBundle();
             _log.logDebug("  New Patch: " + patchNodes.toString(), true);
             String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
             if(prettyJson == null || prettyJson.equals("")) {
@@ -214,7 +236,7 @@ public class JsonManipulator {
     }
 
     private ArrayNode addReplaceNode(ArrayNode node, String opName, ArrayNode value) throws IOException {
-        node.add(createTestNodes(opName, value));
+        node.add(createTestNodes(opName));
         ArrayNode replaceNodes = _mapper.createArrayNode();
         replaceNodes.add(createReplaceNode(opName, value));
         node.add(replaceNodes);
@@ -365,7 +387,7 @@ public class JsonManipulator {
         return result;
     }
 
-    private ArrayNode createTestNodes(String pathName, ArrayNode value) throws IOException {
+    private ArrayNode createTestNodes(String pathName) throws IOException {
         ArrayNode nodeArray = _mapper.createArrayNode();
         ObjectNode testNode = _mapper.createObjectNode();
         testNode.put("op", "test");
