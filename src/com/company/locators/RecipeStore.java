@@ -47,7 +47,7 @@ public class RecipeStore {
 
     private void setupRecipes() {
         _log.logInfo("Locating recipes", false);
-        _stopWatchTimer.start("location recipes");
+        _stopWatchTimer.start("locating recipes");
         ArrayList<String> filePathPatches = _fileLocator.getFilePathsByExtension(".recipe.patch");
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(".recipe");
         for(int i = 0; i < filePaths.size(); i++) {

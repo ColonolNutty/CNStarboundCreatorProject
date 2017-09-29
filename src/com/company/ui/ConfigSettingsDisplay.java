@@ -82,6 +82,10 @@ public class ConfigSettingsDisplay {
                 settings.numberOfPasses);
 
         //CheckBox
+        JPanel enableTreeView = addField(FieldType.CheckBox,
+                "Enable Tree View",
+                "enableTreeView",
+                settings.enableTreeView);
         JPanel enableConsoleDebug = addField(FieldType.CheckBox,
                 "Enable Console Debug",
                 "enableConsoleDebug",
@@ -131,6 +135,7 @@ public class ConfigSettingsDisplay {
                         )
                         //Bottom
                         .addGroup(layout.createSequentialGroup()
+                                        .addComponent(enableTreeView)
                                         .addComponent(enableConsoleDebug)
                                         .addComponent(enableVerboseLogging)
                                         .addComponent(enableEffectsUpdate))
@@ -170,6 +175,7 @@ public class ConfigSettingsDisplay {
                         //Middle - Right
                         .addGroup(
                                 layout.createParallelGroup()
+                                        .addComponent(enableTreeView)
                                         .addComponent(enableConsoleDebug)
                                         .addComponent(enableVerboseLogging)
                                         .addComponent(enableEffectsUpdate)
@@ -450,6 +456,13 @@ public class ConfigSettingsDisplay {
             }
         });
 
+        setupCheckBoxListener("enableTreeView", new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkbox = (JCheckBox)e.getSource();
+                settings.enableTreeView = checkbox.isSelected();
+            }
+        });
         setupCheckBoxListener("enableConsoleDebug", new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -510,6 +523,10 @@ public class ConfigSettingsDisplay {
             settings.numberOfPasses = numberOfPasses;
         }
 
+        Boolean enableTreeView = getIsSelected("enableTreeView");
+        if(enableTreeView != null) {
+            settings.enableTreeView = enableTreeView;
+        }
         Boolean enableConsoleDebug = getIsSelected("enableConsoleDebug");
         if(enableConsoleDebug != null) {
             settings.enableConsoleDebug = enableConsoleDebug;

@@ -86,7 +86,7 @@ public abstract class CNUtils {
             return null;
         }
         ArrayList<String> values = new ArrayList<String>();
-        String[] split = value.split(",\\s");
+        String[] split = value.split(",\\s*");
         for (int i = 0; i < split.length; i++) {
             String val = split[i].trim();
             if(!val.isEmpty()) {

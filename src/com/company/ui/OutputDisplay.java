@@ -46,8 +46,10 @@ public class OutputDisplay extends DebugWriter {
         _outputDisplay.setEditable(false);
         _outputDisplay.setRows(20);
         _outputDisplay.setName(ComponentNames.CONSOLEDISPLAY);
+        _outputDisplay.setAutoscrolls(true);
         CNUIExtensions.addInternalPadding(_outputDisplay, 10);
         JScrollPane scrollPanel = new JScrollPane(_outputDisplay);
+        scrollPanel.setAutoscrolls(true);
 
         _topLevelOutputNode = new DefaultMutableTreeNode("File Events");
         _outputTree = new JTree(_topLevelOutputNode);

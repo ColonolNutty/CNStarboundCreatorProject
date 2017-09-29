@@ -121,6 +121,10 @@ public class FileUpdater {
 
     private String[] startPathBundle(String fileName, String rootDir) {
         File file = new File(fileName);
+        if(!_settings.enableTreeView) {
+            _log.startSubBundle(file.getName());
+            return null;
+        }
         String fileNameParentDirectories = file.getParentFile().getAbsolutePath().substring(rootDir.length() + 1);
         String[] relativePathNames = fileNameParentDirectories.split("\\\\");
         for(String relativePathName : relativePathNames) {
@@ -131,8 +135,12 @@ public class FileUpdater {
     }
 
     private void endPathBundle(String[] pathNames) {
+        if(!_settings.enableTreeView || pathNames == null) {
+            _log.endSubBundle();
+            return;
+        }
         _log.endSubBundle();
-        for(String pathName : pathNames) {
+        for (String pathName : pathNames) {
             _log.endSubBundle();
         }
     }

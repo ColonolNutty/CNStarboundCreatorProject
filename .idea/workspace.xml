@@ -7,10 +7,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/DebugLog.java" afterPath="$PROJECT_DIR$/src/com/company/DebugLog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/balancerConfiguration.json" afterPath="$PROJECT_DIR$/balancerConfiguration.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/CNUtils.java" afterPath="$PROJECT_DIR$/src/com/company/CNUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/FileUpdater.java" afterPath="$PROJECT_DIR$/src/com/company/FileUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" afterPath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/MessageBundle.java" afterPath="$PROJECT_DIR$/src/com/company/models/MessageBundle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" afterPath="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" afterPath="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java" afterPath="$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" afterPath="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,24 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/ui/MainWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="98" column="71" lean-forward="true" selection-start-line="98" selection-start-column="71" selection-end-line="98" selection-end-column="71" />
-              <folding>
-                <element signature="e#3013#4022#0" expanded="true" />
-                <element signature="e#4021#4022#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ConfigSettingsDisplay.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="147" column="42" lean-forward="true" selection-start-line="147" selection-start-column="42" selection-end-line="147" selection-end-column="42" />
+            <state relative-caret-position="3339">
+              <caret line="462" column="39" lean-forward="false" selection-start-line="462" selection-start-column="39" selection-end-line="462" selection-end-column="39" />
               <folding>
                 <element signature="method#ConfigSettingsDisplay#0;class#ConfigSettingsDisplay#0" expanded="false" />
                 <element signature="method#addCurrentDirectoryField#0;class#ConfigSettingsDisplay#0" expanded="false" />
@@ -52,22 +41,21 @@
                 <element signature="method#createTextField#0;class#ConfigSettingsDisplay#0" expanded="false" />
                 <element signature="method#createCheckBox#0;class#ConfigSettingsDisplay#0" expanded="false" />
                 <element signature="method#createPanel#0;class#ConfigSettingsDisplay#0" expanded="false" />
-                <element signature="method#setupChangeListeners#0;class#ConfigSettingsDisplay#0" expanded="false" />
-                <element signature="class#16031:16379" expanded="false" />
-                <element signature="method#focusGained#0;class#16031:16379" expanded="false" />
-                <element signature="method#focusLost#0;class#16031:16379" expanded="false" />
-                <element signature="class#16442:16789" expanded="false" />
-                <element signature="method#focusGained#0;class#16442:16789" expanded="false" />
-                <element signature="method#focusLost#0;class#16442:16789" expanded="false" />
-                <element signature="class#16851:17197" expanded="false" />
-                <element signature="method#focusGained#0;class#16851:17197" expanded="false" />
-                <element signature="method#focusLost#0;class#16851:17197" expanded="false" />
-                <element signature="class#17266:17591" expanded="false" />
-                <element signature="method#focusGained#0;class#17266:17591" expanded="false" />
-                <element signature="method#focusLost#0;class#17266:17591" expanded="false" />
-                <element signature="class#17645:17955" expanded="false" />
-                <element signature="method#focusGained#0;class#17645:17955" expanded="false" />
-                <element signature="method#focusLost#0;class#17645:17955" expanded="false" />
+                <element signature="class#16344:16692" expanded="false" />
+                <element signature="method#focusGained#0;class#16344:16692" expanded="false" />
+                <element signature="method#focusLost#0;class#16344:16692" expanded="false" />
+                <element signature="class#16755:17102" expanded="false" />
+                <element signature="method#focusGained#0;class#16755:17102" expanded="false" />
+                <element signature="method#focusLost#0;class#16755:17102" expanded="false" />
+                <element signature="class#17164:17510" expanded="false" />
+                <element signature="method#focusGained#0;class#17164:17510" expanded="false" />
+                <element signature="method#focusLost#0;class#17164:17510" expanded="false" />
+                <element signature="class#17579:17904" expanded="false" />
+                <element signature="method#focusGained#0;class#17579:17904" expanded="false" />
+                <element signature="method#focusLost#0;class#17579:17904" expanded="false" />
+                <element signature="class#17958:18268" expanded="false" />
+                <element signature="method#focusGained#0;class#17958:18268" expanded="false" />
+                <element signature="method#focusLost#0;class#17958:18268" expanded="false" />
                 <element signature="method#updateConfigSettings#0;class#ConfigSettingsDisplay#0" expanded="false" />
                 <element signature="method#getCurrentValue#0;class#ConfigSettingsDisplay#0" expanded="false" />
                 <element signature="method#getIsSelected#0;class#ConfigSettingsDisplay#0" expanded="false" />
@@ -76,24 +64,9 @@
                 <element signature="method#setupCheckBoxListener#0;class#ConfigSettingsDisplay#0" expanded="false" />
                 <element signature="method#setupSliderListener#0;class#ConfigSettingsDisplay#0" expanded="false" />
                 <element signature="method#setupRunButton#0;class#ConfigSettingsDisplay#0" expanded="false" />
-                <element signature="e#24819#24820#0" expanded="true" />
-                <element signature="e#24857#24858#0" expanded="true" />
-                <element signature="e#24901#24902#0" expanded="true" />
-                <element signature="e#24938#24939#0" expanded="true" />
+                <element signature="method#disable#0;class#ConfigSettingsDisplay#0" expanded="false" />
+                <element signature="method#enable#0;class#ConfigSettingsDisplay#0" expanded="false" />
                 <element signature="class#FieldType#0;class#ConfigSettingsDisplay#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IngredientDataCalculator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/IngredientDataCalculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1680">
-              <caret line="128" column="62" lean-forward="true" selection-start-line="128" selection-start-column="62" selection-end-line="128" selection-end-column="62" />
-              <folding>
-                <element signature="method#findIngredientsFor#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -109,44 +82,94 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OutputDisplay.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java">
+      <file leaf-file-name="ConfigSettings.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/models/ConfigSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
-              <folding>
-                <element signature="docComment;class#OutputDisplay#0" expanded="false" />
-                <element signature="method#get#0;class#OutputDisplay#0" expanded="false" />
-                <element signature="method#setup#0;class#OutputDisplay#0" expanded="false" />
-                <element signature="class#1711:2481" expanded="false" />
-                <element signature="method#mouseClicked#0;class#1711:2481" expanded="false" />
-                <element signature="method#mousePressed#0;class#1711:2481" expanded="false" />
-                <element signature="method#mouseReleased#0;class#1711:2481" expanded="false" />
-                <element signature="method#mouseEntered#0;class#1711:2481" expanded="false" />
-                <element signature="method#mouseExited#0;class#1711:2481" expanded="false" />
-                <element signature="method#writeln#0;class#OutputDisplay#0" expanded="false" />
-                <element signature="e#4622#4833#0" expanded="true" />
-                <element signature="e#4832#4833#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileUpdater.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/company/FileUpdater.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="103" column="36" lean-forward="false" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
+            <state relative-caret-position="250">
+              <caret line="19" column="34" lean-forward="false" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DebugLog.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="balancerConfiguration.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/balancerConfiguration.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CNUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/CNUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="124">
+              <caret line="89" column="48" lean-forward="true" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
+              <folding>
+                <element signature="docComment;class#CNUtils#0" expanded="false" />
+                <element signature="method#contains#0;class#CNUtils#0" expanded="false" />
+                <element signature="method#fileEndsWith#0;class#CNUtils#0" expanded="false" />
+                <element signature="method#fileStartsWith#0;class#CNUtils#0" expanded="false" />
+                <element signature="method#isValueType#0;class#CNUtils#0" expanded="false" />
+                <element signature="method#toCommaSeparated#0;class#CNUtils#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OutputDisplay.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="51" column="41" lean-forward="false" selection-start-line="51" selection-start-column="41" selection-end-line="51" selection-end-column="41" />
+              <folding>
+                <element signature="docComment;class#OutputDisplay#0" expanded="false" />
+                <element signature="method#get#0;class#OutputDisplay#0" expanded="false" />
+                <element signature="class#1798:2568" expanded="false" />
+                <element signature="method#mouseClicked#0;class#1798:2568" expanded="false" />
+                <element signature="method#mousePressed#0;class#1798:2568" expanded="false" />
+                <element signature="method#mouseReleased#0;class#1798:2568" expanded="false" />
+                <element signature="method#mouseEntered#0;class#1798:2568" expanded="false" />
+                <element signature="method#mouseExited#0;class#1798:2568" expanded="false" />
+                <element signature="method#writeln#0;class#OutputDisplay#0" expanded="false" />
+                <element signature="e#4709#4920#0" expanded="true" />
+                <element signature="e#4919#4920#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileUpdater.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/FileUpdater.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="131" column="9" lean-forward="true" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileLocator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/locators/FileLocator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="94" column="45" lean-forward="true" selection-start-line="94" selection-start-column="45" selection-end-line="94" selection-end-column="45" />
+              <folding>
+                <element signature="docComment;class#FileLocator#0" expanded="false" />
+                <element signature="method#getFilePaths#1;class#FileLocator#0" expanded="false" />
+                <element signature="method#isValidFileType#0;class#FileLocator#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DebugLog.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/DebugLog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+            <state relative-caret-position="99">
+              <caret line="140" column="9" lean-forward="true" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
               <folding>
                 <element signature="e#2352#2353#0" expanded="true" />
                 <element signature="e#2412#2413#0" expanded="true" />
@@ -162,53 +185,6 @@
               <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessageBundle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/models/MessageBundle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;class#MessageBundle#0" expanded="false" />
-                <element signature="method#MessageBundle#0;class#MessageBundle#0" expanded="false" />
-                <element signature="method#add#0;class#MessageBundle#0" expanded="false" />
-                <element signature="e#1481#1482#0" expanded="true" />
-                <element signature="e#1538#1539#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JsonManipulator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/JsonManipulator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="222" column="13" lean-forward="true" selection-start-line="222" selection-start-column="13" selection-end-line="222" selection-end-column="13" />
-              <folding>
-                <element signature="docComment;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#JsonManipulator#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#readRecipe#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#readIngredient#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#addReplaceNode#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#addReplaceNode#1;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createTestNodes#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createTestNodes#1;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createReplaceNode#1;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#toEffectsArrayNode#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#PatchResult#0;class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -286,7 +262,6 @@
         <option value="$PROJECT_DIR$/NonStuff/wheat.item.patch" />
         <option value="$PROJECT_DIR$/src/com/company/models/IngredientEffect.java" />
         <option value="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" />
-        <option value="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" />
         <option value="$PROJECT_DIR$/src/com/company/models/StatusEffect.java" />
         <option value="$PROJECT_DIR$/NonStuff/wheat.item" />
         <option value="$PROJECT_DIR$/Samples/jumpboosfood.statuseffect.patch" />
@@ -301,28 +276,29 @@
         <option value="$PROJECT_DIR$/src/com/company/ui/ConfigurationSettings.java" />
         <option value="$PROJECT_DIR$/src/com/company/ui/ConfigurationSettingsDisplay.java" />
         <option value="$PROJECT_DIR$/src/com/company/ui/listeners/CheckBoxChangeListener.java" />
-        <option value="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" />
         <option value="$PROJECT_DIR$/updatelog.log" />
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/SettingsWriter.java" />
-        <option value="$PROJECT_DIR$/balancerConfiguration.json" />
         <option value="$PROJECT_DIR$/src/com/company/ValueBalancer.java" />
         <option value="$PROJECT_DIR$/src/com/company/DebugWriter.java" />
         <option value="$PROJECT_DIR$/src/com/company/ui/UIExtensions.java" />
         <option value="$PROJECT_DIR$/src/com/company/ui/CNUIExtensions.java" />
         <option value="$PROJECT_DIR$/src/com/company/IngredientUpdater.java" />
         <option value="$PROJECT_DIR$/Samples/battersimpleMFM.consumable.patch" />
-        <option value="$PROJECT_DIR$/src/com/company/CNUtils.java" />
         <option value="$PROJECT_DIR$/src/com/company/models/Ingredient.java" />
         <option value="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" />
         <option value="$PROJECT_DIR$/src/com/company/IngredientDataCalculator.java" />
         <option value="$PROJECT_DIR$/src/com/company/ui/MainWindow.java" />
         <option value="$PROJECT_DIR$/src/com/company/MessageBundler.java" />
-        <option value="$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java" />
-        <option value="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" />
         <option value="$PROJECT_DIR$/src/com/company/models/MessageBundle.java" />
         <option value="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
+        <option value="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" />
+        <option value="$PROJECT_DIR$/src/com/company/CNUtils.java" />
         <option value="$PROJECT_DIR$/src/com/company/DebugLog.java" />
+        <option value="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" />
+        <option value="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" />
+        <option value="$PROJECT_DIR$/balancerConfiguration.json" />
+        <option value="$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java" />
         <option value="$PROJECT_DIR$/src/com/company/FileUpdater.java" />
       </list>
     </option>
@@ -359,6 +335,24 @@
             <path>
               <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
               <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PriceFoodValueBalancer" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="PriceFoodValueBalancer_jar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PriceFoodValueBalancer" type="b2602c69:ProjectViewProjectNode" />
@@ -545,14 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/locators/RecipeStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="66" column="53" lean-forward="false" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NonStuff/runboost20.statuseffect">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -621,21 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/locators/FileLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="22" column="38" lean-forward="true" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-          <folding>
-            <element signature="docComment;class#FileLocator#0" expanded="false" />
-            <element signature="e#1718#1726#0" expanded="false" />
-            <element signature="e#2271#2279#0" expanded="false" />
-            <element signature="method#getFilePaths#1;class#FileLocator#0" expanded="false" />
-            <element signature="method#getFilePaths#2;class#FileLocator#0" expanded="false" />
-            <element signature="method#isValidFileType#0;class#FileLocator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/locators/StatusEffectStore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -688,14 +659,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/ui/listeners/CheckBoxChangeListener.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/company/models/ConfigSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="32" lean-forward="true" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/updatelog.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -766,7 +729,7 @@
         <state relative-caret-position="126">
           <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -790,34 +753,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/balancerConfiguration.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Samples/Stuff/battersimpleMFM.consumable.patch">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/CNUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="84" column="45" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
-          <folding>
-            <element signature="docComment;class#CNUtils#0" expanded="false" />
-            <element signature="method#contains#0;class#CNUtils#0" expanded="false" />
-            <element signature="method#fileEndsWith#0;class#CNUtils#0" expanded="false" />
-            <element signature="method#fileStartsWith#0;class#CNUtils#0" expanded="false" />
-            <element signature="method#isValueType#0;class#CNUtils#0" expanded="false" />
-            <element signature="method#toCommaSeparated#0;class#CNUtils#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -872,8 +812,8 @@
         <state relative-caret-position="523">
           <caret line="98" column="71" lean-forward="true" selection-start-line="98" selection-start-column="71" selection-end-line="98" selection-end-column="71" />
           <folding>
-            <element signature="e#3013#4022#0" expanded="true" />
-            <element signature="e#4021#4022#0" expanded="true" />
+            <element signature="e#3013#4022#0" expanded="false" />
+            <element signature="e#4021#4022#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -885,83 +825,6 @@
           <folding>
             <element signature="method#findIngredientsFor#0;class#IngredientDataCalculator#0" expanded="false" />
             <element signature="method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="147" column="42" lean-forward="true" selection-start-line="147" selection-start-column="42" selection-end-line="147" selection-end-column="42" />
-          <folding>
-            <element signature="method#ConfigSettingsDisplay#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#addCurrentDirectoryField#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#addSlider#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#createSlider#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#addField#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#addTextArea#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#createTextArea#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#createTextField#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#createCheckBox#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#createPanel#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#setupChangeListeners#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="class#16031:16379" expanded="false" />
-            <element signature="method#focusGained#0;class#16031:16379" expanded="false" />
-            <element signature="method#focusLost#0;class#16031:16379" expanded="false" />
-            <element signature="class#16442:16789" expanded="false" />
-            <element signature="method#focusGained#0;class#16442:16789" expanded="false" />
-            <element signature="method#focusLost#0;class#16442:16789" expanded="false" />
-            <element signature="class#16851:17197" expanded="false" />
-            <element signature="method#focusGained#0;class#16851:17197" expanded="false" />
-            <element signature="method#focusLost#0;class#16851:17197" expanded="false" />
-            <element signature="class#17266:17591" expanded="false" />
-            <element signature="method#focusGained#0;class#17266:17591" expanded="false" />
-            <element signature="method#focusLost#0;class#17266:17591" expanded="false" />
-            <element signature="class#17645:17955" expanded="false" />
-            <element signature="method#focusGained#0;class#17645:17955" expanded="false" />
-            <element signature="method#focusLost#0;class#17645:17955" expanded="false" />
-            <element signature="method#updateConfigSettings#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#getCurrentValue#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#getIsSelected#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#getCurrentText#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#setupTextEntryFocusListener#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#setupCheckBoxListener#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#setupSliderListener#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="method#setupRunButton#0;class#ConfigSettingsDisplay#0" expanded="false" />
-            <element signature="e#24819#24820#0" expanded="true" />
-            <element signature="e#24857#24858#0" expanded="true" />
-            <element signature="e#24901#24902#0" expanded="true" />
-            <element signature="e#24938#24939#0" expanded="true" />
-            <element signature="class#FieldType#0;class#ConfigSettingsDisplay#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/IngredientUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
-          <folding>
-            <element signature="docComment;class#OutputDisplay#0" expanded="false" />
-            <element signature="method#get#0;class#OutputDisplay#0" expanded="false" />
-            <element signature="method#setup#0;class#OutputDisplay#0" expanded="false" />
-            <element signature="class#1711:2481" expanded="false" />
-            <element signature="method#mouseClicked#0;class#1711:2481" expanded="false" />
-            <element signature="method#mousePressed#0;class#1711:2481" expanded="false" />
-            <element signature="method#mouseReleased#0;class#1711:2481" expanded="false" />
-            <element signature="method#mouseEntered#0;class#1711:2481" expanded="false" />
-            <element signature="method#mouseExited#0;class#1711:2481" expanded="false" />
-            <element signature="method#writeln#0;class#OutputDisplay#0" expanded="false" />
-            <element signature="e#4622#4833#0" expanded="true" />
-            <element signature="e#4832#4833#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1009,6 +872,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/locators/RecipeStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/locators/FileLocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="94" column="45" lean-forward="true" selection-start-line="94" selection-start-column="45" selection-end-line="94" selection-end-column="45" />
+          <folding>
+            <element signature="docComment;class#FileLocator#0" expanded="false" />
+            <element signature="method#getFilePaths#1;class#FileLocator#0" expanded="false" />
+            <element signature="method#isValidFileType#0;class#FileLocator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/MessageBundler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="313">
@@ -1019,22 +902,126 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DebugLog.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/CNUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+        <state relative-caret-position="124">
+          <caret line="89" column="48" lean-forward="true" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
           <folding>
-            <element signature="e#2352#2353#0" expanded="true" />
-            <element signature="e#2412#2413#0" expanded="true" />
+            <element signature="docComment;class#CNUtils#0" expanded="false" />
+            <element signature="method#contains#0;class#CNUtils#0" expanded="false" />
+            <element signature="method#fileEndsWith#0;class#CNUtils#0" expanded="false" />
+            <element signature="method#fileStartsWith#0;class#CNUtils#0" expanded="false" />
+            <element signature="method#isValueType#0;class#CNUtils#0" expanded="false" />
+            <element signature="method#toCommaSeparated#0;class#CNUtils#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="51" column="41" lean-forward="false" selection-start-line="51" selection-start-column="41" selection-end-line="51" selection-end-column="41" />
+          <folding>
+            <element signature="docComment;class#OutputDisplay#0" expanded="false" />
+            <element signature="method#get#0;class#OutputDisplay#0" expanded="false" />
+            <element signature="class#1798:2568" expanded="false" />
+            <element signature="method#mouseClicked#0;class#1798:2568" expanded="false" />
+            <element signature="method#mousePressed#0;class#1798:2568" expanded="false" />
+            <element signature="method#mouseReleased#0;class#1798:2568" expanded="false" />
+            <element signature="method#mouseEntered#0;class#1798:2568" expanded="false" />
+            <element signature="method#mouseExited#0;class#1798:2568" expanded="false" />
+            <element signature="method#writeln#0;class#OutputDisplay#0" expanded="false" />
+            <element signature="e#4709#4920#0" expanded="true" />
+            <element signature="e#4919#4920#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/models/ConfigSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="19" column="34" lean-forward="false" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/balancerConfiguration.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3339">
+          <caret line="462" column="39" lean-forward="false" selection-start-line="462" selection-start-column="39" selection-end-line="462" selection-end-column="39" />
+          <folding>
+            <element signature="method#ConfigSettingsDisplay#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#addCurrentDirectoryField#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#addSlider#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#createSlider#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#addField#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#addTextArea#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#createTextArea#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#createTextField#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#createCheckBox#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#createPanel#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="class#16344:16692" expanded="false" />
+            <element signature="method#focusGained#0;class#16344:16692" expanded="false" />
+            <element signature="method#focusLost#0;class#16344:16692" expanded="false" />
+            <element signature="class#16755:17102" expanded="false" />
+            <element signature="method#focusGained#0;class#16755:17102" expanded="false" />
+            <element signature="method#focusLost#0;class#16755:17102" expanded="false" />
+            <element signature="class#17164:17510" expanded="false" />
+            <element signature="method#focusGained#0;class#17164:17510" expanded="false" />
+            <element signature="method#focusLost#0;class#17164:17510" expanded="false" />
+            <element signature="class#17579:17904" expanded="false" />
+            <element signature="method#focusGained#0;class#17579:17904" expanded="false" />
+            <element signature="method#focusLost#0;class#17579:17904" expanded="false" />
+            <element signature="class#17958:18268" expanded="false" />
+            <element signature="method#focusGained#0;class#17958:18268" expanded="false" />
+            <element signature="method#focusLost#0;class#17958:18268" expanded="false" />
+            <element signature="method#updateConfigSettings#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#getCurrentValue#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#getIsSelected#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#getCurrentText#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#setupTextEntryFocusListener#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#setupCheckBoxListener#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#setupSliderListener#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#setupRunButton#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#disable#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="method#enable#0;class#ConfigSettingsDisplay#0" expanded="false" />
+            <element signature="class#FieldType#0;class#ConfigSettingsDisplay#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/IngredientUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/FileUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="103" column="36" lean-forward="false" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
+        <state relative-caret-position="300">
+          <caret line="131" column="9" lean-forward="true" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/DebugLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="140" column="9" lean-forward="true" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
+          <folding>
+            <element signature="e#2352#2353#0" expanded="true" />
+            <element signature="e#2412#2413#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

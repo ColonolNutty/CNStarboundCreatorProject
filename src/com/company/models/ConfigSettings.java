@@ -17,6 +17,7 @@ public class ConfigSettings {
     public String ingredientOverridePath;
     public String logFile;
     public int numberOfPasses;
+    public Boolean enableTreeView;
     public Boolean enableConsoleDebug;
     public Boolean enableVerboseLogging;
     public Boolean enableEffectsUpdate;
