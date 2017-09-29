@@ -8,16 +8,12 @@ import java.util.ArrayList;
  * Time: 2:07 PM
  */
 public class MessageBundle {
-    private String _message;
+    private String _name;
 
     private ArrayList<MessageBundle> _subBundles;
 
-    public MessageBundle() {
-        this(null);
-    }
-
-    public MessageBundle(String message) {
-        _message = message;
+    public MessageBundle(String name) {
+        _name = name;
         _subBundles = new ArrayList<MessageBundle>();
     }
 
@@ -26,12 +22,22 @@ public class MessageBundle {
     }
 
     public MessageBundle add(String message) {
-        if(_message == null) {
-            _message = message;
+        if(_name == null) {
+            _name = message;
             return this;
         }
-        if(_message.equals(message)) {
+        if(_name.equals(message)) {
             return this;
+        }
+        MessageBundle foundBundle = null;
+        for(MessageBundle bundle : _subBundles) {
+            if(bundle.hasMessage(message)) {
+                foundBundle = bundle;
+                break;
+            }
+        }
+        if(foundBundle != null) {
+            return foundBundle;
         }
         MessageBundle messageBundle = new MessageBundle(message);
         _subBundles.add(messageBundle);
@@ -46,8 +52,12 @@ public class MessageBundle {
         return size() > 0;
     }
 
+    public boolean hasMessage(String message) {
+        return _name != null && message != null && _name.equals(message);
+    }
+
     @Override
     public String toString() {
-        return _message;
+        return _name;
     }
 }

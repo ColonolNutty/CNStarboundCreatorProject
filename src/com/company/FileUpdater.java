@@ -47,27 +47,40 @@ public class FileUpdater {
         ingredientFileExts[3] = ".matitem";
         ingredientFileExts[4] = ".liquid";
         ingredientFileExts[5] = ".projectile";
+        String currentDirectory = System.getProperty("user.dir");
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(ingredientFileExts);
         Hashtable<String, String> ingredientsToUpdate = new Hashtable<String, String>();
         for(int k = 0; k < _settings.numberOfPasses; k++) {
             String currentPass = "Beginning pass: " + (k + 1);
-            _log.logInfo(currentPass, false);
+            _log.clearCurrentBundle();
             for (int i = 0; i < filePaths.size(); i++) {
                 String filePath = filePaths.get(i);
+                if(filePath.endsWith(".recipe") || filePath.endsWith(".patch")) {
+                    continue;
+                }
                 File file = new File(filePath);
-                _log.setCurrentBundle(file.getName(), file.getName());
-                _log.addToCurrentBundle(currentPass, true);
-                if(!filePath.endsWith(".recipe") && !filePath.endsWith(".patch")) {
-                    String ingredientName = _ingredientUpdater.update(filePath);
-                    //If ingredientName is null, it means the file doesn't need an update
-                    if(ingredientName == null) {
-                        if(ingredientsToUpdate.containsKey(filePath)) {
-                            ingredientsToUpdate.remove(filePath);
-                        }
+                String fileNameParentDirectories = file.getParentFile().getAbsolutePath().substring(currentDirectory.length() + 1);
+                String[] relativePathNames = fileNameParentDirectories.split("\\\\");
+                for(String relativePathName : relativePathNames) {
+                    _log.startSubBundle(relativePathName);
+                }
+                _log.startSubBundle(file.getName());
+                _log.startSubBundle(currentPass);
+                String ingredientName = _ingredientUpdater.update(filePath);
+                //If ingredientName is null, it means the file doesn't need an update
+                if(ingredientName == null) {
+                    if(ingredientsToUpdate.containsKey(filePath)) {
+                        ingredientsToUpdate.remove(filePath);
                     }
-                    else if (!ingredientsToUpdate.containsKey(filePath)) {
-                        ingredientsToUpdate.put(filePath, ingredientName);
-                    }
+                }
+                else if (!ingredientsToUpdate.containsKey(filePath)) {
+                    ingredientsToUpdate.put(filePath, ingredientName);
+                }
+                _log.endSubBundle();
+                _log.endSubBundle();
+                _log.endSubBundle();
+                for(String relativePathName : relativePathNames) {
+                    _log.endSubBundle();
                 }
             }
         }

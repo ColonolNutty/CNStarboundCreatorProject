@@ -112,9 +112,9 @@ public class ConfigSettingsDisplay {
                                                 layout.createParallelGroup()
                                                         .addGroup(
                                                                 layout.createParallelGroup()
+                                                                        .addComponent(locsToUpdate)
                                                                         .addComponent(includeLocsPanel)
                                                                         .addComponent(excludeEffectsPanel)
-                                                                        .addComponent(locsToUpdate)
                                                         )
                                                         .addGroup(
                                                                 layout.createParallelGroup()
@@ -149,9 +149,9 @@ public class ConfigSettingsDisplay {
                                         layout.createSequentialGroup()
                                                 .addGroup(
                                                         layout.createSequentialGroup()
-                                                            .addComponent(includeLocsPanel)
-                                                            .addComponent(excludeEffectsPanel)
-                                                            .addComponent(locsToUpdate)
+                                                                .addComponent(locsToUpdate)
+                                                                .addComponent(includeLocsPanel)
+                                                                .addComponent(excludeEffectsPanel)
                                                 )
                                                 .addGroup(
                                                         layout.createSequentialGroup()

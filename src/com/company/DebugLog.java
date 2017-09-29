@@ -50,23 +50,14 @@ public class DebugLog {
         }
     }
 
-    private MessageBundle _currentBundle;
     private ArrayList<MessageBundle> _subBundles;
 
-    public void setCurrentBundle(String name, String message) {
-        _currentBundle = _messageBundler.getBundle(name, message);
-    }
-
     public void startSubBundle(String name) {
-        if(_currentBundle == null) {
-            setCurrentBundle(name, name);
-            return;
-        }
         if(_subBundles == null) {
             _subBundles = new ArrayList<MessageBundle>();
         }
         if(_subBundles.isEmpty()) {
-            _subBundles.add(_currentBundle.add(name));
+            _subBundles.add(_messageBundler.getBundle(name));
             return;
         }
         _subBundles.add(_subBundles.get(_subBundles.size() - 1).add(name));
@@ -84,18 +75,11 @@ public class DebugLog {
     }
 
     public void clearCurrentBundle() {
-        _currentBundle = null;
+        _subBundles = new ArrayList<MessageBundle>();
     }
 
     public void clear() {
         _messageBundler.clear();
-    }
-
-    public void addToCurrentBundle(String message, boolean setAsCurrent) {
-        MessageBundle bundle = writeToCurrentBundle(message);
-        if(setAsCurrent) {
-            _currentBundle = bundle;
-        }
     }
 
     public void logDebug(String message, boolean isVerbose) {
@@ -179,11 +163,8 @@ public class DebugLog {
     }
 
     private MessageBundle writeToCurrentBundle(String message) {
-        if(_currentBundle == null) {
-            return null;
-        }
         if(_subBundles == null || _subBundles.isEmpty()) {
-            return _currentBundle.add(message);
+            return _messageBundler.getBundle("Root").add(message);
         }
         return _subBundles.get(_subBundles.size() - 1).add(message);
     }
