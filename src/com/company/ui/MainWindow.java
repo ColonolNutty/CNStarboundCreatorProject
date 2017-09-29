@@ -84,23 +84,30 @@ public class MainWindow {
         JPanel settingsPanel = _configSettingsDisplay.setup(_configSettings, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton source = (JButton) e.getSource();
+                final JButton source = (JButton) e.getSource();
                 source.setEnabled(false);
-                try {
-                    _settingsWriter.write(_configSettings);
-                    _log.clear();
-                    _configSettingsDisplay.updateConfigSettings(_configSettings);
-                    _valueBalancer = new ValueBalancer(_configSettings, _log);
-                    _valueBalancer.run();
-                    Hashtable<String, MessageBundle> messages = _log.getMessages();
-                    _outputDisplay.updateTreeDisplay(messages);
-                }
-                catch(Exception e1) {
-                    e1.printStackTrace();
-                }
-                finally {
-                    source.setEnabled(true);
-                }
+                Thread thread = new Thread() {
+                    public void run() {
+                        try {
+                            _log.clear();
+                            _configSettingsDisplay.disable();
+                            _configSettingsDisplay.updateConfigSettings(_configSettings);
+                            _settingsWriter.write(_configSettings);
+                            _valueBalancer = new ValueBalancer(_configSettings, _log);
+                            _valueBalancer.run();
+                            Hashtable<String, MessageBundle> messages = _log.getMessages();
+                            _outputDisplay.updateTreeDisplay(messages);
+                        }
+                        catch(Exception e1) {
+                            e1.printStackTrace();
+                        }
+                        finally {
+                            source.setEnabled(true);
+                            _configSettingsDisplay.enable();
+                        }
+                    }
+                };
+                thread.start();
             }
         });
         layout.setHorizontalGroup(

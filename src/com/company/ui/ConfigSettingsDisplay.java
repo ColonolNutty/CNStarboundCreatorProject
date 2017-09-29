@@ -9,6 +9,7 @@ import javax.swing.event.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -34,6 +35,10 @@ public class ConfigSettingsDisplay {
         JPanel currentDir = addCurrentDirectoryField();
 
         //TextAreas
+        JPanel locsToUpdate = addTextArea(
+                "Relative Locations To Update (Comma Separated): ",
+                "locationsToUpdate",
+                settings.locationsToUpdate);
         JPanel includeLocsPanel = addTextArea(
                 "Relative Locations To Include In Searches (Comma Separated): ",
                 "includeLocations",
@@ -42,10 +47,6 @@ public class ConfigSettingsDisplay {
                 "Exclude Effects With Name (Comma Separated): ",
                 "excludedEffects",
                 settings.excludedEffects);
-        JPanel locsToUpdate = addTextArea(
-                "Relative Locations To Update (Comma Separated): ",
-                "locationsToUpdate",
-                settings.locationsToUpdate);
 
         //TextFields
         JPanel ingredientOverridePath = addField(FieldType.TextField,
@@ -577,6 +578,48 @@ public class ConfigSettingsDisplay {
         runButton.setEnabled(true);
         runButton.addActionListener(onRun);
         return runButton;
+    }
+
+    public void disable() {
+        Enumeration<JTextComponent> textFields = _textFields.elements();
+        while(textFields.hasMoreElements()) {
+            disable(textFields.nextElement());
+        }
+
+        Enumeration<JCheckBox> checkBoxes = _checkBoxes.elements();
+        while(checkBoxes.hasMoreElements()) {
+            disable(checkBoxes.nextElement());
+        }
+
+        Enumeration<JSlider> slider = _sliders.elements();
+        while(slider.hasMoreElements()) {
+            disable(slider.nextElement());
+        }
+    }
+
+    public void enable() {
+        Enumeration<JTextComponent> textFields = _textFields.elements();
+        while(textFields.hasMoreElements()) {
+            enable(textFields.nextElement());
+        }
+
+        Enumeration<JCheckBox> checkBoxes = _checkBoxes.elements();
+        while(checkBoxes.hasMoreElements()) {
+            enable(checkBoxes.nextElement());
+        }
+
+        Enumeration<JSlider> slider = _sliders.elements();
+        while(slider.hasMoreElements()) {
+            enable(slider.nextElement());
+        }
+    }
+
+    private void disable(JComponent comp) {
+        comp.setEnabled(false);
+    }
+
+    private void enable(JComponent comp) {
+        comp.setEnabled(true);
     }
 
     private enum FieldType {
