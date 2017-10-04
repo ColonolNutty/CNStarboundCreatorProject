@@ -7,6 +7,8 @@ import com.company.models.ConfigSettings;
 import com.company.models.MessageBundle;
 import com.company.models.RecipeCreatorSettings;
 import com.company.ui.balancer.ConfigSettingsDisplay;
+import com.company.ui.balancer.MainBalancerPanel;
+import com.company.ui.recipecreator.MainRecipeCreatorPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,20 +23,14 @@ import java.util.Hashtable;
  */
 public class MainWindow {
     private JFrame _mainFrame;
-    private ConfigSettings _configSettings;
-    private RecipeCreatorSettings _recipeCreatorSettings;
-    private ValueBalancer _valueBalancer;
-    private CNLog _log;
-    private SettingsWriter _settingsWriter;
-    private OutputDisplay _outputDisplay;
-    private ConfigSettingsDisplay _configSettingsDisplay;
+    private MainBalancerPanel _mainBalancerPanel;
+    private MainRecipeCreatorPanel _mainRecipeCreatorPanel;
 
     public MainWindow(ConfigSettings settings,
                       RecipeCreatorSettings recipeCreatorSettings,
                       SettingsWriter settingsWriter) {
-        _configSettings = settings;
-        _recipeCreatorSettings = recipeCreatorSettings;
-        _settingsWriter = settingsWriter;
+        _mainBalancerPanel = new MainBalancerPanel(settings, settingsWriter);
+        _mainRecipeCreatorPanel = new MainRecipeCreatorPanel(recipeCreatorSettings, settingsWriter);
     }
 
     public void start() {
@@ -51,14 +47,17 @@ public class MainWindow {
         _mainFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                _log.dispose();
-                _mainFrame = null;
+            _mainBalancerPanel.dispose();
+            _mainRecipeCreatorPanel.dispose();
+            _mainFrame = null;
             }
         });
         _mainFrame.setLayout(new BorderLayout());
         _mainFrame.getContentPane().setBackground(Color.BLUE);
-        JPanel mainPanel = setupMainPanel(_mainFrame.getSize());
-        _mainFrame.add(mainPanel);
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.add("Balancer", _mainBalancerPanel.create(_mainFrame.getSize()));
+        tabbedPane.add("Creator", _mainRecipeCreatorPanel.create(_mainFrame.getSize()));
+        _mainFrame.add(tabbedPane);
         _mainFrame.pack();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameDimensions = _mainFrame.getSize();
@@ -71,61 +70,5 @@ public class MainWindow {
             newY = 0;
         }
         _mainFrame.setLocation(newX, newY);
-    }
-
-    private JPanel setupMainPanel(Dimension size) {
-        JPanel mainPanel = new JPanel();
-        mainPanel.setSize(size);
-        GroupLayout layout = new GroupLayout(mainPanel);
-        mainPanel.setLayout(layout);
-        _configSettingsDisplay = new ConfigSettingsDisplay();
-
-        _outputDisplay = new OutputDisplay();
-        JPanel outputDisplayPanel = _outputDisplay.get();
-        if(_log != null) {
-            _log.dispose();
-        }
-        _log = new CNLog(_outputDisplay, _configSettings);
-        mainPanel.setVisible(true);
-        JPanel settingsPanel = _configSettingsDisplay.setup(_configSettings, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final JButton source = (JButton) e.getSource();
-                source.setEnabled(false);
-                Thread thread = new Thread() {
-                    public void run() {
-                        try {
-                            _log.clear();
-                            _configSettingsDisplay.disable();
-                            _configSettingsDisplay.updateConfigSettings(_configSettings);
-                            _settingsWriter.write(_configSettings);
-                            _valueBalancer = new ValueBalancer(_configSettings, _log);
-                            _valueBalancer.run();
-                            Hashtable<String, MessageBundle> messages = _log.getMessages();
-                            _outputDisplay.updateTreeDisplay(messages);
-                        }
-                        catch(Exception e1) {
-                            e1.printStackTrace();
-                        }
-                        finally {
-                            source.setEnabled(true);
-                            _configSettingsDisplay.enable();
-                        }
-                    }
-                };
-                thread.start();
-            }
-        });
-        layout.setHorizontalGroup(
-                layout.createParallelGroup()
-                .addComponent(settingsPanel)
-                .addComponent(outputDisplayPanel)
-        );
-        layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                .addComponent(settingsPanel)
-                .addComponent(outputDisplayPanel)
-        );
-        return mainPanel;
     }
 }

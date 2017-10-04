@@ -1,15 +1,15 @@
 {
-  "creationPath": "TestFiles\\CreatePath",
-  "ingredientListFile": "TestFiles\\Templates\\ingredientList.json",
-  "recipeTemplateFile": "TestFiles\\Templates\\recipeTemplate.recipe",
-  "ingredientTemplateFile": "TestFiles\\Templates\\sandwichTemplate.consumable",
-  "ingredientImageTemplateFile": "TestFiles\\Templates\\sandwichTemplate.png",
-  "recipeConfigFileName": "TestFiles\\CreatePath\\preparingMFMRecipes.config",
-  "filePrefix": "sandwich",
-  "fileSuffix": "MFM",
-  "fileExtension": "consumable",
-  "outputItemDescription": "A sandwich",
-  "outputItemShortDescription": "Sandwich",
-  "countPerIngredient": 2,
-  "numberOfIngredientsPerRecipe": 1
+  "creationPath" : "TestFiles\\CreatePath",
+  "ingredientListFile" : "TestFiles\\Templates\\ingredientList.json",
+  "recipeTemplateFile" : "TestFiles\\Templates\\recipeTemplate.recipe",
+  "ingredientTemplateFile" : "TestFiles\\Templates\\sandwichTemplate.consumable",
+  "ingredientImageTemplateFile" : "TestFiles\\Templates\\sandwichTemplate.png",
+  "recipeConfigFileName" : "TestFiles\\CreatePath\\preparingMFMRecipes.config",
+  "filePrefix" : "sandwich",
+  "fileSuffix" : "MFM",
+  "fileExtension" : "consumable",
+  "outputItemDescription" : "A sandwich",
+  "outputItemShortDescription" : "Sandwich",
+  "countPerIngredient" : 2,
+  "numberOfIngredientsPerRecipe" : 1
 }

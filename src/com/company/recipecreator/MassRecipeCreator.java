@@ -2,6 +2,7 @@ package com.company.recipecreator;
 
 import com.company.CNLog;
 import com.company.JsonManipulator;
+import com.company.StopWatchTimer;
 import com.company.models.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -41,6 +42,8 @@ public class MassRecipeCreator {
             _log.error("No configuration file found, exiting.");
             return;
         }
+        StopWatchTimer timer = new StopWatchTimer(_log);
+        timer.start("Running");
 
         IngredientListItem[] ingredientList = read(_settings.ingredientListFile, IngredientListItem[].class);
         if(ingredientList == null) {
@@ -49,6 +52,7 @@ public class MassRecipeCreator {
 
         ArrayList<String> outputNames = createFromTemplate(ingredientList);
         writeToConfigurationFile(outputNames);
+        timer.logTime();
     }
 
     private void writeToConfigurationFile(ArrayList<String> names) {
