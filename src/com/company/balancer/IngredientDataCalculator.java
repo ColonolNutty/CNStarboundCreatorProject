@@ -1,5 +1,8 @@
-package com.company;
+package com.company.balancer;
 
+import com.company.CNUtils;
+import com.company.JsonManipulator;
+import com.company.CNLog;
 import com.company.locators.IngredientStore;
 import com.company.locators.RecipeStore;
 import com.company.locators.StatusEffectStore;
@@ -16,14 +19,14 @@ import java.util.Hashtable;
  * Time: 12:31 PM
  */
 public class IngredientDataCalculator {
-    private DebugLog _log;
+    private CNLog _log;
     private ConfigSettings _settings;
     private RecipeStore _recipeStore;
     private IngredientStore _ingredientStore;
     private JsonManipulator _manipulator;
     private StatusEffectStore _statusEffectStore;
 
-    public IngredientDataCalculator(DebugLog log,
+    public IngredientDataCalculator(CNLog log,
                                     ConfigSettings settings,
                                     RecipeStore recipeStore,
                                     IngredientStore ingredientStore,
@@ -40,7 +43,7 @@ public class IngredientDataCalculator {
     public Ingredient updateIngredient(Ingredient ingredient){
         Recipe recipe = _recipeStore.locateRecipe(ingredient.getName());
         if(recipe == null) {
-            _log.logDebug("No recipe found for: " + ingredient.getName(), true);
+            _log.debug("No recipe found for: " + ingredient.getName());
             return ingredient;
         }
         return calculateNewValues(recipe);
@@ -54,18 +57,18 @@ public class IngredientDataCalculator {
 
         String outputName = recipe.output.item;
         boolean outputIsRaw = outputName.startsWith("raw");
-        String subName = "Calculating new values for: " + outputName;
+        String subName = "Calculating \"" + outputName + "\" values";
         _log.startSubBundle(subName);
-        _log.logDebug(subName, true);
+        _log.debug(subName);
         Hashtable<String, Integer> effectValues = new Hashtable<String, Integer>();
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
             Ingredient ingredient = recipeIngredient.ingredient;
-            _log.startSubBundle("Ingredient " + (i + 1) + " name: " + ingredient.getName());
-            _log.logDebug("    count: " + recipeIngredient.count, true);
-            _log.logDebug("    price: " + ingredient.price, true);
-            _log.logDebug("    food value: " + ingredient.foodValue, true);
+            String subBundleMessage = "Ingredient " + (i + 1) + " name: " + ingredient.getName();
+            _log.debug(subBundleMessage + " c: " + recipeIngredient.count + " p: " + ingredient.price + " fv: " + ingredient.foodValue, 4);
+            _log.startSubBundle(subBundleMessage);
+            _log.writeToBundle("count: " + recipeIngredient.count, "price: " + ingredient.price, "food value: " + ingredient.foodValue);
 
             if(ingredient == null) {
                 continue;
@@ -78,7 +81,6 @@ public class IngredientDataCalculator {
                 continue;
             }
 
-            _log.startSubBundle("    Effects: ");
             for(JsonNode effect : ingredient.effects) {
                 if(!effect.isArray()) {
                     continue;
@@ -95,7 +97,7 @@ public class IngredientDataCalculator {
                         subEffectName = subEffect.get("effect").asText();
                     }
                     else {
-                        _log.logDebug("Effect with no name found on ingredient: " + ingredient.getName(), true);
+                        _log.debug("Effect with no name found on ingredient: " + ingredient.getName(), 4);
                         continue;
                     }
                     int defaultDuration = findDefaultDuration(subEffectName);
@@ -114,10 +116,9 @@ public class IngredientDataCalculator {
                     else {
                         effectValues.put(subEffectName, effectValues.get(subEffectName) + (int)(duration * recipeIngredient.count));
                     }
-                    _log.logDebug("    " + subEffectName + " with duration: " + duration, true);
+                    _log.debug(subEffectName + " with duration: " + duration, 4);
                 }
             }
-            _log.endSubBundle();
             _log.endSubBundle();
         }
 
@@ -137,7 +138,7 @@ public class IngredientDataCalculator {
         newPrice = roundTwoDecimalPlaces(newPrice / outputCount);
         newFoodValue = roundTwoDecimalPlaces(newFoodValue / outputCount);
 
-        _log.logDebug("New values for: " + outputName + " are p: " + newPrice + " and fv: " + newFoodValue, true);
+        _log.debug("New values for: " + outputName + " are p: " + newPrice + " and fv: " + newFoodValue);
 
         Ingredient newIngredient = new Ingredient(outputName, newPrice, newFoodValue, combined);
         _ingredientStore.updateIngredient(newIngredient);

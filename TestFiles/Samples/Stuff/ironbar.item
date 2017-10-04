@@ -6,5 +6,5 @@
   "description" : "Ore for iron bars is primarily found on planets orbiting gentle stars.",
   "shortdescription" : "Iron Bar",
   "inventoryIcon" : "ironbar.png",
-  "itemTags" : ["reagent"]
+  "itemTags" : [ "reagent" ]
 }

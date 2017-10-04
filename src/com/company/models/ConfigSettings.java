@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * Time: 2:31 PM
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ConfigSettings {
+public class ConfigSettings extends BaseSettings {
     public String[] locationsToUpdate;
     public String[] includeLocations;
     public String[] excludedEffects;
@@ -21,4 +21,12 @@ public class ConfigSettings {
     public Boolean enableConsoleDebug;
     public Boolean enableVerboseLogging;
     public Boolean enableEffectsUpdate;
+
+    public ConfigSettings() {}
+
+    public ConfigSettings(String logFile, boolean enableConsoleDebug, boolean enableVerboseLogging) {
+        this.logFile = logFile;
+        this.enableConsoleDebug = enableConsoleDebug;
+        this.enableVerboseLogging = enableVerboseLogging;
+    }
 }

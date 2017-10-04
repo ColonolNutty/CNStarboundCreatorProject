@@ -33,9 +33,6 @@ public class Ingredient {
     public ArrayNode effects;
 
     @JsonIgnore
-    public HashMap<String, Integer> ingredientEffects;
-
-    @JsonIgnore
     public static int DefaultEffectDuration = 60;
 
     @JsonIgnore
@@ -76,6 +73,21 @@ public class Ingredient {
 
     public boolean hasEffects() {
         return hasEffects(effects);
+    }
+
+    public void setName(String name) {
+        if(this.name != null) {
+            this.name = name;
+        }
+        if(this.itemName != null) {
+            this.itemName = name;
+        }
+        if(this.projectileName != null) {
+            this.projectileName = name;
+        }
+        if(this.objectName != null) {
+            this.objectName = name;
+        }
     }
 
     public String getName() {
@@ -236,5 +248,23 @@ public class Ingredient {
     @Override
     public String toString() {
         return getName();
+    }
+
+    public Ingredient copy() {
+        Ingredient copyIngred = new Ingredient();
+        copyIngred.name = this.name;
+        copyIngred.itemName = this.itemName;
+        copyIngred.objectName = this.objectName;
+        copyIngred.projectileName = this.projectileName;
+        copyIngred.price = this.price;
+        copyIngred.foodValue = this.foodValue;
+        copyIngred.description = this.description;
+        copyIngred.shortdescription = this.shortdescription;
+        copyIngred.inventoryIcon = this.inventoryIcon;
+        copyIngred.stages = this.stages;
+        copyIngred.interactData = this.interactData;
+        copyIngred.breakDropOptions = this.breakDropOptions;
+        copyIngred.effects = this.effects;
+        return copyIngred;
     }
 }

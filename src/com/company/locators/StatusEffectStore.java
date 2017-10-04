@@ -1,6 +1,6 @@
 package com.company.locators;
 
-import com.company.DebugLog;
+import com.company.CNLog;
 import com.company.JsonManipulator;
 import com.company.models.StatusEffect;
 
@@ -14,13 +14,13 @@ import java.util.Hashtable;
  * Time: 10:02 AM
  */
 public class StatusEffectStore {
-    private DebugLog _log;
+    private CNLog _log;
     private FileLocator _fileLocator;
     private JsonManipulator _manipulator;
     private PatchLocator _patchLocator;
     private Hashtable<String, StatusEffect> _statusEffects;
 
-    public StatusEffectStore(DebugLog log,
+    public StatusEffectStore(CNLog log,
                              FileLocator fileLocator,
                              JsonManipulator manipulator,
                              PatchLocator patchLocator) {
@@ -72,7 +72,7 @@ public class StatusEffectStore {
             }
         }
         catch(IOException e) {
-            _log.logError("[IOE] While reading: " + filePath, e);
+            _log.error("[IOE] While reading: " + filePath, e);
         }
     }
 }

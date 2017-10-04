@@ -1,9 +1,11 @@
-package com.company;
+package com.company.balancer;
 
+import com.company.CNUtils;
+import com.company.JsonManipulator;
+import com.company.CNLog;
 import com.company.locators.IngredientStore;
 import com.company.models.ConfigSettings;
 import com.company.models.Ingredient;
-import sun.security.krb5.Config;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,14 +17,14 @@ import java.util.ArrayList;
  * Time: 11:25 AM
  */
 public class IngredientUpdater {
-    protected DebugLog _log;
+    protected CNLog _log;
     protected ConfigSettings _settings;
     protected JsonManipulator _manipulator;
     protected IngredientStore _ingredientStore;
     protected IngredientDataCalculator _ingredientDataCalculator;
     protected ArrayList<String> _fileTypesIgnoreFoodValues;
 
-    public IngredientUpdater(DebugLog log,
+    public IngredientUpdater(CNLog log,
                              ConfigSettings settings,
                              JsonManipulator manipulator,
                              IngredientStore ingredientStore,
@@ -45,22 +47,22 @@ public class IngredientUpdater {
             File ingredientFile = new File(ingredientFilePath);
             String messageOne = "Calculating values for: " + ingredientFile.getName();
             _log.startSubBundle(messageOne);
-            _log.logDebug(messageOne, true);
+            _log.debug(messageOne);
             Ingredient ingredient = _ingredientStore.getIngredientWithFilePath(ingredientFilePath);
             if(ingredient == null) {
-                _log.logDebug("No ingredient found in store for: " + ingredientFilePath, true);
+                _log.debug("No ingredient found in store for: " + ingredientFilePath);
                 return null;
             }
             Ingredient updatedIngredient = _ingredientDataCalculator.updateIngredient(ingredient);
             Ingredient originalIngredient = _manipulator.readIngredient(ingredientFilePath);
             if(meetsMinimumValues(updatedIngredient) && ingredientsAreEqual(originalIngredient, updatedIngredient)) {
-                _log.logDebug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), true);
+                _log.debug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName());
                 return null;
             }
             return ingredient.getName();
         }
         catch(IOException e) {
-            _log.logError("[IOE] While attempting to update: " + ingredientFilePath, e);
+            _log.error("[IOE] While attempting to update: " + ingredientFilePath, e);
         }
         finally {
             _log.endSubBundle();
@@ -70,22 +72,26 @@ public class IngredientUpdater {
 
     private boolean ingredientsAreEqual(Ingredient one, Ingredient two) {
         if(one == null || two == null) {
-            return false;
+            return true;
         }
-        if(one.filePath != null && CNUtils.fileEndsWith(one.filePath, _fileTypesIgnoreFoodValues)) {
-            _log.logDebug("Comparing using only price: " + one.getName(), true);
+        String filePathToCheck = one.filePath;
+        if(filePathToCheck == null) {
+            filePathToCheck = two.filePath;
+        }
+        if(filePathToCheck == null) {
+            return true;
+        }
+        if(CNUtils.fileEndsWith(filePathToCheck, _fileTypesIgnoreFoodValues)
+                || CNUtils.fileEndsWith(filePathToCheck, _fileTypesIgnoreFoodValues)) {
+            _log.debug("Comparing using only price: " + one.getName(), 4);
             return one.priceEquals(two);
         }
-        if(two.filePath != null && CNUtils.fileEndsWith(two.filePath, _fileTypesIgnoreFoodValues)) {
-            _log.logDebug("Comparing using only price: " + one.getName(), true);
-            return one.priceEquals(two);
+        boolean shouldCheckOther = filePathToCheck.endsWith(".consumable") || filePathToCheck.endsWith(".consumable");
+        if(!shouldCheckOther) {
+            return true;
         }
-        boolean shouldCheckEffects = (one.filePath != null && one.filePath.endsWith(".consumable")) || (two.filePath != null && two.filePath.endsWith(".consumable"));
-        if(shouldCheckEffects && !one.effectsAreEqual(two.effects)) {
-            return false;
-        }
-        _log.logDebug("Comparing using both price and foodValue: " + one.getName(), true);
-        return one.equals(two);
+        _log.debug("Comparing using both price, foodValue, and effects: " + one.getName(), 4);
+        return one.equals(two) && one.effectsAreEqual(two.effects);
     }
 
     private boolean meetsMinimumValues(Ingredient ingredient) {

@@ -1,5 +1,8 @@
 {
   "order": [
+    "input",
+    "output",
+    "groups",
     "effect",
     "duration",
     "itemName",

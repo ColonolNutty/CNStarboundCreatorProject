@@ -1,10 +1,12 @@
 package com.company.ui;
 
-import com.company.DebugLog;
+import com.company.CNLog;
 import com.company.SettingsWriter;
-import com.company.ValueBalancer;
+import com.company.balancer.ValueBalancer;
 import com.company.models.ConfigSettings;
 import com.company.models.MessageBundle;
+import com.company.models.RecipeCreatorSettings;
+import com.company.ui.balancer.ConfigSettingsDisplay;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,14 +22,18 @@ import java.util.Hashtable;
 public class MainWindow {
     private JFrame _mainFrame;
     private ConfigSettings _configSettings;
+    private RecipeCreatorSettings _recipeCreatorSettings;
     private ValueBalancer _valueBalancer;
-    private DebugLog _log;
+    private CNLog _log;
     private SettingsWriter _settingsWriter;
     private OutputDisplay _outputDisplay;
     private ConfigSettingsDisplay _configSettingsDisplay;
 
-    public MainWindow(ConfigSettings settings, SettingsWriter settingsWriter) {
+    public MainWindow(ConfigSettings settings,
+                      RecipeCreatorSettings recipeCreatorSettings,
+                      SettingsWriter settingsWriter) {
         _configSettings = settings;
+        _recipeCreatorSettings = recipeCreatorSettings;
         _settingsWriter = settingsWriter;
     }
 
@@ -79,7 +85,7 @@ public class MainWindow {
         if(_log != null) {
             _log.dispose();
         }
-        _log = new DebugLog(_outputDisplay, _configSettings);
+        _log = new CNLog(_outputDisplay, _configSettings);
         mainPanel.setVisible(true);
         JPanel settingsPanel = _configSettingsDisplay.setup(_configSettings, new ActionListener() {
             @Override

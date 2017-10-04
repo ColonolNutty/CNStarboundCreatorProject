@@ -1,0 +1,7 @@
+{
+  "input" : [
+    { "item" : "breadsliceMFM", "count" : 2 }
+  ],
+  "output" : { "item" : "", "count" : 1 },
+  "groups" : [ "preparingMFM" ]
+}

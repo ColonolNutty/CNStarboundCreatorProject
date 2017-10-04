@@ -2,7 +2,6 @@ package com.company;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,15 +16,15 @@ import java.util.Iterator;
  */
 public class JsonPrettyPrinter {
     private String[] _propertyOrder;
-    private DebugLog _log;
+    private CNLog _log;
 
-    public JsonPrettyPrinter(DebugLog log, String[] propertyOrder) {
+    public JsonPrettyPrinter(CNLog log, String[] propertyOrder) {
         _log = log;
         _propertyOrder = propertyOrder;
     }
 
     public String makePretty(JSONObject obj, int indentSize) {
-        String prettyJson = makeIndent(indentSize) + "{\r\n";
+        String prettyJson = CNUtils.createIndent(indentSize) + "{\r\n";
         ArrayList<String> foundProperties = new ArrayList<String>();
         for(int i = 0; i < _propertyOrder.length; i++) {
             String propertyName = _propertyOrder[i];
@@ -38,7 +37,7 @@ public class JsonPrettyPrinter {
             if(obj.isNull(propertyName)) {
                 continue;
             }
-            prettyJson += makeIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
+            prettyJson += CNUtils.createIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
             if (i + 1 < foundProperties.size()) {
                 prettyJson += ",\r\n";
             }
@@ -55,13 +54,13 @@ public class JsonPrettyPrinter {
                     prettyJson += ",\r\n";
                     appendedComma = true;
                 }
-                prettyJson += makeIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
+                prettyJson += CNUtils.createIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
                 if(propertyNames.hasNext()) {
                     appendedComma = false;
                 }
             }
         }
-        prettyJson += "\r\n" + makeIndent(indentSize) + "}";
+        prettyJson += "\r\n" + CNUtils.createIndent(indentSize) + "}";
         return prettyJson;
     }
 
@@ -109,7 +108,7 @@ public class JsonPrettyPrinter {
                                 return "\"" + obj.getString(key) + "\"";
                             }
                             catch(JSONException e5) {
-                                _log.logError("Unknown object type: " + key, e5);
+                                _log.error("Unknown object type: " + key, e5);
                             }
                         }
                     }
@@ -118,7 +117,7 @@ public class JsonPrettyPrinter {
             return null;
         }
         catch(JSONException e) {
-            _log.logError("When parsing: " + key, e);
+            _log.error("When parsing: " + key, e);
         }
         return "";
     }
@@ -179,7 +178,7 @@ public class JsonPrettyPrinter {
             return result;
         }
         catch(JSONException e) {
-            _log.logError("Unknown object type: " + key, e);
+            _log.error("Unknown object type: " + key, e);
         }
         return "";
     }
@@ -206,9 +205,9 @@ public class JsonPrettyPrinter {
 
     public String makePretty(ArrayNode node, int indentSize) {
         if(node.isArray() && node.size() == 0) {
-            return makeIndent(indentSize) + "[]";
+            return CNUtils.createIndent(indentSize) + "[]";
         }
-        String prettyJson = makeIndent(indentSize) + "[\r\n";
+        String prettyJson = CNUtils.createIndent(indentSize) + "[\r\n";
         for(int i = 0; i < node.size(); i++) {
             JsonNode subNode = node.get(i);
             String result = formatAsIntended(subNode, indentSize + 2);
@@ -220,7 +219,7 @@ public class JsonPrettyPrinter {
                 prettyJson += ",\r\n";
             }
         }
-        prettyJson += "\r\n" + makeIndent(indentSize) + "]";
+        prettyJson += "\r\n" + CNUtils.createIndent(indentSize) + "]";
         return prettyJson;
     }
 
@@ -230,9 +229,9 @@ public class JsonPrettyPrinter {
         }
         if(CNUtils.isValueType(node)) {
             if(node.isTextual()) {
-                return makeIndent(indentSize) + "\"" + node.asText() + "\"";
+                return CNUtils.createIndent(indentSize) + "\"" + node.asText() + "\"";
             }
-            return makeIndent(indentSize) + node.asText();
+            return CNUtils.createIndent(indentSize) + node.asText();
         }
         if(node.isArray()) {
             return makePretty((ArrayNode)node, indentSize);
@@ -245,7 +244,7 @@ public class JsonPrettyPrinter {
 
     private String formatAsObject(JsonNode node, int indentSize) {
         boolean hasValue = false;
-        String prettyJson = makeIndent(indentSize) + "{\r\n";
+        String prettyJson = CNUtils.createIndent(indentSize) + "{\r\n";
         Iterator<String> fieldNames = node.fieldNames();
         while(fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
@@ -257,7 +256,7 @@ public class JsonPrettyPrinter {
                 continue;
             }
             hasValue = true;
-            prettyJson += makeIndent(indentSize + 2) + "\"" + fieldName + "\" : " + result.trim();
+            prettyJson += CNUtils.createIndent(indentSize + 2) + "\"" + fieldName + "\" : " + result.trim();
             if(fieldNames.hasNext()) {
                 prettyJson += ",\r\n";
             }
@@ -265,15 +264,7 @@ public class JsonPrettyPrinter {
         if(!hasValue) {
             return "{}";
         }
-        prettyJson += "\r\n" + makeIndent(indentSize) + "}";
+        prettyJson += "\r\n" + CNUtils.createIndent(indentSize) + "}";
         return prettyJson;
-    }
-
-    private String makeIndent(int count) {
-        String indent = "";
-        for(int i = 0; i < count; i++) {
-            indent += " ";
-        }
-        return indent;
     }
 }

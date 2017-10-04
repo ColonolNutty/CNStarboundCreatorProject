@@ -1,4 +1,4 @@
-package com.company;
+package com.company.balancer;
 
 import com.company.models.MessageBundle;
 

@@ -1,5 +1,8 @@
-package com.company;
+package com.company.balancer;
 
+import com.company.CNUtils;
+import com.company.JsonManipulator;
+import com.company.CNLog;
 import com.company.locators.FileLocator;
 import com.company.locators.IngredientStore;
 import com.company.models.*;
@@ -15,7 +18,7 @@ import java.util.Hashtable;
  * Time: 2:38 PM
  */
 public class FileUpdater {
-    private DebugLog _log;
+    private CNLog _log;
     private ConfigSettings _settings;
     private IngredientDataCalculator _ingredientDataCalculator;
     private JsonManipulator _manipulator;
@@ -23,7 +26,7 @@ public class FileUpdater {
     private IngredientStore _ingredientStore;
     private FileLocator _fileLocator;
 
-    public FileUpdater(DebugLog log,
+    public FileUpdater(CNLog log,
                        ConfigSettings settings,
                        IngredientDataCalculator ingredientDataCalculator,
                        JsonManipulator manipulator,
@@ -52,7 +55,7 @@ public class FileUpdater {
         Hashtable<String, String> ingredientsToUpdate = new Hashtable<String, String>();
         for(int k = 0; k < _settings.numberOfPasses; k++) {
             String currentPass = "Beginning pass: " + (k + 1);
-            _log.clearCurrentBundle();
+            _log.clearCurrentBundles();
             for (int i = 0; i < filePaths.size(); i++) {
                 String filePath = filePaths.get(i);
                 if(filePath.endsWith(".recipe") || filePath.endsWith(".patch")) {
@@ -76,13 +79,13 @@ public class FileUpdater {
             }
         }
 
-        _log.clearCurrentBundle();
+        _log.clearCurrentBundles();
 
         if(ingredientsToUpdate.isEmpty()) {
-            _log.logInfo("No files to update", false);
+            _log.info("No files to update");
             return;
         }
-        _log.logInfo("Finished passes, updating files", false);
+        _log.info("Finished passes, updating files");
         Enumeration<String> ingredientNames = ingredientsToUpdate.elements();
         while(ingredientNames.hasMoreElements()) {
             String ingredientName = ingredientNames.nextElement();
@@ -91,31 +94,26 @@ public class FileUpdater {
                 continue;
             }
             verifyMinimumValues(ingredient);
-            if(ingredient.patchFile != null) {
-                if(!CNUtils.fileStartsWith(ingredient.patchFile, _settings.locationsToUpdate)) {
-                    continue;
-                }
-                String[] relativePathNames = startPathBundle(ingredient.patchFile, currentDirectory);
-                _log.startSubBundle("Update");
-                _log.startSubBundle("Attempting to update patch file: " + ingredientName);
-                _manipulator.writeIngredientAsPatch(ingredient);
-                _log.endSubBundle();
-                _log.endSubBundle();
-                _log.endSubBundle();
-                endPathBundle(relativePathNames);
+            boolean isPatchFile = ingredient.patchFile != null;
+            String filePath = isPatchFile ? ingredient.patchFile : ingredient.filePath;
+            if(!CNUtils.fileStartsWith(filePath, _settings.locationsToUpdate)) {
+                continue;
+            }
+            String[] relativePathNames = startPathBundle(filePath, currentDirectory);
+            _log.startSubBundle("Update");
+
+            if(isPatchFile) {
+                _log.writeToAll("Attempting to update patch: " + ingredientName);
+                _manipulator.writeAsPatch(ingredient);
             }
             else {
-                if(!CNUtils.fileStartsWith(ingredient.filePath, _settings.locationsToUpdate)) {
-                    continue;
-                }
-                String[] relativePathNames = startPathBundle(ingredient.filePath, currentDirectory);
-                _log.startSubBundle("Update");
-                _log.logInfo("Updating ingredient: " + ingredientName, false);
+                _log.writeToAll("Attempting to update file: " + ingredientName);
                 _manipulator.write(ingredient.filePath, ingredient);
-                _log.endSubBundle();
-                _log.endSubBundle();
-                endPathBundle(relativePathNames);
             }
+
+            _log.endSubBundle();
+            _log.endSubBundle();
+            endPathBundle(relativePathNames);
         }
     }
 

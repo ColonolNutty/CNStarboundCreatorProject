@@ -11,9 +11,9 @@ public class StopWatchTimer {
     private long _endTime;
     private long _duration;
     private String _actionBeingPerformed;
-    private DebugLog _log;
+    private CNLog _log;
 
-    public StopWatchTimer(DebugLog log) {
+    public StopWatchTimer(CNLog log) {
         _log = log;
     }
 
@@ -84,6 +84,6 @@ public class StopWatchTimer {
         if(_actionBeingPerformed != null) {
             action = _actionBeingPerformed;
         }
-        _log.logInfo("Finished " + action + " in " + time + " " + unitOfMeasurement, false);
+        _log.info("Finished " + action + " in " + time + " " + unitOfMeasurement);
     }
 }

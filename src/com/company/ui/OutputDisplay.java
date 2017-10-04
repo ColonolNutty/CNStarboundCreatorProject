@@ -9,7 +9,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -45,7 +44,6 @@ public class OutputDisplay extends DebugWriter {
         _outputDisplay = new JTextArea();
         _outputDisplay.setEditable(false);
         _outputDisplay.setRows(20);
-        _outputDisplay.setName(ComponentNames.CONSOLEDISPLAY);
         _outputDisplay.setAutoscrolls(true);
         CNUIExtensions.addInternalPadding(_outputDisplay, 10);
         JScrollPane scrollPanel = new JScrollPane(_outputDisplay);

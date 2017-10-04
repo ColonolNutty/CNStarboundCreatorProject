@@ -1,10 +1,8 @@
 package com.company.locators;
 
-import com.company.DebugLog;
+import com.company.CNLog;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -14,9 +12,9 @@ import java.util.ArrayList;
  */
 public class PatchLocator {
 
-    private DebugLog _log;
+    private CNLog _log;
 
-    public PatchLocator(DebugLog log) {
+    public PatchLocator(CNLog log) {
         _log = log;
     }
 
@@ -37,7 +35,7 @@ public class PatchLocator {
             }
         }
         if(foundPatchFileName != null) {
-            _log.logDebug("Found patch file for: " + toCheckFileName, true);
+            _log.debug("Found patch file for: " + toCheckFileName);
         }
         return foundPatchFileName;
     }

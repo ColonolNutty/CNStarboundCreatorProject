@@ -1,0 +1,26 @@
+[
+  {
+    "name": "flourMFM",
+    "singular": "Flour",
+    "plural": "Flour",
+    "shortName": "Flr"
+  },
+  {
+    "name": "wheat",
+    "singular": "Wheat",
+    "plural": "Wheat",
+    "shortName": "Wht"
+  },
+  {
+    "name": "foulcocktailMFM",
+    "singular": "A Foul Cocktail",
+    "plural": "Foul Cocktails",
+    "shortName": "FoC"
+  },
+  {
+    "name": "sugarMFM",
+    "singular": "Sugar",
+    "plural": "Sugar",
+    "shortName": "Sgr"
+  }
+]

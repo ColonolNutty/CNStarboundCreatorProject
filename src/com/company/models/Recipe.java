@@ -1,6 +1,6 @@
 package com.company.models;
 
-import com.company.ItemDescriptor;
+import com.company.balancer.ItemDescriptor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**

@@ -99,4 +99,12 @@ public abstract class CNUtils {
         }
         return split;
     }
+
+    public static String createIndent(int numberOfSpaces) {
+        String indent = "";
+        for(int i = 0; i < numberOfSpaces; i++) {
+            indent += " ";
+        }
+        return indent;
+    }
 }

@@ -1,7 +1,7 @@
 package com.company.locators;
 
 import com.company.CNUtils;
-import com.company.DebugLog;
+import com.company.CNLog;
 import com.company.models.ConfigSettings;
 
 import java.io.File;
@@ -14,12 +14,12 @@ import java.util.ArrayList;
  */
 public class FileLocator {
 
-    private DebugLog _log;
+    private CNLog _log;
     private ConfigSettings _settings;
     private ArrayList<String> _includedFileTypes;
     private ArrayList<String> _savedFileNames;
 
-    public FileLocator(DebugLog log,
+    public FileLocator(CNLog log,
                        ConfigSettings settings) {
         _log = log;
         _settings = settings;

@@ -1,12 +1,10 @@
 package com.company.locators;
 
-import com.company.DebugLog;
+import com.company.CNLog;
 import com.company.JsonManipulator;
 import com.company.StopWatchTimer;
-import com.company.models.ConfigSettings;
 import com.company.models.Recipe;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -19,13 +17,13 @@ import java.util.Hashtable;
 public class RecipeStore {
 
     private Hashtable<String, Recipe> _recipes;
-    private DebugLog _log;
+    private CNLog _log;
     private JsonManipulator _manipulator;
     private PatchLocator _patchLocator;
     private FileLocator _fileLocator;
     private StopWatchTimer _stopWatchTimer;
 
-    public RecipeStore(DebugLog log,
+    public RecipeStore(CNLog log,
                        JsonManipulator manipulator,
                        PatchLocator patchLocator,
                        FileLocator fileLocator) {
@@ -46,7 +44,7 @@ public class RecipeStore {
     }
 
     private void setupRecipes() {
-        _log.logInfo("Locating recipes", false);
+        _log.info("Locating recipes");
         _stopWatchTimer.start("locating recipes");
         ArrayList<String> filePathPatches = _fileLocator.getFilePathsByExtension(".recipe.patch");
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(".recipe");
@@ -76,7 +74,7 @@ public class RecipeStore {
             }
         }
         catch(IOException e) {
-            _log.logError("{IOE] Adding recipe at path: " + filePath, e);
+            _log.error("{IOE] Adding recipe at path: " + filePath, e);
         }
     }
 }

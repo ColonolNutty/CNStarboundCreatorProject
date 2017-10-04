@@ -3,7 +3,6 @@ package com.company;
 import com.company.models.*;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -21,13 +20,13 @@ import java.util.*;
  * Time: 12:32 PM
  */
 public class JsonManipulator {
-    private DebugLog _log;
+    private CNLog _log;
     private ObjectMapper _mapper;
     private ArrayList<String> _keysToWrite;
     private String[] _propertyOrder;
     private JsonPrettyPrinter _prettyPrinter;
 
-    public JsonManipulator(DebugLog log) {
+    public JsonManipulator(CNLog log) {
         _log = log;
         JsonFactory jf = new JsonFactory();
         jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
@@ -42,7 +41,7 @@ public class JsonManipulator {
             _prettyPrinter = new JsonPrettyPrinter(_log, _propertyOrder);
         }
         catch(IOException e) {
-            _log.logError("propertyOrder.json file not found", e);
+            _log.error("propertyOrder.json file not found", e);
         }
     }
 
@@ -57,6 +56,81 @@ public class JsonManipulator {
     public <T> T read(String filePath, Class<T> classOfT) throws IOException {
         Reader reader = new FileReader(filePath);
         return _mapper.readValue(reader, classOfT);
+    }
+
+    public void writeNew(String filePath, Object obj) {
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            String toWriteObj = _mapper.writeValueAsString(obj);
+            JSONObject toWrite = new JSONObject(toWriteObj);
+
+            String result = _prettyPrinter.makePretty(toWrite, 0);
+            if(result == null || result.equals("")) {
+                return;
+            }
+            Writer writer = new FileWriter(file);
+            writer.write(result);
+            writer.close();
+        }
+        catch(IOException e) {
+            _log.error("[IOE] Failed to write file: " + filePath, e);
+        }
+    }
+
+    public void writeNewWithTemplate(String templateFile, String filePath, Object obj) {
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            String fileData = readExistingFile(templateFile);
+            String toWriteObj = _mapper.writeValueAsString(obj);
+            JSONObject toWrite = new JSONObject(toWriteObj);
+            JSONObject combined = applyMissingProperties(toWrite, fileData);
+            if(combined == null) {
+                return;
+            }
+
+            String result = _prettyPrinter.makePretty(combined, 0);
+            if(result == null || result.equals("")) {
+                return;
+            }
+            Writer writer = new FileWriter(file);
+            writer.write(result);
+            writer.close();
+        }
+        catch(IOException e) {
+            _log.error("[IOE] Failed to write file: " + filePath, e);
+        }
+    }
+
+    private JSONObject applyMissingProperties(JSONObject toWrite,
+                                         String existingJson) throws IOException {
+        if(existingJson == null) {
+            return null;
+        }
+        try {
+            JSONObject existingObject = new JSONObject(existingJson);
+
+            Iterator<String> toUpdateKeys = existingObject.keys();
+            while (toUpdateKeys.hasNext()) {
+                String key = toUpdateKeys.next();
+                if(toWrite.has(key)) {
+                    Object value = toWrite.get(key);
+                    if(value != null) {
+                        existingObject.put(key, value);
+                    }
+                }
+            }
+            return existingObject;
+        }
+        catch(JSONException e) {
+            _log.error("Problem when parsing: " + existingJson, e);
+            return null;
+        }
     }
 
     public void write(String filePath, Object obj) {
@@ -78,11 +152,13 @@ public class JsonManipulator {
             writer.close();
         }
         catch(IOException e) {
-            _log.logError("[IOE] Failed to write file: " + filePath, e);
+            _log.error("[IOE] Failed to write file: " + filePath, e);
         }
     }
 
-    private JSONObject combineJsonValues(JSONObject toWrite, String existingJson, boolean canUpdateEffects) throws IOException {
+    private JSONObject combineJsonValues(JSONObject toWrite,
+                                         String existingJson,
+                                         boolean canUpdateEffects) throws IOException {
         if(existingJson == null) {
             return null;
         }
@@ -92,7 +168,7 @@ public class JsonManipulator {
             Iterator<String> toUpdateKeys = toWrite.keys();
             while (toUpdateKeys.hasNext()) {
                 String key = toUpdateKeys.next();
-                if(canWriteKey(key) && (existingObject.has(key) || (key.equals("effects") && canUpdateEffects))) {
+                if(canWriteKey(key) && (existingObject.has(key) || (canUpdateEffects && key.equals("effects")))) {
                     Object value = toWrite.get(key);
                     if(value != null) {
                         existingObject.put(key, value);
@@ -102,7 +178,7 @@ public class JsonManipulator {
             return existingObject;
         }
         catch(JSONException e) {
-            _log.logError("Problem when parsing: " + existingJson, e);
+            _log.error("Problem when parsing: " + existingJson, e);
             return null;
         }
     }
@@ -135,94 +211,73 @@ public class JsonManipulator {
         return fileData;
     }
 
-    public void writeIngredientAsPatch(Ingredient ingredient) {
+    public void writeAsPatch(Ingredient ingredient) {
         if (ingredient.patchFile == null) {
             return;
         }
+        String skipMessage = "Skipping patch file for: " + ingredient.getName();
         ArrayNode patchNodes = null;
         try {
             Reader reader = new FileReader(ingredient.patchFile);
             patchNodes = _mapper.readValue(reader, ArrayNode.class);
             reader.close();
         } catch (IOException e) {
-            _log.logError("[IOE] Failed to read file: " + ingredient.patchFile, e);
+            _log.error("[IOE] Failed to read file: " + ingredient.patchFile, e);
+        }
+        if(patchNodes == null) {
+            _log.writeToAll(4, skipMessage);
+            return;
         }
         try {
             PatchResult result = new PatchResult();
             result = updateNodes(ingredient, patchNodes, result);
-            if (!result.foundFood || !result.foundPrice || !result.foundEffects) {
-                if (!result.foundFood) {
-                    _log.logDebug("   Food Value not found on patch file: " + ingredient.getName(), true);
-                }
-                if (!result.foundPrice) {
-                    _log.logDebug("    Price not found on patch file: " + ingredient.getName(), true);
-                }
-                ArrayNode nodes = _mapper.createArrayNode();
-                if(patchNodes.size() > 0 && patchNodes.get(0).isArray()) {
-                    for(int i = 0; i < patchNodes.size(); i++) {
-                        nodes.add(patchNodes.get(i));
-                    }
-                }
-                else {
-                    ArrayNode arrNode = _mapper.createArrayNode();
-                    for (int i = 0; i < patchNodes.size(); i++) {
-                        arrNode.add(patchNodes.get(i));
-                    }
-                    nodes.add(arrNode);
-                }
-                if (!result.foundFood) {
-                    if (ingredient.hasFoodValue() && ingredient.filePath.endsWith("consumable")) {
-                        nodes = addReplaceNode(nodes, "foodValue", ingredient.foodValue);
-                        result.needsUpdate = true;
-                    }
-                }
-                if (!result.foundPrice) {
-                    if (ingredient.hasPrice()) {
-                        nodes = addReplaceNode(nodes, "price", ingredient.price);
-                        result.needsUpdate = true;
-                    }
-                }
-                if (!result.foundEffects) {
-                    if (ingredient.hasEffects()) {
-                        _log.logDebug("Adding replace node for ingredient: " + ingredient.getName() + " effects: " + ingredient.effects.toString(), true);
-                        nodes = addReplaceNode(nodes, "effects", ingredient.effects);
-                        result.needsUpdate = true;
-                    }
-                }
-                if (!result.needsUpdate) {
-                    _log.logInfo("    Skipping patch file for: " + ingredient.getName(), false);
-                    return;
-                }
-                patchNodes = nodes;
-            }
-            if(!result.needsUpdate) {
-                _log.logInfo("    Skipping patch file for: " + ingredient.getName(), false);
+            if (result.foundFood && result.foundPrice && result.foundEffects && !result.needsUpdate) {
+                _log.writeToAll(4, skipMessage);
                 return;
             }
-            _log.logInfo("    Applying update to patch file: " + ingredient.getName(), false);
-            _log.startSubBundle("New Values");
-            if(ingredient.hasPrice()) {
-                _log.logDebug("Price: " + ingredient.price, true);
+            if (!result.foundFood) {
+                _log.writeToAll(4, "Food Value not found on patch file: " + ingredient.getName());
             }
-            if(ingredient.hasFoodValue()) {
-                _log.logDebug("Food Value: " + ingredient.foodValue, true);
+            if (!result.foundPrice) {
+                _log.writeToAll(4, "Price not found on patch file: " + ingredient.getName());
             }
-            if(ingredient.hasEffects()) {
-                _log.startSubBundle("New Effects");
-                for(int i = 0; i < ingredient.effects.size(); i++) {
-                    ArrayNode subEffects = (ArrayNode)ingredient.effects.get(i);
-                    for(int j = 0; j < subEffects.size(); j++) {
-                        JsonNode subEffect = subEffects.get(j);
-                        String name = subEffect.get("effect").asText();
-                        String duration = subEffect.get("duration").asText();
-
-                        _log.logDebug("Name: " + name + " Duration: " + duration, true);
-                    }
+            ArrayNode nodes = _mapper.createArrayNode();
+            if(patchNodes.size() > 0 && patchNodes.get(0).isArray()) {
+                for(int i = 0; i < patchNodes.size(); i++) {
+                    nodes.add(patchNodes.get(i));
                 }
-                _log.endSubBundle();
             }
-            _log.endSubBundle();
-            _log.logDebug("  New Patch: " + patchNodes.toString(), true);
+            else {
+                ArrayNode arrNode = _mapper.createArrayNode();
+                for (int i = 0; i < patchNodes.size(); i++) {
+                    arrNode.add(patchNodes.get(i));
+                }
+                nodes.add(arrNode);
+            }
+            if (!result.foundPrice && ingredient.hasPrice()) {
+                nodes = addReplaceNode(nodes, "price", ingredient.price);
+                result.needsUpdate = true;
+            }
+            boolean isConsumable = ingredient.filePath.endsWith("consumable");
+            if (!result.foundFood
+                    && ingredient.hasFoodValue()
+                    && isConsumable) {
+                nodes = addReplaceNode(nodes, "foodValue", ingredient.foodValue);
+                result.needsUpdate = true;
+            }
+            if (!result.foundEffects
+                    && ingredient.hasEffects()
+                    && isConsumable) {
+                nodes = addReplaceNode(nodes, "effects", ingredient.effects);
+                result.needsUpdate = true;
+            }
+            if (!result.needsUpdate) {
+                _log.writeToAll(4, skipMessage);
+                return;
+            }
+            patchNodes = nodes;
+            _log.writeToAll(4, "Applying update to patch file: " + ingredient.getName());
+            logValues(ingredient);
             String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
             if(prettyJson == null || prettyJson.equals("")) {
                 return;
@@ -231,8 +286,48 @@ public class JsonManipulator {
             writer.write(prettyJson);
             writer.close();
         }
-        catch(JsonMappingException e) { _log.logError("Error while mapping: " + ingredient.patchFile, e); }
-        catch (IOException e) { _log.logError("[IOE] Failed to read file: " + ingredient.patchFile, e); }
+        catch(JsonMappingException e) { _log.error("Error while mapping: " + ingredient.patchFile, e); }
+        catch (IOException e) { _log.error("[IOE] Failed to read file: " + ingredient.patchFile, e); }
+    }
+
+    private void logValues(Ingredient ingredient) {
+        boolean logCombined = false;
+        String combined = "New Values: ";
+        _log.startSubBundle("New Values");
+        if(ingredient.hasPrice()) {
+            _log.writeToBundle("Price: " + ingredient.price);
+            combined += " p: " + ingredient.price;
+            logCombined = true;
+        }
+        if(ingredient.hasFoodValue()) {
+            _log.writeToBundle("Food Value: " + ingredient.foodValue);
+            combined += " fv: " + ingredient.foodValue;
+            logCombined = true;
+        }
+        if(ingredient.hasEffects()) {
+            _log.startSubBundle("New Effects");
+            combined += " effects: ";
+            for(int i = 0; i < ingredient.effects.size(); i++) {
+                ArrayNode subEffects = (ArrayNode)ingredient.effects.get(i);
+                for(int j = 0; j < subEffects.size(); j++) {
+                    JsonNode subEffect = subEffects.get(j);
+                    String name = subEffect.get("effect").asText();
+                    String duration = subEffect.get("duration").asText();
+
+                    _log.writeToBundle("Name: " + name + " Duration: " + duration);
+                    combined += "{ n: \"" + name + "\" d: " + duration + " }";
+                    if((j + 1) < subEffects.size()) {
+                        combined += ", ";
+                    }
+                }
+            }
+            _log.endSubBundle();
+            logCombined = true;
+        }
+        _log.endSubBundle();
+        if(logCombined) {
+            _log.debug(combined, 4);
+        }
     }
 
     private ArrayNode addReplaceNode(ArrayNode node, String opName, ArrayNode value) throws IOException {
@@ -276,7 +371,7 @@ public class JsonManipulator {
                         patchedFileAsJson = modifiedAsNode.toString();
                     }
                     catch(JsonPatchException e) {
-                        _log.logError("Json Test Patch \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
+                        _log.error("Json Test Patch \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
                     }
                 }
             }
@@ -305,18 +400,18 @@ public class JsonManipulator {
             return _mapper.treeToValue(modNode, valueType);
         }
         catch(JsonMappingException e) {
-            _log.logError("Json file being patched:\n    " + patchedFileAsJson, e);
+            _log.error("Json file being patched:\n    " + patchedFileAsJson, e);
         }
         catch(JsonPatchException e) {
             if(patchFileAsJson != null) {
-                _log.logError("Json \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
+                _log.error("Json \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
             }
             else {
-                _log.logError("When parsing patch file: " + patchFileName, e);
+                _log.error("When parsing patch file: " + patchFileName, e);
             }
         }
         catch (IOException e) {
-            _log.logError("[IOE1] Failed to read file: " + patchFileName, e);
+            _log.error("[IOE1] Failed to read file: " + patchFileName, e);
         }
         return null;
     }
@@ -451,7 +546,7 @@ public class JsonManipulator {
             ObjectNode objNode = _mapper.createObjectNode();
             objNode.put("effect", effectName);
             objNode.put("duration", effectDuration);
-            _log.logDebug("    Effect name: \"" + effectName + "\", duration: " + effectDuration, true);
+            _log.writeToBundle("Effect name: \"" + effectName + "\", duration: " + effectDuration);
             arrayNode.add(objNode);
         }
         _log.endSubBundle();

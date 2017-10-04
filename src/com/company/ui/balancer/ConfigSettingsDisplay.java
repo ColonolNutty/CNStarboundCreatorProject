@@ -1,7 +1,8 @@
-package com.company.ui;
+package com.company.ui.balancer;
 
 import com.company.CNUtils;
 import com.company.models.ConfigSettings;
+import com.company.ui.CNUIExtensions;
 
 import javax.swing.*;
 import javax.swing.border.Border;
