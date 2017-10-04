@@ -5,76 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestFiles/Templates/sandwichTemplate.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/sugarcaneBMB.item" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestFiles/Templates/ingredientList.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestFiles/Templates/recipeTemplate.recipe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestFiles/Templates/sandwichTemplate.consumable" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/recipeCreatorSettings.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/CNLog.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/ConsoleDebugWriter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/balancer/ValueBalancer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/models/BaseSettings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/models/IngredientListItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/models/RecipeCreatorSettings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/models/RecipesConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/recipecreator/CNCrafter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/recipecreator/IngredientCrafter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/recipecreator/MassRecipeCreator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/recipecreator/RecipeCrafter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/ui/RecipeCreatorUI.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Samples/Stuff/sugarcaneBMB.item" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/DebugLog.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/ValueBalancer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/ui/ComponentNames.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/battersimpleMFM.consumable" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/battersimpleMFM.consumable" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/cocoa.item" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/cocoa.item" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/jumpboostfood.statuseffect" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/jumpboostfood.statuseffect" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/runboost.statuseffect" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/runboost.statuseffect" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/runboost20.statuseffect" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/runboost20.statuseffect" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/runboostfood.statuseffect" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/runboostfood.statuseffect" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/sugar.item" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/sugar.item" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/wheat.consumable" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/wheat.consumable" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NonStuff/wheat.consumable.patch" afterPath="$PROJECT_DIR$/TestFiles/NonStuff/wheat.consumable.patch" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/battersimpleMFM.consumable.patch" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/battersimpleMFM.consumable.patch" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/battersimpleMFM.recipe" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/battersimpleMFM.recipe" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/battersimpleMFM.recipe.patch" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/battersimpleMFM.recipe.patch" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/flourMFM.consumable" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/flourMFM.consumable" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/flourMFM.recipe" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/flourMFM.recipe" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/foulcocktailMFM.item" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/foulcocktailMFM.item" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/handmillMFM.object" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/handmillMFM.object" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/handmillMFM.object1" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/handmillMFM.object1" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/handmillMFM.recipe" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/handmillMFM.recipe" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/ironbar.item" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/ironbar.item" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/jumpboostfood.statuseffect.patch" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/jumpboostfood.statuseffect.patch" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Samples/Stuff/sugarMFM.recipe" afterPath="$PROJECT_DIR$/TestFiles/Samples/Stuff/sugarMFM.recipe" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ConfigReader.java" afterPath="$PROJECT_DIR$/src/com/company/balancer/ConfigReader.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/FileUpdater.java" afterPath="$PROJECT_DIR$/src/com/company/balancer/FileUpdater.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/IngredientDataCalculator.java" afterPath="$PROJECT_DIR$/src/com/company/balancer/IngredientDataCalculator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/IngredientUpdater.java" afterPath="$PROJECT_DIR$/src/com/company/balancer/IngredientUpdater.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ItemDescriptor.java" afterPath="$PROJECT_DIR$/src/com/company/balancer/ItemDescriptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/MessageBundler.java" afterPath="$PROJECT_DIR$/src/com/company/balancer/MessageBundler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ui/ConfigSettingsDisplay.java" afterPath="$PROJECT_DIR$/src/com/company/ui/balancer/ConfigSettingsDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/balancerConfiguration.json" afterPath="$PROJECT_DIR$/balancerConfiguration.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/propertyOrder.json" afterPath="$PROJECT_DIR$/propertyOrder.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/CNUtils.java" afterPath="$PROJECT_DIR$/src/com/company/CNUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" afterPath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/JsonPrettyPrinter.java" afterPath="$PROJECT_DIR$/src/com/company/JsonPrettyPrinter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/SettingsWriter.java" afterPath="$PROJECT_DIR$/src/com/company/SettingsWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/StopWatchTimer.java" afterPath="$PROJECT_DIR$/src/com/company/StopWatchTimer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" afterPath="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" afterPath="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/PatchLocator.java" afterPath="$PROJECT_DIR$/src/com/company/locators/PatchLocator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" afterPath="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/locators/StatusEffectStore.java" afterPath="$PROJECT_DIR$/src/com/company/locators/StatusEffectStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" afterPath="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/Ingredient.java" afterPath="$PROJECT_DIR$/src/com/company/models/Ingredient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/models/Recipe.java" afterPath="$PROJECT_DIR$/src/com/company/models/Recipe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ui/MainWindow.java" afterPath="$PROJECT_DIR$/src/com/company/ui/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" afterPath="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -121,8 +52,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+            <state relative-caret-position="336">
+              <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -945,8 +876,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+        <state relative-caret-position="336">
+          <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
           <folding />
         </state>
       </provider>

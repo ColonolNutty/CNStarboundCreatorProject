@@ -17,8 +17,8 @@ public class Main {
         RecipeCreatorSettings recipeCreatorSettings = configReader.readCreatorSettings(recipeCreatorConfigName);
         //MassRecipeCreator creator = new MassRecipeCreator(recipeCreatorSettings, log, new JsonManipulator(log));
         //creator.create();
-        //MainWindow main = new MainWindow(configSettings, recipeCreatorSettings, new SettingsWriter());
-        //main.start();
+        MainWindow main = new MainWindow(configSettings, recipeCreatorSettings, new SettingsWriter());
+        main.start();
     }
 
     private static String getConfigName(String[] args, int index, String defaultName) {
