@@ -29,6 +29,35 @@ public class OutputDisplay extends DebugWriter {
         return _displayPanel;
     }
 
+    public void clear() {
+        _outputDisplay.setText("");
+    }
+
+    @Override
+    public void writeln(String text) {
+        if(_outputDisplay.getText().isEmpty()) {
+            _outputDisplay.append(text);
+            return;
+        }
+        _outputDisplay.append("\n" + text);
+    }
+
+    public void updateTreeDisplay(Hashtable<String, MessageBundle> bundles) {
+        _topLevelOutputNode.removeAllChildren();
+        DefaultTreeModel model = (DefaultTreeModel)_outputTree.getModel();
+        model.reload();
+        Enumeration<String> keys = bundles.keys();
+        while(keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            MessageBundle bundle = bundles.get(key);
+            _topLevelOutputNode.add(addNode(bundle));
+        }
+        if(bundles.isEmpty()) {
+            return;
+        }
+        _outputTree.expandRow(0);
+    }
+
     private void setup() {
         if(_displayPanel != null) {
             return;
@@ -86,11 +115,11 @@ public class OutputDisplay extends DebugWriter {
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
                         .addComponent(outputTree, 500, 500, 500)
-                    .addGroup(
-                        layout.createParallelGroup()
-                            .addComponent(label)
-                            .addComponent(scrollPanel, 500, 500, 10000)
-                    )
+                        .addGroup(
+                                layout.createParallelGroup()
+                                        .addComponent(label)
+                                        .addComponent(scrollPanel, 500, 500, 10000)
+                        )
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup()
@@ -102,31 +131,6 @@ public class OutputDisplay extends DebugWriter {
                         )
         );
         _displayPanel.setVisible(true);
-    }
-
-    @Override
-    public void writeln(String text) {
-        if(_outputDisplay.getText().isEmpty()) {
-            _outputDisplay.append(text);
-            return;
-        }
-        _outputDisplay.append("\n" + text);
-    }
-
-    public void updateTreeDisplay(Hashtable<String, MessageBundle> bundles) {
-        _topLevelOutputNode.removeAllChildren();
-        DefaultTreeModel model = (DefaultTreeModel)_outputTree.getModel();
-        model.reload();
-        Enumeration<String> keys = bundles.keys();
-        while(keys.hasMoreElements()) {
-            String key = keys.nextElement();
-            MessageBundle bundle = bundles.get(key);
-            _topLevelOutputNode.add(addNode(bundle));
-        }
-        if(bundles.isEmpty()) {
-            return;
-        }
-        _outputTree.expandRow(0);
     }
 
     private DefaultMutableTreeNode addNode(MessageBundle bundle) {

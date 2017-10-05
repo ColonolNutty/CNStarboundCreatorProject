@@ -3,9 +3,9 @@ package com.company.ui.balancer;
 import com.company.CNUtils;
 import com.company.models.ConfigSettings;
 import com.company.ui.CNUIExtensions;
+import com.company.ui.SettingsDisplayBase;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
@@ -13,20 +13,9 @@ import java.awt.event.*;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
-public class ConfigSettingsDisplay {
-    private Hashtable<String, JTextComponent> _textFields;
-    private Hashtable<String, JCheckBox> _checkBoxes;
-    private Hashtable<String, JSlider> _sliders;
-
-    public ConfigSettingsDisplay() {
-        _textFields = new Hashtable<String, JTextComponent>();
-        _checkBoxes = new Hashtable<String, JCheckBox>();
-        _sliders = new Hashtable<String, JSlider>();
-    }
-
+public class ConfigSettingsDisplay extends SettingsDisplayBase {
     public JPanel setup(ConfigSettings settings, ActionListener onRun) {
         JPanel settingsDisplay = new JPanel();
         GroupLayout layout = new GroupLayout(settingsDisplay);
@@ -50,11 +39,11 @@ public class ConfigSettingsDisplay {
                 settings.excludedEffects);
 
         //TextFields
-        JPanel ingredientOverridePath = addField(FieldType.TextField,
+        JPanel ingredientOverridePath = createField(FieldType.TextField,
                 "Relative Path To Ingredient Overrides: ",
                 "ingredientOverridePath",
                 settings.ingredientOverridePath);
-        JPanel logFile = addField(FieldType.TextField,
+        JPanel logFile = createField(FieldType.TextField,
                 "Relative Log File Path: ",
                 "logFile",
                 settings.logFile);
@@ -83,23 +72,23 @@ public class ConfigSettingsDisplay {
                 settings.numberOfPasses);
 
         //CheckBox
-        JPanel enableTreeView = addField(FieldType.CheckBox,
+        JPanel enableTreeView = createField(FieldType.CheckBox,
                 "Enable Tree View",
                 "enableTreeView",
                 settings.enableTreeView);
-        JPanel enableConsoleDebug = addField(FieldType.CheckBox,
+        JPanel enableConsoleDebug = createField(FieldType.CheckBox,
                 "Enable Console Debug",
                 "enableConsoleDebug",
                 settings.enableConsoleDebug);
-        JPanel enableVerboseLogging = addField(FieldType.CheckBox,
+        JPanel enableVerboseLogging = createField(FieldType.CheckBox,
                 "Enable Verbose Logging",
                 "enableVerboseLogging",
                 settings.enableVerboseLogging);
-        JPanel enableEffectsUpdate = addField(FieldType.CheckBox,
+        JPanel enableEffectsUpdate = createField(FieldType.CheckBox,
                 "Update Effects",
                 "enableEffectsUpdate",
                 settings.enableEffectsUpdate);
-        JButton runButton = setupRunButton(onRun);
+        JButton runButton = createButton("Run", onRun);
 
         layout.setHorizontalGroup(
                 layout.createParallelGroup()
@@ -187,197 +176,59 @@ public class ConfigSettingsDisplay {
         return settingsDisplay;
     }
 
-    private JPanel addCurrentDirectoryField() {
-        JLabel label = new JLabel("Current Working Directory: ");
-        JTextField field = createTextField("currentDirectory");
-        field.setEditable(false);
-        field.setEnabled(false);
-        field.setText(System.getProperty("user.dir"));
-        return createPanel(true, label, field);
-    }
-
-    private JPanel addSlider(String label,
-                           String name,
-                           int min,
-                           int max,
-                           int minorTicks,
-                           int majorTicks,
-                           int initial) {
-        JLabel configEntryLabel = new JLabel(label);
-        JSlider slider = createSlider(name, min, max, minorTicks, majorTicks, initial);
-        JPanel fieldPanel = new JPanel();
-        final JTextArea field = createTextArea(name + "textField");
-        field.setText(initial + "");
-        slider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                JSlider slider = (JSlider)e.getSource();
-                int value = slider.getValue();
-                String existingText = field.getText();
-                String newText = value + "";
-                if(existingText == null || !existingText.equals(newText)) {
-                    field.setText(newText);
-                }
-            }
-        });
-        field.setEditable(false);
-        field.setEnabled(false);
-        field.setRows(1);
-
-        _sliders.put(name, slider);
-        fieldPanel.setBackground(Color.BLUE);
-        fieldPanel.add(field);
-
-
-        JPanel panel = new JPanel();
-        GroupLayout layout = new GroupLayout(panel);
-        layout.setAutoCreateContainerGaps(true);
-        layout.setAutoCreateGaps(true);
-        panel.setLayout(layout);
-        int maxTextSize = (max + "").length();
-        int width = 10 + (maxTextSize * 10);
-
-        layout.setHorizontalGroup(
-                layout.createParallelGroup()
-                        .addGroup(
-                                layout.createSequentialGroup()
-                                        .addComponent(configEntryLabel)
-                                        .addComponent(field, width, width, width)
-                        )
-                        .addComponent(slider)
-        );
-        layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                        .addGroup(
-                                layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                                        .addComponent(configEntryLabel)
-                                        .addComponent(field, 30, 30, 30)
-                        )
-                        .addComponent(slider)
-        );
-
-        panel.setVisible(true);
-        return panel;
-    }
-
-    private JSlider createSlider(String name, int min, int max, int minorTicks, int majorTicks, int init) {
-        JSlider slider = new JSlider();
-        slider.setName(name);
-        slider.setMinimum(min);
-        slider.setMaximum(max);
-        slider.setValue(init);
-        slider.setMinorTickSpacing(minorTicks);
-        slider.setMajorTickSpacing(majorTicks);
-        slider.setPaintTicks(true);
-        slider.setPaintLabels(true);
-        return slider;
-    }
-
-    private JPanel addField(FieldType fieldType,
-                          String label,
-                          String name,
-                          Object initValue) {
-        JLabel configEntryLabel = new JLabel(label);
-        JPanel createdPanel = null;
-        switch(fieldType) {
-            case CheckBox:
-                JCheckBox checkBox = createCheckBox(name);
-                if(initValue != null) {
-                    checkBox.setSelected((Boolean)initValue);
-                }
-                _checkBoxes.put(name, checkBox);
-                createdPanel = createPanel(true, checkBox, configEntryLabel);
-                break;
-            case TextField:
-                JTextField textField = createTextField(name);
-                if(initValue != null) {
-                    textField.setText(initValue.toString());
-                }
-                _textFields.put(name, textField);
-                JScrollPane scrollPane = new JScrollPane(textField);
-                scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
-                scrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
-                createdPanel = createPanel(true, configEntryLabel, scrollPane);
-                break;
+    public void updateConfigSettings(ConfigSettings settings) {
+        String[] newLocToUpdate = CNUtils.fromCommaSeparated(getCurrentText("locationsToUpdate"));
+        if(newLocToUpdate != null) {
+            settings.locationsToUpdate = newLocToUpdate;
         }
-        if(createdPanel == null) {
-            return null;
+        String[] includeLocations = CNUtils.fromCommaSeparated(getCurrentText("includeLocations"));
+        if(includeLocations != null) {
+            settings.includeLocations = includeLocations;
         }
-        return createdPanel;
-    }
-
-    private JPanel addTextArea(String label, String name, String[] initValue) {
-        JLabel configEntryLabel = new JLabel(label);
-        JTextArea textArea = createTextArea(name);
-        if(initValue != null) {
-            textArea.setText(CNUtils.toCommaSeparated(initValue));
+        String[] excludedEffects = CNUtils.fromCommaSeparated(getCurrentText("excludedEffects"));
+        if(excludedEffects != null) {
+            settings.excludedEffects = excludedEffects;
         }
-        _textFields.put(name, textArea);
-        JScrollPane scrollPane = new JScrollPane(textArea);
 
-        JPanel panel = new JPanel();
-        GroupLayout layout = new GroupLayout(panel);
-        layout.setAutoCreateContainerGaps(true);
-        layout.setAutoCreateGaps(true);
-        panel.setLayout(layout);
-
-        layout.setHorizontalGroup(
-                layout.createParallelGroup()
-                        .addComponent(configEntryLabel)
-                        .addComponent(scrollPane)
-        );
-        layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                        .addComponent(configEntryLabel)
-                        .addComponent(scrollPane)
-        );
-
-        panel.setVisible(true);
-        return panel;
-    }
-
-    private JTextArea createTextArea(String name) {
-        JTextArea textArea = new JTextArea();
-        textArea.setName(name);
-        textArea.setAutoscrolls(true);
-        textArea.setRows(3);
-        textArea.setLineWrap(true);
-        CNUIExtensions.addInternalPadding(textArea, 5);
-        return textArea;
-    }
-
-    private JTextField createTextField(String name) {
-        JTextField textField = new JTextField();
-        textField.setName(name);
-        CNUIExtensions.addInternalPadding(textField, 5);
-        return textField;
-    }
-
-    private JCheckBox createCheckBox(String name) {
-        JCheckBox checkBox = new JCheckBox();
-        checkBox.setName(name);
-        return checkBox;
-    }
-
-    private JPanel createPanel(boolean centerAlignLabel, Component... components) {
-        JPanel panel = new JPanel();
-        GroupLayout layout = new GroupLayout(panel);
-        panel.setLayout(layout);
-
-        GroupLayout.SequentialGroup horzGroup = layout.createSequentialGroup();
-        GroupLayout.ParallelGroup vertGroup = layout.createParallelGroup();
-        if(centerAlignLabel) {
-            vertGroup = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
+        String ingredientOverridePath = getCurrentText("ingredientOverridePath");
+        if(ingredientOverridePath != null) {
+            settings.ingredientOverridePath = ingredientOverridePath;
         }
-        for (Component component : components) {
-            horzGroup = horzGroup.addComponent(component);
-            vertGroup = vertGroup.addComponent(component);
-        }
-        layout.setHorizontalGroup(horzGroup);
-        layout.setVerticalGroup(vertGroup);
 
-        panel.setVisible(true);
-        return panel;
+        String logFile = getCurrentText("logFile");
+        if(logFile != null) {
+            settings.logFile = logFile;
+        }
+
+        Integer minimumFoodValue = getCurrentValue("minimumFoodValue");
+        if(minimumFoodValue != null) {
+            settings.minimumFoodValue = minimumFoodValue;
+        }
+        Integer increasePercentage = getCurrentValue("increasePercentage");
+        if(increasePercentage != null) {
+            settings.increasePercentage = increasePercentage/100.0;
+        }
+        Integer numberOfPasses = getCurrentValue("numberOfPasses");
+        if(numberOfPasses != null) {
+            settings.numberOfPasses = numberOfPasses;
+        }
+
+        Boolean enableTreeView = getIsSelected("enableTreeView");
+        if(enableTreeView != null) {
+            settings.enableTreeView = enableTreeView;
+        }
+        Boolean enableConsoleDebug = getIsSelected("enableConsoleDebug");
+        if(enableConsoleDebug != null) {
+            settings.enableConsoleDebug = enableConsoleDebug;
+        }
+        Boolean enableVerboseLogging = getIsSelected("enableVerboseLogging");
+        if(enableVerboseLogging != null) {
+            settings.enableVerboseLogging = enableVerboseLogging;
+        }
+        Boolean enableEffectsUpdate = getIsSelected("enableEffectsUpdate");
+        if(enableEffectsUpdate != null) {
+            settings.enableEffectsUpdate = enableEffectsUpdate;
+        }
     }
 
     private void setupChangeListeners(final ConfigSettings settings) {
@@ -485,164 +336,5 @@ public class ConfigSettingsDisplay {
                 settings.enableEffectsUpdate = checkbox.isSelected();
             }
         });
-    }
-
-    public void updateConfigSettings(ConfigSettings settings) {
-        String[] newLocToUpdate = CNUtils.fromCommaSeparated(getCurrentText("locationsToUpdate"));
-        if(newLocToUpdate != null) {
-            settings.locationsToUpdate = newLocToUpdate;
-        }
-        String[] includeLocations = CNUtils.fromCommaSeparated(getCurrentText("includeLocations"));
-        if(includeLocations != null) {
-            settings.includeLocations = includeLocations;
-        }
-        String[] excludedEffects = CNUtils.fromCommaSeparated(getCurrentText("excludedEffects"));
-        if(excludedEffects != null) {
-            settings.excludedEffects = excludedEffects;
-        }
-
-        String ingredientOverridePath = getCurrentText("ingredientOverridePath");
-        if(ingredientOverridePath != null) {
-            settings.ingredientOverridePath = ingredientOverridePath;
-        }
-
-        String logFile = getCurrentText("logFile");
-        if(logFile != null) {
-            settings.logFile = logFile;
-        }
-
-        Integer minimumFoodValue = getCurrentValue("minimumFoodValue");
-        if(minimumFoodValue != null) {
-            settings.minimumFoodValue = minimumFoodValue;
-        }
-        Integer increasePercentage = getCurrentValue("increasePercentage");
-        if(increasePercentage != null) {
-            settings.increasePercentage = increasePercentage/100.0;
-        }
-        Integer numberOfPasses = getCurrentValue("numberOfPasses");
-        if(numberOfPasses != null) {
-            settings.numberOfPasses = numberOfPasses;
-        }
-
-        Boolean enableTreeView = getIsSelected("enableTreeView");
-        if(enableTreeView != null) {
-            settings.enableTreeView = enableTreeView;
-        }
-        Boolean enableConsoleDebug = getIsSelected("enableConsoleDebug");
-        if(enableConsoleDebug != null) {
-            settings.enableConsoleDebug = enableConsoleDebug;
-        }
-        Boolean enableVerboseLogging = getIsSelected("enableVerboseLogging");
-        if(enableVerboseLogging != null) {
-            settings.enableVerboseLogging = enableVerboseLogging;
-        }
-        Boolean enableEffectsUpdate = getIsSelected("enableEffectsUpdate");
-        if(enableEffectsUpdate != null) {
-            settings.enableEffectsUpdate = enableEffectsUpdate;
-        }
-    }
-
-    private Integer getCurrentValue(String name) {
-        if(!_sliders.containsKey(name)) {
-            return null;
-        }
-        JSlider comp = _sliders.get(name);
-        return comp.getValue();
-    }
-
-    private Boolean getIsSelected(String name) {
-        if (!_checkBoxes.containsKey(name)) {
-            return null;
-        }
-        JCheckBox comp = _checkBoxes.get(name);
-        return comp.isSelected();
-    }
-
-    private String getCurrentText(String name) {
-        if(!_textFields.containsKey(name)) {
-            return null;
-        }
-        JTextComponent comp = _textFields.get(name);
-        return comp.getText();
-    }
-
-    private void setupTextEntryFocusListener(String name, FocusListener listener) {
-        if(!_textFields.containsKey(name)) {
-            return;
-        }
-        JTextComponent text = _textFields.get(name);
-        text.addFocusListener(listener);
-    }
-
-    private void setupCheckBoxListener(String name, ChangeListener listener) {
-        if(!_checkBoxes.containsKey(name)) {
-            return;
-        }
-        JCheckBox checkBox = _checkBoxes.get(name);
-        checkBox.addChangeListener(listener);
-    }
-
-    private void setupSliderListener(String name, ChangeListener listener) {
-        if(!_sliders.containsKey(name)) {
-            return;
-        }
-        JSlider slider = _sliders.get(name);
-        slider.addChangeListener(listener);
-    }
-
-    private JButton setupRunButton(ActionListener onRun) {
-        final JButton runButton = new JButton("Run");
-        runButton.setDefaultCapable(true);
-        runButton.setEnabled(true);
-        runButton.addActionListener(onRun);
-        return runButton;
-    }
-
-    public void disable() {
-        Enumeration<JTextComponent> textFields = _textFields.elements();
-        while(textFields.hasMoreElements()) {
-            disable(textFields.nextElement());
-        }
-
-        Enumeration<JCheckBox> checkBoxes = _checkBoxes.elements();
-        while(checkBoxes.hasMoreElements()) {
-            disable(checkBoxes.nextElement());
-        }
-
-        Enumeration<JSlider> slider = _sliders.elements();
-        while(slider.hasMoreElements()) {
-            disable(slider.nextElement());
-        }
-    }
-
-    public void enable() {
-        Enumeration<JTextComponent> textFields = _textFields.elements();
-        while(textFields.hasMoreElements()) {
-            enable(textFields.nextElement());
-        }
-
-        Enumeration<JCheckBox> checkBoxes = _checkBoxes.elements();
-        while(checkBoxes.hasMoreElements()) {
-            enable(checkBoxes.nextElement());
-        }
-
-        Enumeration<JSlider> slider = _sliders.elements();
-        while(slider.hasMoreElements()) {
-            enable(slider.nextElement());
-        }
-    }
-
-    private void disable(JComponent comp) {
-        comp.setEnabled(false);
-    }
-
-    private void enable(JComponent comp) {
-        comp.setEnabled(true);
-    }
-
-    private enum FieldType {
-        TextArea,
-        TextField,
-        CheckBox
     }
 }

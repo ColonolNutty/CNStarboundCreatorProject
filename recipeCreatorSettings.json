@@ -10,6 +10,6 @@
   "fileExtension" : "consumable",
   "outputItemDescription" : "A sandwich",
   "outputItemShortDescription" : "Sandwich",
-  "countPerIngredient" : 2,
-  "numberOfIngredientsPerRecipe" : 1
+  "countPerIngredient" : 5,
+  "numberOfIngredientsPerRecipe" : 5
 }

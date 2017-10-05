@@ -5,7 +5,6 @@ import com.company.SettingsWriter;
 import com.company.balancer.ValueBalancer;
 import com.company.models.ConfigSettings;
 import com.company.models.MessageBundle;
-import com.company.models.RecipeCreatorSettings;
 import com.company.ui.OutputDisplay;
 
 import javax.swing.*;
@@ -23,7 +22,7 @@ public class MainBalancerPanel {
     private CNLog _log;
     private ConfigSettings _configSettings;
     private OutputDisplay _outputDisplay;
-    private ConfigSettingsDisplay _configSettingsDisplay;
+    private ConfigSettingsDisplay _settingsDisplay;
     private SettingsWriter _settingsWriter;
     private ValueBalancer _valueBalancer;
 
@@ -38,7 +37,7 @@ public class MainBalancerPanel {
         mainPanel.setSize(size);
         GroupLayout layout = new GroupLayout(mainPanel);
         mainPanel.setLayout(layout);
-        _configSettingsDisplay = new ConfigSettingsDisplay();
+        _settingsDisplay = new ConfigSettingsDisplay();
 
         _outputDisplay = new OutputDisplay();
         JPanel outputDisplayPanel = _outputDisplay.get();
@@ -47,7 +46,7 @@ public class MainBalancerPanel {
         }
         _log = new CNLog(_outputDisplay, _configSettings);
         mainPanel.setVisible(true);
-        JPanel settingsPanel = _configSettingsDisplay.setup(_configSettings, new ActionListener() {
+        JPanel settingsPanel = _settingsDisplay.setup(_configSettings, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 final JButton source = (JButton) e.getSource();
@@ -56,8 +55,9 @@ public class MainBalancerPanel {
                     public void run() {
                         try {
                             _log.clear();
-                            _configSettingsDisplay.disable();
-                            _configSettingsDisplay.updateConfigSettings(_configSettings);
+                            _outputDisplay.clear();
+                            _settingsDisplay.disable();
+                            _settingsDisplay.updateConfigSettings(_configSettings);
                             _settingsWriter.write(_configSettings);
                             _valueBalancer = new ValueBalancer(_configSettings, _log);
                             _valueBalancer.run();
@@ -69,7 +69,7 @@ public class MainBalancerPanel {
                         }
                         finally {
                             source.setEnabled(true);
-                            _configSettingsDisplay.enable();
+                            _settingsDisplay.enable();
                         }
                     }
                 };

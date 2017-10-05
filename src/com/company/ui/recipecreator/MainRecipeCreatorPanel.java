@@ -26,6 +26,7 @@ public class MainRecipeCreatorPanel {
     private CNLog _log;
     private RecipeCreatorSettings _configSettings;
     private OutputDisplay _outputDisplay;
+    private RecipeSettingsDisplay _settingsDisplay;
     private SettingsWriter _settingsWriter;
 
     public MainRecipeCreatorPanel(RecipeCreatorSettings settings,
@@ -39,7 +40,7 @@ public class MainRecipeCreatorPanel {
         mainPanel.setSize(size);
         GroupLayout layout = new GroupLayout(mainPanel);
         mainPanel.setLayout(layout);
-        RecipeSettingsDisplay settingsDisplay = new RecipeSettingsDisplay();
+        _settingsDisplay = new RecipeSettingsDisplay();
 
         _outputDisplay = new OutputDisplay();
         JPanel outputDisplayPanel = _outputDisplay.get();
@@ -48,7 +49,7 @@ public class MainRecipeCreatorPanel {
         }
         _log = new CNLog(_outputDisplay);
         mainPanel.setVisible(true);
-        JPanel settingsPanel = settingsDisplay.setup(_configSettings, new ActionListener() {
+        JPanel settingsPanel = _settingsDisplay.setup(_configSettings, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 final JButton source = (JButton) e.getSource();
@@ -57,15 +58,21 @@ public class MainRecipeCreatorPanel {
                     public void run() {
                         try {
                             _log.clear();
+                            _outputDisplay.clear();
+                            _settingsDisplay.disable();
+                            _settingsDisplay.updateConfigSettings(_configSettings);
                             _settingsWriter.write(_configSettings);
-                            MassRecipeCreator creator = new MassRecipeCreator(_configSettings, _log, new JsonManipulator(_log));
+                            MassRecipeCreator creator = new MassRecipeCreator(_configSettings, _log);
                             creator.create();
+                            Hashtable<String, MessageBundle> messages = _log.getMessages();
+                            _outputDisplay.updateTreeDisplay(messages);
                         }
                         catch(Exception e1) {
                             e1.printStackTrace();
                         }
                         finally {
                             source.setEnabled(true);
+                            _settingsDisplay.enable();
                         }
                     }
                 };

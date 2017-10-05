@@ -22,19 +22,16 @@ public class MassRecipeCreator {
     private CNLog _log;
     private RecipeCreatorSettings _settings;
     private JsonManipulator _manipulator;
-    private RecipeCrafter _recipeCrafter;
-    private IngredientCrafter _ingredientCrafter;
     private ArrayList<CNCrafter> _crafters;
 
     public MassRecipeCreator(RecipeCreatorSettings settings,
-                             CNLog log,
-                             JsonManipulator manipulator) {
+                             CNLog log) {
         _settings = settings;
         _log = log;
-        _manipulator = manipulator;
+        _manipulator = new JsonManipulator(log);
         _crafters = new ArrayList<CNCrafter>();
-        _crafters.add(new RecipeCrafter(log, settings, manipulator));
-        _crafters.add(new IngredientCrafter(log, settings, manipulator));
+        _crafters.add(new RecipeCrafter(log, settings, _manipulator));
+        _crafters.add(new IngredientCrafter(log, settings, _manipulator));
     }
 
     public void create() {
@@ -82,36 +79,44 @@ public class MassRecipeCreator {
     }
 
     public ArrayList<String> createFromTemplate(IngredientListItem[] ingredientNames) {
-        String prefix = _settings.filePrefix;
-        String suffix = _settings.fileSuffix;
-        int countPer = _settings.countPerIngredient;
         int numberPerRecipe = _settings.numberOfIngredientsPerRecipe;
 
-        ArrayList<String> newIngredients = new ArrayList<String>();
+        _log.startSubBundle("Ingredients");
+        ArrayList<String> newNames = createIngredients(ingredientNames, new ArrayList<IngredientListItem>(), -1, numberPerRecipe);
+        _log.endSubBundle();
+        return newNames;
+    }
 
-        for(int i = 1; i <= numberPerRecipe; i++) {
-            for(int j = 0; j < ingredientNames.length; j++) {
-                IngredientListItem currentIngredient = ingredientNames[j];
-                ArrayList<IngredientListItem> ingredients = new ArrayList<IngredientListItem>();
-                _log.debug("Using ingredient as start: " + currentIngredient);
-                ingredients.add(currentIngredient);
-                for(int k = j + 1; k < ingredientNames.length && k <= (j + i); k++) {
-                    IngredientListItem nextIngredient = ingredientNames[k];
-                    _log.debug("Including ingredient: " + nextIngredient);
-                    ingredients.add(nextIngredient);
-                }
-                String outputName = prefix;
-                for(IngredientListItem ingred : ingredients) {
-                    outputName += ingred.shortName;
-                }
-                outputName += suffix;
-                for(CNCrafter crafter : _crafters) {
-                    crafter.craft(outputName, ingredients, countPer);
-                }
-                newIngredients.add(outputName);
-            }
+    private ArrayList<String> createIngredients(IngredientListItem[] ingredientList,
+                                   ArrayList<IngredientListItem> currentIngredients,
+                                   int currentIngredientIndex,
+                                   int ingredientsLeft) {
+        ArrayList<String> names = new ArrayList<String>();
+        if(ingredientsLeft == 0) {
+            return names;
         }
-        return newIngredients;
+        for(int i = currentIngredientIndex + 1; i < ingredientList.length; i++) {
+            ArrayList<IngredientListItem> ingredients = new ArrayList<IngredientListItem>();
+            ingredients.addAll(currentIngredients);
+            IngredientListItem nextIngredient = ingredientList[i];
+            _log.startSubBundle(nextIngredient.name);
+            ingredients.add(nextIngredient);
+            if(ingredientsLeft != 0) {
+                names.addAll(createIngredients(ingredientList, ingredients, i, ingredientsLeft - 1));
+            }
+
+            String outputName = _settings.filePrefix;
+            for(IngredientListItem ingred : ingredients) {
+                outputName += ingred.shortName;
+            }
+            outputName += _settings.fileSuffix;
+            for(CNCrafter crafter : _crafters) {
+                crafter.craft(outputName, ingredients, _settings.countPerIngredient);
+            }
+            names.add(outputName);
+            _log.endSubBundle();
+        }
+        return names;
     }
 
     private <T> T read(String path, Class<T> classOfT){
