@@ -1,0 +1,7 @@
+{
+  "input" : [
+    { "item" : "flourMFM", "count" : 1 }
+  ],
+  "output" : { "item" : "yeastMFMseed", "count" : 1 },
+  "groups" : [ "blendingMFM" ]
+}

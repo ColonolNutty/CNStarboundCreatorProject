@@ -6,6 +6,7 @@ import com.company.ui.balancer.ConfigSettingsDisplay;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -216,6 +217,8 @@ public abstract class SettingsDisplayBase {
 
     protected JTextArea createTextArea(String name) {
         JTextArea textArea = new JTextArea();
+        DefaultCaret caret = (DefaultCaret) textArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         textArea.setName(name);
         textArea.setAutoscrolls(true);
         textArea.setRows(3);

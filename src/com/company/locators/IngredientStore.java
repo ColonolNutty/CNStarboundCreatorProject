@@ -49,7 +49,7 @@ public class IngredientStore {
         _log.debug("Found overrides, overriding values");
         for(int i = 0; i < ingredients.length; i++) {
             Ingredient ingredient = ingredients[i];
-            _log.debug("Overriding ingredient: " + ingredient.getName() + " with p: " + ingredient.price + " and fv: " + ingredient.foodValue);
+            _log.debug("Overriding ingredient: " + ingredient.getIdentifier() + " with p: " + ingredient.price + " and fv: " + ingredient.foodValue);
             updateIngredient(ingredient, true);
         }
     }
@@ -129,34 +129,41 @@ public class IngredientStore {
         try {
             _log.debug("File found at: " + filePath);
             Ingredient ingredient = _manipulator.readIngredient(filePath);
-            if(ingredient != null && ingredient.hasName()) {
-                ingredient.filePath = filePath;
-                ingredient.patchFile = patchFilePath;
-                String ingredientName = ingredient.getName();
-                if(!_ingredients.containsKey(ingredientName)) {
-                    Ingredient patchedIngredient = _manipulator.patch(ingredient, patchFilePath, Ingredient.class);
-                    _log.debug("Pre-patch ingredient values: " + ingredientName + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
-                    if(patchedIngredient != null) {
-                        patchedIngredient.filePath = filePath;
-                        patchedIngredient.patchFile = patchFilePath;
-                        updateIngredient(patchedIngredient, true);
-                    }
-                    else {
-                        updateIngredient(ingredient, false);
-                    }
+            if(ingredient == null || !ingredient.hasName()) {
+                return;
+            }
+            ingredient.filePath = filePath;
+            ingredient.patchFile = patchFilePath;
+            String ingredientName = ingredient.getName();
+            if(!_ingredients.containsKey(ingredientName)) {
+                Ingredient patchedIngredient = _manipulator.patch(ingredient, patchFilePath, Ingredient.class);
+                _log.debug("Pre-patch ingredient values: " + ingredient.getIdentifier() + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
+                if(patchedIngredient != null) {
+                    patchedIngredient.filePath = filePath;
+                    patchedIngredient.patchFile = patchFilePath;
+                    updateIngredient(patchedIngredient, true);
                 }
                 else {
                     updateIngredient(ingredient, false);
                 }
             }
+            else {
+                updateIngredient(ingredient, false);
+            }
         }
         catch(IOException e) {
-            _log.error("{IOE] Reading recipe at path: " + filePath, e);
+            _log.error("{IOE] Reading ingredient at path: " + filePath, e);
         }
     }
 
     private void updateIngredient(Ingredient ingredient, boolean isOverride) {
         String ingredientName = ingredient.getName();
+        String identifier = ingredient.getIdentifier();
+        //if(identifier == null) {
+        //    _log.error("Ingredient found with no identifier(Name and File Paths), how did it get here?");
+        //    return;
+        //}
+        _log.debug("Attempting to update ingredient: " + ingredient.getIdentifier());
         if(!_ingredients.containsKey(ingredientName)) {
             _log.debug("No ingredient found, so adding: " + ingredientName + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
             _ingredients.put(ingredientName, ingredient);
@@ -174,22 +181,39 @@ public class IngredientStore {
         if(ingredient.effects != null && (_settings.enableEffectsUpdate || existing.hasPatchFile())) {
             existing.effects = ingredient.effects;
         }
-        existing.itemName = ingredient.itemName;
-        existing.objectName = ingredient.objectName;
-        existing.name = ingredient.name;
-        existing.projectileName = ingredient.projectileName;
-        existing.description = ingredient.description;
-        existing.inventoryIcon = ingredient.inventoryIcon;
-        existing.shortdescription = ingredient.shortdescription;
-        existing.stages = ingredient.stages;
-        existing.interactData = ingredient.interactData;
+        if(ingredient.itemName != null) {
+            existing.itemName = ingredient.itemName;
+        }
+        if(ingredient.objectName != null) {
+            existing.objectName = ingredient.objectName;
+        }
+        if(ingredient.name != null) {
+            existing.name = ingredient.name;
+        }
+        if(ingredient.projectileName != null) {
+            existing.projectileName = ingredient.projectileName;
+        }
+        if(ingredient.description != null) {
+            existing.description = ingredient.description;
+        }
+        if(ingredient.inventoryIcon != null) {
+            existing.inventoryIcon = ingredient.inventoryIcon;
+        }
+        if(ingredient.shortdescription != null) {
+            existing.shortdescription = ingredient.shortdescription;
+        }
+        if(ingredient.stages != null) {
+            existing.stages = ingredient.stages;
+        }
+        if(ingredient.interactData != null) {
+            existing.interactData = ingredient.interactData;
+        }
         if(ingredient.filePath != null) {
             existing.filePath = ingredient.filePath;
         }
         if(ingredient.patchFile != null) {
             existing.patchFile = ingredient.patchFile;
         }
-        _ingredients.put(existing.getName(), existing);
     }
 
     private void initializeIngredientOverrides() {

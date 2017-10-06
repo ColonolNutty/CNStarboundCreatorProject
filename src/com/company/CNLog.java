@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.balancer.MessageBundler;
+import com.company.models.BaseSettings;
 import com.company.models.ConfigSettings;
 import com.company.models.MessageBundle;
 
@@ -15,8 +16,6 @@ import java.util.Hashtable;
  */
 public class CNLog {
 
-    private boolean _enableConsoleDebug;
-    private boolean _enableVerboseLogging;
     private String defaultLogFile = "updateLog.log";
     private String debugPrefix = "[DEBUG] ";
     private String errorPrefix = "[ERROR] ";
@@ -25,34 +24,14 @@ public class CNLog {
     private ArrayList<String> _ignoredErrors;
     private DebugWriter _debugWriter;
     private MessageBundler _messageBundler;
+    private BaseSettings _settings;
 
-    public CNLog(DebugWriter debugWriter) {
-        this(debugWriter, new ConfigSettings("prerunlog.log", true, true));
-    }
-
-    public CNLog(DebugWriter debugWriter, ConfigSettings settings) {
+    public CNLog(DebugWriter debugWriter, BaseSettings settings) {
+        _settings = settings;
         _debugWriter = debugWriter;
-        _enableConsoleDebug = settings.enableConsoleDebug;
-        _enableVerboseLogging = settings.enableVerboseLogging;
         _ignoredErrors = new ArrayList<String>();
         _ignoredErrors.add("value differs from expectations");
-        String debugLogFile = settings.logFile;
-        _messageBundler = new MessageBundler();
-        if(debugLogFile == null) {
-            info("'logFile' not specified in configuration file, using default: " + defaultLogFile);
-            debugLogFile = defaultLogFile;
-        }
-        try {
-            File file = new File(debugLogFile);
-            if (file.exists()) {
-                file.delete();
-            }
-            file.createNewFile();
-            writer = new PrintWriter(file);
-        }
-        catch(IOException e) {
-            error(e);
-        }
+        setupDebugLogFile();
     }
 
     public void debug(String message) {
@@ -106,10 +85,10 @@ public class CNLog {
                 messagePrefix = errorPrefix;
                 break;
         }
-        if(isDebug && !_enableVerboseLogging) {
+        if(isDebug && !_settings.enableVerboseLogging) {
             return;
         }
-        if(!isDebug ||  _enableConsoleDebug) {
+        if(!isDebug ||  _settings.enableConsoleDebug) {
             if(_debugWriter != null) {
                 _debugWriter.writeln(messagePrefix + message);
             }
@@ -205,6 +184,30 @@ public class CNLog {
         if(writer != null) {
             writer.flush();
             writer.close();
+        }
+    }
+
+    public void setupDebugLogFile() {
+        if(writer != null) {
+            writer.flush();
+            writer.close();
+        }
+        String debugLogFile = _settings.logFile;
+        _messageBundler = new MessageBundler();
+        if(debugLogFile == null) {
+            info("'logFile' not specified in configuration file, using default: " + defaultLogFile);
+            debugLogFile = defaultLogFile;
+        }
+        try {
+            File file = new File(debugLogFile);
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+            writer = new PrintWriter(file);
+        }
+        catch(IOException e) {
+            error(e);
         }
     }
 

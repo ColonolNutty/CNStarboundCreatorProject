@@ -1,5 +1,6 @@
 package com.company.ui.recipecreator;
 
+import com.company.SettingsWriter;
 import com.company.models.RecipeCreatorSettings;
 import com.company.ui.SettingsDisplayBase;
 
@@ -17,7 +18,15 @@ import java.awt.event.FocusListener;
  * Time: 5:04 PM
  */
 public class RecipeSettingsDisplay extends SettingsDisplayBase {
-    public JPanel setup(RecipeCreatorSettings settings, ActionListener onRun) {
+    private SettingsWriter _writer;
+    private RecipeCreatorSettings _settings;
+
+    public RecipeSettingsDisplay(SettingsWriter writer, RecipeCreatorSettings settings) {
+        _settings = settings;
+        _writer = writer;
+    }
+
+    public JPanel setup(ActionListener onRun) {
         JPanel settingsDisplay = new JPanel();
         GroupLayout layout = new GroupLayout(settingsDisplay);
         layout.setAutoCreateGaps(true);
@@ -29,47 +38,51 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
         JPanel creationPath = createField(FieldType.TextField,
                 "What folder will the files be created at? ",
                 "creationPath",
-                settings.creationPath);
+                _settings.creationPath);
         JPanel ingredientListFile = createField(FieldType.TextField,
                 "What is the name of the file that denotes ingredients to use?",
                 "ingredientListFile",
-                settings.ingredientListFile);
+                _settings.ingredientListFile);
         JPanel recipeTemplateFile = createField(FieldType.TextField,
                 "What file will be used as a template (Recipe)?",
                 "recipeTemplateFile",
-                settings.recipeTemplateFile);
+                _settings.recipeTemplateFile);
         JPanel ingredientTemplateFile = createField(FieldType.TextField,
                 "What file will be used as a template (Ingredient)?",
                 "ingredientTemplateFile",
-                settings.ingredientTemplateFile);
+                _settings.ingredientTemplateFile);
         JPanel ingredientImageTemplateFile = createField(FieldType.TextField,
                 "What file will be used as a template (IngredientImage)?",
                 "ingredientImageTemplateFile",
-                settings.ingredientImageTemplateFile);
+                _settings.ingredientImageTemplateFile);
         JPanel recipeConfigFileName = createField(FieldType.TextField,
                 "What file will the names of created recipes be written?",
                 "recipeConfigFileName",
-                settings.recipeConfigFileName);
+                _settings.recipeConfigFileName);
         JPanel filePrefix = createField(FieldType.TextField,
                 "What text will be put in front of created recipes/ingredients?",
                 "filePrefix",
-                settings.filePrefix);
+                _settings.filePrefix);
         JPanel fileSuffix = createField(FieldType.TextField,
                 "What text will be put at the end of created recipes/ingredients?",
                 "fileSuffix",
-                settings.fileSuffix);
+                _settings.fileSuffix);
         JPanel fileExtension = createField(FieldType.TextField,
                 "What file extension will created recipes/ingredients be created with?",
                 "fileExtension",
-                settings.fileExtension);
+                _settings.fileExtension);
         JPanel outputItemDescription = createField(FieldType.TextField,
                 "What will be at the start of created ingredient descriptions?",
                 "outputItemDescription",
-                settings.outputItemDescription);
+                _settings.outputItemDescription);
         JPanel outputItemShortDescription = createField(FieldType.TextField,
                 "What will be at the start of created ingredient shortdescriptions?",
                 "outputItemShortDescription",
-                settings.outputItemShortDescription);
+                _settings.outputItemShortDescription);
+        JPanel logFile = createField(FieldType.TextField,
+                "Relative Log File Path: ",
+                "logFile",
+                _settings.logFile);
 
         JPanel countPerIngredient = addSlider(
                 "The number of each ingredient added to a recipe?",
@@ -78,7 +91,7 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
                 101,
                 1,
                 10,
-                settings.countPerIngredient);
+                _settings.countPerIngredient);
 
         JPanel numberOfIngredientsPerRecipe = addSlider(
                 "The number of ingredients possible per recipe(i.e. value of 8 = 8, 7, 6, 5, etc.)?",
@@ -87,7 +100,20 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
                 8,
                 1,
                 2,
-                settings.numberOfIngredientsPerRecipe);
+                _settings.numberOfIngredientsPerRecipe);
+
+        JPanel enableTreeView = createField(FieldType.CheckBox,
+                "Enable Tree View",
+                "enableTreeView",
+                _settings.enableTreeView);
+        JPanel enableConsoleDebug = createField(FieldType.CheckBox,
+                "Enable Console Debug",
+                "enableConsoleDebug",
+                _settings.enableConsoleDebug);
+        JPanel enableVerboseLogging = createField(FieldType.CheckBox,
+                "Enable Verbose Logging",
+                "enableVerboseLogging",
+                _settings.enableVerboseLogging);
 
         layout.setHorizontalGroup(
                 layout.createParallelGroup()
@@ -128,9 +154,20 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
                         )
                         //Bottom
                         .addGroup(
-                                layout.createSequentialGroup()
-                                    .addComponent(countPerIngredient)
-                                    .addComponent(numberOfIngredientsPerRecipe)
+                                layout.createParallelGroup()
+                                        //Bottom - Bottom
+                                        .addGroup(
+                                                layout.createSequentialGroup()
+                                                        .addComponent(countPerIngredient)
+                                                        .addComponent(numberOfIngredientsPerRecipe)
+                                        )
+                                        //Bottom - Top
+                                        .addGroup(
+                                                layout.createSequentialGroup()
+                                                        .addComponent(enableTreeView)
+                                                        .addComponent(enableConsoleDebug)
+                                                        .addComponent(enableVerboseLogging)
+                                        )
                         )
         );
         layout.setVerticalGroup(
@@ -168,75 +205,26 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
                                                 .addComponent(outputItemShortDescription)
                                 )
                         )
-                        //Middle - Right
+                        //Bottom - Left
                         .addGroup(
                                 layout.createParallelGroup()
                                         .addComponent(countPerIngredient)
                                         .addComponent(numberOfIngredientsPerRecipe)
                         )
+                        //Bottom - Right
+                        .addGroup(
+                                layout.createParallelGroup()
+                                        .addComponent(enableTreeView)
+                                        .addComponent(enableConsoleDebug)
+                                        .addComponent(enableVerboseLogging)
+                        )
         );
 
-        setupChangeListeners(settings);
+        setupChangeListeners();
         return settingsDisplay;
     }
 
-    public void updateConfigSettings(RecipeCreatorSettings settings) {
-        String creationPath = getCurrentText("creationPath");
-        if(creationPath != null) {
-            settings.creationPath = creationPath;
-        }
-        String ingredientListFile = getCurrentText("ingredientListFile");
-        if(ingredientListFile != null) {
-            settings.ingredientListFile = ingredientListFile;
-        }
-        String recipeTemplateFile = getCurrentText("recipeTemplateFile");
-        if(recipeTemplateFile != null) {
-            settings.recipeTemplateFile = recipeTemplateFile;
-        }
-        String ingredientTemplateFile = getCurrentText("ingredientTemplateFile");
-        if(ingredientTemplateFile != null) {
-            settings.ingredientTemplateFile = ingredientTemplateFile;
-        }
-        String ingredientImageTemplateFile = getCurrentText("ingredientImageTemplateFile");
-        if(ingredientImageTemplateFile != null) {
-            settings.ingredientImageTemplateFile = ingredientImageTemplateFile;
-        }
-        String recipeConfigFileName = getCurrentText("recipeConfigFileName");
-        if(recipeConfigFileName != null) {
-            settings.recipeConfigFileName = recipeConfigFileName;
-        }
-        String filePrefix = getCurrentText("filePrefix");
-        if(filePrefix != null) {
-            settings.filePrefix = filePrefix;
-        }
-        String fileSuffix = getCurrentText("fileSuffix");
-        if(fileSuffix != null) {
-            settings.fileSuffix = fileSuffix;
-        }
-        String fileExtension = getCurrentText("fileExtension");
-        if(fileExtension != null) {
-            settings.fileExtension = fileExtension;
-        }
-        String outputItemDescription = getCurrentText("outputItemDescription");
-        if(outputItemDescription != null) {
-            settings.outputItemDescription = outputItemDescription;
-        }
-        String outputItemShortDescription = getCurrentText("outputItemShortDescription");
-        if(outputItemShortDescription != null) {
-            settings.outputItemShortDescription = outputItemShortDescription;
-        }
-
-        Integer countPerIngredient = getCurrentValue("countPerIngredient");
-        if(countPerIngredient != null) {
-            settings.countPerIngredient = countPerIngredient;
-        }
-        Integer numberOfIngredientsPerRecipe = getCurrentValue("numberOfIngredientsPerRecipe");
-        if(numberOfIngredientsPerRecipe != null) {
-            settings.numberOfIngredientsPerRecipe = numberOfIngredientsPerRecipe;
-        }
-    }
-
-    private void setupChangeListeners(final RecipeCreatorSettings settings) {
+    private void setupChangeListeners() {
         setupTextEntryFocusListener("creationPath", new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) { }
@@ -244,7 +232,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.creationPath = text.getText();
+                _settings.creationPath = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("ingredientListFile", new FocusListener() {
@@ -254,7 +243,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.ingredientListFile = text.getText();
+                _settings.ingredientListFile = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("recipeTemplateFile", new FocusListener() {
@@ -264,7 +254,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.recipeTemplateFile = text.getText();
+                _settings.recipeTemplateFile = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("ingredientTemplateFile", new FocusListener() {
@@ -274,7 +265,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.ingredientTemplateFile = text.getText();
+                _settings.ingredientTemplateFile = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("ingredientImageTemplateFile", new FocusListener() {
@@ -284,7 +276,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.ingredientImageTemplateFile = text.getText();
+                _settings.ingredientImageTemplateFile = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("recipeConfigFileName", new FocusListener() {
@@ -294,7 +287,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.recipeConfigFileName = text.getText();
+                _settings.recipeConfigFileName = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("filePrefix", new FocusListener() {
@@ -304,7 +298,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.filePrefix = text.getText();
+                _settings.filePrefix = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("fileSuffix", new FocusListener() {
@@ -314,7 +309,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.fileSuffix = text.getText();
+                _settings.fileSuffix = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("fileExtension", new FocusListener() {
@@ -324,7 +320,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.fileExtension = text.getText();
+                _settings.fileExtension = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("outputItemDescription", new FocusListener() {
@@ -334,7 +331,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.outputItemDescription = text.getText();
+                _settings.outputItemDescription = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("outputItemShortDescription", new FocusListener() {
@@ -344,7 +342,19 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.outputItemShortDescription = text.getText();
+                _settings.outputItemShortDescription = text.getText();
+                writeSettings();
+            }
+        });
+        setupTextEntryFocusListener("logFile", new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                JTextComponent text = (JTextComponent)e.getSource();
+                _settings.logFile = text.getText();
+                writeSettings();
             }
         });
 
@@ -352,7 +362,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void stateChanged(ChangeEvent e) {
                 JSlider slider = (JSlider)e.getSource();
-                settings.countPerIngredient = slider.getValue();
+                _settings.countPerIngredient = slider.getValue();
+                writeSettings();
             }
         });
 
@@ -360,8 +371,38 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void stateChanged(ChangeEvent e) {
                 JSlider slider = (JSlider)e.getSource();
-                settings.numberOfIngredientsPerRecipe = slider.getValue();
+                _settings.numberOfIngredientsPerRecipe = slider.getValue();
+                writeSettings();
             }
         });
+
+        setupCheckBoxListener("enableTreeView", new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkbox = (JCheckBox)e.getSource();
+                _settings.enableTreeView = checkbox.isSelected();
+                writeSettings();
+            }
+        });
+        setupCheckBoxListener("enableConsoleDebug", new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkbox = (JCheckBox)e.getSource();
+                _settings.enableConsoleDebug = checkbox.isSelected();
+                writeSettings();
+            }
+        });
+        setupCheckBoxListener("enableVerboseLogging", new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkbox = (JCheckBox)e.getSource();
+                _settings.enableVerboseLogging = checkbox.isSelected();
+                writeSettings();
+            }
+        });
+    }
+
+    private void writeSettings() {
+        _writer.write(_settings);
     }
 }

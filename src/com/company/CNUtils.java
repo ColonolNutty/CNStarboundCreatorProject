@@ -107,4 +107,9 @@ public abstract class CNUtils {
         }
         return indent;
     }
+
+    public static String escapeString(String str) {
+        return str.replace("\n", "\\n")
+                .replace("\r", "\\r");
+    }
 }

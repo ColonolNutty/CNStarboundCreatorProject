@@ -1,22 +1,25 @@
 package com.company.ui.balancer;
 
 import com.company.CNUtils;
+import com.company.SettingsWriter;
 import com.company.models.ConfigSettings;
-import com.company.ui.CNUIExtensions;
 import com.company.ui.SettingsDisplayBase;
 
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.JTextComponent;
-import java.awt.*;
 import java.awt.event.*;
-import java.util.Enumeration;
-import java.util.Hashtable;
-
-import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 public class ConfigSettingsDisplay extends SettingsDisplayBase {
-    public JPanel setup(ConfigSettings settings, ActionListener onRun) {
+    private SettingsWriter _writer;
+    private ConfigSettings _settings;
+
+    public ConfigSettingsDisplay(SettingsWriter writer, ConfigSettings settings) {
+        _writer = writer;
+        this._settings = settings;
+    }
+
+    public JPanel setup(ActionListener onRun) {
         JPanel settingsDisplay = new JPanel();
         GroupLayout layout = new GroupLayout(settingsDisplay);
         layout.setAutoCreateGaps(true);
@@ -28,25 +31,25 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
         JPanel locsToUpdate = addTextArea(
                 "Relative Locations To Update (Comma Separated): ",
                 "locationsToUpdate",
-                settings.locationsToUpdate);
+                _settings.locationsToUpdate);
         JPanel includeLocsPanel = addTextArea(
                 "Relative Locations To Include In Searches (Comma Separated): ",
                 "includeLocations",
-                settings.includeLocations);
+                _settings.includeLocations);
         JPanel excludeEffectsPanel = addTextArea(
                 "Exclude Effects With Name (Comma Separated): ",
                 "excludedEffects",
-                settings.excludedEffects);
+                _settings.excludedEffects);
 
         //TextFields
         JPanel ingredientOverridePath = createField(FieldType.TextField,
                 "Relative Path To Ingredient Overrides: ",
                 "ingredientOverridePath",
-                settings.ingredientOverridePath);
+                _settings.ingredientOverridePath);
         JPanel logFile = createField(FieldType.TextField,
                 "Relative Log File Path: ",
                 "logFile",
-                settings.logFile);
+                _settings.logFile);
 
         //Sliders
         JPanel increasePercentage = addSlider("Increase Percent Each Step (Ex. 0.05): ",
@@ -55,39 +58,39 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
                 100,
                 5,
                 20,
-                (int)(settings.increasePercentage*100));
+                (int)(_settings.increasePercentage*100));
         JPanel minimumFoodValue = addSlider("Minimum Food Value (No food will be allowed a value below this): ",
                 "minimumFoodValue",
                 1,
                 21,
                 2,
                 10,
-                settings.minimumFoodValue);
+                _settings.minimumFoodValue);
         JPanel numberOfPasses = addSlider("Number Of Passes:",
                 "numberOfPasses",
                 1,
                 31,
                 1,
                 5,
-                settings.numberOfPasses);
+                _settings.numberOfPasses);
 
         //CheckBox
         JPanel enableTreeView = createField(FieldType.CheckBox,
                 "Enable Tree View",
                 "enableTreeView",
-                settings.enableTreeView);
+                _settings.enableTreeView);
         JPanel enableConsoleDebug = createField(FieldType.CheckBox,
                 "Enable Console Debug",
                 "enableConsoleDebug",
-                settings.enableConsoleDebug);
+                _settings.enableConsoleDebug);
         JPanel enableVerboseLogging = createField(FieldType.CheckBox,
                 "Enable Verbose Logging",
                 "enableVerboseLogging",
-                settings.enableVerboseLogging);
+                _settings.enableVerboseLogging);
         JPanel enableEffectsUpdate = createField(FieldType.CheckBox,
                 "Update Effects",
                 "enableEffectsUpdate",
-                settings.enableEffectsUpdate);
+                _settings.enableEffectsUpdate);
         JButton runButton = createButton("Run", onRun);
 
         layout.setHorizontalGroup(
@@ -128,7 +131,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
                                         .addComponent(enableTreeView)
                                         .addComponent(enableConsoleDebug)
                                         .addComponent(enableVerboseLogging)
-                                        .addComponent(enableEffectsUpdate))
+                                        .addComponent(enableEffectsUpdate)
+                        )
         );
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
@@ -172,66 +176,11 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
                         )
         );
 
-        setupChangeListeners(settings);
+        setupChangeListeners();
         return settingsDisplay;
     }
 
-    public void updateConfigSettings(ConfigSettings settings) {
-        String[] newLocToUpdate = CNUtils.fromCommaSeparated(getCurrentText("locationsToUpdate"));
-        if(newLocToUpdate != null) {
-            settings.locationsToUpdate = newLocToUpdate;
-        }
-        String[] includeLocations = CNUtils.fromCommaSeparated(getCurrentText("includeLocations"));
-        if(includeLocations != null) {
-            settings.includeLocations = includeLocations;
-        }
-        String[] excludedEffects = CNUtils.fromCommaSeparated(getCurrentText("excludedEffects"));
-        if(excludedEffects != null) {
-            settings.excludedEffects = excludedEffects;
-        }
-
-        String ingredientOverridePath = getCurrentText("ingredientOverridePath");
-        if(ingredientOverridePath != null) {
-            settings.ingredientOverridePath = ingredientOverridePath;
-        }
-
-        String logFile = getCurrentText("logFile");
-        if(logFile != null) {
-            settings.logFile = logFile;
-        }
-
-        Integer minimumFoodValue = getCurrentValue("minimumFoodValue");
-        if(minimumFoodValue != null) {
-            settings.minimumFoodValue = minimumFoodValue;
-        }
-        Integer increasePercentage = getCurrentValue("increasePercentage");
-        if(increasePercentage != null) {
-            settings.increasePercentage = increasePercentage/100.0;
-        }
-        Integer numberOfPasses = getCurrentValue("numberOfPasses");
-        if(numberOfPasses != null) {
-            settings.numberOfPasses = numberOfPasses;
-        }
-
-        Boolean enableTreeView = getIsSelected("enableTreeView");
-        if(enableTreeView != null) {
-            settings.enableTreeView = enableTreeView;
-        }
-        Boolean enableConsoleDebug = getIsSelected("enableConsoleDebug");
-        if(enableConsoleDebug != null) {
-            settings.enableConsoleDebug = enableConsoleDebug;
-        }
-        Boolean enableVerboseLogging = getIsSelected("enableVerboseLogging");
-        if(enableVerboseLogging != null) {
-            settings.enableVerboseLogging = enableVerboseLogging;
-        }
-        Boolean enableEffectsUpdate = getIsSelected("enableEffectsUpdate");
-        if(enableEffectsUpdate != null) {
-            settings.enableEffectsUpdate = enableEffectsUpdate;
-        }
-    }
-
-    private void setupChangeListeners(final ConfigSettings settings) {
+    private void setupChangeListeners() {
         setupTextEntryFocusListener("locationsToUpdate", new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) { }
@@ -239,7 +188,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.locationsToUpdate = CNUtils.fromCommaSeparated(text.getText());
+                _settings.locationsToUpdate = CNUtils.fromCommaSeparated(text.getText());
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("includeLocations", new FocusListener() {
@@ -249,7 +199,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.includeLocations = CNUtils.fromCommaSeparated(text.getText());
+                _settings.includeLocations = CNUtils.fromCommaSeparated(text.getText());
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("excludedEffects", new FocusListener() {
@@ -259,7 +210,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.excludedEffects = CNUtils.fromCommaSeparated(text.getText());
+                _settings.excludedEffects = CNUtils.fromCommaSeparated(text.getText());
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("ingredientOverridePath", new FocusListener() {
@@ -269,7 +221,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.ingredientOverridePath = text.getText();
+                _settings.ingredientOverridePath = text.getText();
+                writeSettings();
             }
         });
         setupTextEntryFocusListener("logFile", new FocusListener() {
@@ -279,7 +232,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                settings.logFile = text.getText();
+                _settings.logFile = text.getText();
+                writeSettings();
             }
         });
 
@@ -288,7 +242,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             public void stateChanged(ChangeEvent e) {
                 JSlider slider = (JSlider)e.getSource();
                 int val = slider.getValue();
-                settings.increasePercentage = val/100.0;
+                _settings.increasePercentage = val/100.0;
+                writeSettings();
             }
         });
         setupSliderListener("minimumFoodValue", new ChangeListener() {
@@ -296,7 +251,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             public void stateChanged(ChangeEvent e) {
                 JSlider slider = (JSlider)e.getSource();
                 int val = slider.getValue();
-                settings.minimumFoodValue = val;
+                _settings.minimumFoodValue = val;
+                writeSettings();
             }
         });
         setupSliderListener("numberOfPasses", new ChangeListener() {
@@ -304,7 +260,8 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             public void stateChanged(ChangeEvent e) {
                 JSlider slider = (JSlider)e.getSource();
                 int val = slider.getValue();
-                settings.numberOfPasses = val;
+                _settings.numberOfPasses = val;
+                writeSettings();
             }
         });
 
@@ -312,29 +269,37 @@ public class ConfigSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void stateChanged(ChangeEvent e) {
                 JCheckBox checkbox = (JCheckBox)e.getSource();
-                settings.enableTreeView = checkbox.isSelected();
+                _settings.enableTreeView = checkbox.isSelected();
+                writeSettings();
             }
         });
         setupCheckBoxListener("enableConsoleDebug", new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 JCheckBox checkbox = (JCheckBox)e.getSource();
-                settings.enableConsoleDebug = checkbox.isSelected();
+                _settings.enableConsoleDebug = checkbox.isSelected();
+                writeSettings();
             }
         });
         setupCheckBoxListener("enableVerboseLogging", new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 JCheckBox checkbox = (JCheckBox)e.getSource();
-                settings.enableVerboseLogging = checkbox.isSelected();
+                _settings.enableVerboseLogging = checkbox.isSelected();
+                writeSettings();
             }
         });
         setupCheckBoxListener("enableEffectsUpdate", new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 JCheckBox checkbox = (JCheckBox)e.getSource();
-                settings.enableEffectsUpdate = checkbox.isSelected();
+                _settings.enableEffectsUpdate = checkbox.isSelected();
+                writeSettings();
             }
         });
+    }
+
+    private void writeSettings() {
+        _writer.write(_settings);
     }
 }

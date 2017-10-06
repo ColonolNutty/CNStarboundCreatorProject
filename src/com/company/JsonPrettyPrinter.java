@@ -105,7 +105,7 @@ public class JsonPrettyPrinter {
                             return val.toString();
                         } catch (JSONException e4) {
                             try {
-                                return "\"" + obj.getString(key) + "\"";
+                                return "\"" + CNUtils.escapeString(obj.getString(key)) + "\"";
                             }
                             catch(JSONException e5) {
                                 _log.error("Unknown object type: " + key, e5);
@@ -171,7 +171,7 @@ public class JsonPrettyPrinter {
                     }
                 }
             }
-            String result = "\"" + obj.getString(key) + "\"";
+            String result = "\"" + CNUtils.escapeString(obj.getString(key)) + "\"";
             if(isNotLast) {
                 result += ", ";
             }

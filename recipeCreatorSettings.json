@@ -11,5 +11,9 @@
   "outputItemDescription" : "A sandwich",
   "outputItemShortDescription" : "Sandwich",
   "countPerIngredient" : 5,
-  "numberOfIngredientsPerRecipe" : 5
+  "numberOfIngredientsPerRecipe" : 5,
+  "logFile" : "updatelog.log",
+  "enableTreeView" : true,
+  "enableConsoleDebug" : true,
+  "enableVerboseLogging" : true
 }

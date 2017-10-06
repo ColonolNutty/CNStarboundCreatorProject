@@ -4,6 +4,7 @@ import com.company.DebugWriter;
 import com.company.models.MessageBundle;
 
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -20,7 +21,8 @@ import java.util.Hashtable;
  */
 public class OutputDisplay extends DebugWriter {
     private JPanel _displayPanel;
-    private JTextArea _outputDisplay;
+    private JTextArea _outputDisplayTextArea;
+    private JScrollPane _outputDisplayScroll;
     private DefaultMutableTreeNode _topLevelOutputNode;
     private JTree _outputTree;
 
@@ -30,16 +32,17 @@ public class OutputDisplay extends DebugWriter {
     }
 
     public void clear() {
-        _outputDisplay.setText("");
+        _outputDisplayTextArea.setText("");
     }
 
     @Override
     public void writeln(String text) {
-        if(_outputDisplay.getText().isEmpty()) {
-            _outputDisplay.append(text);
+        if(_outputDisplayTextArea.getText().isEmpty()) {
+            _outputDisplayTextArea.append(text);
             return;
         }
-        _outputDisplay.append("\n" + text);
+        _outputDisplayTextArea.append("\n" + text);
+        _outputDisplayScroll.getHorizontalScrollBar().setValue(0);
     }
 
     public void updateTreeDisplay(Hashtable<String, MessageBundle> bundles) {
@@ -70,13 +73,16 @@ public class OutputDisplay extends DebugWriter {
 
         JLabel label = new JLabel("Console Output: ");
 
-        _outputDisplay = new JTextArea();
-        _outputDisplay.setEditable(false);
-        _outputDisplay.setRows(20);
-        _outputDisplay.setAutoscrolls(true);
-        CNUIExtensions.addInternalPadding(_outputDisplay, 10);
-        JScrollPane scrollPanel = new JScrollPane(_outputDisplay);
-        scrollPanel.setAutoscrolls(true);
+        _outputDisplayTextArea = new JTextArea();
+        DefaultCaret caret = (DefaultCaret) _outputDisplayTextArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        _outputDisplayTextArea.setEditable(false);
+        _outputDisplayTextArea.setRows(20);
+        _outputDisplayTextArea.setAutoscrolls(true);
+        CNUIExtensions.addInternalPadding(_outputDisplayTextArea, 10);
+        _outputDisplayScroll = new JScrollPane(_outputDisplayTextArea);
+        _outputDisplayScroll.setAutoscrolls(true);
+        _outputDisplayScroll.getHorizontalScrollBar().setValue(0);
 
         _topLevelOutputNode = new DefaultMutableTreeNode("File Events");
         _outputTree = new JTree(_topLevelOutputNode);
@@ -118,7 +124,7 @@ public class OutputDisplay extends DebugWriter {
                         .addGroup(
                                 layout.createParallelGroup()
                                         .addComponent(label)
-                                        .addComponent(scrollPanel, 500, 500, 10000)
+                                        .addComponent(_outputDisplayScroll, 500, 500, 10000)
                         )
         );
         layout.setVerticalGroup(
@@ -127,7 +133,7 @@ public class OutputDisplay extends DebugWriter {
                         .addGroup(
                                 layout.createSequentialGroup()
                                         .addComponent(label)
-                                        .addComponent(scrollPanel)
+                                        .addComponent(_outputDisplayScroll)
                         )
         );
         _displayPanel.setVisible(true);

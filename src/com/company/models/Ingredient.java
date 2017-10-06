@@ -76,6 +76,17 @@ public class Ingredient {
     }
 
     public void setName(String name) {
+        if(name == null) {
+            return;
+        }
+        String currentName = getName();
+        if(currentName == null) {
+            this.name = name;
+            this.itemName = name;
+            this.projectileName = name;
+            this.objectName = name;
+            return;
+        }
         if(this.name != null) {
             this.name = name;
         }
@@ -101,6 +112,17 @@ public class Ingredient {
             return projectileName;
         }
         return objectName;
+    }
+
+    public String getIdentifier() {
+        String name = getName();
+        if(name != null) {
+            return name;
+        }
+        if(patchFile != null) {
+            return patchFile;
+        }
+        return filePath;
     }
 
     public boolean priceEquals(Ingredient otherIngredient) {

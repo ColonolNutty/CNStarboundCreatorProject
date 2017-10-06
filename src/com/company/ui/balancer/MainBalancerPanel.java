@@ -37,7 +37,7 @@ public class MainBalancerPanel {
         mainPanel.setSize(size);
         GroupLayout layout = new GroupLayout(mainPanel);
         mainPanel.setLayout(layout);
-        _settingsDisplay = new ConfigSettingsDisplay();
+        _settingsDisplay = new ConfigSettingsDisplay(_settingsWriter, _configSettings);
 
         _outputDisplay = new OutputDisplay();
         JPanel outputDisplayPanel = _outputDisplay.get();
@@ -46,7 +46,7 @@ public class MainBalancerPanel {
         }
         _log = new CNLog(_outputDisplay, _configSettings);
         mainPanel.setVisible(true);
-        JPanel settingsPanel = _settingsDisplay.setup(_configSettings, new ActionListener() {
+        JPanel settingsPanel = _settingsDisplay.setup(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 final JButton source = (JButton) e.getSource();
@@ -55,10 +55,9 @@ public class MainBalancerPanel {
                     public void run() {
                         try {
                             _log.clear();
+                            _log.setupDebugLogFile();
                             _outputDisplay.clear();
                             _settingsDisplay.disable();
-                            _settingsDisplay.updateConfigSettings(_configSettings);
-                            _settingsWriter.write(_configSettings);
                             _valueBalancer = new ValueBalancer(_configSettings, _log);
                             _valueBalancer.run();
                             Hashtable<String, MessageBundle> messages = _log.getMessages();

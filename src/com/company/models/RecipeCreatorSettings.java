@@ -22,4 +22,6 @@ public class RecipeCreatorSettings extends BaseSettings {
     public String outputItemShortDescription;
     public Integer countPerIngredient;
     public Integer numberOfIngredientsPerRecipe;
+
+    public RecipeCreatorSettings() {super();}
 }
