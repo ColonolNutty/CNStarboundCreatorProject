@@ -1,4 +1,8 @@
 {
+  "logFile" : "updatelog.log",
+  "enableTreeView" : true,
+  "enableConsoleDebug" : true,
+  "enableVerboseLogging" : true,
   "creationPath" : "TestFiles\\CreatePath",
   "ingredientListFile" : "TestFiles\\Templates\\ingredientList.json",
   "recipeTemplateFile" : "TestFiles\\Templates\\recipeTemplate.recipe",
@@ -10,10 +14,6 @@
   "fileExtension" : "consumable",
   "outputItemDescription" : "A sandwich",
   "outputItemShortDescription" : "Sandwich",
-  "countPerIngredient" : 5,
-  "numberOfIngredientsPerRecipe" : 5,
-  "logFile" : "updatelog.log",
-  "enableTreeView" : true,
-  "enableConsoleDebug" : true,
-  "enableVerboseLogging" : true
+  "countPerIngredient" : 2,
+  "numberOfIngredientsPerRecipe" : 2
 }

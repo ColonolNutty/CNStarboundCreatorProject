@@ -71,7 +71,8 @@ public class IngredientCrafter extends CNCrafter {
         newIngredient.shortdescription = newShortDescrip;
         newIngredient.inventoryIcon = name + ".png";
 
-        String newPath = _settings.creationPath + "\\";
+        String newPath = _settings.creationPath + "\\ingredients\\";
+        ensurePath(newPath);
         String newIngredPath = newPath + name + "." + extension;
         String newImagePath = newPath + newIngredient.inventoryIcon;
         copyImage(newImagePath);

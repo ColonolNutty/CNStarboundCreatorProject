@@ -4,13 +4,11 @@ import com.company.CNLog;
 import com.company.JsonManipulator;
 import com.company.StopWatchTimer;
 import com.company.models.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -39,6 +37,7 @@ public class MassRecipeCreator {
             _log.error("No configuration file found, exiting.");
             return;
         }
+        ensureCreatePath();
         StopWatchTimer timer = new StopWatchTimer(_log);
         timer.start("Running");
 
@@ -50,6 +49,15 @@ public class MassRecipeCreator {
         ArrayList<String> outputNames = createFromTemplate(ingredientList);
         writeToConfigurationFile(outputNames);
         timer.logTime();
+    }
+
+    private void ensureCreatePath() {
+        String createPath = _settings.creationPath;
+        if(createPath == null) {
+            return;
+        }
+        File file = new File(createPath);
+        file.mkdirs();
     }
 
     private void writeToConfigurationFile(ArrayList<String> names) {
@@ -120,6 +128,10 @@ public class MassRecipeCreator {
     }
 
     private <T> T read(String path, Class<T> classOfT){
+        File file = new File(path);
+        if(!file.exists()) {
+            return null;
+        }
         try {
             return _manipulator.read(path, classOfT);
         }

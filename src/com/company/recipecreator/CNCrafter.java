@@ -2,6 +2,7 @@ package com.company.recipecreator;
 
 import com.company.models.IngredientListItem;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -11,4 +12,14 @@ import java.util.ArrayList;
  */
 public abstract class CNCrafter {
     public abstract void craft(String name, ArrayList<IngredientListItem> ingredients, int countPer);
+
+    protected void ensurePath(String path) {
+        if(path == null) {
+            return;
+        }
+        File file = new File(path);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+    }
 }

@@ -87,8 +87,8 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
         JPanel countPerIngredient = addSlider(
                 "The number of each ingredient added to a recipe?",
                 "countPerIngredient",
-                1,
-                101,
+                0,
+                50,
                 1,
                 10,
                 _settings.countPerIngredient);
@@ -97,9 +97,9 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
                 "The number of ingredients possible per recipe(i.e. value of 8 = 8, 7, 6, 5, etc.)?",
                 "numberOfIngredientsPerRecipe",
                 1,
-                8,
+                3,
+                0,
                 1,
-                2,
                 _settings.numberOfIngredientsPerRecipe);
 
         JPanel enableTreeView = createField(FieldType.CheckBox,
@@ -150,6 +150,7 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
                                                         .addComponent(fileExtension)
                                                         .addComponent(outputItemDescription)
                                                         .addComponent(outputItemShortDescription)
+                                                        .addComponent(logFile)
                                         )
                         )
                         //Bottom
@@ -203,6 +204,7 @@ public class RecipeSettingsDisplay extends SettingsDisplayBase {
                                                 .addComponent(fileExtension)
                                                 .addComponent(outputItemDescription)
                                                 .addComponent(outputItemShortDescription)
+                                                .addComponent(logFile)
                                 )
                         )
                         //Bottom - Left

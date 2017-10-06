@@ -50,9 +50,11 @@ public class RecipeCrafter extends CNCrafter {
         }
         recipe.output = new ItemDescriptor(name, _template.output.count);
         recipe.groups = _template.groups;
-        String recipePath = _settings.creationPath + "\\" + name + ".recipe";
+        String recipePath = _settings.creationPath + "\\recipes\\";
+        ensurePath(recipePath);
+        String recipeFile = recipePath + name + ".recipe";
         _log.debug("Creating recipe with name: " + name);
-        _manipulator.writeNewWithTemplate(_settings.recipeTemplateFile, recipePath, recipe);
+        _manipulator.writeNewWithTemplate(_settings.recipeTemplateFile, recipeFile, recipe);
     }
 
     private <T> T read(String path, Class<T> classOfT){

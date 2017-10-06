@@ -1,14 +1,14 @@
 {
+  "logFile" : "updatelog.log",
+  "enableTreeView" : true,
+  "enableConsoleDebug" : true,
+  "enableVerboseLogging" : true,
   "locationsToUpdate" : [ "TestFiles/Samples" ],
   "includeLocations" : [ "TestFiles/NonStuff" ],
   "excludedEffects" : [ "foodpoison" ],
   "increasePercentage" : 0.05,
   "minimumFoodValue" : 2,
   "ingredientOverridePath" : "valueOverrides.json",
-  "logFile" : "updatelog.log",
   "numberOfPasses" : 8,
-  "enableTreeView" : true,
-  "enableConsoleDebug" : true,
-  "enableVerboseLogging" : true,
   "enableEffectsUpdate" : true
 }
