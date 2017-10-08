@@ -1,6 +1,8 @@
-# Price Food Value Balancer by ColonolNutty
+# Starbound Creator by ColonolNutty
 
-### What does this program do?
+## CNPriceFoodValueBalancerModule
+
+### What does this module do?
 
 This program is designed to make it easy to set prices and food values for a mod that has a ton of ingredients. It balances food values and prices using recipes and the ingredients used to make those recipes, it isn't limited to single step recipes either. It goes through each recipe, and each of the ingredients recipes, and the ingredients of the ingredients recipes. Basically, it can go through any number of hoops, calculating values every step of the way. It can even go and update patch files as well, so if you have a patch file that modifies the values of the vanilla items, it'll update the values within the patch file to reflect and recipe changes you have made.
 
