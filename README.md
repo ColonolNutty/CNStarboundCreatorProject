@@ -8,3 +8,6 @@ See below for the different modules you can put in.
 
 # Modules
 
+* [CNPriceFoodValueBalancer](CNPriceFoodValueBalancerModule/README.md)
+* [CNRecipeCreator](CNRecipeCreatorModule/README.md)
+* [CNPerennialCompactor](CNPerennialCompactorModule/README.md)
