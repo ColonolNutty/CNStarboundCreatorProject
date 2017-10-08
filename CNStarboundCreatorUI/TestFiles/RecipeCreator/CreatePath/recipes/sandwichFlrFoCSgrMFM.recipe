@@ -1,0 +1,27 @@
+{
+  "input" : [ 
+    {
+      "item" : "breadsliceMFM",
+      "count" : 2.0
+    },
+
+    {
+      "item" : "flourMFM",
+      "count" : 2.0
+    },
+
+    {
+      "item" : "foulcocktailMFM",
+      "count" : 2.0
+    },
+
+    {
+      "item" : "sugarMFM",
+      "count" : 2.0
+    } ],
+  "output" :   {
+    "item" : "sandwichFlrFoCSgrMFM",
+    "count" : 1.0
+  },
+  "groups" : [ "preparingMFM" ]
+}

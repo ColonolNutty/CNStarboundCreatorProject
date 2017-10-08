@@ -1,0 +1,12 @@
+{
+  "propertyOrderFile" : "configuration\\propertyOrder.json",
+  "logFile" : "logs\\pandclog.log",
+  "enableTreeView" : true,
+  "enableConsoleDebug" : true,
+  "enableVerboseLogging" : true,
+  "locationsOfCrops" : [ "TestFiles\\PandC\\PandCCropPath" ],
+  "createPath" : "TestFiles\\PandC\\PandCCreatePath",
+  "makePerennial" : true,
+  "makeCompact" : true,
+  "makePatchFiles" : true
+}

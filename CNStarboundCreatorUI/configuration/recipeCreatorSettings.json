@@ -1,0 +1,20 @@
+{
+  "propertyOrderFile" : "configuration\\propertyOrder.json",
+  "logFile" : "logs\\recipeCrafterLog.log",
+  "enableTreeView" : true,
+  "enableConsoleDebug" : true,
+  "enableVerboseLogging" : true,
+  "creationPath" : "TestFiles\\RecipeCreator\\CreatePath",
+  "ingredientListFile" : "TestFiles\\RecipeCreator\\Templates\\ingredientList.json",
+  "recipeTemplateFile" : "TestFiles\\RecipeCreator\\Templates\\recipeTemplate.recipe",
+  "ingredientTemplateFile" : "TestFiles\\RecipeCreator\\Templates\\sandwichTemplate.consumable",
+  "ingredientImageTemplateFile" : "TestFiles\\RecipeCreator\\Templates\\sandwichTemplate.png",
+  "recipeConfigFileName" : "TestFiles\\RecipeCreator\\CreatePath\\preparingMFMRecipes.config",
+  "filePrefix" : "sandwich",
+  "fileSuffix" : "MFM",
+  "fileExtension" : "consumable",
+  "outputItemDescription" : "A sandwich",
+  "outputItemShortDescription" : "Sandwich",
+  "countPerIngredient" : 2,
+  "numberOfIngredientsPerRecipe" : 2
+}

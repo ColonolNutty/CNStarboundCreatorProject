@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PriceFoodValueBalancer.iml" filepath="$PROJECT_DIR$/PriceFoodValueBalancer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNModuleDependencies/CNModuleDependencies.iml" filepath="$PROJECT_DIR$/CNModuleDependencies/CNModuleDependencies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNPerennialCompactorModule/CNPerennialCompactorModule.iml" filepath="$PROJECT_DIR$/CNPerennialCompactorModule/CNPerennialCompactorModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/CNPriceFoodValueBalancerModule.iml" filepath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/CNPriceFoodValueBalancerModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNRecipeCreatorModule/CNRecipeCreatorModule.iml" filepath="$PROJECT_DIR$/CNRecipeCreatorModule/CNRecipeCreatorModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNStarboundCreatorProject.iml" filepath="$PROJECT_DIR$/CNStarboundCreatorProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNStarboundCreatorUI/CNStarboundCreatorUI.iml" filepath="$PROJECT_DIR$/CNStarboundCreatorUI/CNStarboundCreatorUI.iml" />
     </modules>
   </component>
 </project>

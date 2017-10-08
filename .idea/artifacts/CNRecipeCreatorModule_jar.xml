@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="CNRecipeCreatorModule:jar">
+    <output-path>$PROJECT_DIR$/CNStarboundCreatorUI/modules</output-path>
+    <root id="archive" name="CNRecipeCreatorModule.jar">
+      <element id="module-output" name="CNRecipeCreatorModule" />
+      <element id="module-output" name="CNModuleDependencies" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/json-patch-1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/msg-simple-1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/json-20170516.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-databind-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/btf-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/guava-23.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/jackson-annotations-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/jackson-core-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/jackson-coreutils-1.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/jackson-databind-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/json-20170516.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/json-patch-1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNRecipeCreatorModule/lib/msg-simple-1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/btf-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-annotations-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-core-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-coreutils-1.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/guava-23.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

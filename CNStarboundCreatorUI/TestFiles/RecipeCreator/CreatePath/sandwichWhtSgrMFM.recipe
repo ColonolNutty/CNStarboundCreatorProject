@@ -1,0 +1,22 @@
+{
+  "input" : [ 
+    {
+      "item" : "breadsliceMFM",
+      "count" : 2.0
+    },
+
+    {
+      "item" : "wheat",
+      "count" : 5.0
+    },
+
+    {
+      "item" : "sugarMFM",
+      "count" : 5.0
+    } ],
+  "output" :   {
+    "item" : "sandwichWhtSgrMFM",
+    "count" : 1.0
+  },
+  "groups" : [ "preparingMFM" ]
+}

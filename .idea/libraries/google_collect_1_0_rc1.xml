@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="google-collect-1.0-rc1">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/google-collect-1.0-rc1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

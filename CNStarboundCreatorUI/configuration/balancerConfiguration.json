@@ -1,0 +1,15 @@
+{
+  "propertyOrderFile" : "configuration\\propertyOrder.json",
+  "logFile" : "logs\\updatelog.log",
+  "enableTreeView" : true,
+  "enableConsoleDebug" : true,
+  "enableVerboseLogging" : true,
+  "locationsToUpdate" : [ "TestFiles\\Balancer\\Samples" ],
+  "includeLocations" : [ "TestFiles\\Balancer\\NonStuff" ],
+  "excludedEffects" : [ "foodpoison" ],
+  "increasePercentage" : 0.05,
+  "minimumFoodValue" : 2,
+  "ingredientOverridePath" : "configuration\\valueOverrides.json",
+  "numberOfPasses" : 8,
+  "enableEffectsUpdate" : true
+}
