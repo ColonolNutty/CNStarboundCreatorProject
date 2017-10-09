@@ -6,6 +6,9 @@ import com.colonolnutty.module.shareddata.MainFunctionModule;
 import com.colonolnutty.module.shareddata.StopWatchTimer;
 import com.colonolnutty.module.shareddata.models.IngredientListItem;
 import com.colonolnutty.module.shareddata.models.RecipesConfig;
+import main.crafters.CNCrafter;
+import main.crafters.IngredientCrafter;
+import main.crafters.RecipeCrafter;
 import main.settings.RecipeCreatorSettings;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
@@ -18,14 +21,14 @@ import java.util.ArrayList;
  * Date: 10/04/2017
  * Time: 9:43 AM
  */
-public class MassRecipeCreator extends MainFunctionModule {
+public class RecipeCreatorMain extends MainFunctionModule {
 
     private CNLog _log;
     private RecipeCreatorSettings _settings;
     private JsonManipulator _manipulator;
     private ArrayList<CNCrafter> _crafters;
 
-    public MassRecipeCreator(RecipeCreatorSettings settings,
+    public RecipeCreatorMain(RecipeCreatorSettings settings,
                              CNLog log) {
         _settings = settings;
         _log = log;

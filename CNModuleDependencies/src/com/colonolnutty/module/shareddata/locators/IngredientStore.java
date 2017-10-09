@@ -199,11 +199,11 @@ public class IngredientStore {
         if(ingredient.shortdescription != null) {
             existing.shortdescription = ingredient.shortdescription;
         }
-        if(ingredient.stages != null) {
-            existing.stages = ingredient.stages;
-        }
         if(ingredient.interactData != null) {
             existing.interactData = ingredient.interactData;
+        }
+        if(ingredient.category != null) {
+            existing.category = ingredient.category;
         }
         if(ingredient.filePath != null) {
             existing.filePath = ingredient.filePath;

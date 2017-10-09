@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PandCSettings extends BaseSettings {
     public String[] locationsOfCrops;
-    public String createPath;
+    public String creationPath;
     public Boolean makePerennial;
     public Boolean makeCompact;
     public Boolean makePatchFiles;

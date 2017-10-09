@@ -5,7 +5,7 @@ import com.colonolnutty.module.shareddata.ConfigReader;
 import com.colonolnutty.module.shareddata.SettingsWriter;
 import com.colonolnutty.module.shareddata.models.settings.BasicSettings;
 import main.settings.BalancerCRData;
-import main.ValueBalancer;
+import main.PriceFoodValueBalancerMain;
 import main.settings.BalancerSettings;
 import com.colonolnutty.module.shareddata.models.MessageBundle;
 import com.colonolnutty.module.shareddata.ui.MainFunctionPanel;
@@ -26,7 +26,7 @@ public class MainPanel extends MainFunctionPanel {
     private BalancerSettings _settings;
     private OutputDisplay _outputDisplay;
     private BalancerSettingsDisplay _settingsDisplay;
-    private ValueBalancer _valueBalancer;
+    private PriceFoodValueBalancerMain _PriceFood_valueBalancerMain;
 
     @Override
     public JPanel create() {
@@ -59,8 +59,8 @@ public class MainPanel extends MainFunctionPanel {
                             _log.setupDebugLogFile();
                             _outputDisplay.clear();
                             _settingsDisplay.disable();
-                            _valueBalancer = new ValueBalancer(_settings, _log);
-                            _valueBalancer.run();
+                            _PriceFood_valueBalancerMain = new PriceFoodValueBalancerMain(_settings, _log);
+                            _PriceFood_valueBalancerMain.run();
                             Hashtable<String, MessageBundle> messages = _log.getMessages();
                             _outputDisplay.updateTreeDisplay(messages);
                         }

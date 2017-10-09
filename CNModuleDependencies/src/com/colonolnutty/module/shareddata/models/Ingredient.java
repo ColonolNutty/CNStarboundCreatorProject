@@ -20,10 +20,10 @@ public class Ingredient {
 
     public Double price;
     public Double foodValue;
+    public String category;
     public String description;
     public String shortdescription;
     public String inventoryIcon;
-    public Object stages;
     public Object interactData;
     public Object breakDropOptions;
     public ArrayNode effects;
@@ -276,10 +276,10 @@ public class Ingredient {
         copyIngred.projectileName = this.projectileName;
         copyIngred.price = this.price;
         copyIngred.foodValue = this.foodValue;
+        copyIngred.category = this.category;
         copyIngred.description = this.description;
         copyIngred.shortdescription = this.shortdescription;
         copyIngred.inventoryIcon = this.inventoryIcon;
-        copyIngred.stages = this.stages;
         copyIngred.interactData = this.interactData;
         copyIngred.breakDropOptions = this.breakDropOptions;
         copyIngred.effects = this.effects;

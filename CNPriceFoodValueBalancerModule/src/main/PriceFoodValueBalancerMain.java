@@ -17,11 +17,11 @@ import java.util.ArrayList;
  * Date: 09/16/2017
  * Time: 11:35 AM
  */
-public class ValueBalancer extends MainFunctionModule {
+public class PriceFoodValueBalancerMain extends MainFunctionModule {
     private BalancerSettings _settings;
     private CNLog _log;
 
-    public ValueBalancer(BalancerSettings balancerSettings, CNLog log) {
+    public PriceFoodValueBalancerMain(BalancerSettings balancerSettings, CNLog log) {
         _settings = balancerSettings;
         _log = log;
     }

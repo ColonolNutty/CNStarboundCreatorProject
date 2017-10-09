@@ -1,4 +1,4 @@
-package main;
+package main.crafters;
 
 import com.colonolnutty.module.shareddata.models.IngredientListItem;
 

@@ -40,10 +40,10 @@ public class PandCSettingsDisplay extends SettingsDisplayBase {
                 "Relative path of crops to be made perennial or compact (Comma Separated): ",
                 "locationsOfCrops",
                 _settings.locationsOfCrops);
-        JPanel createPath = createField(FieldType.TextField,
+        JPanel creationPath = createField(FieldType.TextField,
                 "What folder will patch files be created at? ",
-                "createPath",
-                _settings.createPath);
+                "creationPath",
+                _settings.creationPath);
         JPanel propertyOrderFile = createField(FieldType.TextField,
                 "Relative path to file listing the order of JSON properties: ",
                 "propertyOrderFile",
@@ -92,7 +92,7 @@ public class PandCSettingsDisplay extends SettingsDisplayBase {
                                         //Middle - Left
                                         .addGroup(
                                                 layout.createParallelGroup()
-                                                        .addComponent(createPath)
+                                                        .addComponent(creationPath)
                                                         .addComponent(locationsOfCrops)
                                         )
                                         //Middle - Middle
@@ -133,7 +133,7 @@ public class PandCSettingsDisplay extends SettingsDisplayBase {
                                 //Middle - Left
                                 .addGroup(
                                     layout.createSequentialGroup()
-                                            .addComponent(createPath)
+                                            .addComponent(creationPath)
                                             .addComponent(locationsOfCrops)
                                 )
                                 //Middle - Middle
@@ -186,14 +186,14 @@ public class PandCSettingsDisplay extends SettingsDisplayBase {
                 writeSettings();
             }
         });
-        setupTextEntryFocusListener("createPath", new FocusListener() {
+        setupTextEntryFocusListener("creationPath", new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) { }
 
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                _settings.createPath = text.getText();
+                _settings.creationPath = text.getText();
                 writeSettings();
             }
         });

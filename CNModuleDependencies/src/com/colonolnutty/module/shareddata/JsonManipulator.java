@@ -219,6 +219,21 @@ public class JsonManipulator {
         catch (IOException e) { _log.error("[IOE] Failed to read file: " + ingredient.patchFile, e); }
     }
 
+    public void writeNewPatch(String fileName, ArrayNode patchNodes) {
+        try {
+            String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
+            if (prettyJson == null || prettyJson.equals("")) {
+                return;
+            }
+            Writer writer = new FileWriter(fileName);
+            writer.write(prettyJson);
+            writer.close();
+        }
+        catch(IOException e) {
+            _log.error("[IOE] Problems writing file: " + fileName, e);
+        }
+    }
+
     public <T> T patch(Object entity, String patchFileName, Class<T> valueType) {
         if(patchFileName == null) {
             return null;
@@ -492,7 +507,7 @@ public class JsonManipulator {
         return result;
     }
 
-    private ArrayNode createTestNodes(String pathName) throws IOException {
+    public ArrayNode createTestNodes(String pathName) {
         ArrayNode nodeArray = _mapper.createArrayNode();
         ObjectNode testNode = _mapper.createObjectNode();
         testNode.put("op", "test");
@@ -508,7 +523,7 @@ public class JsonManipulator {
         return nodeArray;
     }
 
-    private ObjectNode createReplaceNode(String pathName, ArrayNode value) throws IOException {
+    public ObjectNode createReplaceNode(String pathName, ArrayNode value) {
         ObjectNode node = _mapper.createObjectNode();
         node.put("op", "replace");
         node.put("path", "/" + pathName);
@@ -519,7 +534,43 @@ public class JsonManipulator {
         return node;
     }
 
-    private ArrayNode createTestNodes(String pathName, Double value) {
+    public ArrayNode createTestNodes(String pathName, Double value) {
+        ArrayNode nodeArray = _mapper.createArrayNode();
+        ObjectNode testNode = _mapper.createObjectNode();
+        testNode.put("op", "test");
+        testNode.put("path", "/" + pathName);
+        testNode.put("inverse", true);
+        nodeArray.add(testNode);
+        ObjectNode addNode = _mapper.createObjectNode();
+        addNode.put("op", "add");
+        addNode.put("path", "/" + pathName);
+        addNode.put("value", value);
+        nodeArray.add(addNode);
+        return nodeArray;
+    }
+    public ArrayNode createTestRemoveNodes(String pathName, Double value) {
+        ArrayNode nodeArray = _mapper.createArrayNode();
+        ObjectNode testNode = _mapper.createObjectNode();
+        testNode.put("op", "test");
+        testNode.put("path", "/" + pathName);
+        testNode.put("value",  value);
+        nodeArray.add(testNode);
+        ObjectNode addNode = _mapper.createObjectNode();
+        addNode.put("op", "remove");
+        addNode.put("path", "/" + pathName);
+        nodeArray.add(addNode);
+        return nodeArray;
+    }
+
+    public ObjectNode createReplaceNode(String pathName, Double value) {
+        ObjectNode node = _mapper.createObjectNode();
+        node.put("op", "replace");
+        node.put("path", "/" + pathName);
+        node.put("value", value);
+        return node;
+    }
+
+    public ArrayNode createTestNodes(String pathName, Integer value) {
         ArrayNode nodeArray = _mapper.createArrayNode();
         ObjectNode testNode = _mapper.createObjectNode();
         testNode.put("op", "test");
@@ -534,11 +585,18 @@ public class JsonManipulator {
         return nodeArray;
     }
 
-    private ObjectNode createReplaceNode(String pathName, Double value) {
+    public ObjectNode createReplaceNode(String pathName, Integer value) {
         ObjectNode node = _mapper.createObjectNode();
         node.put("op", "replace");
         node.put("path", "/" + pathName);
         node.put("value", value);
+        return node;
+    }
+
+    public ObjectNode createRemoveNode(String pathName) {
+        ObjectNode node = _mapper.createObjectNode();
+        node.put("op", "remove");
+        node.put("path", "/" + pathName);
         return node;
     }
 

@@ -5,7 +5,7 @@
   "enableConsoleDebug" : true,
   "enableVerboseLogging" : true,
   "locationsOfCrops" : [ "TestFiles\\PandC\\PandCCropPath" ],
-  "createPath" : "TestFiles\\PandC\\PandCCreatePath",
+  "creationPath" : "TestFiles\\PandC\\PandCCreatePath",
   "makePerennial" : true,
   "makeCompact" : true,
   "makePatchFiles" : true

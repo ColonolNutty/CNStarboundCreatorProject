@@ -21,7 +21,7 @@ public class PandCCRData extends CRData {
         settingNames.add("enableVerboseLogging");
 
         settingNames.add("locationsOfCrops");
-        settingNames.add("createPath");
+        settingNames.add("creationPath");
         settingNames.add("makePerennial");
         settingNames.add("makeCompact");
         settingNames.add("makePatchFiles");

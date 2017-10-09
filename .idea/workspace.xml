@@ -15,190 +15,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/btf-1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/guava-23.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/jackson-annotations-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/jackson-core-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/jackson-coreutils-1.8.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/jackson-databind-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/json-20170516.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/json-patch-1.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/lib/msg-simple-1.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/btf-1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/guava-23.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/jackson-annotations-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/jackson-core-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/jackson-coreutils-1.8.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/jackson-databind-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/json-20170516.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/json-patch-1.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/lib/msg-simple-1.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/btf-1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/guava-23.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/jackson-annotations-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/jackson-core-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/jackson-coreutils-1.8.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/jackson-databind-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/json-20170516.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/json-patch-1.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/lib/msg-simple-1.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/btf-1.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/guava-23.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/jackson-annotations-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/jackson-core-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/jackson-coreutils-1.8.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/jackson-databind-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/json-20170516.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/json-patch-1.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/lib/msg-simple-1.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/CNModuleDependencies_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/CNPerennialCompactorModule_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/CNPriceFoodValueBalancerModule_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/CNRecipeCreatorModule_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/CNStarboundCreatorUI_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/CNStarboundCreatorLibrary.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/CNModuleDependencies.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CRData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ConfigReader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/MainFunctionModule.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/BasicSettings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/MainFunctionPanel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/main/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/CNPerennialCompactorModule.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCSettings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/MainPanel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/CNPriceFoodValueBalancerModule.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/ValueBalancer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/settings/BalancerCRData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/CNRecipeCreatorModule.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorProject.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/CNStarboundCreatorUI.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/runBalancer.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/src/META-INF/MANIFEST.MF" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/PriceFoodValueBalancer_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/ToRun.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/JSON_In_Java.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/btf_1_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/frozen_1_0_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/google_collect_0_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/google_collect_1_0_rc1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_6_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/guava_23_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_annotations_2_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_annotations_2_2_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_annotations_2_9_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_core_2_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_core_2_9_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_coreutils_1_8.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_databind_2_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_databind_2_2_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_databind_2_9_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/json_patch_1_9.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/msg_simple_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PriceFoodValueBalancer.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/battersimpleMFM.consumable" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/cocoa.item" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/jumpboostfood.statuseffect" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/runboost.statuseffect" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/runboost20.statuseffect" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/runboostfood.statuseffect" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/sugar.item" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/wheat.consumable" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/NonStuff/wheat.consumable.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.recipe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.recipe.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/flourMFM.consumable" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/flourMFM.recipe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/foulcocktailMFM.item" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/handmillMFM.object" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/handmillMFM.object1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/handmillMFM.recipe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/ironbar.item" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/jumpboostfood.statuseffect.patch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/sugarMFM.recipe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/sugarcaneBMB.item" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/yeastMFMseed.object" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/yeastMFMseed.recipe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/RecipeCreator/CreatePath/ingredients/sandwichFlrFoCMFM.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/RecipeCreator/Templates/ingredientList.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/RecipeCreator/Templates/recipeTemplate.recipe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFiles/RecipeCreator/Templates/sandwichTemplate.consumable" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/balancerConfiguration.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/configuration/propertyOrder.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/configuration/valueOverrides.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/recipeCreatorSettings.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/runBalancer.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/colonolnutty/ui/MainWindow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/balancer/ConfigReader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/balancer/ValueBalancer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/ui/RecipeCreatorUI.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/btf-1.2.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/btf-1.2.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/guava-23.0.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/guava-23.0.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.2.4.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-annotations-2.2.4.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/jackson-core-2.2.4.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-core-2.2.4.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/jackson-coreutils-1.8.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-coreutils-1.8.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/jackson-databind-2.2.4.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-databind-2.2.4.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/json-20170516.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/json-20170516.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/json-patch-1.9.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/json-patch-1.9.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/msg-simple-1.1.jar" afterPath="$PROJECT_DIR$/CNModuleDependencies/lib/msg-simple-1.1.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/CNLog.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CNLog.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/CNUtils.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CNUtils.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ConsoleDebugWriter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ConsoleDebugWriter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/DebugWriter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/DebugWriter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/JsonManipulator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/JsonPrettyPrinter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPrettyPrinter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/SettingsWriter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/SettingsWriter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/StopWatchTimer.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/StopWatchTimer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/balancer/FileUpdater.java" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/FileUpdater.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/balancer/IngredientDataCalculator.java" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/IngredientDataCalculator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/balancer/IngredientUpdater.java" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/IngredientUpdater.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/balancer/ItemDescriptor.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/balancer/MessageBundler.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/MessageBundler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/locators/FileLocator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/FileLocator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/locators/IngredientStore.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/IngredientStore.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/locators/PatchLocator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/PatchLocator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/locators/RecipeStore.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/RecipeStore.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/locators/StatusEffectStore.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/StatusEffectStore.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/BaseSettings.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/BaseSettings.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/ConfigSettings.java" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/settings/BalancerSettings.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/Ingredient.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/IngredientListItem.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/IngredientListItem.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/IngredientOverrides.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/IngredientOverrides.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/MessageBundle.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/MessageBundle.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/PropertyOrder.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/PropertyOrder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/Recipe.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Recipe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/RecipeCreatorSettings.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorSettings.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/RecipeIngredient.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/RecipeIngredient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/RecipesConfig.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/RecipesConfig.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/StatusEffect.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/StatusEffect.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/models/UpdateDetails.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/UpdateDetails.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/recipecreator/CNCrafter.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/CNCrafter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/recipecreator/IngredientCrafter.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/IngredientCrafter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/recipecreator/MassRecipeCreator.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/MassRecipeCreator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/recipecreator/RecipeCrafter.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCrafter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ui/CNUIExtensions.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/CNUIExtensions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ui/OutputDisplay.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/OutputDisplay.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ui/SettingsDisplayBase.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/SettingsDisplayBase.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ui/balancer/ConfigSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/ui/BalancerSettingsDisplay.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ui/balancer/MainBalancerPanel.java" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/ui/MainPanel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ui/recipecreator/MainRecipeCreatorPanel.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/MainPanel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/company/ui/recipecreator/RecipeSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/RecipeCreatorSettingsDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CNCollectionUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Farmable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFMseed.object" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwiseed.object" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildjelonMFMseed.object" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildjelonalienMFMseed.object" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildjelondryMFMseed.object" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildkiwiseed.object" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/ValueBalancer.java" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/PriceFoodValueBalancerMain.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/CNCrafter.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/CNCrafter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/IngredientCrafter.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/IngredientCrafter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/MassRecipeCreator.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCreatorMain.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCrafter.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/RecipeCrafter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/runBalancer.bat" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPriceFoodValueBalancerModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPriceFoodValueBalancerModule.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/IngredientStore.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/IngredientStore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCSettings.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCSettings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/ui/MainPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/MainPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/configuration/perennialAndCompactorConfig.json" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/configuration/perennialAndCompactorConfig.json" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -209,7 +53,83 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450" />
+    <leaf>
+      <file leaf-file-name="PerennialCompactorMain.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="81" column="62" lean-forward="false" selection-start-line="81" selection-start-column="62" selection-end-line="81" selection-end-column="62" />
+              <folding>
+                <element signature="method#addPerennialNodes#0;class#PerennialCompactorMain#0" expanded="false" />
+                <element signature="method#addCompactNodes#0;class#PerennialCompactorMain#0" expanded="false" />
+                <element signature="e#4957#4969#0" expanded="true" />
+                <element signature="method#ensureCreatePath#0;class#PerennialCompactorMain#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JsonManipulator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="478">
+              <caret line="226" column="13" lean-forward="false" selection-start-line="226" selection-start-column="13" selection-end-line="226" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#JsonManipulator#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#readRecipe#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#readIngredient#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#writeNew#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#writeNewWithTemplate#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#applyMissingProperties#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#logValues#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#addReplaceNode#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#addReplaceNode#1;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createTestNodes#1;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createTestRemoveNodes#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createReplaceNode#1;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#createTestNodes#2;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#toEffectsArrayNode#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
+                <element signature="method#PatchResult#0;class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ingredient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="278" column="43" lean-forward="false" selection-start-line="278" selection-start-column="43" selection-end-line="278" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Farmable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Farmable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="19" column="28" lean-forward="false" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#420#421#0" expanded="true" />
+                <element signature="e#486#487#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -220,7 +140,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&quot;value&quot;</find>
       <find>hasValue</find>
       <find>]</find>
       <find>makepretty</find>
@@ -250,6 +169,7 @@
       <find>_enableConsoleDebug</find>
       <find>_enableVerboseLogging</find>
       <find>logFile</find>
+      <find>createPath</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -271,17 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/Main.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/SettingsDisplayBase.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/MainFunctionPanel.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/ui/MainFunctionPanel.java" />
-        <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/ui/BalancerSettingsDisplay.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/ui/OutputDisplay.java" />
-        <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/ui/MainPanel.java" />
-        <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/settings/BalancerCRData.java" />
-        <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/main/ValueBalancer.java" />
-        <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/settings/BalancerSettings.java" />
-        <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/main/FileUpdater.java" />
         <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/main/IngredientDataCalculator.java" />
         <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/main/IngredientUpdater.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/PatchLocator.java" />
@@ -289,11 +198,8 @@
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/StatusEffectStore.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/IngredientStore.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/RecipeStore.java" />
-        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCSettings.java" />
-        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" />
         <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/main/PerennialCompactorMain.java" />
         <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/MainPanel.java" />
-        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java" />
         <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCrafter.java" />
         <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/IngredientCrafter.java" />
         <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/MassRecipeCreator.java" />
@@ -302,7 +208,6 @@
         <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/ui/SettingsDisplayBase.java" />
         <option value="$PROJECT_DIR$/CNStarboundCreatorModuleLoader/src/com/colonolnutty/ui/MainWindow.java" />
-        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
         <option value="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/balancer/ValueBalancer.java" />
         <option value="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/balancer/Main.java" />
         <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/Main.java" />
@@ -317,15 +222,30 @@
         <option value="$PROJECT_DIR$/src/com/colonolnutty/Main.java" />
         <option value="$PROJECT_DIR$/src/com/colonolnutty/ModuleLoader.java" />
         <option value="$PROJECT_DIR$/src/com/colonolnutty/ui/MainWindow.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
         <option value="$PROJECT_DIR$/runBalancer.bat" />
         <option value="$PROJECT_DIR$/CNStarboundCreator/src/com/colonolnutty/ui/MainWindow.java" />
         <option value="$PROJECT_DIR$/CNStarboundCreator/src/com/colonolnutty/Main.java" />
         <option value="$PROJECT_DIR$/CNStarboundCreator/src/com/colonolnutty/ModuleLoader.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/internal/PerennialCompactorMain.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/IngredientCrafter.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/RecipeCrafter.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/CNCrafter.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCreatorMain.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/configuration/perennialAndCompactorConfig.json" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCSettings.java" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/IngredientStore.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Farmable.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CNCollectionUtils.java" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="19" />
     <option name="y" value="14" />
     <option name="width" value="1222" />
@@ -349,7 +269,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -358,12 +277,85 @@
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNModuleDependencies" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNModuleDependencies" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNPerennialCompactorModule" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNPerennialCompactorModule" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNPerennialCompactorModule" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
+              <item name="TestFiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
+              <item name="TestFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="PandC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
+              <item name="TestFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="PandC" type="462c0819:PsiDirectoryNode" />
+              <item name="PandCCropPath" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -374,12 +366,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/CNStarboundCreator/modules" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreator" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreator" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\configuration" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\TestFiles" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreatorUI\TestFiles\PandC\PandCCropPath" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\modules" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNPriceFoodValueBalancerModule" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNRecipeCreatorModule" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="balancer" />
@@ -388,12 +380,12 @@
       <recent name="com.company.models.settings" />
       <recent name="com.company.updaters" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\modules" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreator" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreator" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\configuration" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\TestFiles" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNPriceFoodValueBalancerModule" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNRecipeCreatorModule" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNPerennialCompactorModule" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -475,7 +467,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -490,7 +482,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36594594" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37243244" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36084905" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -502,7 +495,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36084905" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -523,237 +515,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/OutputDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" column="38" lean-forward="false" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/RecipeStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/IngredientStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-126">
-          <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/StatusEffectStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-672">
-          <caret line="18" column="22" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/PatchLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="15" column="15" lean-forward="false" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#locatePatchFileFor#0;class#PatchLocator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/settings/BalancerSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="184" column="45" lean-forward="false" selection-start-line="184" selection-start-column="45" selection-end-line="184" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/MassRecipeCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="43" column="17" lean-forward="false" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#MassRecipeCreator#0" expanded="false" />
-            <element signature="method#ensureCreatePath#0;class#MassRecipeCreator#0" expanded="false" />
-            <element signature="method#writeToConfigurationFile#0;class#MassRecipeCreator#0" expanded="false" />
-            <element signature="method#contains#0;class#MassRecipeCreator#0" expanded="false" />
-            <element signature="method#createFromTemplate#0;class#MassRecipeCreator#0" expanded="false" />
-            <element signature="method#createIngredients#0;class#MassRecipeCreator#0" expanded="false" />
-            <element signature="method#read#0;class#MassRecipeCreator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/IngredientCrafter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCrafter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="34" column="60" lean-forward="false" selection-start-line="34" selection-start-column="60" selection-end-line="34" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/CNCrafter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/MainPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="42" column="54" lean-forward="false" selection-start-line="42" selection-start-column="54" selection-end-line="42" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#dispose#0;class#MainPanel#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="12" column="47" lean-forward="false" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/RecipeCreatorSettingsDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="19" column="56" lean-forward="false" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/SettingsDisplayBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="46" lean-forward="false" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
-          <folding>
-            <element signature="docComment;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#SettingsDisplayBase#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#enable#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#disable#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#addCurrentDirectoryField#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#addSlider#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#createSlider#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#createField#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#createTextField#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#createCheckBox#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#createPanel#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#getCurrentValue#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#getIsSelected#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#getCurrentText#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#setupTextEntryFocusListener#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#setupCheckBoxListener#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#setupSliderListener#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="method#createButton#0;class#SettingsDisplayBase#0" expanded="false" />
-            <element signature="class#FieldType#0;class#SettingsDisplayBase#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/FileUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/IngredientDataCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/IngredientUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -765,20 +526,11 @@
     <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/configuration/propertyOrder.json" />
     <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/configuration/propertyOrder.json" />
     <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/TestFiles/Balancer/Samples/Stuff/ironbar.item" />
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/ValueBalancer.java">
+    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/PriceFoodValueBalancerMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding>
-            <element signature="method#loadIngredientOverrides#0;class#ValueBalancer#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -822,16 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/MainPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="30" column="27" lean-forward="false" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
-          <folding>
-            <element signature="method#create#0;class#MainPanel#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/MainFunctionModule.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -844,9 +586,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
-          <folding>
-            <element signature="method#getPropertyNames#0;class#BalancerCRData#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -872,27 +611,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/configuration/propertyOrder.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/ironbar.item">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configuration/perennialAndCompactorConfig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration/propertyOrder.json" />
+    <entry file="file://$PROJECT_DIR$/TestFiles/Balancer/Samples/Stuff/ironbar.item" />
+    <entry file="file://$PROJECT_DIR$/configuration/perennialAndCompactorConfig.json" />
     <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ConfigReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
@@ -905,10 +626,205 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/colonolnutty/ui/RecipeCreatorUI.java" />
+    <entry file="file://$PROJECT_DIR$/src/colonolnutty/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/colonolnutty/ModuleLoader.java" />
+    <entry file="file://$PROJECT_DIR$/src/colonolnutty/ui/MainWindow.java" />
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/ui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="36" lean-forward="false" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/ModuleLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/configuration/balancerConfiguration.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="2" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/configuration/recipeCreatorSettings.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/MainPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="30" column="27" lean-forward="false" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+          <folding>
+            <element signature="method#create#0;class#MainPanel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/CNCrafter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/RecipeCrafter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/IngredientCrafter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="13" column="30" lean-forward="false" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/configuration/perennialAndCompactorConfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="15" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCreatorMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="53" column="9" lean-forward="true" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
+          <folding>
+            <element signature="docComment;class#RecipeCreatorMain#0" expanded="false" />
+            <element signature="method#ensureCreatePath#0;class#RecipeCreatorMain#0" expanded="false" />
+            <element signature="method#writeToConfigurationFile#0;class#RecipeCreatorMain#0" expanded="false" />
+            <element signature="method#contains#0;class#RecipeCreatorMain#0" expanded="false" />
+            <element signature="method#createFromTemplate#0;class#RecipeCreatorMain#0" expanded="false" />
+            <element signature="method#createIngredients#0;class#RecipeCreatorMain#0" expanded="false" />
+            <element signature="method#read#0;class#RecipeCreatorMain#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildjelonMFMseed.object">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildkiwiseed.object">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="278" column="43" lean-forward="false" selection-start-line="278" selection-start-column="43" selection-end-line="278" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/IngredientStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="188" column="9" lean-forward="true" selection-start-line="188" selection-start-column="9" selection-end-line="188" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Farmable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="28" lean-forward="false" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CNCollectionUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="583">
+          <caret line="29" column="48" lean-forward="false" selection-start-line="29" selection-start-column="48" selection-end-line="29" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#358#366#0" expanded="true" />
+            <element signature="e#749#750#0" expanded="true" />
+            <element signature="e#804#805#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="181" column="21" lean-forward="true" selection-start-line="181" selection-start-column="21" selection-end-line="181" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="478">
+          <caret line="226" column="13" lean-forward="false" selection-start-line="226" selection-start-column="13" selection-end-line="226" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#JsonManipulator#0" expanded="false" />
@@ -919,7 +835,6 @@
             <element signature="method#writeNew#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#writeNewWithTemplate#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#writeAsPatch#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#applyMissingProperties#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
@@ -928,10 +843,11 @@
             <element signature="method#addReplaceNode#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#addReplaceNode#1;class#JsonManipulator#0" expanded="false" />
             <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
-            <element signature="method#createTestNodes#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#createTestNodes#1;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#createTestRemoveNodes#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#createReplaceNode#1;class#JsonManipulator#0" expanded="false" />
+            <element signature="method#createTestNodes#2;class#JsonManipulator#0" expanded="false" />
             <element signature="method#toEffectsArrayNode#0;class#JsonManipulator#0" expanded="false" />
             <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#PatchResult#0;class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
@@ -939,63 +855,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/colonolnutty/Main.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath/kiwiseed.object.patch">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+        <state relative-caret-position="126">
+          <caret line="46" column="6" lean-forward="true" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/colonolnutty/ModuleLoader.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFMseed.object">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        <state relative-caret-position="189">
+          <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/colonolnutty/ui/MainWindow.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwiseed.object">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="-504">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/runBalancer.bat">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath/jelonMFMseed.object.patch">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/ui/MainWindow.java">
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="36" lean-forward="false" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+        <state relative-caret-position="248">
+          <caret line="81" column="62" lean-forward="false" selection-start-line="81" selection-start-column="62" selection-end-line="81" selection-end-column="62" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/ModuleLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#437#456#0" expanded="true" />
+            <element signature="method#addPerennialNodes#0;class#PerennialCompactorMain#0" expanded="false" />
+            <element signature="method#addCompactNodes#0;class#PerennialCompactorMain#0" expanded="false" />
+            <element signature="e#4957#4969#0" expanded="true" />
+            <element signature="method#ensureCreatePath#0;class#PerennialCompactorMain#0" expanded="false" />
           </folding>
         </state>
       </provider>

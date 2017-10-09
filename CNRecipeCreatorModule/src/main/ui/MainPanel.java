@@ -8,7 +8,7 @@ import com.colonolnutty.module.shareddata.models.settings.BasicSettings;
 import com.colonolnutty.module.shareddata.ui.MainFunctionPanel;
 import com.colonolnutty.module.shareddata.ui.OutputDisplay;
 import main.settings.RecipeCreatorSettings;
-import main.MassRecipeCreator;
+import main.RecipeCreatorMain;
 import main.settings.RecipeCreatorCRData;
 
 import javax.swing.*;
@@ -57,7 +57,7 @@ public class MainPanel extends MainFunctionPanel {
                             _log.setupDebugLogFile();
                             _outputDisplay.clear();
                             _settingsDisplay.disable();
-                            MassRecipeCreator creator = new MassRecipeCreator(_settings, _log);
+                            RecipeCreatorMain creator = new RecipeCreatorMain(_settings, _log);
                             creator.run();
                             Hashtable<String, MessageBundle> messages = _log.getMessages();
                             _outputDisplay.updateTreeDisplay(messages);
