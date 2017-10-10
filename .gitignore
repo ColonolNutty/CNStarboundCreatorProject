@@ -3,4 +3,5 @@ desktop.ini
 out
 updatelog.log
 prerunlog.log
-TestFiles/CreatePath
+CNStarboundCreatorUI/TestFiles/RecipeCreator/CreatePath
+CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath
