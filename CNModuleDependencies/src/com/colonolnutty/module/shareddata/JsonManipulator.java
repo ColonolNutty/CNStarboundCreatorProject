@@ -220,17 +220,20 @@ public class JsonManipulator {
     }
 
     public void writeNewPatch(String fileName, ArrayNode patchNodes) {
+        File file = new File(fileName);
+        file.getParentFile().mkdirs();
         try {
             String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
             if (prettyJson == null || prettyJson.equals("")) {
                 return;
             }
-            Writer writer = new FileWriter(fileName);
+            String absPath = file.getAbsolutePath();
+            Writer writer = new FileWriter(absPath);
             writer.write(prettyJson);
             writer.close();
         }
         catch(IOException e) {
-            _log.error("[IOE] Problems writing file: " + fileName, e);
+            _log.error("[IOE] Problems writing file: " + file.getAbsolutePath(), e);
         }
     }
 

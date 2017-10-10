@@ -63,7 +63,9 @@ public class PerennialCompactorMain extends MainFunctionModule {
             Farmable farmable = manipulator.read(seedFile, Farmable.class);
             _log.startSubBundle(farmable.getName());
             if(_settings.makePatchFiles) {
-                String patchFileName = _settings.creationPath + "\\" + file.getName() + ".patch";
+                String basePathName = _settings.creationPath;
+                String relativeModPathName = file.getParentFile().getAbsolutePath().replace(System.getProperty("user.dir") + "\\", "");
+                String patchFileName = basePathName + "\\" + relativeModPathName + "\\" + file.getName() + ".patch";
                 farmable.patchFile = patchFileName;
                 createPatch(patchFileName, manipulator, farmable);
             }
