@@ -15,13 +15,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ObjectFrames.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ObjectFramesGrid.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/jelonMFMseed.frames" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/jelonalienMFMseed.frames" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/jelondryMFMseed.frames" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwi/kiwiseed.frames" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFMseed.object" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/jelonMFMseed.object" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwiseed.object" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwi/kiwiseed.object" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildjelonMFMseed.object" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelonMFMseed.object" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildjelonalienMFMseed.object" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelonalienMFMseed.object" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildjelondryMFMseed.object" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelondryMFMseed.object" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildkiwiseed.object" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwi/wildkiwiseed.object" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPriceFoodValueBalancerModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPriceFoodValueBalancerModule.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/logs/pandclog.log" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/logs/pandclog.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,76 +43,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PerennialCompactorMain.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PerennialCompactorMain.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="69" column="66" lean-forward="false" selection-start-line="69" selection-start-column="66" selection-end-line="69" selection-end-column="66" />
+            <state relative-caret-position="195">
+              <caret line="101" column="17" lean-forward="false" selection-start-line="101" selection-start-column="17" selection-end-line="101" selection-end-column="17" />
               <folding>
                 <element signature="method#addPerennialNodes#0;class#PerennialCompactorMain#0" expanded="false" />
                 <element signature="method#addCompactNodes#0;class#PerennialCompactorMain#0" expanded="false" />
-                <element signature="e#5174#5186#0" expanded="true" />
+                <element signature="e#5636#5648#0" expanded="true" />
+                <element signature="method#loadFrames#0;class#PerennialCompactorMain#0" expanded="false" />
                 <element signature="method#ensureCreatePath#0;class#PerennialCompactorMain#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JsonManipulator.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="224" column="13" lean-forward="false" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#JsonManipulator#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#readRecipe#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#readIngredient#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#read#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#writeNew#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#writeNewWithTemplate#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#write#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#patch#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#applyMissingProperties#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#combineJsonValues#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#readExistingFile#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#logValues#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#addReplaceNode#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#addReplaceNode#1;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#updateNodes#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createReplaceNode#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createTestNodes#1;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createTestRemoveNodes#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createReplaceNode#1;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#createTestNodes#2;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#toEffectsArrayNode#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
-                <element signature="method#PatchResult#0;class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ingredient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5">
-              <caret line="248" column="25" lean-forward="false" selection-start-line="248" selection-start-column="25" selection-end-line="248" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Farmable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Farmable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="19" column="28" lean-forward="false" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#420#421#0" expanded="true" />
-                <element signature="e#486#487#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -170,11 +121,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/main/IngredientDataCalculator.java" />
-        <option value="$PROJECT_DIR$/PriceFoodValueBalancerModule/src/balancer/main/IngredientUpdater.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/PatchLocator.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/FileLocator.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/StatusEffectStore.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/IngredientStore.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/colonolnutty/module/shareddata/locators/RecipeStore.java" />
         <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/main/PerennialCompactorMain.java" />
@@ -205,7 +151,6 @@
         <option value="$PROJECT_DIR$/CNStarboundCreator/src/com/colonolnutty/ui/MainWindow.java" />
         <option value="$PROJECT_DIR$/CNStarboundCreator/src/com/colonolnutty/Main.java" />
         <option value="$PROJECT_DIR$/CNStarboundCreator/src/com/colonolnutty/ModuleLoader.java" />
-        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat" />
         <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/internal/PerennialCompactorMain.java" />
         <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/IngredientCrafter.java" />
         <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/RecipeCrafter.java" />
@@ -219,14 +164,19 @@
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Farmable.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CNCollectionUtils.java" />
         <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java" />
-        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ObjectFramesGrid.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ObjectFrames.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/jelonalienMFMseed.frames" />
+        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelonalienMFMseed.object" />
+        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelondryMFMseed.object" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="19" />
-    <option name="y" value="14" />
+    <option name="x" value="-11" />
     <option name="width" value="1222" />
     <option name="height" value="1005" />
   </component>
@@ -259,24 +209,31 @@
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies" type="462c0819:PsiDirectoryNode" />
+              <item name="CNPerennialCompactorModule" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies" type="462c0819:PsiDirectoryNode" />
+              <item name="CNPerennialCompactorModule" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNPerennialCompactorModule" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
               <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
               <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="TestFiles" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
@@ -314,11 +271,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreatorUI\TestFiles\PandC\PandCCropPath\jelonMFM" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreatorUI\TestFiles\PandC\PandCCropPath" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\modules" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNPriceFoodValueBalancerModule" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNRecipeCreatorModule" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="balancer" />
@@ -328,11 +285,11 @@
       <recent name="com.company.updaters" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreatorUI\TestFiles\PandC\PandCCropPath\kiwi" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreatorUI\TestFiles\PandC\PandCCropPath\jelonMFM" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreator" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreator" />
       <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\configuration" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader\TestFiles" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\PriceFoodValueBalancer\CNStarboundCreatorModuleLoader" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -424,7 +381,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2240566" sideWeight="0.50216216" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3466981" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3466981" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -435,7 +392,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43042454" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25707546" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -457,85 +414,11 @@
           <option name="timeStamp" value="284" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="292" />
+      <option name="time" value="301" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/configuration/propertyOrder.json" />
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/configuration/propertyOrder.json" />
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/configuration/propertyOrder.json" />
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/TestFiles/Balancer/Samples/Stuff/ironbar.item" />
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/PriceFoodValueBalancerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/FileLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="115" column="18" lean-forward="false" selection-start-line="115" selection-start-column="18" selection-end-line="115" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="678" column="61" lean-forward="true" selection-start-line="678" selection-start-column="61" selection-end-line="678" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/MainFunctionModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/src/main/settings/BalancerCRData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CNLog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
@@ -594,14 +477,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -703,7 +578,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildjelonMFMseed.object">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelonMFMseed.object">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -711,7 +586,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/wildkiwiseed.object">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwi/wildkiwiseed.object">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
@@ -724,18 +599,6 @@
         <state relative-caret-position="142">
           <caret line="188" column="9" lean-forward="true" selection-start-line="188" selection-start-column="9" selection-end-line="188" selection-end-column="9" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Farmable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="28" lean-forward="false" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#420#421#0" expanded="true" />
-            <element signature="e#486#487#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -768,22 +631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFMseed.object">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwiseed.object">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-504">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath/jelonMFMseed.object.patch">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -792,23 +639,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/runSBCreator.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="69" column="66" lean-forward="false" selection-start-line="69" selection-start-column="66" selection-end-line="69" selection-end-column="66" />
-          <folding>
-            <element signature="method#addPerennialNodes#0;class#PerennialCompactorMain#0" expanded="false" />
-            <element signature="method#addCompactNodes#0;class#PerennialCompactorMain#0" expanded="false" />
-            <element signature="e#5174#5186#0" expanded="true" />
-            <element signature="method#ensureCreatePath#0;class#PerennialCompactorMain#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="248" column="25" lean-forward="false" selection-start-line="248" selection-start-column="25" selection-end-line="248" selection-end-column="25" />
+        <state relative-caret-position="0">
+          <caret line="0" column="34" lean-forward="false" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -843,6 +677,162 @@
             <element signature="method#toEffectsArrayNode#0;class#JsonManipulator#0" expanded="false" />
             <element signature="class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
             <element signature="method#PatchResult#0;class#PatchResult#0;class#JsonManipulator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Recipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="9" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ObjectFramesGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwi/kiwiseed.object">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/kiwi/kiwiseed.frames">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ObjectFrames.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/jelonMFMseed.object">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Farmable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="30" lean-forward="false" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath/TestFiles/PandC/PandCCropPath/kiwi/kiwiseed.object.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/jelonalienMFMseed.frames">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelondryMFMseed.object">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="46" column="23" lean-forward="false" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelonalienMFMseed.object">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="45" column="39" lean-forward="false" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelonMFMseed.object.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelonalienMFMseed.object.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="40" column="3" lean-forward="true" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath/TestFiles/PandC/PandCCropPath/jelonMFM/jelonMFMseed.object.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5">
+          <caret line="248" column="25" lean-forward="false" selection-start-line="248" selection-start-column="25" selection-end-line="248" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath/TestFiles/PandC/PandCCropPath/jelonMFM/wildjelondryMFMseed.object.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="101" column="17" lean-forward="false" selection-start-line="101" selection-start-column="17" selection-end-line="101" selection-end-column="17" />
+          <folding>
+            <element signature="method#addPerennialNodes#0;class#PerennialCompactorMain#0" expanded="false" />
+            <element signature="method#addCompactNodes#0;class#PerennialCompactorMain#0" expanded="false" />
+            <element signature="e#5636#5648#0" expanded="true" />
+            <element signature="method#loadFrames#0;class#PerennialCompactorMain#0" expanded="false" />
+            <element signature="method#ensureCreatePath#0;class#PerennialCompactorMain#0" expanded="false" />
           </folding>
         </state>
       </provider>

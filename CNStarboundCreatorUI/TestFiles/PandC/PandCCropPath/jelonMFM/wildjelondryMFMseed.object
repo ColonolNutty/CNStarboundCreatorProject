@@ -43,7 +43,8 @@
     },
     {
       "alts" : 5,
-      "harvestPool" : "jelonMFMHarvest"
+      "harvestPool" : "jelonMFMHarvest",
+      "resetToStage": 1
     }
   ],
   "maxImmersion" : 0.25,

@@ -3,6 +3,7 @@ package main;
 import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.locators.FileLocator;
 import com.colonolnutty.module.shareddata.models.Farmable;
+import com.colonolnutty.module.shareddata.models.ObjectFrames;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -38,6 +39,7 @@ public class PerennialCompactorMain extends MainFunctionModule {
 
         ArrayList<String> cropLocations = CNCollectionUtils.toStringArrayList(_settings.locationsOfCrops);
         _log.debug("Locating seeds");
+
         FileLocator fileLocator = new FileLocator(_log);
         ArrayList<String> seedFiles = fileLocator.getFilePathsByExtension(cropLocations, "seed.object");
         perennializeAndCompact(seedFiles);
@@ -67,7 +69,7 @@ public class PerennialCompactorMain extends MainFunctionModule {
                 String relativeModPathName = file.getParentFile().getAbsolutePath().replace(System.getProperty("user.dir") + "\\", "");
                 String patchFileName = basePathName + "\\" + relativeModPathName + "\\" + file.getName() + ".patch";
                 farmable.patchFile = patchFileName;
-                createPatch(patchFileName, manipulator, farmable);
+                createPatch(file.getParent(), patchFileName, manipulator, farmable);
             }
             else {
                 farmable.filePath = seedFile;
@@ -84,8 +86,12 @@ public class PerennialCompactorMain extends MainFunctionModule {
         _log.error("Overriding original files is not supported yet");
     }
 
-    private void createPatch(String patchFileName, JsonManipulator manipulator, Farmable farmable) {
+    private void createPatch(String seedPath,
+                             String patchFileName,
+                             JsonManipulator manipulator,
+                             Farmable farmable) {
         _log.startSubBundle("Creating patch file for: " + farmable.getName());
+        _log.writeToAll(4,"Creating patch file for: " + farmable.getName());
         ArrayNode patchNodes = manipulator.createArrayNode();
         ArrayNode replaceNodes = manipulator.createArrayNode();
         ObjectNode replaceNode = addPerennialNodes(manipulator, farmable, patchNodes);
@@ -93,13 +99,15 @@ public class PerennialCompactorMain extends MainFunctionModule {
             replaceNodes.add(replaceNode);
         }
 
-        ArrayList<ObjectNode> compactReplaceNodes = addCompactNodes(manipulator, farmable, patchNodes);
+        ArrayList<ObjectNode> compactReplaceNodes = addCompactNodes(seedPath, manipulator, farmable, patchNodes);
         for(ObjectNode objNode : compactReplaceNodes) {
             replaceNodes.add(objNode);
         }
 
-        patchNodes.add(replaceNodes);
-        manipulator.writeNewPatch(patchFileName, patchNodes);
+        if(!CNCollectionUtils.isEmpty(replaceNodes)) {
+            patchNodes.add(replaceNodes);
+            manipulator.writeNewPatch(patchFileName, patchNodes);
+        }
         _log.endSubBundle();
     }
 
@@ -122,20 +130,30 @@ public class PerennialCompactorMain extends MainFunctionModule {
         return replaceNode;
     }
 
-    private ArrayList<ObjectNode> addCompactNodes(JsonManipulator manipulator, Farmable farmable, ArrayNode patchNodes) {
+    private ArrayList<ObjectNode> addCompactNodes(String seedPath,
+                                                  JsonManipulator manipulator,
+                                                  Farmable farmable,
+                                                  ArrayNode patchNodes) {
         if(!_settings.makeCompact || CNCollectionUtils.isEmpty(farmable.orientations)) {
             return new ArrayList<ObjectNode>();
         }
-        _log.writeToAll(4,"Adding Compact Patch");
 
         ArrayList<ObjectNode> replaceNodes = new ArrayList<ObjectNode>();
         for(int i = 0; i < farmable.orientations.size(); i++) {
-            JsonNode node = farmable.orientations.get(i);
-            if(node.has("spaceScan")) {
+            JsonNode orientationNode = farmable.orientations.get(i);
+            ObjectFrames frames = loadFrames(seedPath, manipulator, orientationNode);
+            if(frames == null
+                    || frames.frameGrid == null
+                    || frames.frameGrid.size.size() == 0
+                    || frames.frameGrid.size.get(0).asInt() <= 8) {
+                continue;
+            }
+            if(orientationNode.has("spaceScan")) {
                 String spaceScanPath = "orientations/" + i + "/spaceScan";
-                ArrayNode testRemoveSpaceScan = manipulator.createTestRemoveNodes(spaceScanPath, node.get("spaceScan").asDouble());
+                ArrayNode testRemoveSpaceScan = manipulator.createTestRemoveNodes(spaceScanPath, orientationNode.get("spaceScan").asDouble());
                 patchNodes.add(testRemoveSpaceScan);
             }
+
             String imagePosPath = "orientations/" + i + "/imagePosition";
             ArrayNode testAddImagePosition = manipulator.createTestNodes(imagePosPath);
             patchNodes.add(testAddImagePosition);
@@ -158,6 +176,28 @@ public class PerennialCompactorMain extends MainFunctionModule {
         }
 
         return replaceNodes;
+    }
+
+    private ObjectFrames loadFrames(String seedPath, JsonManipulator manipulator, JsonNode orientationNode) {
+        try {
+            String imageName = null;
+            if(orientationNode.has("dualImage")) {
+                imageName = orientationNode.get("dualImage").asText();
+            }
+            else if(orientationNode.has("image")) {
+                imageName = orientationNode.get("image").asText();
+            }
+            if(imageName == null) {
+                return null;
+            }
+            String framesFileName = seedPath + "\\" + imageName.split(":")[0].replace(".png", ".frames");
+            ObjectFrames farmableFrames = manipulator.read(framesFileName, ObjectFrames.class);
+            return farmableFrames;
+        }
+        catch(IOException e) {
+
+        }
+        return null;
     }
 
     private void ensureCreatePath() {
