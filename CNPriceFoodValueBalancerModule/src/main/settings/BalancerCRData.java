@@ -28,6 +28,8 @@ public class BalancerCRData extends CRData {
         settingNames.add("ingredientOverridePath");
         settingNames.add("numberOfPasses");
         settingNames.add("enableEffectsUpdate");
+        settingNames.add("includeCraftGroups");
+        settingNames.add("forceUpdate");
 
         return settingNames;
     }

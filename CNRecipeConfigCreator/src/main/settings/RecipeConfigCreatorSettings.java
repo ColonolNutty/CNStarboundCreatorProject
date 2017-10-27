@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * Time: 9:43 AM
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RecipeCreatorSettings extends BaseSettings {
+public class RecipeConfigCreatorSettings extends BaseSettings {
     public String creationPath;
     public String ingredientListFile;
     public String recipeTemplateFile;

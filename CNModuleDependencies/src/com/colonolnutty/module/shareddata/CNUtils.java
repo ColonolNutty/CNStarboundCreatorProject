@@ -108,6 +108,7 @@ public abstract class CNUtils {
 
     public static String escapeString(String str) {
         return str.replace("\n", "\\n")
-                .replace("\r", "\\r");
+                .replace("\r", "\\r")
+                .replace("\"", "\\\"");
     }
 }

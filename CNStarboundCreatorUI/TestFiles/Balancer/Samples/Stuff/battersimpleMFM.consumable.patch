@@ -16,7 +16,7 @@
     {
       "op" : "replace",
       "path" : "/foodValue",
-      "value" : 2.54
+      "value" : 2.1
     }
   ],
   [
@@ -35,7 +35,7 @@
     {
       "op" : "replace",
       "path" : "/price",
-      "value" : 38.22
+      "value" : 29.4
     }
   ],
   [
@@ -64,14 +64,29 @@
           },
           {
             "effect" : "jumpboostfood",
-            "duration" : 11
-          },
-          {
-            "effect" : "runboostfood",
-            "duration" : 2
+            "duration" : 6
           }
         ]
       ]
+    }
+  ],
+  [
+    {
+      "op" : "test",
+      "path" : "/description",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/description",
+      "value" : ""
+    }
+  ],
+  [
+    {
+      "op" : "replace",
+      "path" : "/description",
+      "value" : "(BLEND)(PREP):-} Nope What \"NONONO\" warefdsagfdsa"
     }
   ]
 ]

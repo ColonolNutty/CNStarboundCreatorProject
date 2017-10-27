@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
@@ -26,6 +27,9 @@ public class IngredientDataCalculator {
     private IngredientStore _ingredientStore;
     private JsonManipulator _manipulator;
     private StatusEffectStore _statusEffectStore;
+    private String recipeGroupDelimeter = ":-} ";
+
+    private HashMap<String, String> _descriptionNames;
 
     public IngredientDataCalculator(CNLog log,
                                     BalancerSettings settings,
@@ -39,6 +43,21 @@ public class IngredientDataCalculator {
         _ingredientStore = ingredientStore;
         _statusEffectStore = statusEffectStore;
         _manipulator = manipulator;
+        _descriptionNames = new HashMap<String, String>();
+        _descriptionNames.put("bakingMFM", "BAKE");
+        _descriptionNames.put("blendingMFM", "BLEND");
+        _descriptionNames.put("boilingMFM", "BOIL");
+        _descriptionNames.put("coffeeMFM", "COFFEE");
+        _descriptionNames.put("choppingMFM", "CHOP");
+        _descriptionNames.put("freezingMFM", "FREEZE");
+        _descriptionNames.put("fryingMFM", "FRY");
+        _descriptionNames.put("purifyingMFM", "PURIFY");
+        _descriptionNames.put("millingMFM", "MILL");
+        _descriptionNames.put("pressingMFM", "PRESS");
+        _descriptionNames.put("canningMFM", "CAN");
+        _descriptionNames.put("churningMFM", "CHURN");
+        _descriptionNames.put("distillingMFM", "DISTILL");
+        _descriptionNames.put("preparingMFM", "PREP");
     }
 
     public Ingredient updateIngredient(Ingredient ingredient){
@@ -142,6 +161,8 @@ public class IngredientDataCalculator {
         _log.debug("New values for: " + outputName + " are p: " + newPrice + " and fv: " + newFoodValue);
 
         Ingredient newIngredient = new Ingredient(outputName, newPrice, newFoodValue, combined);
+        Ingredient existingIngredient = _ingredientStore.getIngredient(outputName);
+        newIngredient.description = createIngredientDescription(existingIngredient.description, recipe);
         _ingredientStore.updateIngredient(newIngredient);
         return _ingredientStore.getIngredient(outputName);
     }
@@ -180,5 +201,39 @@ public class IngredientDataCalculator {
             return Ingredient.DefaultEffectDuration;
         }
         return statusEffect.defaultDuration;
+    }
+
+    private String createIngredientDescription(String ingredientDescription, Recipe recipe) {
+        if(ingredientDescription == null) {
+            return ingredientDescription;
+        }
+        String[] descripSplit = ingredientDescription.split(recipeGroupDelimeter);
+        if(descripSplit.length == 0) {
+            return ingredientDescription;
+        }
+
+        ArrayList<String> recipeGroupNames = getIngredientRecipeGroupNames(recipe);
+        if(recipeGroupNames == null || recipeGroupNames.isEmpty()) {
+            return ingredientDescription;
+        }
+
+        String ingredDescripGroups = "";
+        for(int i = 0; i < recipeGroupNames.size(); i++) {
+            String recipeGroupName = recipeGroupNames.get(i);
+            ingredDescripGroups += "(" + recipeGroupName + ")";
+        }
+
+        return ingredDescripGroups + recipeGroupDelimeter + descripSplit[descripSplit.length - 1];
+    }
+
+    private ArrayList<String> getIngredientRecipeGroupNames(Recipe recipe) {
+        ArrayList<String> groupNames = new ArrayList<String>();
+        for(int i = 0; i < recipe.groups.length; i++) {
+            String group = recipe.groups[i];
+            if(_descriptionNames.containsKey(group)) {
+                groupNames.add(_descriptionNames.get(group));
+            }
+        }
+        return groupNames;
     }
 }

@@ -2,7 +2,7 @@ package main.ui;
 
 import com.colonolnutty.module.shareddata.SettingsWriter;
 import com.colonolnutty.module.shareddata.ui.SettingsDisplayBase;
-import main.settings.RecipeCreatorSettings;
+import main.settings.RecipeConfigCreatorSettings;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -17,11 +17,11 @@ import java.awt.event.FocusListener;
  * Date: 10/04/2017
  * Time: 5:04 PM
  */
-public class RecipeCreatorSettingsDisplay extends SettingsDisplayBase {
+public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
     private SettingsWriter _writer;
-    private RecipeCreatorSettings _settings;
+    private RecipeConfigCreatorSettings _settings;
 
-    public RecipeCreatorSettingsDisplay(SettingsWriter writer, RecipeCreatorSettings settings) {
+    public RecipeConfigCreatorSettingsDisplay(SettingsWriter writer, RecipeConfigCreatorSettings settings) {
         _settings = settings;
         _writer = writer;
     }

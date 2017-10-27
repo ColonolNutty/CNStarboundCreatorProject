@@ -95,6 +95,14 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                 "Update Effects",
                 "enableEffectsUpdate",
                 _settings.enableEffectsUpdate);
+        JPanel includeCraftGroups = createField(FieldType.CheckBox,
+                "Include Craft Groups",
+                "includeCraftGroups",
+                _settings.includeCraftGroups);
+        JPanel forceUpdate = createField(FieldType.CheckBox,
+                "Force Update",
+                "forceUpdate",
+                _settings.forceUpdate);
         JButton runButton = createButton("Run", onRun);
 
         layout.setHorizontalGroup(
@@ -138,6 +146,8 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                                         .addComponent(enableConsoleDebug)
                                         .addComponent(enableVerboseLogging)
                                         .addComponent(enableEffectsUpdate)
+                                        .addComponent(includeCraftGroups)
+                                        .addComponent(forceUpdate)
                         )
         );
         layout.setVerticalGroup(
@@ -180,6 +190,8 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                                         .addComponent(enableConsoleDebug)
                                         .addComponent(enableVerboseLogging)
                                         .addComponent(enableEffectsUpdate)
+                                        .addComponent(includeCraftGroups)
+                                        .addComponent(forceUpdate)
                         )
         );
 
@@ -312,6 +324,22 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
             public void stateChanged(ChangeEvent e) {
                 JCheckBox checkbox = (JCheckBox)e.getSource();
                 _settings.enableEffectsUpdate = checkbox.isSelected();
+                writeSettings();
+            }
+        });
+        setupCheckBoxListener("includeCraftGroups", new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkbox = (JCheckBox)e.getSource();
+                _settings.includeCraftGroups = checkbox.isSelected();
+                writeSettings();
+            }
+        });
+        setupCheckBoxListener("forceUpdate", new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkbox = (JCheckBox)e.getSource();
+                _settings.forceUpdate = checkbox.isSelected();
                 writeSettings();
             }
         });

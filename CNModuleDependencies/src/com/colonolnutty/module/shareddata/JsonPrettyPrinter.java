@@ -229,9 +229,9 @@ public class JsonPrettyPrinter {
         }
         if(CNUtils.isValueType(node)) {
             if(node.isTextual()) {
-                return CNUtils.createIndent(indentSize) + "\"" + node.asText() + "\"";
+                return CNUtils.createIndent(indentSize) + "\"" + CNUtils.escapeString(node.asText()) + "\"";
             }
-            return CNUtils.createIndent(indentSize) + node.asText();
+            return CNUtils.createIndent(indentSize) + CNUtils.escapeString(node.asText());
         }
         if(node.isArray()) {
             return makePretty((ArrayNode)node, indentSize);

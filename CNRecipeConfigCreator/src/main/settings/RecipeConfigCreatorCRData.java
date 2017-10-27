@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Date: 10/08/2017
  * Time: 10:29 AM
  */
-public class RecipeCreatorCRData extends CRData {
+public class RecipeConfigCreatorCRData extends CRData {
     @Override
     public ArrayList<String> getPropertyNames() {
         ArrayList<String> settingNames = new ArrayList<String>();

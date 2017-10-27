@@ -11,5 +11,7 @@
   "minimumFoodValue" : 2,
   "ingredientOverridePath" : "configuration\\valueOverrides.json",
   "numberOfPasses" : 8,
-  "enableEffectsUpdate" : true
+  "enableEffectsUpdate" : true,
+  "includeCraftGroups" : true,
+  "forceUpdate" : true
 }

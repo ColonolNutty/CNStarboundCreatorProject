@@ -55,7 +55,9 @@ public class IngredientUpdater {
             }
             Ingredient updatedIngredient = _ingredientDataCalculator.updateIngredient(ingredient);
             Ingredient originalIngredient = _manipulator.readIngredient(ingredientFilePath);
-            if(meetsMinimumValues(updatedIngredient) && ingredientsAreEqual(originalIngredient, updatedIngredient)) {
+            if(!_settings.forceUpdate
+                    && meetsMinimumValues(updatedIngredient)
+                    && ingredientsAreEqual(originalIngredient, updatedIngredient)) {
                 _log.debug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName());
                 return null;
             }

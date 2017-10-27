@@ -18,4 +18,6 @@ public class BalancerSettings extends BaseSettings {
     public String ingredientOverridePath;
     public Integer numberOfPasses;
     public Boolean enableEffectsUpdate;
+    public Boolean includeCraftGroups;
+    public Boolean forceUpdate;
 }

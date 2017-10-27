@@ -67,6 +67,8 @@ public class Ingredient {
         return foodValue != null && foodValue > 0.0;
     }
 
+    public boolean hasDescription() { return description != null && !description.equals(""); }
+
     public boolean hasEffects() {
         return hasEffects(effects);
     }

@@ -6,11 +6,8 @@ import com.colonolnutty.module.shareddata.MainFunctionModule;
 import com.colonolnutty.module.shareddata.StopWatchTimer;
 import com.colonolnutty.module.shareddata.models.IngredientListItem;
 import com.colonolnutty.module.shareddata.models.RecipesConfig;
-import main.crafters.CNCrafter;
-import main.crafters.IngredientCrafter;
-import main.crafters.RecipeCrafter;
-import main.settings.RecipeCreatorSettings;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import main.settings.RecipeConfigCreatorSettings;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,21 +18,17 @@ import java.util.ArrayList;
  * Date: 10/04/2017
  * Time: 9:43 AM
  */
-public class RecipeCreatorMain extends MainFunctionModule {
+public class RecipeConfigCreatorMain extends MainFunctionModule {
 
     private CNLog _log;
-    private RecipeCreatorSettings _settings;
+    private RecipeConfigCreatorSettings _settings;
     private JsonManipulator _manipulator;
-    private ArrayList<CNCrafter> _crafters;
 
-    public RecipeCreatorMain(RecipeCreatorSettings settings,
-                             CNLog log) {
+    public RecipeConfigCreatorMain(RecipeConfigCreatorSettings settings,
+                                   CNLog log) {
         _settings = settings;
         _log = log;
         _manipulator = new JsonManipulator(log, settings);
-        _crafters = new ArrayList<CNCrafter>();
-        _crafters.add(new RecipeCrafter(log, settings, _manipulator));
-        _crafters.add(new IngredientCrafter(log, settings, _manipulator));
     }
 
     @Override
@@ -133,9 +126,6 @@ public class RecipeCreatorMain extends MainFunctionModule {
                 outputName += ingred.shortName;
             }
             outputName += _settings.fileSuffix;
-            for(CNCrafter crafter : _crafters) {
-                crafter.craft(outputName, ingredients, _settings.countPerIngredient);
-            }
             names.add(outputName);
             _log.endSubBundle();
         }

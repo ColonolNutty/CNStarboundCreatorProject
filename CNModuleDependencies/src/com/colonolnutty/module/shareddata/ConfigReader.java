@@ -68,7 +68,7 @@ public class ConfigReader {
             String settingName = settingNames.get(i);
             if(!settingsNode.has(settingName)) {
                 JsonNode node = settingsNode.get(settingName);
-                if(!node.isNull() && (node.isArray() && ((ArrayNode)node).size() > 0)) {
+                if(node == null || !node.isNull() && (node.isArray() && ((ArrayNode)node).size() > 0)) {
                     continue;
                 }
                 _log.error("Setting not found with name: " + settingName);
