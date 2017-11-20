@@ -1,11 +1,10 @@
 package main;
 
-import com.colonolnutty.module.shareddata.CNLog;
-import com.colonolnutty.module.shareddata.JsonManipulator;
-import com.colonolnutty.module.shareddata.MainFunctionModule;
-import com.colonolnutty.module.shareddata.StopWatchTimer;
+import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.locators.*;
 import com.colonolnutty.module.shareddata.models.IngredientOverrides;
+import com.colonolnutty.module.shareddata.ui.ConfirmationController;
+import com.colonolnutty.module.shareddata.ui.ProgressController;
 import main.settings.BalancerSettings;
 
 import java.io.FileNotFoundException;
@@ -20,10 +19,14 @@ import java.util.ArrayList;
 public class PriceFoodValueBalancerMain extends MainFunctionModule {
     private BalancerSettings _settings;
     private CNLog _log;
+    private ProgressController _progressController;
 
-    public PriceFoodValueBalancerMain(BalancerSettings balancerSettings, CNLog log) {
+    public PriceFoodValueBalancerMain(BalancerSettings balancerSettings,
+                                      CNLog log,
+                                      ProgressController progressController) {
         _settings = balancerSettings;
         _log = log;
+        _progressController = progressController;
     }
 
     @Override
@@ -38,6 +41,7 @@ public class PriceFoodValueBalancerMain extends MainFunctionModule {
         PatchLocator patchLocator = new PatchLocator(_log);
         ArrayList<String> searchLocations = setupSearchLocations(_settings);
         FileLocator fileLocator = new FileLocator(_log);
+
         StatusEffectStore statusEffectStore = new StatusEffectStore(_log, fileLocator, manipulator, patchLocator, searchLocations);
         IngredientStore ingredientStore = new IngredientStore(_log, manipulator, patchLocator, fileLocator, searchLocations);
         IngredientOverrides ingredientOverrides = loadIngredientOverrides(_settings.ingredientOverridePath, manipulator);
@@ -48,12 +52,15 @@ public class PriceFoodValueBalancerMain extends MainFunctionModule {
         IngredientDataCalculator ingredientDataCalculator = new IngredientDataCalculator(_log, _settings, recipeStore, ingredientStore, statusEffectStore, manipulator);
         IngredientUpdater ingredientUpdater = new IngredientUpdater(_log, _settings, manipulator, ingredientStore, ingredientDataCalculator);
 
-        FileUpdater fileUpdater = new FileUpdater(_log, _settings,
-                ingredientDataCalculator, manipulator, ingredientUpdater, ingredientStore, fileLocator, searchLocations);
+        FileUpdater fileUpdater = new FileUpdater(_log, _settings, manipulator, ingredientUpdater, ingredientStore, fileLocator, searchLocations, _progressController);
         fileUpdater.updateValues();
 
-        timer.stop();
         timer.logTime();
+    }
+
+    private int numberOfFilesToUpdate(FileLocator fileLocator) {
+        ArrayList<String> filesToUpdate = fileLocator.getFilePaths(CNCollectionUtils.toStringArrayList(_settings.locationsToUpdate));
+        return filesToUpdate.size();
     }
 
     private ArrayList<String> setupSearchLocations(BalancerSettings settings) {

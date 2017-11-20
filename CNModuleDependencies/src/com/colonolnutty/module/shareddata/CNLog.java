@@ -107,15 +107,19 @@ public class CNLog {
     private ArrayList<MessageBundle> _messageBundles;
 
     public void startSubBundle(String name) {
+        startSubBundle(name, false);
+    }
+
+    public void startSubBundle(String name, boolean highlight) {
         if(_messageBundles == null) {
             _messageBundles = new ArrayList<MessageBundle>();
         }
         if(_messageBundles.isEmpty()) {
-            _messageBundles.add(_messageBundler.getBundle(name));
+            _messageBundles.add(_messageBundler.getBundle(name, highlight));
             return;
         }
         MessageBundle lastBundle = _messageBundles.get(_messageBundles.size() - 1);
-        _messageBundles.add(lastBundle.add(name));
+        _messageBundles.add(lastBundle.add(name, highlight));
     }
 
     public void endSubBundle() {
@@ -130,18 +134,26 @@ public class CNLog {
     }
 
     public void writeToBundle(String... messages) {
+        writeToBundle(false, messages);
+    }
+
+    public void writeToBundle(String message) {
+        writeToBundle(message, false);
+    }
+
+    public void writeToBundle(boolean highlight, String... messages) {
         if(messages == null || messages.length == 0) {
             return;
         }
         for(String message : messages) {
-            writeToBundle(message);
+            writeToBundle(message, highlight);
         }
     }
 
-    public void writeToBundle(String message) {
+    public void writeToBundle(String message, boolean highlight) {
         MessageBundle messageBundle;
         if(_messageBundles == null || _messageBundles.isEmpty()) {
-            messageBundle = _messageBundler.getBundle("Root");
+            messageBundle = _messageBundler.getBundle("Root", highlight);
         }
         else {
             messageBundle = _messageBundles.get(_messageBundles.size() - 1);
@@ -149,24 +161,28 @@ public class CNLog {
         messageBundle.add(message);
     }
 
+    public void writeToAll(String... messages) {
+        writeToAll(0, messages);
+    }
+
     public void writeToAll(int indentSize, String... messages) {
+        writeToAll(indentSize, false, messages);
+    }
+
+    public void writeToAll(int indentSize, boolean highlight, String... messages) {
         if(messages == null || messages.length == 0) {
             return;
         }
         String combined = "";
         for(int i = 0; i < messages.length; i++) {
             String message = messages[i];
-            writeToBundle(message);
+            writeToBundle(message, highlight);
             combined += message;
             if((i + 1) < messages.length) {
                 combined += ", ";
             }
         }
         debug(combined, indentSize);
-    }
-
-    public void writeToAll(String... messages) {
-        writeToAll(0, messages);
     }
 
     public void clearCurrentBundles() {

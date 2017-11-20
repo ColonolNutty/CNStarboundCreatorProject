@@ -7,6 +7,7 @@ import com.colonolnutty.module.shareddata.models.MessageBundle;
 import com.colonolnutty.module.shareddata.models.settings.BasicSettings;
 import com.colonolnutty.module.shareddata.ui.MainFunctionPanel;
 import com.colonolnutty.module.shareddata.ui.OutputDisplay;
+import com.colonolnutty.module.shareddata.ui.ProgressDisplay;
 import main.settings.RecipeCreatorSettings;
 import main.RecipeCreatorMain;
 import main.settings.RecipeCreatorCRData;
@@ -25,6 +26,7 @@ public class MainPanel extends MainFunctionPanel {
     private CNLog _log;
     private RecipeCreatorSettings _settings;
     private OutputDisplay _outputDisplay;
+    private ProgressDisplay _progressDisplay;
     private RecipeCreatorSettingsDisplay _settingsDisplay;
 
     @Override
@@ -45,6 +47,8 @@ public class MainPanel extends MainFunctionPanel {
         _log = new CNLog(_outputDisplay, _settings);
         SettingsWriter writer = new SettingsWriter(_log);
         _settingsDisplay = new RecipeCreatorSettingsDisplay(writer, _settings);
+        _progressDisplay = new ProgressDisplay();
+        JPanel progressDisplayPanel = _progressDisplay.get();
         JPanel settingsPanel = _settingsDisplay.setup(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,7 +61,8 @@ public class MainPanel extends MainFunctionPanel {
                             _log.setupDebugLogFile();
                             _outputDisplay.clear();
                             _settingsDisplay.disable();
-                            RecipeCreatorMain creator = new RecipeCreatorMain(_settings, _log);
+                            _progressDisplay.reset();
+                            RecipeCreatorMain creator = new RecipeCreatorMain(_settings, _log, _progressDisplay);
                             creator.run();
                             Hashtable<String, MessageBundle> messages = _log.getMessages();
                             _outputDisplay.updateTreeDisplay(messages);
@@ -77,11 +82,13 @@ public class MainPanel extends MainFunctionPanel {
         layout.setHorizontalGroup(
                 layout.createParallelGroup()
                         .addComponent(settingsPanel)
+                        .addComponent(progressDisplayPanel)
                         .addComponent(outputDisplayPanel)
         );
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                         .addComponent(settingsPanel)
+                        .addComponent(progressDisplayPanel)
                         .addComponent(outputDisplayPanel)
         );
         mainPanel.setVisible(true);

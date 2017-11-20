@@ -10,6 +10,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -85,36 +86,7 @@ public class OutputDisplay extends DebugWriter {
         _outputDisplayScroll.getHorizontalScrollBar().setValue(0);
 
         _topLevelOutputNode = new DefaultMutableTreeNode("File Events");
-        _outputTree = new JTree(_topLevelOutputNode);
-        _outputTree.setEditable(false);
-        _outputTree.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e){
-                if(_outputTree.isCollapsed(_outputTree.getRowForLocation(e.getX(),e.getY()))) {
-                    _outputTree.expandRow(_outputTree.getRowForLocation(e.getX(),e.getY()));
-                }
-                else {
-                    _outputTree.collapseRow(_outputTree.getRowForLocation(e.getX(),e.getY()));
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) { }
-
-            @Override
-            public void mouseReleased(MouseEvent e) { }
-
-            @Override
-            public void mouseEntered(MouseEvent e) { }
-
-            @Override
-            public void mouseExited(MouseEvent e) { }
-        });
-        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) _outputTree.getCellRenderer();
-        renderer.setLeafIcon(null);
-        renderer.setClosedIcon(null);
-        renderer.setOpenIcon(null);
-        CNUIExtensions.addInternalPadding(_outputTree, 10);
+        _outputTree = setupOutputTree(_topLevelOutputNode);
 
         JScrollPane outputTree = new JScrollPane(_outputTree);
 
@@ -139,14 +111,55 @@ public class OutputDisplay extends DebugWriter {
         _displayPanel.setVisible(true);
     }
 
-    private DefaultMutableTreeNode addNode(MessageBundle bundle) {
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode(bundle.toString());
-        bundle.orderBy(new Comparator<MessageBundle>() {
+    private static JTree setupOutputTree(DefaultMutableTreeNode _topLevelOutputNode) {
+        final JTree tree = new JTree(_topLevelOutputNode);
+        tree.setEditable(false);
+        tree.addMouseListener(new MouseListener() {
             @Override
-            public int compare(MessageBundle o1, MessageBundle o2) {
-                return o1.toString().compareTo(o2.toString());
+            public void mouseClicked(MouseEvent e){
+                JTree sourceTree = (JTree) e.getSource();
+                int selectedRow = sourceTree.getRowForLocation(e.getX(), e.getY());
+                if(sourceTree.isCollapsed(selectedRow)) {
+                    sourceTree.expandRow(selectedRow);
+                }
+                else {
+                    sourceTree.collapseRow(selectedRow);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) { }
+
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
             }
         });
+        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
+        renderer.setLeafIcon(null);
+        renderer.setClosedIcon(null);
+        renderer.setOpenIcon(null);
+        CNUIExtensions.addInternalPadding(tree, 10);
+
+        tree.setCellRenderer(new HighlightableTreeCellRenderer());
+        return tree;
+    }
+
+    private DefaultMutableTreeNode addNode(MessageBundle bundle) {
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode(bundle);
+        top.setUserObject(bundle);
+        //bundle.orderBy(new Comparator<MessageBundle>() {
+        //    @Override
+        //    public int compare(MessageBundle o1, MessageBundle o2) {
+        //        return o1.toString().compareTo(o2.toString());
+        //    }
+        //});
         for(int i = 0; i < bundle.size(); i++) {
             top.add(addNode(bundle.get(i)));
         }

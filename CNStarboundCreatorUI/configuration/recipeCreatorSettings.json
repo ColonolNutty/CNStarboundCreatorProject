@@ -16,6 +16,6 @@
   "outputItemDescription" : "A sandwich",
   "outputItemShortDescription" : "Sandwich",
   "countPerIngredient" : 2,
-  "numberOfIngredientsPerRecipe" : 2,
+  "numberOfIngredientsPerRecipe" : 3,
   "configAsPatchFile" : true
 }

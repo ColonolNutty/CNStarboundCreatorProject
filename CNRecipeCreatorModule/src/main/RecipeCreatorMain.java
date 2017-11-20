@@ -1,11 +1,10 @@
 package main;
 
-import com.colonolnutty.module.shareddata.CNLog;
-import com.colonolnutty.module.shareddata.JsonManipulator;
-import com.colonolnutty.module.shareddata.MainFunctionModule;
-import com.colonolnutty.module.shareddata.StopWatchTimer;
+import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.models.IngredientListItem;
 import com.colonolnutty.module.shareddata.models.RecipesConfig;
+import com.colonolnutty.module.shareddata.ui.ConfirmationController;
+import com.colonolnutty.module.shareddata.ui.ProgressController;
 import main.crafters.CNCrafter;
 import main.crafters.IngredientCrafter;
 import main.crafters.RecipeCrafter;
@@ -27,11 +26,14 @@ public class RecipeCreatorMain extends MainFunctionModule {
     private RecipeCreatorSettings _settings;
     private JsonManipulator _manipulator;
     private ArrayList<CNCrafter> _crafters;
+    private ProgressController _progressController;
 
     public RecipeCreatorMain(RecipeCreatorSettings settings,
-                             CNLog log) {
+                             CNLog log,
+                             ProgressController progressController) {
         _settings = settings;
         _log = log;
+        _progressController = progressController;
         _manipulator = new JsonManipulator(log, settings);
         _crafters = new ArrayList<CNCrafter>();
         _crafters.add(new RecipeCrafter(log, settings, _manipulator));
@@ -52,6 +54,47 @@ public class RecipeCreatorMain extends MainFunctionModule {
         if(ingredientList == null) {
             return;
         }
+        _log.startSubBundle("Pre-Run");
+        int numOfIngredients = ingredientList.length;
+        int numberPerRecipe = _settings.numberOfIngredientsPerRecipe;
+        _log.writeToAll("Number of ingredients: " + numOfIngredients);
+        _log.writeToAll("Number of ingredients per recipe: " + numberPerRecipe);
+
+        double numberOfPermutations = 0;
+        for(int i = numberPerRecipe; i > 0; i--) {
+            _log.writeToAll("Calculating permutations for: " + i);
+            _log.writeToAll("Factorial is: " + CNMathUtils.factorial(i));
+            double result = CNMathUtils.calculateCombinations(numOfIngredients, i);
+            _log.writeToAll("Result is: " + result);
+            if(result == -1) {
+                _log.writeToAll("Result is negative");
+            }
+            numberOfPermutations += result;
+        }
+
+        int numberOfPermutationsInt = 0;
+
+        try {
+            numberOfPermutationsInt = (int) (numberOfPermutations * _crafters.size());
+            _log.writeToAll("Number of permutations: " + numberOfPermutationsInt);
+        }
+        catch(ArithmeticException e) {
+            _log.endSubBundle();
+            _log.error("Too many combinations, aborting execution");
+            timer.logTime();
+            return;
+        }
+        _log.endSubBundle();
+
+        boolean result = ConfirmationController.getConfirmation("You are about to create " + numberOfPermutationsInt + " files, continue?");
+
+        if(!result) {
+            _log.error("User chose to abort, aborting");
+            timer.logTime();
+            return;
+        }
+
+        _progressController.setMaximum(numberOfPermutationsInt);
 
         ArrayList<String> outputNames = createFromTemplate(ingredientList);
         writeToConfigurationFile(outputNames);
@@ -122,7 +165,7 @@ public class RecipeCreatorMain extends MainFunctionModule {
             ArrayList<IngredientListItem> ingredients = new ArrayList<IngredientListItem>();
             ingredients.addAll(currentIngredients);
             IngredientListItem nextIngredient = ingredientList[i];
-            _log.startSubBundle(nextIngredient.name);
+            _log.startSubBundle(nextIngredient.name, true);
             ingredients.add(nextIngredient);
             if(ingredientsLeft != 0) {
                 names.addAll(createIngredients(ingredientList, ingredients, i, ingredientsLeft - 1));
@@ -135,6 +178,7 @@ public class RecipeCreatorMain extends MainFunctionModule {
             outputName += _settings.fileSuffix;
             for(CNCrafter crafter : _crafters) {
                 crafter.craft(outputName, ingredients, _settings.countPerIngredient);
+                _progressController.add(1);
             }
             names.add(outputName);
             _log.endSubBundle();

@@ -17,16 +17,20 @@ public class MessageBundler {
     }
 
     public MessageBundle getBundle(String name) {
+        return getBundle(name, false);
+    }
+
+    public MessageBundle getBundle(String name, boolean highlight) {
         if(_bundles.containsKey(name)) {
             return _bundles.get(name);
         }
-        MessageBundle bundle = new MessageBundle(name);
+        MessageBundle bundle = new MessageBundle(name, highlight);
         _bundles.put(name, bundle);
         return bundle;
     }
 
     public Hashtable<String, MessageBundle> getBundles() {
-        return _bundles;
+        return new Hashtable<String, MessageBundle>(_bundles);
     }
 
     public void clear() {

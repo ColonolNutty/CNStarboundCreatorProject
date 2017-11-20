@@ -6,6 +6,8 @@ import com.colonolnutty.module.shareddata.JsonManipulator;
 import com.colonolnutty.module.shareddata.locators.FileLocator;
 import com.colonolnutty.module.shareddata.locators.IngredientStore;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.ui.ConfirmationController;
+import com.colonolnutty.module.shareddata.ui.ProgressController;
 import main.settings.BalancerSettings;
 
 import java.io.File;
@@ -21,29 +23,29 @@ import java.util.Hashtable;
 public class FileUpdater {
     private CNLog _log;
     private BalancerSettings _settings;
-    private IngredientDataCalculator _ingredientDataCalculator;
     private JsonManipulator _manipulator;
     private IngredientUpdater _ingredientUpdater;
     private IngredientStore _ingredientStore;
     private FileLocator _fileLocator;
     private ArrayList<String> _fileLocations;
+    private ProgressController _progressController;
 
     public FileUpdater(CNLog log,
                        BalancerSettings settings,
-                       IngredientDataCalculator ingredientDataCalculator,
                        JsonManipulator manipulator,
                        IngredientUpdater ingredientUpdater,
                        IngredientStore ingredientStore,
                        FileLocator fileLocator,
-                       ArrayList<String> fileLocations) {
+                       ArrayList<String> fileLocations,
+                       ProgressController progressController) {
         _log = log;
         _settings = settings;
-        _ingredientDataCalculator = ingredientDataCalculator;
         _manipulator = manipulator;
         _ingredientUpdater = ingredientUpdater;
         _ingredientStore = ingredientStore;
         _fileLocator = fileLocator;
         _fileLocations = fileLocations;
+        _progressController = progressController;
     }
 
     public void updateValues() {
@@ -56,6 +58,15 @@ public class FileUpdater {
         ingredientFileExts[5] = ".projectile";
         String currentDirectory = System.getProperty("user.dir");
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientFileExts);
+
+        int totalIterations = filePaths.size() * _settings.numberOfPasses;
+        boolean shouldContinue = ConfirmationController.getConfirmation("Total number of iterations (Larger numbers will take awhile): " + totalIterations + ", continue?");
+        if(!shouldContinue) {
+            _log.debug("User chose to not continue, aborting balance");
+            return;
+        }
+
+        _progressController.setMaximum(totalIterations);
         Hashtable<String, String> ingredientsToUpdate = new Hashtable<String, String>();
         for(int k = 0; k < _settings.numberOfPasses; k++) {
             String currentPass = "Beginning pass: " + (k + 1);
@@ -75,11 +86,14 @@ public class FileUpdater {
                     }
                 }
                 else if (!ingredientsToUpdate.containsKey(filePath)) {
-                    ingredientsToUpdate.put(filePath, ingredientName);
+                    if(!CNUtils.fileStartsWith(filePath, _settings.locationsToUpdate)) {
+                        ingredientsToUpdate.put(filePath, ingredientName);
+                    }
                 }
                 _log.endSubBundle();
                 _log.endSubBundle();
                 endPathBundle(relativePathNames);
+                _progressController.add(1);
             }
         }
 
@@ -89,6 +103,15 @@ public class FileUpdater {
             _log.info("No files to update");
             return;
         }
+
+        int totalToUpdate = ingredientsToUpdate.size();
+        boolean shouldUpdateIngredients = ConfirmationController.getConfirmation("Number of files to update: " + totalToUpdate + ", continue?");
+        if(!shouldUpdateIngredients) {
+            _log.debug("User chose to abort, aborting balancer");
+            return;
+        }
+        _progressController.reset();
+        _progressController.setMaximum(totalToUpdate);
         _log.info("Finished passes, updating files");
         Enumeration<String> ingredientNames = ingredientsToUpdate.elements();
         while(ingredientNames.hasMoreElements()) {
@@ -101,6 +124,7 @@ public class FileUpdater {
             boolean isPatchFile = ingredient.patchFile != null;
             String filePath = isPatchFile ? ingredient.patchFile : ingredient.filePath;
             if(!CNUtils.fileStartsWith(filePath, _settings.locationsToUpdate)) {
+                _progressController.add(1);
                 continue;
             }
             String[] relativePathNames = startPathBundle(filePath, currentDirectory);
@@ -118,6 +142,7 @@ public class FileUpdater {
             _log.endSubBundle();
             _log.endSubBundle();
             endPathBundle(relativePathNames);
+            _progressController.add(1);
         }
     }
 

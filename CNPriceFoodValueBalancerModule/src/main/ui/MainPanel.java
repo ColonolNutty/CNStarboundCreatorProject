@@ -4,6 +4,7 @@ import com.colonolnutty.module.shareddata.CNLog;
 import com.colonolnutty.module.shareddata.ConfigReader;
 import com.colonolnutty.module.shareddata.SettingsWriter;
 import com.colonolnutty.module.shareddata.models.settings.BasicSettings;
+import com.colonolnutty.module.shareddata.ui.ProgressDisplay;
 import main.settings.BalancerCRData;
 import main.PriceFoodValueBalancerMain;
 import main.settings.BalancerSettings;
@@ -25,8 +26,8 @@ public class MainPanel extends MainFunctionPanel {
     private CNLog _log;
     private BalancerSettings _settings;
     private OutputDisplay _outputDisplay;
+    private ProgressDisplay _progressDisplay;
     private BalancerSettingsDisplay _settingsDisplay;
-    private PriceFoodValueBalancerMain _PriceFood_valueBalancerMain;
 
     @Override
     public JPanel create() {
@@ -47,6 +48,8 @@ public class MainPanel extends MainFunctionPanel {
         mainPanel.setVisible(true);
         SettingsWriter writer = new SettingsWriter(_log);
         _settingsDisplay = new BalancerSettingsDisplay(writer, _settings);
+        _progressDisplay = new ProgressDisplay();
+        JPanel progressDisplayPanel = _progressDisplay.get();
         JPanel settingsPanel = _settingsDisplay.setup(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,8 +62,10 @@ public class MainPanel extends MainFunctionPanel {
                             _log.setupDebugLogFile();
                             _outputDisplay.clear();
                             _settingsDisplay.disable();
-                            _PriceFood_valueBalancerMain = new PriceFoodValueBalancerMain(_settings, _log);
-                            _PriceFood_valueBalancerMain.run();
+                            _progressDisplay.reset();
+                            PriceFoodValueBalancerMain balancer = new PriceFoodValueBalancerMain(_settings,
+                                    _log, _progressDisplay);
+                            balancer.run();
                             Hashtable<String, MessageBundle> messages = _log.getMessages();
                             _outputDisplay.updateTreeDisplay(messages);
                         }
@@ -79,11 +84,13 @@ public class MainPanel extends MainFunctionPanel {
         layout.setHorizontalGroup(
                 layout.createParallelGroup()
                         .addComponent(settingsPanel)
+                        .addComponent(progressDisplayPanel)
                         .addComponent(outputDisplayPanel)
         );
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                         .addComponent(settingsPanel)
+                        .addComponent(progressDisplayPanel)
                         .addComponent(outputDisplayPanel)
         );
         return mainPanel;

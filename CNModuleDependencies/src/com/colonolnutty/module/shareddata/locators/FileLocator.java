@@ -16,7 +16,7 @@ public class FileLocator {
 
     private CNLog _log;
     private ArrayList<String> _includedFileTypes;
-    private ArrayList<String> _savedFileNames;
+    private ArrayList<String> _fileNameCache;
 
     public FileLocator(CNLog log) {
         _log = log;
@@ -40,15 +40,15 @@ public class FileLocator {
     }
 
     public ArrayList<String> getFilePaths(ArrayList<String> locations) {
-        if(_savedFileNames != null) {
-            return _savedFileNames;
+        if(_fileNameCache != null) {
+            return _fileNameCache;
         }
         ArrayList<String> filePaths = new ArrayList<String>();
         for(String location : locations) {
             filePaths.addAll(getFilePaths(location));
         }
-        _savedFileNames = filePaths;
-        return _savedFileNames;
+        _fileNameCache = filePaths;
+        return _fileNameCache;
     }
 
     public ArrayList<String> getFilePathsByExtension(ArrayList<String> locations, String extension) {

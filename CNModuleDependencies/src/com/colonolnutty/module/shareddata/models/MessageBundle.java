@@ -11,12 +11,18 @@ import java.util.Comparator;
  */
 public class MessageBundle {
     private String _name;
+    private boolean _highlight;
 
     private ArrayList<MessageBundle> _subBundles;
 
     public MessageBundle(String name) {
+        this(name, false);
+    }
+
+    public MessageBundle(String name, boolean highlight) {
         _name = name;
         _subBundles = new ArrayList<MessageBundle>();
+        _highlight = highlight;
     }
 
     public MessageBundle get(int index) {
@@ -24,6 +30,10 @@ public class MessageBundle {
     }
 
     public MessageBundle add(String message) {
+        return add(message, false);
+    }
+
+    public MessageBundle add(String message, boolean highlight) {
         if(_name == null) {
             _name = message;
             return this;
@@ -41,7 +51,7 @@ public class MessageBundle {
         if(foundBundle != null) {
             return foundBundle;
         }
-        MessageBundle messageBundle = new MessageBundle(message);
+        MessageBundle messageBundle = new MessageBundle(message, highlight);
         _subBundles.add(messageBundle);
         return messageBundle;
     }
@@ -65,5 +75,9 @@ public class MessageBundle {
     @Override
     public String toString() {
         return _name;
+    }
+
+    public boolean shouldHighlight() {
+        return _highlight;
     }
 }
