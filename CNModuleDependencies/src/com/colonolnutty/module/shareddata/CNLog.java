@@ -2,6 +2,7 @@ package com.colonolnutty.module.shareddata;
 
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.MessageBundle;
+import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class CNLog {
     }
 
     public void debug(String message, int indentSize) {
-        writeMessage(MessageType.Debug, CNUtils.createIndent(indentSize) + message);
+        writeMessage(MessageType.Debug, CNStringUtils.createIndent(indentSize) + message);
     }
 
     public void info(String message) {
@@ -45,7 +46,7 @@ public class CNLog {
     }
 
     public void info(String message, int indentSize) {
-        writeMessage(MessageType.Info, CNUtils.createIndent(indentSize) + message);
+        writeMessage(MessageType.Info, CNStringUtils.createIndent(indentSize) + message);
     }
 
     public void error(String message) {

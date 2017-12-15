@@ -1,6 +1,6 @@
 package com.colonolnutty.module.shareddata.ui;
 
-import com.colonolnutty.module.shareddata.CNUtils;
+import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -190,7 +190,7 @@ public abstract class SettingsDisplayBase {
         JLabel configEntryLabel = new JLabel(label);
         JTextArea textArea = createTextArea(name);
         if(initValue != null) {
-            textArea.setText(CNUtils.toCommaSeparated(initValue));
+            textArea.setText(CNStringUtils.toCommaSeparated(initValue));
         }
         _textFields.put(name, textArea);
         JScrollPane scrollPane = new JScrollPane(textArea);

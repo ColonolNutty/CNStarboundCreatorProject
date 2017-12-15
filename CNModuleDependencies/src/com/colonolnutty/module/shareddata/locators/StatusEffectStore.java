@@ -2,6 +2,7 @@ package com.colonolnutty.module.shareddata.locators;
 
 import com.colonolnutty.module.shareddata.CNLog;
 import com.colonolnutty.module.shareddata.JsonManipulator;
+import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.StatusEffect;
 
 import java.io.IOException;
@@ -43,6 +44,14 @@ public class StatusEffectStore {
         return null;
     }
 
+    public int getDefaultStatusEffectDuration(String effectName) {
+        StatusEffect statusEffect = getStatusEffect(effectName);
+        if(statusEffect == null || statusEffect.defaultDuration == 0) {
+            return Ingredient.DefaultEffectDuration;
+        }
+        return statusEffect.defaultDuration;
+    }
+
     private void storeStatusEffects() {
         if(!_statusEffects.isEmpty()) {
             return;
@@ -78,4 +87,5 @@ public class StatusEffectStore {
             _log.error("[IOE] While reading: " + filePath, e);
         }
     }
+
 }

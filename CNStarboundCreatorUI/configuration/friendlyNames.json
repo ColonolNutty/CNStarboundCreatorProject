@@ -1,0 +1,16 @@
+[
+  ["bakingMFM", "BAKE"],
+  ["blendingMFM", "BLEND"],
+  ["boilingMFM", "BOIL"],
+  ["coffeeMFM", "COFFEE"],
+  ["choppingMFM", "CHOP"],
+  ["freezingMFM", "FREEZE"],
+  ["fryingMFM", "FRY"],
+  ["purifyingMFM", "PURIFY"],
+  ["millingMFM", "MILL"],
+  ["pressingMFM", "PRESS"],
+  ["canningMFM", "CAN"],
+  ["churningMFM", "CHURN"],
+  ["distillingMFM", "DISTILL"],
+  ["preparingMFM", "PREP"]
+]

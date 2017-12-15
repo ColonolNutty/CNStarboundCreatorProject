@@ -13,5 +13,6 @@
   "numberOfPasses" : 8,
   "enableEffectsUpdate" : true,
   "includeCraftGroups" : true,
-  "forceUpdate" : true
+  "forceUpdate" : false,
+  "friendlyNamesFilePath" : "configuration\\friendlyNames.json"
 }

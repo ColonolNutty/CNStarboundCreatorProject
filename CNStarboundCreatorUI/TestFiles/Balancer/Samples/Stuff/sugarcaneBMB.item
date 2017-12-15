@@ -5,16 +5,6 @@
   "category" : "craftingMaterial",
   "description" : "Freshly harvested Sugarcane stalk. Can be milled into Sugar.",
   "shortdescription" : "Sugarcane Stalk",
-  "effects" : [ [ 
-      {
-        "effect" : "jumpboostfood",
-        "duration" : 20
-      },
-
-      {
-        "effect" : "maxenergyscalingboostfood",
-        "duration" : 210
-      } ] ],
   "inventoryIcon" : "sugarcaneBMB.png",
   "itemTags" : [ "reagent" ],
   "learnBlueprintsOnPickup" : [ "paper" ]

@@ -543,9 +543,15 @@ public class JsonManipulator {
                 else if (nodePath.contains("effects")) {
                     JsonNode effects = objNode.get("value");
                     if(!ingredient.effectsAreEqual(effects)) {
-                        ArrayNode arrNode = objNode.putArray("value");
-                        for (int i = 0; i < ingredient.effects.size(); i++) {
-                            arrNode.add(ingredient.effects.get(i));
+                        if(ingredient.hasEffects()) {
+                            ArrayNode arrNode = objNode.putArray("value");
+                            for (int i = 0; i < ingredient.effects.size(); i++) {
+                                arrNode.add(ingredient.effects.get(i));
+                            }
+                        }
+                        else {
+                            ArrayNode arrNode = objNode.putArray("value");
+                            arrNode.add(createArrayNode());
                         }
                         result.needsUpdate = true;
                     }
@@ -701,6 +707,11 @@ public class JsonManipulator {
     public ArrayNode createArrayNode() {
         return _mapper.createArrayNode();
     }
+
+    public ArrayNode createJsonNode() {
+        return _mapper.createArrayNode();
+    }
+
 
     private class PatchResult {
         public boolean needsUpdate;

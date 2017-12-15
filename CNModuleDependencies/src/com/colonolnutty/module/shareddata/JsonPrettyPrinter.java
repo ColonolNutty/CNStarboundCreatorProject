@@ -1,5 +1,7 @@
 package com.colonolnutty.module.shareddata;
 
+import com.colonolnutty.module.shareddata.utils.CNStringUtils;
+import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.json.JSONArray;
@@ -24,7 +26,7 @@ public class JsonPrettyPrinter {
     }
 
     public String makePretty(JSONObject obj, int indentSize) {
-        String prettyJson = CNUtils.createIndent(indentSize) + "{\r\n";
+        String prettyJson = CNStringUtils.createIndent(indentSize) + "{\r\n";
         ArrayList<String> foundProperties = new ArrayList<String>();
         for(int i = 0; i < _propertyOrder.length; i++) {
             String propertyName = _propertyOrder[i];
@@ -37,7 +39,7 @@ public class JsonPrettyPrinter {
             if(obj.isNull(propertyName)) {
                 continue;
             }
-            prettyJson += CNUtils.createIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
+            prettyJson += CNStringUtils.createIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
             if (i + 1 < foundProperties.size()) {
                 prettyJson += ",\r\n";
             }
@@ -54,13 +56,13 @@ public class JsonPrettyPrinter {
                     prettyJson += ",\r\n";
                     appendedComma = true;
                 }
-                prettyJson += CNUtils.createIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
+                prettyJson += CNStringUtils.createIndent(indentSize + 2) + "\"" + propertyName + "\" : " + formatAsIntended(obj, propertyName, indentSize + 2);
                 if(propertyNames.hasNext()) {
                     appendedComma = false;
                 }
             }
         }
-        prettyJson += "\r\n" + CNUtils.createIndent(indentSize) + "}";
+        prettyJson += "\r\n" + CNStringUtils.createIndent(indentSize) + "}";
         return prettyJson;
     }
 
@@ -105,7 +107,7 @@ public class JsonPrettyPrinter {
                             return val.toString();
                         } catch (JSONException e4) {
                             try {
-                                return "\"" + CNUtils.escapeString(obj.getString(key)) + "\"";
+                                return "\"" + CNStringUtils.escapeString(obj.getString(key)) + "\"";
                             }
                             catch(JSONException e5) {
                                 _log.error("Unknown object type: " + key, e5);
@@ -171,7 +173,7 @@ public class JsonPrettyPrinter {
                     }
                 }
             }
-            String result = "\"" + CNUtils.escapeString(obj.getString(key)) + "\"";
+            String result = "\"" + CNStringUtils.escapeString(obj.getString(key)) + "\"";
             if(isNotLast) {
                 result += ", ";
             }
@@ -205,9 +207,9 @@ public class JsonPrettyPrinter {
 
     public String makePretty(ArrayNode node, int indentSize) {
         if(node.isArray() && node.size() == 0) {
-            return CNUtils.createIndent(indentSize) + "[]";
+            return CNStringUtils.createIndent(indentSize) + "[]";
         }
-        String prettyJson = CNUtils.createIndent(indentSize) + "[\r\n";
+        String prettyJson = CNStringUtils.createIndent(indentSize) + "[\r\n";
         for(int i = 0; i < node.size(); i++) {
             JsonNode subNode = node.get(i);
             String result = formatAsIntended(subNode, indentSize + 2);
@@ -219,7 +221,7 @@ public class JsonPrettyPrinter {
                 prettyJson += ",\r\n";
             }
         }
-        prettyJson += "\r\n" + CNUtils.createIndent(indentSize) + "]";
+        prettyJson += "\r\n" + CNStringUtils.createIndent(indentSize) + "]";
         return prettyJson;
     }
 
@@ -227,11 +229,11 @@ public class JsonPrettyPrinter {
         if(node.isNull()) {
             return null;
         }
-        if(CNUtils.isValueType(node)) {
+        if(CNJsonUtils.isValueType(node)) {
             if(node.isTextual()) {
-                return CNUtils.createIndent(indentSize) + "\"" + CNUtils.escapeString(node.asText()) + "\"";
+                return CNStringUtils.createIndent(indentSize) + "\"" + CNStringUtils.escapeString(node.asText()) + "\"";
             }
-            return CNUtils.createIndent(indentSize) + CNUtils.escapeString(node.asText());
+            return CNStringUtils.createIndent(indentSize) + CNStringUtils.escapeString(node.asText());
         }
         if(node.isArray()) {
             return makePretty((ArrayNode)node, indentSize);
@@ -244,7 +246,7 @@ public class JsonPrettyPrinter {
 
     private String formatAsObject(JsonNode node, int indentSize) {
         boolean hasValue = false;
-        String prettyJson = CNUtils.createIndent(indentSize) + "{\r\n";
+        String prettyJson = CNStringUtils.createIndent(indentSize) + "{\r\n";
         Iterator<String> fieldNames = node.fieldNames();
         while(fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
@@ -256,7 +258,7 @@ public class JsonPrettyPrinter {
                 continue;
             }
             hasValue = true;
-            prettyJson += CNUtils.createIndent(indentSize + 2) + "\"" + fieldName + "\" : " + result.trim();
+            prettyJson += CNStringUtils.createIndent(indentSize + 2) + "\"" + fieldName + "\" : " + result.trim();
             if(fieldNames.hasNext()) {
                 prettyJson += ",\r\n";
             }
@@ -264,7 +266,7 @@ public class JsonPrettyPrinter {
         if(!hasValue) {
             return "{}";
         }
-        prettyJson += "\r\n" + CNUtils.createIndent(indentSize) + "}";
+        prettyJson += "\r\n" + CNStringUtils.createIndent(indentSize) + "}";
         return prettyJson;
     }
 }

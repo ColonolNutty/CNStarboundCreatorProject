@@ -1,6 +1,6 @@
 package main.ui;
 
-import com.colonolnutty.module.shareddata.CNUtils;
+import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import com.colonolnutty.module.shareddata.SettingsWriter;
 import com.colonolnutty.module.shareddata.ui.SettingsDisplayBase;
 import main.settings.PandCSettings;
@@ -182,7 +182,7 @@ public class PandCSettingsDisplay extends SettingsDisplayBase {
             @Override
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
-                _settings.locationsOfCrops = CNUtils.fromCommaSeparated(text.getText());
+                _settings.locationsOfCrops = CNStringUtils.fromCommaSeparated(text.getText());
                 writeSettings();
             }
         });

@@ -2,7 +2,7 @@ package com.colonolnutty.module.shareddata.locators;
 
 
 import com.colonolnutty.module.shareddata.CNLog;
-import com.colonolnutty.module.shareddata.CNUtils;
+import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,6 +27,8 @@ public class FileLocator {
         _includedFileTypes.add(".object");
         _includedFileTypes.add(".matitem");
         _includedFileTypes.add(".liquid");
+        _includedFileTypes.add(".liqitem");
+        _includedFileTypes.add(".material");
         _includedFileTypes.add(".projectile");
         _includedFileTypes.add(".recipe");
         _includedFileTypes.add(".statuseffect");
@@ -110,9 +112,9 @@ public class FileLocator {
     }
 
     private boolean isValidFileType(String fileName) {
-        if(fileName.startsWith("obsolete")) {
+        if(fileName.startsWith("obsolete") || fileName.startsWith("ignore")) {
             return false;
         }
-        return CNUtils.fileEndsWith(fileName, _includedFileTypes);
+        return CNFileUtils.fileEndsWith(fileName, _includedFileTypes);
     }
 }

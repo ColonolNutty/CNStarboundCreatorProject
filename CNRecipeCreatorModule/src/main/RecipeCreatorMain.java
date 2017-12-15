@@ -5,6 +5,7 @@ import com.colonolnutty.module.shareddata.models.IngredientListItem;
 import com.colonolnutty.module.shareddata.models.RecipesConfig;
 import com.colonolnutty.module.shareddata.ui.ConfirmationController;
 import com.colonolnutty.module.shareddata.ui.ProgressController;
+import com.colonolnutty.module.shareddata.utils.CNMathUtils;
 import main.crafters.CNCrafter;
 import main.crafters.IngredientCrafter;
 import main.crafters.RecipeCrafter;

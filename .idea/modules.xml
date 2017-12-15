@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CNBalancerModule/CNBalancerModule.iml" filepath="$PROJECT_DIR$/CNBalancerModule/CNBalancerModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNBalancerModule.Tests/CNBalancerModule.Tests.iml" filepath="$PROJECT_DIR$/CNBalancerModule.Tests/CNBalancerModule.Tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNModuleDependencies/CNModuleDependencies.iml" filepath="$PROJECT_DIR$/CNModuleDependencies/CNModuleDependencies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNModuleDependencies.Tests/CNModuleDependencies.Tests.iml" filepath="$PROJECT_DIR$/CNModuleDependencies.Tests/CNModuleDependencies.Tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNPerennialCompactorModule/CNPerennialCompactorModule.iml" filepath="$PROJECT_DIR$/CNPerennialCompactorModule/CNPerennialCompactorModule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CNPriceFoodValueBalancerModule/CNPriceFoodValueBalancerModule.iml" filepath="$PROJECT_DIR$/CNPriceFoodValueBalancerModule/CNPriceFoodValueBalancerModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNRecipeConfigCreator/CNRecipeConfigCreator.iml" filepath="$PROJECT_DIR$/CNRecipeConfigCreator/CNRecipeConfigCreator.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNRecipeCreatorModule/CNRecipeCreatorModule.iml" filepath="$PROJECT_DIR$/CNRecipeCreatorModule/CNRecipeCreatorModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNStarboundCreatorProject.iml" filepath="$PROJECT_DIR$/CNStarboundCreatorProject.iml" />

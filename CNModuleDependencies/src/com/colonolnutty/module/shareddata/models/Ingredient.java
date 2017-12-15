@@ -1,6 +1,6 @@
 package com.colonolnutty.module.shareddata.models;
 
-import com.colonolnutty.module.shareddata.CNUtils;
+import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -191,8 +191,8 @@ public class Ingredient {
             return false;
         }
         if(!effectsOne.isArray()) {
-            boolean effectsOneIsValueType = CNUtils.isValueType(effectsOne);
-            boolean effectsTwoIsValueType = CNUtils.isValueType(effectsTwo);
+            boolean effectsOneIsValueType = CNJsonUtils.isValueType(effectsOne);
+            boolean effectsTwoIsValueType = CNJsonUtils.isValueType(effectsTwo);
             if(effectsOneIsValueType && effectsTwoIsValueType) {
                 return effectsOne.asText().equals(effectsTwo.asText());
             }
@@ -216,8 +216,8 @@ public class Ingredient {
                 }
                 continue;
             }
-            boolean selfIsValueType = CNUtils.isValueType(selfEffect);
-            boolean otherIsValueType = CNUtils.isValueType(otherEffect);
+            boolean selfIsValueType = CNJsonUtils.isValueType(selfEffect);
+            boolean otherIsValueType = CNJsonUtils.isValueType(otherEffect);
             if(selfIsValueType && otherIsValueType) {
                 if(!selfEffect.asText().equals(otherEffect.asText())) {
                     isSame = false;

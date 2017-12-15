@@ -96,20 +96,24 @@ public class IngredientStore {
         _stopWatch.reset();
         _stopWatch.start("loading ingredients from disk");
         _log.info("Loading ingredients from disk");
-        String[] ingredientFileExtensions = new String[6];
+        String[] ingredientFileExtensions = new String[8];
         ingredientFileExtensions[0] = ".item";
         ingredientFileExtensions[1] = ".consumable";
         ingredientFileExtensions[2] = ".object";
         ingredientFileExtensions[3] = ".matitem";
         ingredientFileExtensions[4] = ".liquid";
-        ingredientFileExtensions[5] = ".projectile";
-        String[] ingredientPatchFileExt = new String[6];
+        ingredientFileExtensions[5] = ".liqitem";
+        ingredientFileExtensions[6] = ".material";
+        ingredientFileExtensions[7] = ".projectile";
+        String[] ingredientPatchFileExt = new String[8];
         ingredientPatchFileExt[0] = ".item.patch";
         ingredientPatchFileExt[1] = ".consumable.patch";
         ingredientPatchFileExt[2] = ".object.patch";
         ingredientPatchFileExt[3] = ".matitem.patch";
         ingredientPatchFileExt[4] = ".liquid.patch";
-        ingredientPatchFileExt[5] = ".projectile.patch";
+        ingredientPatchFileExt[5] = ".liqitem.patch";
+        ingredientPatchFileExt[6] = ".material.patch";
+        ingredientPatchFileExt[7] = ".projectile.patch";
         ArrayList<String> ingredientPatchFiles = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientPatchFileExt);
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientFileExtensions);
         for(int i = 0; i < filePaths.size(); i++) {
@@ -174,10 +178,7 @@ public class IngredientStore {
             _log.debug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price);
             existing.price = ingredient.price;
         }
-        // && (_settings.enableEffectsUpdate || existing.hasPatchFile())
-        if(ingredient.effects != null) {
-            existing.effects = ingredient.effects;
-        }
+        existing.effects = ingredient.effects;
         if(ingredient.itemName != null) {
             existing.itemName = ingredient.itemName;
         }

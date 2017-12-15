@@ -20,4 +20,10 @@ public class StatusEffect {
 
     @JsonIgnore
     public String patchFilePath;
+
+    public StatusEffect() {}
+    public StatusEffect(String name, int duration) {
+        this.name = name;
+        this.defaultDuration = duration;
+    }
 }
