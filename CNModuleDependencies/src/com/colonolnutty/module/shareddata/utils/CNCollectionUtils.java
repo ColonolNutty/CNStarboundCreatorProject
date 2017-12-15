@@ -29,4 +29,15 @@ public abstract class CNCollectionUtils {
     public static boolean isEmpty(ArrayNode node) {
         return node == null || node.size() == 0;
     }
+
+    public static String[] combine(String[] one, String[] two) {
+        String[] ingredientFileExtensions = new String[one.length + two.length];
+        for(int i = 0; i < one.length; i++) {
+            ingredientFileExtensions[i] = one[i];
+        }
+        for(int i = 0; i < two.length; i++) {
+            ingredientFileExtensions[i + one.length] = two[i];
+        }
+        return ingredientFileExtensions;
+    }
 }

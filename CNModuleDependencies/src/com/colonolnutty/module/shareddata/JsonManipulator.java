@@ -4,6 +4,7 @@ import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.PropertyOrder;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.Recipe;
+import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
@@ -34,11 +35,12 @@ public class JsonManipulator {
         jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
         _mapper = new ObjectMapper(jf);
         _mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        _keysToWrite = new ArrayList<String>();
-        _keysToWrite.add("foodValue");
-        _keysToWrite.add("price");
-        _keysToWrite.add("effects");
-        _keysToWrite.add("description");
+        if(settings.propertiesToUpdate == null) {
+            _keysToWrite = new ArrayList<String>();
+        }
+        else {
+            _keysToWrite = CNCollectionUtils.toStringArrayList(settings.propertiesToUpdate);
+        }
         if(settings.propertyOrderFile == null) {
             _prettyPrinter = new JsonPrettyPrinter(_log, new String[0]);
             return;

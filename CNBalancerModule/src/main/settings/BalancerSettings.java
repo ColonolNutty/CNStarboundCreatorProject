@@ -22,4 +22,5 @@ public class BalancerSettings extends BaseSettings {
     public Boolean includeCraftGroups;
     public Boolean forceUpdate;
     public String friendlyNamesFilePath;
+    public String[] fileTypesToUpdate;
 }

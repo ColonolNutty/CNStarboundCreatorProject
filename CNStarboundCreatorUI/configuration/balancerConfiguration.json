@@ -4,6 +4,7 @@
   "enableTreeView" : true,
   "enableConsoleDebug" : true,
   "enableVerboseLogging" : true,
+  "propertiesToUpdate" : [ "foodValue", "price", "effects", "description" ],
   "locationsToUpdate" : [ "TestFiles\\Balancer\\Samples" ],
   "includeLocations" : [ "TestFiles\\Balancer\\NonStuff" ],
   "excludedEffects" : [ "foodpoison" ],
@@ -13,6 +14,7 @@
   "numberOfPasses" : 8,
   "enableEffectsUpdate" : true,
   "includeCraftGroups" : true,
-  "forceUpdate" : false,
-  "friendlyNamesFilePath" : "configuration\\friendlyNames.json"
+  "forceUpdate" : true,
+  "friendlyNamesFilePath" : "configuration\\friendlyNames.json",
+  "fileTypesToUpdate" : [ ".item", ".consumable", ".object", ".matitem", ".liqitem", ".projectile", ".liquid", ".matitem" ]
 }

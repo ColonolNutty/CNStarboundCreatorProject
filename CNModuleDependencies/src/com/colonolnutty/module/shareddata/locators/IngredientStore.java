@@ -22,13 +22,15 @@ public class IngredientStore {
     private PatchLocator _patchLocator;
     private FileLocator _fileLocator;
     private ArrayList<String> _fileLocations;
+    private String[] _fileTypes;
     private StopWatchTimer _stopWatch;
 
     public IngredientStore(CNLog log,
                            JsonManipulator manipulator,
                            PatchLocator patchLocator,
                            FileLocator fileLocator,
-                           ArrayList<String> fileLocations) {
+                           ArrayList<String> fileLocations,
+                           String[] fileTypes) {
         _ingredients = new Hashtable<String, Ingredient>();
         _log = log;
         _manipulator = manipulator;
@@ -36,6 +38,7 @@ public class IngredientStore {
         _fileLocator = fileLocator;
         _fileLocations = fileLocations;
         _stopWatch = new StopWatchTimer(log);
+        _fileTypes = fileTypes;
         initializeIngredientStore();
     }
 
@@ -96,24 +99,11 @@ public class IngredientStore {
         _stopWatch.reset();
         _stopWatch.start("loading ingredients from disk");
         _log.info("Loading ingredients from disk");
-        String[] ingredientFileExtensions = new String[8];
-        ingredientFileExtensions[0] = ".item";
-        ingredientFileExtensions[1] = ".consumable";
-        ingredientFileExtensions[2] = ".object";
-        ingredientFileExtensions[3] = ".matitem";
-        ingredientFileExtensions[4] = ".liquid";
-        ingredientFileExtensions[5] = ".liqitem";
-        ingredientFileExtensions[6] = ".material";
-        ingredientFileExtensions[7] = ".projectile";
-        String[] ingredientPatchFileExt = new String[8];
-        ingredientPatchFileExt[0] = ".item.patch";
-        ingredientPatchFileExt[1] = ".consumable.patch";
-        ingredientPatchFileExt[2] = ".object.patch";
-        ingredientPatchFileExt[3] = ".matitem.patch";
-        ingredientPatchFileExt[4] = ".liquid.patch";
-        ingredientPatchFileExt[5] = ".liqitem.patch";
-        ingredientPatchFileExt[6] = ".material.patch";
-        ingredientPatchFileExt[7] = ".projectile.patch";
+        String[] ingredientFileExtensions = _fileTypes;
+        String[] ingredientPatchFileExt = new String[_fileTypes.length];
+        for(int i = 0; i < _fileTypes.length; i++) {
+            ingredientPatchFileExt[i] = _fileTypes[i] + ".patch";
+        }
         ArrayList<String> ingredientPatchFiles = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientPatchFileExt);
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientFileExtensions);
         for(int i = 0; i < filePaths.size(); i++) {
@@ -178,7 +168,9 @@ public class IngredientStore {
             _log.debug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price);
             existing.price = ingredient.price;
         }
-        existing.effects = ingredient.effects;
+        if(ingredient.effects != null || isOverride) {
+            existing.effects = ingredient.effects;
+        }
         if(ingredient.itemName != null) {
             existing.itemName = ingredient.itemName;
         }

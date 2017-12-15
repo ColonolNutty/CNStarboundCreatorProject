@@ -1,0 +1,8 @@
+{
+  "input" : [
+    { "item" : "testIngredient1", "count" : 1 },
+    { "item" : "testIngredient2", "count" : 4 }
+  ],
+  "output" : { "item" : "testOutput", "count" : 5 },
+  "groups" : [ "bakingMFM", "banana" ]
+}

@@ -5,6 +5,7 @@ import com.colonolnutty.module.shareddata.locators.*;
 import com.colonolnutty.module.shareddata.models.IngredientOverrides;
 import com.colonolnutty.module.shareddata.ui.ConfirmationController;
 import com.colonolnutty.module.shareddata.ui.ProgressController;
+import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import main.settings.BalancerSettings;
 
 import java.io.FileNotFoundException;
@@ -43,7 +44,7 @@ public class BalancerMain extends MainFunctionModule {
         FileLocator fileLocator = new FileLocator(_log);
 
         StatusEffectStore statusEffectStore = new StatusEffectStore(_log, fileLocator, manipulator, patchLocator, searchLocations);
-        IngredientStore ingredientStore = new IngredientStore(_log, manipulator, patchLocator, fileLocator, searchLocations);
+        IngredientStore ingredientStore = new IngredientStore(_log, manipulator, patchLocator, fileLocator, searchLocations, _settings.fileTypesToUpdate);
         IngredientOverrides ingredientOverrides = loadIngredientOverrides(_settings.ingredientOverridePath, manipulator);
         if(ingredientOverrides != null) {
             ingredientStore.overrideIngredients(ingredientOverrides.ingredients);
@@ -53,7 +54,7 @@ public class BalancerMain extends MainFunctionModule {
         IngredientUpdater ingredientUpdater = new IngredientUpdater(_log, _settings, manipulator, ingredientStore, ingredientDataCalculator);
 
         FileUpdater fileUpdater = new FileUpdater(_log, _settings, manipulator, ingredientUpdater, ingredientStore, fileLocator, searchLocations, _progressController);
-        fileUpdater.updateValues();
+        fileUpdater.updateValues(_settings.fileTypesToUpdate);
 
         timer.logTime();
     }

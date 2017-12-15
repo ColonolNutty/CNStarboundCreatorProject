@@ -40,6 +40,14 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                 "Exclude Effects With Name (Comma Separated): ",
                 "excludedEffects",
                 _settings.excludedEffects);
+        JPanel fileTypesToUpdatePanel = addTextArea(
+                "The file types to update (ex. '.liquid, .matitem') (Comma Separated): ",
+                "fileTypesToUpdate",
+                _settings.fileTypesToUpdate);
+        JPanel propertiesToUpdatePanel = addTextArea(
+                "Properties to update (ex. 'foodValue') (Comma Separated): ",
+                "propertiesToUpdate",
+                _settings.propertiesToUpdate);
 
         //TextFields
         JPanel ingredientOverridePath = createField(FieldType.TextField,
@@ -138,6 +146,8 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                                                         .addComponent(increasePercentage)
                                                         .addComponent(minimumFoodValue)
                                                         .addComponent(numberOfPasses)
+                                                        .addComponent(fileTypesToUpdatePanel)
+                                                        .addComponent(propertiesToUpdatePanel)
                                         )
                         )
                         //Bottom
@@ -181,6 +191,8 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                                                 .addComponent(increasePercentage)
                                                 .addComponent(minimumFoodValue)
                                                 .addComponent(numberOfPasses)
+                                                .addComponent(fileTypesToUpdatePanel)
+                                                .addComponent(propertiesToUpdatePanel)
                                 )
                         )
                         //Middle - Right
@@ -230,6 +242,28 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
                 _settings.excludedEffects = CNStringUtils.fromCommaSeparated(text.getText());
+                writeSettings();
+            }
+        });
+        setupTextEntryFocusListener("fileTypesToUpdate", new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                JTextComponent text = (JTextComponent)e.getSource();
+                _settings.fileTypesToUpdate = CNStringUtils.fromCommaSeparated(text.getText());
+                writeSettings();
+            }
+        });
+        setupTextEntryFocusListener("propertiesToUpdate", new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                JTextComponent text = (JTextComponent)e.getSource();
+                _settings.propertiesToUpdate = CNStringUtils.fromCommaSeparated(text.getText());
                 writeSettings();
             }
         });

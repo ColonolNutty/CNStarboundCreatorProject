@@ -19,6 +19,7 @@ public class BalancerCRData extends CRData {
         settingNames.add("enableTreeView");
         settingNames.add("enableConsoleDebug");
         settingNames.add("enableVerboseLogging");
+        settingNames.add("propertiesToUpdate");
 
         settingNames.add("locationsToUpdate");
         settingNames.add("includeLocations");
@@ -30,6 +31,8 @@ public class BalancerCRData extends CRData {
         settingNames.add("enableEffectsUpdate");
         settingNames.add("includeCraftGroups");
         settingNames.add("forceUpdate");
+        settingNames.add("friendlyNamesFilePath");
+        settingNames.add("fileTypesToUpdate");
 
         return settingNames;
     }

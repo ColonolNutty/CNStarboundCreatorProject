@@ -48,16 +48,8 @@ public class FileUpdater {
         _progressController = progressController;
     }
 
-    public void updateValues() {
-        String[] ingredientFileExts = new String[8];
-        ingredientFileExts[0] = ".item";
-        ingredientFileExts[1] = ".consumable";
-        ingredientFileExts[2] = ".object";
-        ingredientFileExts[3] = ".matitem";
-        ingredientFileExts[4] = ".liquid";
-        ingredientFileExts[5] = ".liqitem";
-        ingredientFileExts[6] = ".material";
-        ingredientFileExts[7] = ".projectile";
+    public void updateValues(String[] fileTypesToUpdate) {
+        String[] ingredientFileExts = fileTypesToUpdate;
         String currentDirectory = System.getProperty("user.dir");
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientFileExts);
 

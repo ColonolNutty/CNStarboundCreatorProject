@@ -9,12 +9,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * Time: 10:13 AM
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class BaseSettings {
+public class BaseSettings {
     public String propertyOrderFile;
     public String logFile;
     public Boolean enableTreeView;
     public Boolean enableConsoleDebug;
     public Boolean enableVerboseLogging;
+    public String[] propertiesToUpdate;
 
     @JsonIgnore
     public String configLocation;
