@@ -17,10 +17,11 @@ import java.util.ArrayList;
  * Date: 09/16/2017
  * Time: 11:35 AM
  */
-public class BalancerMain extends MainFunctionModule {
+public class BalancerMain extends MainFunctionModule implements IReadFiles {
     private BalancerSettings _settings;
     private CNLog _log;
     private ProgressController _progressController;
+    private IFileReader _fileReader;
 
     public BalancerMain(BalancerSettings balancerSettings,
                         CNLog log,
@@ -28,6 +29,7 @@ public class BalancerMain extends MainFunctionModule {
         _settings = balancerSettings;
         _log = log;
         _progressController = progressController;
+        _fileReader = new FileReaderWrapper();
     }
 
     @Override
@@ -45,7 +47,7 @@ public class BalancerMain extends MainFunctionModule {
 
         StatusEffectStore statusEffectStore = new StatusEffectStore(_log, fileLocator, manipulator, patchLocator, searchLocations);
         IngredientStore ingredientStore = new IngredientStore(_log, manipulator, patchLocator, fileLocator, searchLocations, _settings.fileTypesToUpdate);
-        IngredientOverrides ingredientOverrides = loadIngredientOverrides(_settings.ingredientOverridePath, manipulator);
+        IngredientOverrides ingredientOverrides = loadIngredientOverrides(_settings.ingredientOverridePath);
         if(ingredientOverrides != null) {
             ingredientStore.overrideIngredients(ingredientOverrides.ingredients);
         }
@@ -70,10 +72,10 @@ public class BalancerMain extends MainFunctionModule {
         return searchLocations;
     }
 
-    private IngredientOverrides loadIngredientOverrides(String overridesPath, JsonManipulator manipulator) {
+    private IngredientOverrides loadIngredientOverrides(String overridesPath) {
         try {
             _log.info("Loading ingredient overrides");
-            IngredientOverrides replacementIngredientValues = manipulator.read(overridesPath, IngredientOverrides.class);
+            IngredientOverrides replacementIngredientValues = _fileReader.read(overridesPath, IngredientOverrides.class);
             return replacementIngredientValues;
         }
         catch(FileNotFoundException e) {
@@ -83,5 +85,10 @@ public class BalancerMain extends MainFunctionModule {
             _log.error(e);
         }
         return null;
+    }
+
+    @Override
+    public void setFileReader(IFileReader fileReader) {
+        _fileReader = fileReader;
     }
 }

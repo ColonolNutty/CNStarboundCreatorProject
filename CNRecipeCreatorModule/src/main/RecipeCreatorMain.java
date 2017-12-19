@@ -21,13 +21,15 @@ import java.util.ArrayList;
  * Date: 10/04/2017
  * Time: 9:43 AM
  */
-public class RecipeCreatorMain extends MainFunctionModule {
+public class RecipeCreatorMain extends MainFunctionModule implements IReadFiles, IRequireNodeProvider {
 
     private CNLog _log;
     private RecipeCreatorSettings _settings;
     private JsonManipulator _manipulator;
     private ArrayList<CNCrafter> _crafters;
     private ProgressController _progressController;
+    private IFileReader _fileReader;
+    private NodeProvider _nodeProvider;
 
     public RecipeCreatorMain(RecipeCreatorSettings settings,
                              CNLog log,
@@ -36,6 +38,8 @@ public class RecipeCreatorMain extends MainFunctionModule {
         _log = log;
         _progressController = progressController;
         _manipulator = new JsonManipulator(log, settings);
+        _fileReader = new FileReaderWrapper();
+        _nodeProvider = new NodeProvider();
         _crafters = new ArrayList<CNCrafter>();
         _crafters.add(new RecipeCrafter(log, settings, _manipulator));
         _crafters.add(new IngredientCrafter(log, settings, _manipulator));
@@ -113,9 +117,9 @@ public class RecipeCreatorMain extends MainFunctionModule {
 
     private void writeToConfigurationFile(ArrayList<String> names) {
         if(_settings.configAsPatchFile) {
-            ArrayNode patchNode = _manipulator.createArrayNode();
+            ArrayNode patchNode = _nodeProvider.createArrayNode();
             for(String name : names) {
-                patchNode.add(_manipulator.createAddNode("possibleOutput/-", name));
+                patchNode.add(_nodeProvider.createAddStringNode("possibleOutput/-", name));
             }
             _manipulator.writeNewPatch(_settings.recipeConfigFileName + ".patch", patchNode);
             return;
@@ -124,7 +128,7 @@ public class RecipeCreatorMain extends MainFunctionModule {
         RecipesConfig recipesConfig = read(recipeConfigFile, RecipesConfig.class);
         if(recipesConfig == null) {
             recipesConfig = new RecipesConfig();
-            recipesConfig.possibleOutput = _manipulator.createArrayNode();
+            recipesConfig.possibleOutput = _nodeProvider.createArrayNode();
         }
         for(String name : names) {
             if(!contains(recipesConfig.possibleOutput, name)) {
@@ -188,16 +192,22 @@ public class RecipeCreatorMain extends MainFunctionModule {
     }
 
     private <T> T read(String path, Class<T> classOfT){
-        File file = new File(path);
-        if(!file.exists()) {
-            return null;
-        }
         try {
-            return _manipulator.read(path, classOfT);
+            return _fileReader.read(path, classOfT);
         }
         catch(IOException e) {
             _log.error("[IOE] Failed to read: " + path, e);
         }
         return null;
+    }
+
+    @Override
+    public void setFileReader(IFileReader fileReader) {
+        _fileReader = fileReader;
+    }
+
+    @Override
+    public void setNodeProvider(NodeProvider nodeProvider) {
+        _nodeProvider = nodeProvider;
     }
 }

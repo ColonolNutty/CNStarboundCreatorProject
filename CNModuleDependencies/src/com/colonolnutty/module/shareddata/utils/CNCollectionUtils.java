@@ -40,4 +40,15 @@ public abstract class CNCollectionUtils {
         }
         return ingredientFileExtensions;
     }
+
+    public static boolean contains(ArrayList<String> arr, String val) {
+        boolean found = false;
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr.get(i).equals(val)) {
+                found = true;
+                i = arr.size();
+            }
+        }
+        return found;
+    }
 }

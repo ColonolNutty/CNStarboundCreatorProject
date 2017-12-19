@@ -1,5 +1,4 @@
 [
-  [],
   [
     {
       "op" : "test",
@@ -10,55 +9,6 @@
       "op" : "add",
       "path" : "/foodValue",
       "value" : 0.0
-    }
-  ],
-  [
-    {
-      "op" : "replace",
-      "path" : "/foodValue",
-      "value" : 2.1
-    }
-  ],
-  [
-    {
-      "op" : "test",
-      "path" : "/price",
-      "inverse" : true
-    },
-    {
-      "op" : "add",
-      "path" : "/price",
-      "value" : 0.0
-    }
-  ],
-  [
-    {
-      "op" : "replace",
-      "path" : "/price",
-      "value" : 29.4
-    }
-  ],
-  [
-    {
-      "op" : "test",
-      "path" : "/effects",
-      "inverse" : true
-    },
-    {
-      "op" : "add",
-      "path" : "/effects",
-      "value" : [
-        []
-      ]
-    }
-  ],
-  [
-    {
-      "op" : "replace",
-      "path" : "/effects",
-      "value" : [
-        []
-      ]
     }
   ],
   [
@@ -75,9 +25,62 @@
   ],
   [
     {
+      "op" : "test",
+      "path" : "/price",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/price",
+      "value" : 0.0
+    }
+  ],
+  [
+    {
+      "op" : "test",
+      "path" : "/effects",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/effects",
+      "value" : [
+        []
+      ]
+    }
+  ],
+  [
+    {
+      "op" : "replace",
+      "path" : "/banana",
+      "value" : "(fdsafdsay"
+    },
+    {
+      "op" : "replace",
+      "path" : "/foodValue",
+      "value" : 2.1
+    },
+    {
       "op" : "replace",
       "path" : "/description",
-      "value" : "(BLEND)(PREP):-} Nope What \"NONONO\" warefdsagfdsa"
+      "value" : "(BLEND)(PREP):-} Waty"
+    },
+    {
+      "op" : "replace",
+      "path" : "/price",
+      "value" : 239.4
+    },
+    {
+      "op" : "replace",
+      "path" : "/nope/noeo/noesa",
+      "value" : "(fdsafdsay"
+    },
+    {
+      "op" : "replace",
+      "path" : "/effects",
+      "value" : [
+        []
+      ]
     }
   ]
 ]

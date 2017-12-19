@@ -1,7 +1,6 @@
 package com.colonolnutty.module.shareddata.locators;
 
-import com.colonolnutty.module.shareddata.CNLog;
-import com.colonolnutty.module.shareddata.JsonManipulator;
+import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.StatusEffect;
 
@@ -14,13 +13,14 @@ import java.util.Hashtable;
  * Date: 09/25/2017
  * Time: 10:02 AM
  */
-public class StatusEffectStore {
+public class StatusEffectStore implements IReadFiles {
     private CNLog _log;
     private FileLocator _fileLocator;
     private JsonManipulator _manipulator;
     private PatchLocator _patchLocator;
     private ArrayList<String> _fileLocations;
     private Hashtable<String, StatusEffect> _statusEffects;
+    private IFileReader _fileReader;
 
     public StatusEffectStore(CNLog log,
                              FileLocator fileLocator,
@@ -33,6 +33,7 @@ public class StatusEffectStore {
         _patchLocator = patchLocator;
         _fileLocations = fileLocations;
         _statusEffects = new Hashtable<String, StatusEffect>();
+        _fileReader = new FileReaderWrapper();
         storeStatusEffects();
     }
 
@@ -67,7 +68,7 @@ public class StatusEffectStore {
 
     private void addStatusEffect(String filePath, String patchFilePath) {
         try {
-            StatusEffect statusEffect = _manipulator.read(filePath, StatusEffect.class);
+            StatusEffect statusEffect = _fileReader.read(filePath, StatusEffect.class);
             statusEffect.filePath = filePath;
             statusEffect.patchFilePath = patchFilePath;
             if(_statusEffects.containsKey(statusEffect.name)) {
@@ -88,4 +89,8 @@ public class StatusEffectStore {
         }
     }
 
+    @Override
+    public void setFileReader(IFileReader fileReader) {
+        _fileReader = fileReader;
+    }
 }

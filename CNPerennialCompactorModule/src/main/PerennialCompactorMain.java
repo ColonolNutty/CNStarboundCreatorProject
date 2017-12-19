@@ -19,13 +19,17 @@ import java.util.ArrayList;
  * Date: 10/08/2017
  * Time: 10:11 AM
  */
-public class PerennialCompactorMain extends MainFunctionModule {
+public class PerennialCompactorMain extends MainFunctionModule implements IReadFiles, IRequireNodeProvider {
     private PandCSettings _settings;
     private CNLog _log;
+    private IFileReader _fileReader;
+    private NodeProvider _nodeProvider;
 
     public PerennialCompactorMain(PandCSettings settings, CNLog log) {
         _settings = settings;
         _log = log;
+        _fileReader = new FileReaderWrapper();
+        _nodeProvider = new NodeProvider();
     }
 
     @Override
@@ -63,7 +67,7 @@ public class PerennialCompactorMain extends MainFunctionModule {
     private void writePatchFile(JsonManipulator manipulator, String seedFile) {
         File file = new File(seedFile);
         try {
-            Farmable farmable = manipulator.read(seedFile, Farmable.class);
+            Farmable farmable = _fileReader.read(seedFile, Farmable.class);
             _log.startSubBundle(farmable.getName());
             if(_settings.makePatchFiles) {
                 String basePathName = _settings.creationPath;
@@ -93,14 +97,14 @@ public class PerennialCompactorMain extends MainFunctionModule {
                              Farmable farmable) {
         _log.startSubBundle("Creating patch file for: " + farmable.getName());
         _log.writeToAll(4,"Creating patch file for: " + farmable.getName());
-        ArrayNode patchNodes = manipulator.createArrayNode();
-        ArrayNode replaceNodes = manipulator.createArrayNode();
-        ObjectNode replaceNode = addPerennialNodes(manipulator, farmable, patchNodes);
+        ArrayNode patchNodes = _nodeProvider.createArrayNode();
+        ArrayNode replaceNodes = _nodeProvider.createArrayNode();
+        ObjectNode replaceNode = addPerennialNodes(farmable, patchNodes);
         if(replaceNode != null) {
             replaceNodes.add(replaceNode);
         }
 
-        ArrayList<ObjectNode> compactReplaceNodes = addCompactNodes(seedPath, manipulator, farmable, patchNodes);
+        ArrayList<ObjectNode> compactReplaceNodes = addCompactNodes(seedPath, farmable, patchNodes);
         for(ObjectNode objNode : compactReplaceNodes) {
             replaceNodes.add(objNode);
         }
@@ -112,7 +116,7 @@ public class PerennialCompactorMain extends MainFunctionModule {
         _log.endSubBundle();
     }
 
-    private ObjectNode addPerennialNodes(JsonManipulator manipulator, Farmable farmable, ArrayNode patchNodes) {
+    private ObjectNode addPerennialNodes(Farmable farmable, ArrayNode patchNodes) {
         if(!_settings.makePerennial || CNCollectionUtils.isEmpty(farmable.stages)) {
             return null;
         }
@@ -125,24 +129,22 @@ public class PerennialCompactorMain extends MainFunctionModule {
         int resetStageIdx = lastIdx - 1;
         _log.writeToAll(4,"Adding Perennial Patch");
         String pathName = "stages/" + lastIdx + "/resetToStage";
-        ArrayNode testNodes = manipulator.createTestNodes(pathName, resetStageIdx);
+        ArrayNode testNodes = _nodeProvider.createTestAddIntegerNode(pathName);
         patchNodes.add(testNodes);
-        ObjectNode replaceNode = manipulator.createReplaceNode(pathName,resetStageIdx);
+        ObjectNode replaceNode = _nodeProvider.createReplaceIntegerNode(pathName, resetStageIdx);
         return replaceNode;
     }
 
     private ArrayList<ObjectNode> addCompactNodes(String seedPath,
-                                                  JsonManipulator manipulator,
                                                   Farmable farmable,
                                                   ArrayNode patchNodes) {
         if(!_settings.makeCompact || CNCollectionUtils.isEmpty(farmable.orientations)) {
             return new ArrayList<ObjectNode>();
         }
-
         ArrayList<ObjectNode> replaceNodes = new ArrayList<ObjectNode>();
         for(int i = 0; i < farmable.orientations.size(); i++) {
             JsonNode orientationNode = farmable.orientations.get(i);
-            ObjectFrames frames = loadFrames(seedPath, manipulator, orientationNode);
+            ObjectFrames frames = loadFrames(seedPath, _fileReader, orientationNode);
             if(frames == null
                     || frames.frameGrid == null
                     || frames.frameGrid.size.size() == 0
@@ -151,35 +153,35 @@ public class PerennialCompactorMain extends MainFunctionModule {
             }
             if(orientationNode.has("spaceScan")) {
                 String spaceScanPath = "orientations/" + i + "/spaceScan";
-                ArrayNode testRemoveSpaceScan = manipulator.createTestRemoveNodes(spaceScanPath, orientationNode.get("spaceScan").asDouble());
+                ArrayNode testRemoveSpaceScan = _nodeProvider.createTestRemoveNodes(spaceScanPath, orientationNode.get("spaceScan").asDouble());
                 patchNodes.add(testRemoveSpaceScan);
             }
 
             String imagePosPath = "orientations/" + i + "/imagePosition";
-            ArrayNode testAddImagePosition = manipulator.createTestNodes(imagePosPath);
+            ArrayNode testAddImagePosition = _nodeProvider.createTestAddArrayNode(imagePosPath);
             patchNodes.add(testAddImagePosition);
-            ArrayNode imagePosArrNode = manipulator.createArrayNode();
+            ArrayNode imagePosArrNode = _nodeProvider.createArrayNode();
             imagePosArrNode.add(-4);
             imagePosArrNode.add(0);
-            ObjectNode imagePosReplaceNode = manipulator.createReplaceNode(imagePosPath, imagePosArrNode);
+            ObjectNode imagePosReplaceNode = _nodeProvider.createReplaceArrayNode(imagePosPath, imagePosArrNode);
             replaceNodes.add(imagePosReplaceNode);
 
             String spacesPath = "orientations/" + i + "/spaces";
-            ArrayNode testAddSpaces = manipulator.createTestNodes(spacesPath);
+            ArrayNode testAddSpaces = _nodeProvider.createTestAddArrayNode(spacesPath);
             patchNodes.add(testAddSpaces);
-            ArrayNode spacesArrNode = manipulator.createArrayNode();
-            ArrayNode spacesArrNodeTwo = manipulator.createArrayNode();
+            ArrayNode spacesArrNode = _nodeProvider.createArrayNode();
+            ArrayNode spacesArrNodeTwo = _nodeProvider.createArrayNode();
             spacesArrNodeTwo.add(0);
             spacesArrNodeTwo.add(0);
             spacesArrNode.add(spacesArrNodeTwo);
-            ObjectNode spacesReplaceNode = manipulator.createReplaceNode(spacesPath, spacesArrNode);
+            ObjectNode spacesReplaceNode = _nodeProvider.createReplaceArrayNode(spacesPath, spacesArrNode);
             replaceNodes.add(spacesReplaceNode);
         }
 
         return replaceNodes;
     }
 
-    private ObjectFrames loadFrames(String seedPath, JsonManipulator manipulator, JsonNode orientationNode) {
+    private ObjectFrames loadFrames(String seedPath, IFileReader fileReader, JsonNode orientationNode) {
         try {
             String imageName = null;
             if(orientationNode.has("dualImage")) {
@@ -192,7 +194,7 @@ public class PerennialCompactorMain extends MainFunctionModule {
                 return null;
             }
             String framesFileName = seedPath + "\\" + imageName.split(":")[0].replace(".png", ".frames");
-            ObjectFrames farmableFrames = manipulator.read(framesFileName, ObjectFrames.class);
+            ObjectFrames farmableFrames = fileReader.read(framesFileName, ObjectFrames.class);
             return farmableFrames;
         }
         catch(IOException e) {
@@ -208,5 +210,15 @@ public class PerennialCompactorMain extends MainFunctionModule {
         }
         File file = new File(createPath);
         file.mkdirs();
+    }
+
+    @Override
+    public void setFileReader(IFileReader fileReader) {
+        _fileReader = fileReader;
+    }
+
+    @Override
+    public void setNodeProvider(NodeProvider nodeProvider) {
+        _nodeProvider = nodeProvider;
     }
 }

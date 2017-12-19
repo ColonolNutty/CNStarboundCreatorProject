@@ -1,14 +1,14 @@
 package main;
 
-import com.colonolnutty.module.shareddata.CNLog;
+import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
-import com.colonolnutty.module.shareddata.JsonManipulator;
 import com.colonolnutty.module.shareddata.locators.IngredientStore;
 import com.colonolnutty.module.shareddata.locators.RecipeStore;
 import com.colonolnutty.module.shareddata.locators.StatusEffectStore;
 import com.colonolnutty.module.shareddata.models.*;
 import com.colonolnutty.module.shareddata.utils.CNMathUtils;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.settings.BalancerSettings;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -24,12 +24,14 @@ import java.util.Hashtable;
  * Date: 09/11/2017
  * Time: 12:31 PM
  */
-public class IngredientDataCalculator {
+public class IngredientDataCalculator implements IReadFiles, IRequireNodeProvider {
     private CNLog _log;
     private BalancerSettings _settings;
     private RecipeStore _recipeStore;
     private IngredientStore _ingredientStore;
     private JsonManipulator _manipulator;
+    private IFileReader _fileReader;
+    private NodeProvider _nodeProvider;
     private StatusEffectStore _statusEffectStore;
     public static final String RECIPE_GROUP_DELIMITER = ":-} ";
 
@@ -47,6 +49,8 @@ public class IngredientDataCalculator {
         _ingredientStore = ingredientStore;
         _statusEffectStore = statusEffectStore;
         _manipulator = manipulator;
+        _fileReader = new FileReaderWrapper();
+        _nodeProvider = new NodeProvider();
     }
 
     public Ingredient updateIngredient(Ingredient ingredient) throws IOException{
@@ -118,8 +122,8 @@ public class IngredientDataCalculator {
         Double outputCount = recipe.output.count;
         ArrayNode combined = null;
         if(_settings.enableEffectsUpdate) {
-            ArrayNode combinedEffects = _manipulator.toEffectsArrayNode(outputName, effectValues, outputCount);
-            combined = _manipulator.createArrayNode();
+            ArrayNode combinedEffects = toEffectsArrayNode(outputName, effectValues, outputCount);
+            combined = _nodeProvider.createArrayNode();
             combined.add(combinedEffects);
         }
 
@@ -274,7 +278,7 @@ public class IngredientDataCalculator {
             return friendlyNames;
         }
 
-        ArrayNode friendlyNamesNode = _manipulator.read(friendlyNamesPath, ArrayNode.class);
+        ArrayNode friendlyNamesNode = _fileReader.read(friendlyNamesPath, ArrayNode.class);
         if(friendlyNamesNode == null || friendlyNamesNode.size() == 0) {
             return friendlyNames;
         }
@@ -295,5 +299,39 @@ public class IngredientDataCalculator {
         }
 
         return friendlyNames;
+    }
+
+    public ArrayNode toEffectsArrayNode(String ingredientName, Hashtable<String, Integer> effects, Double outputCount) {
+        ArrayNode arrayNode = _nodeProvider.createArrayNode();
+        if(effects.isEmpty()) {
+            return arrayNode;
+        }
+        _log.startSubBundle("New effects for " + ingredientName);
+
+        Enumeration<String> effectKeys = effects.keys();
+        while(effectKeys.hasMoreElements()) {
+            String effectName = effectKeys.nextElement();
+            int effectDuration = (int)(effects.get(effectName)/outputCount);
+            if(effectDuration == 0) {
+                continue;
+            }
+            ObjectNode objNode = _nodeProvider.createObjectNode();
+            objNode.put("effect", effectName);
+            objNode.put("duration", effectDuration);
+            _log.writeToBundle("Effect name: \"" + effectName + "\", duration: " + effectDuration);
+            arrayNode.add(objNode);
+        }
+        _log.endSubBundle();
+        return arrayNode;
+    }
+
+    @Override
+    public void setFileReader(IFileReader fileReader) {
+        _fileReader = fileReader;
+    }
+
+    @Override
+    public void setNodeProvider(NodeProvider nodeProvider) {
+        _nodeProvider = nodeProvider;
     }
 }

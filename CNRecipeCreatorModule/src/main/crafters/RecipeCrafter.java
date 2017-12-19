@@ -1,7 +1,6 @@
 package main.crafters;
 
-import com.colonolnutty.module.shareddata.CNLog;
-import com.colonolnutty.module.shareddata.JsonManipulator;
+import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.models.IngredientListItem;
 import com.colonolnutty.module.shareddata.models.ItemDescriptor;
 import com.colonolnutty.module.shareddata.models.Recipe;
@@ -15,12 +14,13 @@ import java.util.ArrayList;
  * Date: 10/04/2017
  * Time: 12:01 PM
  */
-public class RecipeCrafter extends CNCrafter {
+public class RecipeCrafter extends CNCrafter implements IReadFiles {
 
     private CNLog _log;
     private RecipeCreatorSettings _settings;
     private JsonManipulator _manipulator;
     private Recipe _template;
+    private IFileReader _fileReader;
 
     public RecipeCrafter(CNLog log,
                          RecipeCreatorSettings settings,
@@ -28,6 +28,8 @@ public class RecipeCrafter extends CNCrafter {
         _log = log;
         _settings = settings;
         _manipulator = manipulator;
+        _fileReader = new FileReaderWrapper();
+
         _template = read(_settings.recipeTemplateFile, Recipe.class);
     }
 
@@ -59,11 +61,16 @@ public class RecipeCrafter extends CNCrafter {
 
     private <T> T read(String path, Class<T> classOfT){
         try {
-            return _manipulator.read(path, classOfT);
+            return _fileReader.read(path, classOfT);
         }
         catch(IOException e) {
             _log.error("[IOE] Failed to read: " + path, e);
         }
         return null;
+    }
+
+    @Override
+    public void setFileReader(IFileReader fileReader) {
+        _fileReader = fileReader;
     }
 }

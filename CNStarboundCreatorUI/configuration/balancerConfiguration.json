@@ -5,6 +5,7 @@
   "enableConsoleDebug" : true,
   "enableVerboseLogging" : true,
   "propertiesToUpdate" : [ "foodValue", "price", "effects", "description" ],
+  "forceUpdate" : true,
   "locationsToUpdate" : [ "TestFiles\\Balancer\\Samples" ],
   "includeLocations" : [ "TestFiles\\Balancer\\NonStuff" ],
   "excludedEffects" : [ "foodpoison" ],
@@ -14,7 +15,6 @@
   "numberOfPasses" : 8,
   "enableEffectsUpdate" : true,
   "includeCraftGroups" : true,
-  "forceUpdate" : true,
   "friendlyNamesFilePath" : "configuration\\friendlyNames.json",
   "fileTypesToUpdate" : [ ".item", ".consumable", ".object", ".matitem", ".liqitem", ".projectile", ".liquid", ".matitem" ]
 }

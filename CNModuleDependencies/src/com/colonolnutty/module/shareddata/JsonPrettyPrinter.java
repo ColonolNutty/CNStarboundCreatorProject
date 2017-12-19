@@ -16,7 +16,7 @@ import java.util.Iterator;
  * Date: 09/19/2017
  * Time: 12:13 PM
  */
-public class JsonPrettyPrinter {
+public class JsonPrettyPrinter implements IPrettyPrinter {
     private String[] _propertyOrder;
     private CNLog _log;
 
@@ -25,6 +25,11 @@ public class JsonPrettyPrinter {
         _propertyOrder = propertyOrder;
     }
 
+    public void setPropertyOrder(String[] propertyOrder) {
+        _propertyOrder = propertyOrder;
+    }
+
+    @Override
     public String makePretty(JSONObject obj, int indentSize) {
         String prettyJson = CNStringUtils.createIndent(indentSize) + "{\r\n";
         ArrayList<String> foundProperties = new ArrayList<String>();
@@ -205,6 +210,7 @@ public class JsonPrettyPrinter {
         }
     }
 
+    @Override
     public String makePretty(ArrayNode node, int indentSize) {
         if(node.isArray() && node.size() == 0) {
             return CNStringUtils.createIndent(indentSize) + "[]";

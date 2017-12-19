@@ -19,4 +19,23 @@ public abstract class CNJsonUtils {
                 || node.isTextual();
     }
 
+    public static boolean hasTestNode(JsonNode node) {
+        if(!node.isArray()) {
+            return node.has("op")
+                    && node.get("op").asText().equals("test");
+        }
+        boolean foundTestNode = false;
+        for(int i = 0; i < node.size(); i++) {
+            if(hasTestNode(node.get(i))) {
+                foundTestNode = true;
+                i = node.size();
+            }
+        }
+        return foundTestNode;
+    }
+
+    public static boolean hasPathName(JsonNode node, String pathName) {
+        return node.has("path")
+                && node.get("path").asText().equals("/" + pathName);
+    }
 }

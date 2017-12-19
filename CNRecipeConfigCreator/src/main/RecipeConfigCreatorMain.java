@@ -1,9 +1,6 @@
 package main;
 
-import com.colonolnutty.module.shareddata.CNLog;
-import com.colonolnutty.module.shareddata.JsonManipulator;
-import com.colonolnutty.module.shareddata.MainFunctionModule;
-import com.colonolnutty.module.shareddata.StopWatchTimer;
+import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.models.IngredientListItem;
 import com.colonolnutty.module.shareddata.models.RecipesConfig;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -18,17 +15,21 @@ import java.util.ArrayList;
  * Date: 10/04/2017
  * Time: 9:43 AM
  */
-public class RecipeConfigCreatorMain extends MainFunctionModule {
+public class RecipeConfigCreatorMain extends MainFunctionModule implements IReadFiles, IRequireNodeProvider {
 
     private CNLog _log;
     private RecipeConfigCreatorSettings _settings;
     private JsonManipulator _manipulator;
+    private IFileReader _fileReader;
+    private NodeProvider _nodeProvider;
 
     public RecipeConfigCreatorMain(RecipeConfigCreatorSettings settings,
                                    CNLog log) {
         _settings = settings;
         _log = log;
         _manipulator = new JsonManipulator(log, settings);
+        _fileReader = new FileReaderWrapper();
+        _nodeProvider = new NodeProvider();
     }
 
     @Override
@@ -62,9 +63,9 @@ public class RecipeConfigCreatorMain extends MainFunctionModule {
 
     private void writeToConfigurationFile(ArrayList<String> names) {
         if(_settings.configAsPatchFile) {
-            ArrayNode patchNode = _manipulator.createArrayNode();
+            ArrayNode patchNode = _nodeProvider.createArrayNode();
             for(String name : names) {
-                patchNode.add(_manipulator.createAddNode("possibleOutput/-", name));
+                patchNode.add(_nodeProvider.createAddStringNode("possibleOutput/-", name));
             }
             _manipulator.writeNewPatch(_settings.recipeConfigFileName + ".patch", patchNode);
             return;
@@ -73,7 +74,7 @@ public class RecipeConfigCreatorMain extends MainFunctionModule {
         RecipesConfig recipesConfig = read(recipeConfigFile, RecipesConfig.class);
         if(recipesConfig == null) {
             recipesConfig = new RecipesConfig();
-            recipesConfig.possibleOutput = _manipulator.createArrayNode();
+            recipesConfig.possibleOutput = _nodeProvider.createArrayNode();
         }
         for(String name : names) {
             if(!contains(recipesConfig.possibleOutput, name)) {
@@ -133,16 +134,22 @@ public class RecipeConfigCreatorMain extends MainFunctionModule {
     }
 
     private <T> T read(String path, Class<T> classOfT){
-        File file = new File(path);
-        if(!file.exists()) {
-            return null;
-        }
         try {
-            return _manipulator.read(path, classOfT);
+            return _fileReader.read(path, classOfT);
         }
         catch(IOException e) {
             _log.error("[IOE] Failed to read: " + path, e);
         }
         return null;
+    }
+
+    @Override
+    public void setFileReader(IFileReader fileReader) {
+        _fileReader = fileReader;
+    }
+
+    @Override
+    public void setNodeProvider(NodeProvider nodeProvider) {
+        _nodeProvider = nodeProvider;
     }
 }

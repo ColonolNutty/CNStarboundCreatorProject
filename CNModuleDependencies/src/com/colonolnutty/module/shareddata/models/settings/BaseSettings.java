@@ -16,6 +16,7 @@ public class BaseSettings {
     public Boolean enableConsoleDebug;
     public Boolean enableVerboseLogging;
     public String[] propertiesToUpdate;
+    public Boolean forceUpdate;
 
     @JsonIgnore
     public String configLocation;

@@ -20,7 +20,6 @@ public class BalancerSettings extends BaseSettings {
     public Integer numberOfPasses;
     public Boolean enableEffectsUpdate;
     public Boolean includeCraftGroups;
-    public Boolean forceUpdate;
     public String friendlyNamesFilePath;
     public String[] fileTypesToUpdate;
 }
