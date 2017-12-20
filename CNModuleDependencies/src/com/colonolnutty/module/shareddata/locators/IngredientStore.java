@@ -126,7 +126,7 @@ public class IngredientStore {
             ingredient.patchFile = patchFilePath;
             String ingredientName = ingredient.getName();
             if(!_ingredients.containsKey(ingredientName)) {
-                Ingredient patchedIngredient = _manipulator.patch(ingredient, patchFilePath, Ingredient.class);
+                Ingredient patchedIngredient = _manipulator.applyPatch(ingredient, patchFilePath, Ingredient.class);
                 _log.debug("Pre-patch ingredient values: " + ingredient.getIdentifier() + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
                 if(patchedIngredient != null) {
                     patchedIngredient.filePath = filePath;

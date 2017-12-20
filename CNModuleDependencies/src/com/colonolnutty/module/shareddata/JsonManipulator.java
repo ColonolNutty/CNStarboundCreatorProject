@@ -3,7 +3,6 @@ package com.colonolnutty.module.shareddata;
 import com.colonolnutty.module.shareddata.jsonhandlers.*;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.PropertyOrder;
-import com.colonolnutty.module.shareddata.models.json.ReplaceNode;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
@@ -148,50 +147,52 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
         }
     }
 
-    public void writeAsPatch(Ingredient ingredient) {
-        if (ingredient.patchFile == null) {
+    public void writeAsPatch(String patchFileName, Ingredient ingredient) {
+        if (patchFileName == null) {
             return;
         }
-        String skipMessage = "Skipping patch file for: " + ingredient.getName();
-        ArrayNode patchNodes = null;
+        String skipMessage = "Skipping applyPatch file for: " + ingredient.getName();
+        ArrayNode existingPatchNodes = null;
         try {
-            patchNodes = _fileReader.read(ingredient.patchFile, ArrayNode.class);
+            existingPatchNodes = _fileReader.read(patchFileName, ArrayNode.class);
         } catch (IOException e) {
-            _log.error("[IOE] Failed to read file: " + ingredient.patchFile, e);
+            _log.error("[IOE] Failed to read file: " + patchFileName, e);
         }
-        if(patchNodes == null) {
+        if(existingPatchNodes == null) {
             _log.writeToAll(4, skipMessage);
             return;
         }
         try {
-            //Contains the new patch nodes, overwrite the patch file with these
-            SplitNodeTypes splitNodes = createPatchNodes(patchNodes, ingredient);
-            if(splitNodes == null) {
+            //Contains the new applyPatch nodes, overwrite the applyPatch file with these
+            PatchNodes newPatchNodes = createPatchNodes(existingPatchNodes, ingredient);
+            if(newPatchNodes == null) {
+                _log.writeToAll(4, skipMessage);
                 return;
             }
-            //Overwrite the patch file with the new nodes (splitNodes)
+            //Overwrite the applyPatch file with the new nodes (sortPatchNodes)
             ArrayNode newPatch = _nodeProvider.createArrayNode();
-            for(int i = 0; i < splitNodes.TestNodes.size(); i++) {
-                newPatch.add(splitNodes.TestNodes.get(i));
+            for(JsonNode testNode : newPatchNodes.TestNodes) {
+                newPatch.add(testNode);
             }
 
             ArrayNode nonTestNodesArray = _nodeProvider.createArrayNode();
-            for(int i = 0; i < splitNodes.NonTestNodes.size(); i++) {
-                nonTestNodesArray.add(splitNodes.NonTestNodes.get(i));
+            for(JsonNode nonTestNode : newPatchNodes.NonTestNodes) {
+                nonTestNodesArray.add(nonTestNode);
             }
-            if(nonTestNodesArray.size() == 0) {
+            if(nonTestNodesArray.size() > 0) {
                 newPatch.add(nonTestNodesArray);
             }
-            _log.writeToAll(4, "Applying update to patch file: " + ingredient.getName());
+            _log.writeToAll(4, "Applying update to applyPatch file: " + ingredient.getName());
             logValues(ingredient);
             String prettyJson = _prettyPrinter.makePretty(newPatch, 0);
             if(prettyJson == null || prettyJson.equals("")) {
+                _log.writeToAll(4, skipMessage);
                 return;
             }
-            _fileWriter.writeData(ingredient.patchFile, prettyJson);
+            _fileWriter.writeData(patchFileName, prettyJson);
         }
-        catch(JsonMappingException e) { _log.error("Error while mapping: " + ingredient.patchFile, e); }
-        catch (IOException e) { _log.error("[IOE] Failed to read file: " + ingredient.patchFile, e); }
+        catch(JsonMappingException e) { _log.error("Error while mapping: " + patchFileName, e); }
+        catch (IOException e) { _log.error("[IOE] Failed to read file: " + patchFileName, e); }
     }
 
     public void writeNewPatch(String fileName, ArrayNode patchNodes) {
@@ -210,56 +211,63 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
         }
     }
 
-    public <T> T patch(Object entity, String patchFileName, Class<T> valueType) {
+    public <T> T applyPatch(Object entity, String patchFileName, Class<T> valueType) {
         if(patchFileName == null) {
             return null;
         }
         String patchedFileAsJson = null;
         String patchFileAsJson = null;
         try {
-            ArrayNode patchAsNode = _fileReader.read(patchFileName, ArrayNode.class);
-            patchFileAsJson = patchAsNode.toString();
-            if(!patchAsNode.isArray()) {
+            ArrayNode existingPatchNodes = _fileReader.read(patchFileName, ArrayNode.class);
+            patchFileAsJson = existingPatchNodes.toString();
+            if(!existingPatchNodes.isArray()) {
                 return null;
             }
-            JsonNode modifiedAsNode = null;
-            if(patchAsNode.size() > 0 && patchAsNode.get(0).isArray()) {
-                for(JsonNode patch : patchAsNode) {
+            JsonNode patchedNode = null;
+            //To handle starbound patch files
+            if(existingPatchNodes.size() > 0 && existingPatchNodes.get(0).isArray()) {
+                for(JsonNode patch : existingPatchNodes) {
                     try {
                         patchFileAsJson = patch.toString();
                         JsonPatch patchTool = JsonPatch.fromJson(patch);
-                        JsonNode entityAsNode = _fileWriter.valueToTree(entity);
-                        modifiedAsNode = patchTool.apply(entityAsNode);
-                        patchedFileAsJson = modifiedAsNode.toString();
+                        if(patchedNode == null) {
+                            patchedNode = patchTool.apply(_fileWriter.valueToTree(entity));
+                        }
+                        else {
+                            patchedNode = patchTool.apply(patchedNode);
+                        }
+                        patchedFileAsJson = patchedNode.toString();
                     }
                     catch(JsonPatchException e) {
-                        _log.error("Json Test Patch \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
+                        //_log.error("Json Test Patch \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
                     }
                 }
             }
-            else if (patchAsNode.size() == 0) {
+            else if (existingPatchNodes.size() == 0) {
                 return null;
             }
+            //To handle normal patch files
             else {
-                JsonPatch patchTool = JsonPatch.fromJson(patchAsNode);
+                JsonPatch patchTool = JsonPatch.fromJson(existingPatchNodes);
                 JsonNode entityAsNode = _fileWriter.valueToTree(entity);
-                modifiedAsNode = patchTool.apply(entityAsNode);
+                patchedNode = patchTool.apply(entityAsNode);
             }
-            if(modifiedAsNode == null) {
+
+            if(patchedNode == null) {
                 return null;
             }
-            ObjectNode modNode = (ObjectNode) modifiedAsNode;
-            if(!modifiedAsNode.has("effects")) {
-                modNode.putArray("effects");
+            ObjectNode newNode = (ObjectNode) patchedNode;
+            if(!patchedNode.has("effects")) {
+                newNode.putArray("effects");
             }
             else {
-                JsonNode node = modifiedAsNode.get("effects");
+                JsonNode node = patchedNode.get("effects");
                 if(node != null && node.isNull()) {
-                    modNode.putArray("effects");
+                    newNode.putArray("effects");
                 }
             }
-            patchedFileAsJson = modNode.toString();
-            return _fileWriter.treeToValue(modNode, valueType);
+            patchedFileAsJson = newNode.toString();
+            return _fileWriter.treeToValue(newNode, valueType);
         }
         catch(JsonMappingException e) {
             _log.error("Json file being patched:\n    " + patchedFileAsJson, e);
@@ -269,7 +277,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
                 _log.error("Json \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
             }
             else {
-                _log.error("When parsing patch file: " + patchFileName, e);
+                _log.error("When parsing applyPatch file: " + patchFileName, e);
             }
         }
         catch (IOException e) {
@@ -279,7 +287,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
     }
 
     private JSONObject applyMissingProperties(JSONObject toWrite,
-                                              String existingJson) throws IOException {
+                                              String existingJson) {
         if(existingJson == null) {
             return null;
         }
@@ -306,7 +314,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
 
     private JSONObject combineJsonValues(JSONObject toWrite,
                                          String existingJson,
-                                         boolean canUpdateEffects) throws IOException {
+                                         boolean canUpdateEffects) {
         if(existingJson == null) {
             return null;
         }
@@ -337,42 +345,41 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
 
     private void logValues(Ingredient ingredient) {
         boolean logCombined = false;
-        String combined = "New Values: ";
+        StringBuilder stringBuilder = new StringBuilder("New Values: ");
         _log.startSubBundle("New Values");
         if(ingredient.hasPrice()) {
             _log.writeToBundle("Price: " + ingredient.price);
-            combined += " p: " + ingredient.price;
+            stringBuilder.append(" p: " + ingredient.price);
             logCombined = true;
         }
         if(ingredient.hasFoodValue()) {
             _log.writeToBundle("Food Value: " + ingredient.foodValue);
-            combined += " fv: " + ingredient.foodValue;
+            stringBuilder.append(" fv: " + ingredient.foodValue);
             logCombined = true;
         }
         if(ingredient.hasFoodValue()) {
             _log.writeToBundle("Food Value: " + ingredient.foodValue);
-            combined += " fv: " + ingredient.foodValue;
+            stringBuilder.append(" fv: " + ingredient.foodValue);
             logCombined = true;
         }
         if(ingredient.hasDescription()) {
             _log.writeToBundle("Description: " + ingredient.description);
-            combined += " description: " + ingredient.description;
+            stringBuilder.append(" description: " + ingredient.description);
             logCombined = true;
         }
         if(ingredient.hasEffects()) {
             _log.startSubBundle("New Effects");
-            combined += " effects: ";
-            for(int i = 0; i < ingredient.effects.size(); i++) {
-                ArrayNode subEffects = (ArrayNode)ingredient.effects.get(i);
-                for(int j = 0; j < subEffects.size(); j++) {
-                    JsonNode subEffect = subEffects.get(j);
-                    String name = subEffect.get("effect").asText();
-                    String duration = subEffect.get("duration").asText();
+            stringBuilder.append(" effects: ");
+            for(JsonNode effectNodes : ingredient.effects) {
+                JsonNode lastEffect = effectNodes.get(effectNodes.size() - 1);
+                for(JsonNode effectNode : effectNodes) {
+                    String name = effectNode.get("effect").asText();
+                    String duration = effectNode.get("duration").asText();
 
                     _log.writeToBundle("Name: " + name + " Duration: " + duration);
-                    combined += "{ n: \"" + name + "\" d: " + duration + " }";
-                    if((j + 1) < subEffects.size()) {
-                        combined += ", ";
+                    stringBuilder.append("{ n: \"" + name + "\" d: " + duration + " }");
+                    if(!effectNode.equals(lastEffect)) {
+                        stringBuilder.append(", ");
                     }
                 }
             }
@@ -381,13 +388,28 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
         }
         _log.endSubBundle();
         if(logCombined) {
-            _log.debug(combined, 4);
+            _log.debug(stringBuilder.toString(), 4);
         }
     }
 
-    private SplitNodeTypes createPatchNodes(ArrayNode patchNodes, Ingredient ingredient) {
-        SplitNodeTypes nodeTypes = splitNodes(patchNodes);
-        Hashtable<String, NodeAvailability> nodesAvailability = getNodeAvailability(nodeTypes);
+    private PatchNodes createPatchNodes(ArrayNode existingPatchNodes, Ingredient ingredient) {
+        PatchNodes sortedPatchNodes = sortPatchNodes(existingPatchNodes);
+        Hashtable<String, NodeAvailability> nodesAvailability = getNodeAvailability(sortedPatchNodes);
+        return addMissingPatchNodes(nodesAvailability, ingredient);
+    }
+
+    private IJsonHandler findNodeHandler(String pathName) {
+        IJsonHandler found = null;
+        for(IJsonHandler handler : _jsonHandlers) {
+            if(handler.canHandle(pathName)) {
+                found = handler;
+                break;
+            }
+        }
+        return found;
+    }
+
+    private PatchNodes addMissingPatchNodes(Hashtable<String, NodeAvailability> nodesAvailability, Ingredient ingredient) {
         if(nodesAvailability.size() == 0) {
             return null;
         }
@@ -408,11 +430,11 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
                 }
                 continue;
             }
+
             if(nodeAvailability.NonTestNode == null) {
                 JsonNode replaceNode = handler.createReplaceNode(ingredient);
                 if(replaceNode != null) {
                     nodeAvailability.NonTestNode = replaceNode;
-                    newNonTestNodes.add(replaceNode);
                 }
             }
 
@@ -420,8 +442,18 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
                 JsonNode testNode = handler.createTestNode(ingredient);
                 if(testNode != null) {
                     nodeAvailability.TestNode = testNode;
-                    newTestNodes.add(testNode);
                 }
+            }
+            // If there is no NonTestNode then we remove the TestNode. No Changes. No Test.
+            if(nodeAvailability.NonTestNode == null) {
+                nodeAvailability.TestNode = null;
+            }
+
+            if(nodeAvailability.NonTestNode != null) {
+                newNonTestNodes.add(nodeAvailability.NonTestNode);
+            }
+            if(nodeAvailability.TestNode != null) {
+                newTestNodes.add(nodeAvailability.TestNode);
             }
 
             //If forcing an update, no need to check, needsUpdate will be true no matter what
@@ -438,28 +470,15 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
             return null;
         }
         if(_forceUpdate || needsUpdate) {
-            return new SplitNodeTypes(newTestNodes, newNonTestNodes);
+            return new PatchNodes(newTestNodes, newNonTestNodes);
         }
         return null;
     }
 
-    private IJsonHandler findNodeHandler(String pathName) {
-        IJsonHandler found = null;
-        for(int i = 0; i < _jsonHandlers.size(); i++) {
-            IJsonHandler handler = _jsonHandlers.get(i);
-            if(handler.canHandle(pathName)) {
-                found = handler;
-                i = _jsonHandlers.size();
-            }
-        }
-        return found;
-    }
-
-    private Hashtable<String, NodeAvailability> getNodeAvailability(SplitNodeTypes splitNodeTypes) {
+    private Hashtable<String, NodeAvailability> getNodeAvailability(PatchNodes patchNodes) {
         Hashtable<String, NodeAvailability> nodeMap = new Hashtable<String, NodeAvailability>();
 
-        for(int i = 0; i < splitNodeTypes.TestNodes.size(); i++) {
-            JsonNode testNode = splitNodeTypes.TestNodes.get(i);
+        for(JsonNode testNode : patchNodes.TestNodes) {
             String nodePathName = getNodePathName(testNode);
             if(nodePathName == null) {
                 continue;
@@ -478,8 +497,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
             }
         }
 
-        for(int i = 0; i < splitNodeTypes.NonTestNodes.size(); i++) {
-            JsonNode nonTestNode = splitNodeTypes.NonTestNodes.get(i);
+        for(JsonNode nonTestNode : patchNodes.NonTestNodes) {
             String nodePathName = getNodePathName(nonTestNode);
             if(nodePathName == null) {
                 continue;
@@ -503,11 +521,10 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
     private String getNodePathName(JsonNode node) {
         String pathName = null;
         if(node.isArray() && node.size() > 0) {
-            for(int i = 0; i < node.size(); i++) {
-                JsonNode testSubNode = node.get(i);
-                pathName = getNodePathName(testSubNode);
+            for(JsonNode subNode : node) {
+                pathName = getNodePathName(subNode);
                 if(pathName != null) {
-                    i = node.size();
+                    break;
                 }
             }
         }
@@ -518,43 +535,38 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
         return pathName;
     }
 
-    private SplitNodeTypes splitNodes(ArrayNode patchNodes) {
+    private PatchNodes sortPatchNodes(JsonNode patchNodes) {
         ArrayList<JsonNode> testNodes = new ArrayList<JsonNode>();
         ArrayList<JsonNode> nonTestNodes = new ArrayList<JsonNode>();
-        if(patchNodes.size() == 0) {
-            return new SplitNodeTypes(testNodes, nonTestNodes);
+        if(!patchNodes.isArray() || patchNodes.size() == 0) {
+            return new PatchNodes(testNodes, nonTestNodes);
         }
-        for(int i = 0; i < patchNodes.size(); i++) {
-            JsonNode patchNode = patchNodes.get(i);
+        for(JsonNode patchNode : patchNodes) {
             if(CNJsonUtils.hasTestNode(patchNode)) {
                 testNodes.add(patchNode);
                 continue;
             }
             if(patchNode.isArray()) {
-                for(int j = 0; j < patchNode.size(); j++) {
-                    JsonNode subPatchNode = patchNode.get(j);
-                    if(!subPatchNode.isArray()) {
-                        nonTestNodes.add(subPatchNode);
-                        continue;
-                    }
-
-                    for(int k = 0; k < subPatchNode.size(); k++) {
-                        nonTestNodes.add(subPatchNode.get(k));
-                    }
+                PatchNodes subPatchNodes = sortPatchNodes(patchNode);
+                for(JsonNode testNode : subPatchNodes.TestNodes) {
+                    testNodes.add(testNode);
+                }
+                for(JsonNode nonTestNode : subPatchNodes.NonTestNodes) {
+                    nonTestNodes.add(nonTestNode);
                 }
             }
             else {
                 nonTestNodes.add(patchNode);
             }
         }
-        return new SplitNodeTypes(testNodes, nonTestNodes);
+        return new PatchNodes(testNodes, nonTestNodes);
     }
 
-    private class SplitNodeTypes {
+    private class PatchNodes {
         public ArrayList<JsonNode> TestNodes;
         public ArrayList<JsonNode> NonTestNodes;
 
-        public SplitNodeTypes(ArrayList<JsonNode> testNodes, ArrayList<JsonNode> nonTestNodes) {
+        public PatchNodes(ArrayList<JsonNode> testNodes, ArrayList<JsonNode> nonTestNodes) {
             TestNodes = testNodes;
             NonTestNodes = nonTestNodes;
         }

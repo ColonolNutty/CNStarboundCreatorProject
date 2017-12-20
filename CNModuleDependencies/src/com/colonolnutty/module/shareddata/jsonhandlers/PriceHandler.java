@@ -14,7 +14,7 @@ public class PriceHandler extends DefaultNodeProvider implements IJsonHandler {
 
     public PriceHandler() {
         super();
-        _pathName = "price";
+        _pathName = "/price";
     }
 
     @Override

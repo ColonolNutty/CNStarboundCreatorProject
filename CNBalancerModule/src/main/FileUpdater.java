@@ -67,7 +67,7 @@ public class FileUpdater {
             _log.clearCurrentBundles();
             for (int i = 0; i < filePaths.size(); i++) {
                 String filePath = filePaths.get(i);
-                if(filePath.endsWith(".recipe") || filePath.endsWith(".patch")) {
+                if(filePath.endsWith(".recipe") || filePath.endsWith(".applyPatch")) {
                     continue;
                 }
                 String[] relativePathNames = startPathBundle(filePath, currentDirectory);
@@ -123,8 +123,8 @@ public class FileUpdater {
             _log.startSubBundle("Update");
 
             if(isPatchFile) {
-                _log.writeToAll("Attempting to update patch: " + ingredientName);
-                _manipulator.writeAsPatch(ingredient);
+                _log.writeToAll("Attempting to update applyPatch: " + ingredientName);
+                _manipulator.writeAsPatch(ingredient.patchFile, ingredient);
             }
             else {
                 _log.writeToAll("Attempting to update file: " + ingredientName);

@@ -14,7 +14,7 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
 
     public FoodValueHandler() {
         super();
-        _pathName = "foodValue";
+        _pathName = "/foodValue";
     }
 
     @Override

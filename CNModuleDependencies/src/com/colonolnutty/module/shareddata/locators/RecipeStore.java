@@ -66,7 +66,7 @@ public class RecipeStore {
             if(recipe.output != null && recipe.output.item != null) {
                 String itemName = recipe.output.item;
                 if(!_recipes.containsKey(itemName)) {
-                    Recipe patchedRecipe = _manipulator.patch(recipe, patchFilePath, Recipe.class);
+                    Recipe patchedRecipe = _manipulator.applyPatch(recipe, patchFilePath, Recipe.class);
                     if(patchedRecipe != null) {
                         _recipes.put(itemName, patchedRecipe);
                     }

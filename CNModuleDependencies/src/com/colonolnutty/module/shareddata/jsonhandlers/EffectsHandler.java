@@ -20,7 +20,7 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
 
     public EffectsHandler() {
         super();
-        _pathName = "effects";
+        _pathName = "/effects";
     }
 
     @Override

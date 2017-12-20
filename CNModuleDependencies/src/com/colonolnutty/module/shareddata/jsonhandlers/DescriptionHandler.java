@@ -15,7 +15,7 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
 
     public DescriptionHandler() {
         super();
-        _pathName = "description";
+        _pathName = "/description";
     }
 
     @Override

@@ -75,7 +75,7 @@ public class StatusEffectStore implements IReadFiles {
                 return;
             }
             if (patchFilePath != null) {
-                StatusEffect patchedStatusEffect = _manipulator.patch(statusEffect, patchFilePath, StatusEffect.class);
+                StatusEffect patchedStatusEffect = _manipulator.applyPatch(statusEffect, patchFilePath, StatusEffect.class);
                 patchedStatusEffect.filePath = filePath;
                 patchedStatusEffect.patchFilePath = patchFilePath;
                 _statusEffects.put(patchedStatusEffect.name, patchedStatusEffect);
