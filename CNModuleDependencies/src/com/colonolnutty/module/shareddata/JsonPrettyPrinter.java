@@ -4,6 +4,7 @@ import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,56 +119,49 @@ public class JsonPrettyPrinter implements IPrettyPrinter {
     }
 
     @Override
-    public String makePretty(ArrayNode node, int indentSize) {
-        if(node.isArray() && node.size() == 0) {
-            return CNStringUtils.createIndent(indentSize) + "[]";
+    public String makePretty(JsonNode node, int indentSize) {
+        if(!node.isArray()) {
+            return formatObject(node, indentSize);
         }
-        String prettyJson = CNStringUtils.createIndent(indentSize) + "[\r\n";
-        for(int i = 0; i < node.size(); i++) {
+        int nodeSize = node.size();
+        if(nodeSize == 0) {
+            return CNStringUtils.createIndent(indentSize) + "[ ]";
+        }
+        String prettyJson = CNStringUtils.createIndent(indentSize) + "[";
+        boolean containsValueTypes = CNJsonUtils.isValueType(node.get(0));
+        if(containsValueTypes) {
+            prettyJson += " ";
+        }
+        for(int i = 0; i < nodeSize; i++) {
             JsonNode subNode = node.get(i);
             String result = formatAsIntended(subNode, indentSize + 2);
             if(result == null) {
                 continue;
             }
+            if(!containsValueTypes) {
+                prettyJson += "\r\n";
+            }
             prettyJson += result;
-            if(i + 1 < node.size()) {
-                prettyJson += ",\r\n";
+            if((i + 1) < nodeSize) {
+                if(!containsValueTypes) {
+                    prettyJson += ",";
+                }
+                else {
+                    prettyJson += ", ";
+                }
+            }
+            else if(CNJsonUtils.isValueType(subNode)) {
+                prettyJson += " ";
             }
         }
-        prettyJson += "\r\n" + CNStringUtils.createIndent(indentSize) + "]";
+        if(!containsValueTypes) {
+            prettyJson += "\r\n" + CNStringUtils.createIndent(indentSize);
+        }
+        prettyJson += "]";
         return prettyJson;
     }
 
-    public String formatAsIntended(JsonNode node, int indentSize) {
-        if(node.isNull()) {
-            return null;
-        }
-        if(CNJsonUtils.isValueType(node)) {
-            String result = CNStringUtils.createIndent(indentSize);
-            if (node.isDouble()) {
-                return result + node.asDouble();
-            }
-            if (node.isInt()) {
-                return result + node.asInt();
-            }
-            if (node.isBoolean()) {
-                return result + node.asBoolean();
-            }
-            if (node.isTextual()) {
-                return result + "\"" + CNStringUtils.escapeString(node.asText()) + "\"";
-            }
-        }
-
-        if(node.isArray()) {
-            return makePretty((ArrayNode)node, indentSize);
-        }
-        if(node.isObject()) {
-            return formatAsObject(node, indentSize);
-        }
-        return null;
-    }
-
-    private String formatAsObject(JsonNode node, int indentSize) throws JSONException {
+    public String formatObject(JsonNode node, int indentSize) throws JSONException {
         boolean hasValue = false;
         String prettyJson = CNStringUtils.createIndent(indentSize) + "{\r\n";
         Iterator<String> fieldNames = node.fieldNames();
@@ -187,9 +181,31 @@ public class JsonPrettyPrinter implements IPrettyPrinter {
             }
         }
         if(!hasValue) {
-            return "{}";
+            return "{ }";
         }
         prettyJson += "\r\n" + CNStringUtils.createIndent(indentSize) + "}";
         return prettyJson;
+    }
+
+    public String formatAsIntended(JsonNode node, int indentSize) {
+        if(node.isNull()) {
+            return null;
+        }
+        if(CNJsonUtils.isValueType(node)) {
+            if (node.isDouble() || node.isInt() || node.isBoolean()) {
+                return node.asText();
+            }
+            if (node.isTextual()) {
+                return "\"" + CNStringUtils.escapeString(node.asText()) + "\"";
+            }
+        }
+
+        if(node.isArray()) {
+            return makePretty(node, indentSize);
+        }
+        if(node.isObject()) {
+            return formatObject(node, indentSize);
+        }
+        return null;
     }
 }

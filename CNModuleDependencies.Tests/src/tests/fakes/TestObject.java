@@ -1,4 +1,4 @@
-package tests.fakeclasses;
+package tests.fakes;
 
 /**
  * User: Jack's Computer

@@ -2,8 +2,8 @@ package tests;
 
 import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
-import tests.fakeclasses.FakeFileWriter;
-import tests.fakeclasses.FakePrettyPrinter;
+import tests.fakes.FakeFileWriter;
+import tests.fakes.FakePrettyPrinter;
 
 import java.io.IOException;
 

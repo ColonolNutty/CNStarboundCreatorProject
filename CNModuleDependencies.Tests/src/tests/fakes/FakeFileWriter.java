@@ -1,4 +1,4 @@
-package tests.fakeclasses;
+package tests.fakes;
 
 import com.colonolnutty.module.shareddata.IFileWriter;
 import com.colonolnutty.module.shareddata.MapperWrapper;

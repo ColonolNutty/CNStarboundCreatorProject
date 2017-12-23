@@ -1,6 +1,7 @@
-package tests.fakeclasses;
+package tests.fakes;
 
 import com.colonolnutty.module.shareddata.IPrettyPrinter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.json.JSONObject;
 
@@ -17,7 +18,7 @@ public class FakePrettyPrinter implements IPrettyPrinter {
     }
 
     @Override
-    public String makePretty(ArrayNode node, int indentSize) {
+    public String makePretty(JsonNode node, int indentSize) {
         return node.asText();
     }
 }

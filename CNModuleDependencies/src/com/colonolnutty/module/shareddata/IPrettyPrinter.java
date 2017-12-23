@@ -1,5 +1,6 @@
 package com.colonolnutty.module.shareddata;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.json.JSONObject;
 
@@ -10,5 +11,5 @@ import org.json.JSONObject;
  */
 public interface IPrettyPrinter {
     String makePretty(JSONObject obj, int indentSize);
-    String makePretty(ArrayNode node, int indentSize);
+    String makePretty(JsonNode node, int indentSize);
 }

@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
+import tests.fakes.*;
 
 /**
  * User: Jack's Computer
@@ -16,7 +17,7 @@ import static org.mockito.Mockito.mock;
  */
 public class JsonPatchManipulatorTests {
     protected BaseSettings _settings;
-    protected tests.fakeclasses.FakeFileWriter _fileWriter;
+    protected tests.fakes.FakeFileWriter _fileWriter;
     protected IFileReader _fileReader;
     protected NodeProvider _nodeProvider;
     protected IPrettyPrinter _prettyPrinter;
@@ -34,8 +35,8 @@ public class JsonPatchManipulatorTests {
 
         _manipulator = new JsonPatchManipulator(log, _settings);
 
-        _fileWriter = new tests.fakeclasses.FakeFileWriter();
-        _prettyPrinter = new tests.fakeclasses.FakePrettyPrinter();
+        _fileWriter = new FakeFileWriter();
+        _prettyPrinter = new FakePrettyPrinter();
         _fileReader = mock(IFileReader.class);
         _nodeProvider = new NodeProvider();
 
