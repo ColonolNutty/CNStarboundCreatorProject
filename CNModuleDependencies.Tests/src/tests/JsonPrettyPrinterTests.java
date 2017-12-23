@@ -155,6 +155,16 @@ public class JsonPrettyPrinterTests {
     }
 
     @Test
+    public void makePrettyJsonNode_should_return_empty_sub_array() {
+        String expectedResult = "[[ ]]";
+        ArrayNode arr = _nodeProvider.createArrayNode();
+        ArrayNode subArr = _nodeProvider.createArrayNode();
+        arr.add(subArr);
+        String result = _printer.makePretty(arr, 0);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
     public void makePrettyJsonNode_should_return_formatted_array() {
         String expectedResult = "[ 24.0, 25.0, 26.0 ]";
         ArrayNode arr = _nodeProvider.createArrayNode();
@@ -167,7 +177,11 @@ public class JsonPrettyPrinterTests {
 
     @Test
     public void makePrettyJsonNode_should_return_formatted_sub_array_of_values() {
-        String expectedResult = "[\r\n  [ 24.0 ],\r\n  [ 25.0 ],\r\n  [ 26.0 ]\r\n]";
+        String expectedResult = "["
+                     + "\r\n" + "  [ 24.0 ],"
+                     + "\r\n" + "  [ 25.0 ],"
+                     + "\r\n" + "  [ 26.0 ]"
+                     + "\r\n" + "]";
         ArrayNode arr = _nodeProvider.createArrayNode();
         ArrayNode subArrayOne = _nodeProvider.createArrayNode();
         subArrayOne.add(24.0);
@@ -184,7 +198,23 @@ public class JsonPrettyPrinterTests {
 
     @Test
     public void makePrettyJsonNode_should_return_formatted_sub_array_of_objects() {
-        String expectedResult = "[\r\n  [\r\n    {\r\n      \"one\" : 24.0\r\n    }\r\n  ],\r\n  [\r\n    {\r\n      \"two\" : 25.0\r\n    }\r\n  ],\r\n  [\r\n    {\r\n      \"three\" : 26.0\r\n    }\r\n  ]\r\n]";
+        String expectedResult = "["
+                     + "\r\n" + "  ["
+                     + "\r\n" + "    {"
+                     + "\r\n" + "      \"one\" : 24.0"
+                     + "\r\n" + "    }"
+                     + "\r\n" + "  ],"
+                     + "\r\n" + "  ["
+                     + "\r\n" + "    {"
+                     + "\r\n" + "      \"two\" : 25.0"
+                     + "\r\n" + "    }"
+                     + "\r\n" + "  ],"
+                     + "\r\n" + "  ["
+                     + "\r\n" + "    {"
+                     + "\r\n" + "      \"three\" : 26.0"
+                     + "\r\n" + "    }"
+                     + "\r\n" + "  ]"
+                     + "\r\n" + "]";
         ArrayNode arr = _nodeProvider.createArrayNode();
         ArrayNode subArrayOne = _nodeProvider.createArrayNode();
         ObjectNode objOne = _nodeProvider.createObjectNode();
@@ -207,7 +237,17 @@ public class JsonPrettyPrinterTests {
 
     @Test
     public void makePrettyJsonNode_should_return_formatted_sub_object() {
-        String expectedResult = "[\r\n  {\r\n    \"one\" : 24.0\r\n  },\r\n  {\r\n    \"two\" : 25.0\r\n  },\r\n  {\r\n    \"three\" : 26.0\r\n  }\r\n]";
+        String expectedResult = "["
+                     + "\r\n" + "  {"
+                     + "\r\n" + "    \"one\" : 24.0"
+                     + "\r\n" + "  },"
+                     + "\r\n" + "  {"
+                     + "\r\n" + "    \"two\" : 25.0"
+                     + "\r\n" + "  },"
+                     + "\r\n" + "  {"
+                     + "\r\n" + "    \"three\" : 26.0"
+                     + "\r\n" + "  }"
+                     + "\r\n" + "]";
         ArrayNode arr = _nodeProvider.createArrayNode();
         ObjectNode objOne = _nodeProvider.createObjectNode();
         objOne.put("one", 24.0);
@@ -232,7 +272,10 @@ public class JsonPrettyPrinterTests {
 
     @Test
     public void formatObject_should_return_formatted_object() {
-        String expectedResult = "{\r\n  \"one\" : 24.0,\r\n  \"two\" : 25.0\r\n}";
+        String expectedResult = "{"
+                + "\r\n" + "  \"one\" : 24.0,"
+                + "\r\n" + "  \"two\" : 25.0"
+                + "\r\n" + "}";
         ObjectNode objNode = _nodeProvider.createObjectNode();
         objNode.put("one", 24.0);
         objNode.put("two", 25.0);
@@ -242,7 +285,10 @@ public class JsonPrettyPrinterTests {
 
     @Test
     public void formatObject_should_return_formatted_object_with_array() {
-        String expectedResult = "{\r\n  \"one\" : [ 24.0 ],\r\n  \"two\" : 25.0\r\n}";
+        String expectedResult = "{"
+                + "\r\n" + "  \"one\" : [ 24.0 ],"
+                + "\r\n" + "  \"two\" : 25.0"
+                + "\r\n" + "}";
         ObjectNode objNode = _nodeProvider.createObjectNode();
         ArrayNode arrNodeOne = _nodeProvider.createArrayNode();
         arrNodeOne.add(24.0);
@@ -254,7 +300,12 @@ public class JsonPrettyPrinterTests {
 
     @Test
     public void formatObject_should_return_formatted_object_with_double_array() {
-        String expectedResult = "{\r\n  \"one\" : [\r\n    [ 24.0 ]\r\n  ],\r\n  \"two\" : 25.0\r\n}";
+        String expectedResult = "{"
+                + "\r\n" + "  \"one\" : ["
+                + "\r\n" + "    [ 24.0 ]"
+                + "\r\n" + "  ],"
+                + "\r\n" + "  \"two\" : 25.0"
+                + "\r\n" + "}";
         ObjectNode objNode = _nodeProvider.createObjectNode();
         ArrayNode subNodeArr = _nodeProvider.createArrayNode();
         ArrayNode arrNodeOne = _nodeProvider.createArrayNode();
@@ -269,18 +320,50 @@ public class JsonPrettyPrinterTests {
 
     @Test
     public void formatObject_should_return_formatted_object_with_double_array_of_objects() {
-        String expectedResult = "{\r\n  \"one\" : [\r\n    [\r\n      {\r\n        \"three\" : 26.0,\r\n        \"four\" : 27.0\r\n      }\r\n    ]\r\n  ],\r\n  \"two\" : 25.0\r\n}";
+        String expectedResult = "{"
+                     + "\r\n" + "  \"one\" : ["
+                     + "\r\n" + "    ["
+                     + "\r\n" + "      {"
+                     + "\r\n" + "        \"three\" : 26.0,"
+                     + "\r\n" + "        \"four\" : 27.0"
+                     + "\r\n" + "      },"
+                     + "\r\n" + "      {"
+                     + "\r\n" + "        \"five\" : 28.0,"
+                     + "\r\n" + "        \"six\" : 29.0"
+                     + "\r\n" + "      }"
+                     + "\r\n" + "    ]"
+                     + "\r\n" + "  ],"
+                     + "\r\n" + "  \"two\" : 25.0"
+                     + "\r\n" + "}";
         ObjectNode objNode = _nodeProvider.createObjectNode();
         ArrayNode subNodeArr = _nodeProvider.createArrayNode();
         ArrayNode arrNodeOne = _nodeProvider.createArrayNode();
         ObjectNode subObjNode = _nodeProvider.createObjectNode();
         subObjNode.put("three", 26.0);
         subObjNode.put("four", 27.0);
+        ObjectNode subObjNodeTwo = _nodeProvider.createObjectNode();
+        subObjNodeTwo.put("five", 28.0);
+        subObjNodeTwo.put("six", 29.0);
         arrNodeOne.add(subObjNode);
+        arrNodeOne.add(subObjNodeTwo);
         subNodeArr.add(arrNodeOne);
 
         objNode.put("one",  subNodeArr);
         objNode.put("two", 25.0);
+        String result = _printer.formatObject(objNode, 0);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void formatObject_should_return_formatted_object_with_empty_double_array() {
+        String expectedResult = "{"
+                + "\r\n" + "  \"one\" : [[ ]]"
+                + "\r\n" + "}";
+        ObjectNode objNode = _nodeProvider.createObjectNode();
+        ArrayNode arrNodeOne = _nodeProvider.createArrayNode();
+        ArrayNode subNodeArr = _nodeProvider.createArrayNode();
+        arrNodeOne.add(subNodeArr);
+        objNode.put("one",  arrNodeOne);
         String result = _printer.formatObject(objNode, 0);
         assertEquals(expectedResult, result);
     }

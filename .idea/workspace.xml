@@ -16,14 +16,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonManipulatorTests.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonManipulatorTests.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonManipulatorWriteTests.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonManipulatorWriteTests.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonPatchManipulatorTests.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonPatchManipulatorTests.java" />
       <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonPrettyPrinterTests.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonPrettyPrinterTests.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/fakes/FakeFileWriter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/fakes/FakeFileWriter.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/fakes/FakePrettyPrinter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/fakes/FakePrettyPrinter.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/fakes/TestObject.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/fakes/TestObject.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/IPrettyPrinter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/IPrettyPrinter.java" />
       <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPrettyPrinter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPrettyPrinter.java" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" />
@@ -44,8 +37,8 @@
           <file leaf-file-name="JsonPrettyPrinterTests.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonPrettyPrinterTests.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="299">
-                  <caret line="286" column="0" lean-forward="true" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
+                <state relative-caret-position="278">
+                  <caret line="357" column="86" lean-forward="false" selection-start-line="357" selection-start-column="86" selection-end-line="357" selection-end-column="86" />
                   <folding>
                     <element signature="docComment;class#JsonPrettyPrinterTests#0" expanded="false" />
                     <element signature="method#JsonPrettyPrinterTests#0;class#JsonPrettyPrinterTests#0" expanded="false" />
@@ -67,10 +60,14 @@
                     <element signature="method#formatAsIntendedJsonNode_should_return_string#0;class#JsonPrettyPrinterTests#0" expanded="false" />
                     <element signature="e#4377#4423#0" expanded="false" />
                     <element signature="method#makePrettyJsonNode_should_return_empty_array#0;class#JsonPrettyPrinterTests#0" expanded="false" />
+                    <element signature="method#makePrettyJsonNode_should_return_formatted_array#0;class#JsonPrettyPrinterTests#0" expanded="false" />
                     <element signature="method#makePrettyJsonNode_should_return_formatted_sub_array_of_values#0;class#JsonPrettyPrinterTests#0" expanded="false" />
                     <element signature="method#makePrettyJsonNode_should_return_formatted_sub_array_of_objects#0;class#JsonPrettyPrinterTests#0" expanded="false" />
                     <element signature="method#makePrettyJsonNode_should_return_formatted_sub_object#0;class#JsonPrettyPrinterTests#0" expanded="false" />
+                    <element signature="method#formatObject_should_return_empty_object#0;class#JsonPrettyPrinterTests#0" expanded="false" />
+                    <element signature="method#formatObject_should_return_formatted_object_with_double_array#0;class#JsonPrettyPrinterTests#0" expanded="false" />
                     <element signature="method#formatObject_should_return_formatted_object_with_double_array_of_objects#0;class#JsonPrettyPrinterTests#0" expanded="false" />
+                    <element signature="method#formatObject_should_return_formatted_object_with_empty_double_array#0;class#JsonPrettyPrinterTests#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -83,8 +80,8 @@
           <file leaf-file-name="JsonPrettyPrinter.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPrettyPrinter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-394">
-                  <caret line="156" column="12" lean-forward="false" selection-start-line="156" selection-start-column="12" selection-end-line="156" selection-end-column="12" />
+                <state relative-caret-position="383">
+                  <caret line="132" column="9" lean-forward="false" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
                   <folding>
                     <element signature="docComment;class#JsonPrettyPrinter#0" expanded="false" />
                     <element signature="e#798#799#0" expanded="true" />
@@ -92,6 +89,7 @@
                     <element signature="method#makePretty#0;class#JsonPrettyPrinter#0" expanded="false" />
                     <element signature="method#formatArray#0;class#JsonPrettyPrinter#0" expanded="false" />
                     <element signature="method#formatAsIntended#0;class#JsonPrettyPrinter#0" expanded="false" />
+                    <element signature="method#formatObject#0;class#JsonPrettyPrinter#0" expanded="false" />
                     <element signature="method#formatAsIntended#1;class#JsonPrettyPrinter#0" expanded="false" />
                   </folding>
                 </state>
@@ -393,7 +391,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array_of_objects">
+  <component name="RunManager" selected="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_empty_double_array">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -439,7 +437,7 @@
       <dir value="$PROJECT_DIR$" />
       <patterns />
     </configuration>
-    <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_empty_double_array" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="tests.*" />
@@ -451,7 +449,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.JsonPrettyPrinterTests" />
-      <option name="METHOD_NAME" value="formatObject_should_return_formatted_object" />
+      <option name="METHOD_NAME" value="formatObject_should_return_formatted_object_with_empty_double_array" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
@@ -465,7 +463,7 @@
       <dir value="$PROJECT_DIR$" />
       <patterns />
     </configuration>
-    <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_array" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JsonPrettyPrinterTests.makePrettyJsonNode_should_return_empty_sub_array" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="tests.*" />
@@ -477,7 +475,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.JsonPrettyPrinterTests" />
-      <option name="METHOD_NAME" value="formatObject_should_return_formatted_object_with_array" />
+      <option name="METHOD_NAME" value="makePrettyJsonNode_should_return_empty_sub_array" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
@@ -491,7 +489,7 @@
       <dir value="$PROJECT_DIR$" />
       <patterns />
     </configuration>
-    <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_array_of_objects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="tests.*" />
@@ -503,7 +501,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.JsonPrettyPrinterTests" />
-      <option name="METHOD_NAME" value="formatObject_should_return_formatted_object_with_double_array" />
+      <option name="METHOD_NAME" value="makePrettyJsonNode_should_return_formatted_sub_array_of_objects" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
@@ -517,7 +515,7 @@
       <dir value="$PROJECT_DIR$" />
       <patterns />
     </configuration>
-    <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array_of_objects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_array_of_values" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="tests.*" />
@@ -529,7 +527,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.JsonPrettyPrinterTests" />
-      <option name="METHOD_NAME" value="formatObject_should_return_formatted_object_with_double_array_of_objects" />
+      <option name="METHOD_NAME" value="makePrettyJsonNode_should_return_formatted_sub_array_of_values" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
@@ -593,19 +591,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_array" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array_of_objects" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_array_of_objects" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_array_of_values" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.makePrettyJsonNode_should_return_empty_sub_array" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_empty_double_array" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array_of_objects" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_empty_double_array" />
         <item index="1" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_array" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.formatObject_should_return_formatted_object" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.makePrettyJsonNode_should_return_empty_sub_array" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_array_of_values" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_array_of_objects" />
       </list>
     </recent_temporary>
   </component>
@@ -626,35 +624,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="JsonPrettyPrinterTests - 2017.12.23 at 14h 19m 53s.xml">
+    <history-entry file="JsonPrettyPrinterTests - 2017.12.23 at 14h 45m 50s.xml">
       <configuration name="JsonPrettyPrinterTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests - 2017.12.23 at 14h 20m 41s.xml">
+    <history-entry file="JsonPrettyPrinterTests - 2017.12.23 at 14h 46m 04s.xml">
       <configuration name="JsonPrettyPrinterTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests - 2017.12.23 at 14h 21m 21s.xml">
+    <history-entry file="JsonPrettyPrinterTests - 2017.12.23 at 14h 46m 55s.xml">
       <configuration name="JsonPrettyPrinterTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests - 2017.12.23 at 14h 23m 17s.xml">
-      <configuration name="JsonPrettyPrinterTests" configurationId="JUnit" />
+    <history-entry file="JsonPrettyPrinterTests_formatObject_should_return_formatted_object - 2017.12.23 at 14h 36m 22s.xml">
+      <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests - 2017.12.23 at 14h 26m 37s.xml">
-      <configuration name="JsonPrettyPrinterTests" configurationId="JUnit" />
+    <history-entry file="JsonPrettyPrinterTests_formatObject_should_return_formatted_object_with_empty_double_array - 2017.12.23 at 14h 48m 07s.xml">
+      <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_empty_double_array" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests_formatObject_should_return_formatted_object_with_array - 2017.12.23 at 14h 19m 48s.xml">
-      <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_array" configurationId="JUnit" />
+    <history-entry file="JsonPrettyPrinterTests_makePrettyJsonNode_should_return_empty_sub_array - 2017.12.23 at 14h 43m 41s.xml">
+      <configuration name="JsonPrettyPrinterTests.makePrettyJsonNode_should_return_empty_sub_array" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests_formatObject_should_return_formatted_object_with_double_array - 2017.12.23 at 14h 23m 13s.xml">
-      <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array" configurationId="JUnit" />
+    <history-entry file="JsonPrettyPrinterTests_makePrettyJsonNode_should_return_formatted_sub_array_of_objects - 2017.12.23 at 14h 41m 46s.xml">
+      <configuration name="JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_array_of_objects" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests_formatObject_should_return_formatted_object_with_double_array_of_objects - 2017.12.23 at 14h 26m 31s.xml">
-      <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array_of_objects" configurationId="JUnit" />
+    <history-entry file="JsonPrettyPrinterTests_makePrettyJsonNode_should_return_formatted_sub_array_of_values - 2017.12.23 at 14h 42m 48s.xml">
+      <configuration name="JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_array_of_values" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests_formatObject_should_return_formatted_object_with_double_array_of_objects - 2017.12.23 at 14h 26m 43s.xml">
-      <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array_of_objects" configurationId="JUnit" />
+    <history-entry file="JsonPrettyPrinterTests_makePrettyJsonNode_should_return_formatted_sub_object - 2017.12.23 at 14h 39m 06s.xml">
+      <configuration name="JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_object" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JsonPrettyPrinterTests_formatObject_should_return_formatted_object_with_double_array_of_objects - 2017.12.23 at 14h 26m 53s.xml">
-      <configuration name="JsonPrettyPrinterTests.formatObject_should_return_formatted_object_with_double_array_of_objects" configurationId="JUnit" />
+    <history-entry file="JsonPrettyPrinterTests_makePrettyJsonNode_should_return_formatted_sub_object - 2017.12.23 at 14h 39m 55s.xml">
+      <configuration name="JsonPrettyPrinterTests.makePrettyJsonNode_should_return_formatted_sub_object" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -669,7 +667,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5518868" sideWeight="0.50324327" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32048193" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32048193" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -722,7 +720,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="505" />
+      <option name="time" value="509" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1167,8 +1165,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPrettyPrinter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-394">
-          <caret line="156" column="12" lean-forward="false" selection-start-line="156" selection-start-column="12" selection-end-line="156" selection-end-column="12" />
+        <state relative-caret-position="383">
+          <caret line="132" column="9" lean-forward="false" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
           <folding>
             <element signature="docComment;class#JsonPrettyPrinter#0" expanded="false" />
             <element signature="e#798#799#0" expanded="true" />
@@ -1176,6 +1174,7 @@
             <element signature="method#makePretty#0;class#JsonPrettyPrinter#0" expanded="false" />
             <element signature="method#formatArray#0;class#JsonPrettyPrinter#0" expanded="false" />
             <element signature="method#formatAsIntended#0;class#JsonPrettyPrinter#0" expanded="false" />
+            <element signature="method#formatObject#0;class#JsonPrettyPrinter#0" expanded="false" />
             <element signature="method#formatAsIntended#1;class#JsonPrettyPrinter#0" expanded="false" />
           </folding>
         </state>
@@ -1183,8 +1182,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonPrettyPrinterTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="286" column="0" lean-forward="true" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
+        <state relative-caret-position="278">
+          <caret line="357" column="86" lean-forward="false" selection-start-line="357" selection-start-column="86" selection-end-line="357" selection-end-column="86" />
           <folding>
             <element signature="docComment;class#JsonPrettyPrinterTests#0" expanded="false" />
             <element signature="method#JsonPrettyPrinterTests#0;class#JsonPrettyPrinterTests#0" expanded="false" />
@@ -1206,10 +1205,14 @@
             <element signature="method#formatAsIntendedJsonNode_should_return_string#0;class#JsonPrettyPrinterTests#0" expanded="false" />
             <element signature="e#4377#4423#0" expanded="false" />
             <element signature="method#makePrettyJsonNode_should_return_empty_array#0;class#JsonPrettyPrinterTests#0" expanded="false" />
+            <element signature="method#makePrettyJsonNode_should_return_formatted_array#0;class#JsonPrettyPrinterTests#0" expanded="false" />
             <element signature="method#makePrettyJsonNode_should_return_formatted_sub_array_of_values#0;class#JsonPrettyPrinterTests#0" expanded="false" />
             <element signature="method#makePrettyJsonNode_should_return_formatted_sub_array_of_objects#0;class#JsonPrettyPrinterTests#0" expanded="false" />
             <element signature="method#makePrettyJsonNode_should_return_formatted_sub_object#0;class#JsonPrettyPrinterTests#0" expanded="false" />
+            <element signature="method#formatObject_should_return_empty_object#0;class#JsonPrettyPrinterTests#0" expanded="false" />
+            <element signature="method#formatObject_should_return_formatted_object_with_double_array#0;class#JsonPrettyPrinterTests#0" expanded="false" />
             <element signature="method#formatObject_should_return_formatted_object_with_double_array_of_objects#0;class#JsonPrettyPrinterTests#0" expanded="false" />
+            <element signature="method#formatObject_should_return_formatted_object_with_empty_double_array#0;class#JsonPrettyPrinterTests#0" expanded="false" />
           </folding>
         </state>
       </provider>

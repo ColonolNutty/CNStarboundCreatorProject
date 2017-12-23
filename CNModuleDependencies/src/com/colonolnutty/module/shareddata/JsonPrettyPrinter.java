@@ -125,10 +125,14 @@ public class JsonPrettyPrinter implements IPrettyPrinter {
         }
         int nodeSize = node.size();
         if(nodeSize == 0) {
-            return CNStringUtils.createIndent(indentSize) + "[ ]";
+            return "[ ]";
         }
+        JsonNode nodeOne = node.get(0);
+        if(nodeOne.isArray() && nodeOne.size() == 0 && nodeSize == 1) {
+            return "[[ ]]";
+        }
+        boolean containsValueTypes = CNJsonUtils.isValueType(nodeOne);
         String prettyJson = CNStringUtils.createIndent(indentSize) + "[";
-        boolean containsValueTypes = CNJsonUtils.isValueType(node.get(0));
         if(containsValueTypes) {
             prettyJson += " ";
         }
