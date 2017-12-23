@@ -20,6 +20,7 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
     private CNLog _log;
     private RecipeConfigCreatorSettings _settings;
     private JsonManipulator _manipulator;
+    private JsonPatchManipulator _patchManipulator;
     private IFileReader _fileReader;
     private NodeProvider _nodeProvider;
 
@@ -28,6 +29,7 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
         _settings = settings;
         _log = log;
         _manipulator = new JsonManipulator(log, settings);
+        _patchManipulator = new JsonPatchManipulator(log, settings);
         _fileReader = new FileReaderWrapper();
         _nodeProvider = new NodeProvider();
     }
@@ -67,7 +69,7 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
             for(String name : names) {
                 patchNode.add(_nodeProvider.createAddStringNode("possibleOutput/-", name));
             }
-            _manipulator.writeNewPatch(_settings.recipeConfigFileName + ".patch", patchNode);
+            _patchManipulator.writeNew(_settings.recipeConfigFileName + ".patch", patchNode);
             return;
         }
         String recipeConfigFile = _settings.recipeConfigFileName;

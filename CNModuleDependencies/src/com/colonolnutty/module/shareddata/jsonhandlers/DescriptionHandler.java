@@ -53,4 +53,12 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
         Double nodeVal = node.get("value").asDouble();
         return !nodeVal.equals(ingredient.description);
     }
+
+    @Override
+    public String getShortStringValue(Ingredient ingredient) {
+        if(ingredient.hasDescription()) {
+            return "desc: " + ingredient.description;
+        }
+        return null;
+    }
 }

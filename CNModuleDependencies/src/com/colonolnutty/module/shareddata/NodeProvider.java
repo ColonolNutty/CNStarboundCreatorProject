@@ -10,6 +10,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class NodeProvider extends MapperWrapper {
 
+    public ObjectNode createTestInverseNode(String pathName) {
+        ObjectNode node = createTestNode(pathName);
+        node.put("inverse", true);
+        return node;
+    }
+
     public ArrayNode createTestAddArrayNode(String pathName) {
         ArrayNode nodeArray = createArrayNode();
         ObjectNode testNode = createTestInverseNode(pathName);
@@ -49,12 +55,6 @@ public class NodeProvider extends MapperWrapper {
         node.put("value", 0);
         nodeArray.add(node);
         return nodeArray;
-    }
-
-    public ObjectNode createTestInverseNode(String pathName) {
-        ObjectNode node = createTestNode(pathName);
-        node.put("inverse", true);
-        return node;
     }
 
     public ArrayNode createTestRemoveNodes(String pathName, Double value) {
@@ -126,9 +126,12 @@ public class NodeProvider extends MapperWrapper {
     }
 
     private ObjectNode createOperationNode(String operation, String pathName) {
+        if(!pathName.startsWith("/")) {
+            pathName = "/" + pathName;
+        }
         ObjectNode node = createObjectNode();
         node.put("op", operation);
-        node.put("path", "/" + pathName);
+        node.put("path", pathName);
         return node;
     }
 }

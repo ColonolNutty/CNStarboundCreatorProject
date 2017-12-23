@@ -2,6 +2,7 @@ package com.colonolnutty.module.shareddata.locators;
 
 import com.colonolnutty.module.shareddata.CNLog;
 import com.colonolnutty.module.shareddata.JsonManipulator;
+import com.colonolnutty.module.shareddata.JsonPatchManipulator;
 import com.colonolnutty.module.shareddata.StopWatchTimer;
 import com.colonolnutty.module.shareddata.models.Recipe;
 
@@ -19,6 +20,7 @@ public class RecipeStore {
     private Hashtable<String, Recipe> _recipes;
     private CNLog _log;
     private JsonManipulator _manipulator;
+    private JsonPatchManipulator _patchManipulator;
     private PatchLocator _patchLocator;
     private FileLocator _fileLocator;
     private ArrayList<String> _fileLocations;
@@ -26,11 +28,13 @@ public class RecipeStore {
 
     public RecipeStore(CNLog log,
                        JsonManipulator manipulator,
+                       JsonPatchManipulator patchManipulator,
                        PatchLocator patchLocator,
                        FileLocator fileLocator,
                        ArrayList<String> fileLocations) {
         _log = log;
         _manipulator = manipulator;
+        _patchManipulator = patchManipulator;
         _patchLocator = patchLocator;
         _fileLocator = fileLocator;
         _fileLocations = fileLocations;
@@ -66,7 +70,7 @@ public class RecipeStore {
             if(recipe.output != null && recipe.output.item != null) {
                 String itemName = recipe.output.item;
                 if(!_recipes.containsKey(itemName)) {
-                    Recipe patchedRecipe = _manipulator.applyPatch(recipe, patchFilePath, Recipe.class);
+                    Recipe patchedRecipe = _patchManipulator.applyPatch(recipe, patchFilePath, Recipe.class);
                     if(patchedRecipe != null) {
                         _recipes.put(itemName, patchedRecipe);
                     }

@@ -38,4 +38,24 @@ public abstract class CNJsonUtils {
         return node.has("path")
                 && node.get("path").asText().equals("/" + pathName);
     }
+
+    public static String getNodePath(JsonNode node) {
+        String pathName = null;
+        if(node == null) {
+            return null;
+        }
+        if(node.isArray() && node.size() > 0) {
+            for(JsonNode subNode : node) {
+                pathName = getNodePath(subNode);
+                if(pathName != null) {
+                    break;
+                }
+            }
+        }
+        else if(!node.isArray()
+                && node.has("path")) {
+            pathName = node.get("path").asText();
+        }
+        return pathName;
+    }
 }

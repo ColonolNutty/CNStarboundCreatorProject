@@ -3,6 +3,7 @@ package com.colonolnutty.module.shareddata.locators;
 import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.StatusEffect;
+import com.github.fge.jsonpatch.JsonPatch;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class StatusEffectStore implements IReadFiles {
     private CNLog _log;
     private FileLocator _fileLocator;
     private JsonManipulator _manipulator;
+    private JsonPatchManipulator _patchManipulator;
     private PatchLocator _patchLocator;
     private ArrayList<String> _fileLocations;
     private Hashtable<String, StatusEffect> _statusEffects;
@@ -25,11 +27,13 @@ public class StatusEffectStore implements IReadFiles {
     public StatusEffectStore(CNLog log,
                              FileLocator fileLocator,
                              JsonManipulator manipulator,
+                             JsonPatchManipulator patchManipulator,
                              PatchLocator patchLocator,
                              ArrayList<String> fileLocations) {
         _log = log;
         _fileLocator = fileLocator;
         _manipulator = manipulator;
+        _patchManipulator = patchManipulator;
         _patchLocator = patchLocator;
         _fileLocations = fileLocations;
         _statusEffects = new Hashtable<String, StatusEffect>();
@@ -75,7 +79,7 @@ public class StatusEffectStore implements IReadFiles {
                 return;
             }
             if (patchFilePath != null) {
-                StatusEffect patchedStatusEffect = _manipulator.applyPatch(statusEffect, patchFilePath, StatusEffect.class);
+                StatusEffect patchedStatusEffect = _patchManipulator.applyPatch(statusEffect, patchFilePath, StatusEffect.class);
                 patchedStatusEffect.filePath = filePath;
                 patchedStatusEffect.patchFilePath = patchFilePath;
                 _statusEffects.put(patchedStatusEffect.name, patchedStatusEffect);

@@ -24,12 +24,14 @@ public class PerennialCompactorMain extends MainFunctionModule implements IReadF
     private CNLog _log;
     private IFileReader _fileReader;
     private NodeProvider _nodeProvider;
+    private JsonPatchManipulator _patchManipulator;
 
     public PerennialCompactorMain(PandCSettings settings, CNLog log) {
         _settings = settings;
         _log = log;
         _fileReader = new FileReaderWrapper();
         _nodeProvider = new NodeProvider();
+        _patchManipulator = new JsonPatchManipulator(log, settings);
     }
 
     @Override
@@ -57,14 +59,13 @@ public class PerennialCompactorMain extends MainFunctionModule implements IReadF
             return;
         }
         _log.debug("Seeds found, creating patch files");
-        JsonManipulator manipulator = new JsonManipulator(_log, _settings);
         for(String seedFile : seedFiles) {
-            writePatchFile(manipulator, seedFile);
+            writePatchFile(seedFile);
         }
         _log.debug("Finished creating patch files");
     }
 
-    private void writePatchFile(JsonManipulator manipulator, String seedFile) {
+    private void writePatchFile(String seedFile) {
         File file = new File(seedFile);
         try {
             Farmable farmable = _fileReader.read(seedFile, Farmable.class);
@@ -74,7 +75,7 @@ public class PerennialCompactorMain extends MainFunctionModule implements IReadF
                 String relativeModPathName = file.getParentFile().getAbsolutePath().replace(System.getProperty("user.dir") + "\\", "");
                 String patchFileName = basePathName + "\\" + relativeModPathName + "\\" + file.getName() + ".patch";
                 farmable.patchFile = patchFileName;
-                createPatch(file.getParent(), patchFileName, manipulator, farmable);
+                createPatch(file.getParent(), patchFileName, farmable);
             }
             else {
                 farmable.filePath = seedFile;
@@ -93,7 +94,6 @@ public class PerennialCompactorMain extends MainFunctionModule implements IReadF
 
     private void createPatch(String seedPath,
                              String patchFileName,
-                             JsonManipulator manipulator,
                              Farmable farmable) {
         _log.startSubBundle("Creating patch file for: " + farmable.getName());
         _log.writeToAll(4,"Creating patch file for: " + farmable.getName());
@@ -111,7 +111,7 @@ public class PerennialCompactorMain extends MainFunctionModule implements IReadF
 
         if(!CNCollectionUtils.isEmpty(replaceNodes)) {
             patchNodes.add(replaceNodes);
-            manipulator.writeNewPatch(patchFileName, patchNodes);
+            _patchManipulator.writeNew(patchFileName, patchNodes);
         }
         _log.endSubBundle();
     }

@@ -2,6 +2,7 @@ package com.colonolnutty.module.shareddata.locators;
 
 import com.colonolnutty.module.shareddata.CNLog;
 import com.colonolnutty.module.shareddata.JsonManipulator;
+import com.colonolnutty.module.shareddata.JsonPatchManipulator;
 import com.colonolnutty.module.shareddata.StopWatchTimer;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 
@@ -19,6 +20,7 @@ public class IngredientStore {
     private Hashtable<String, Ingredient> _ingredients;
     private CNLog _log;
     private JsonManipulator _manipulator;
+    private JsonPatchManipulator _patchManipulator;
     private PatchLocator _patchLocator;
     private FileLocator _fileLocator;
     private ArrayList<String> _fileLocations;
@@ -27,6 +29,7 @@ public class IngredientStore {
 
     public IngredientStore(CNLog log,
                            JsonManipulator manipulator,
+                           JsonPatchManipulator patchManipulator,
                            PatchLocator patchLocator,
                            FileLocator fileLocator,
                            ArrayList<String> fileLocations,
@@ -34,6 +37,7 @@ public class IngredientStore {
         _ingredients = new Hashtable<String, Ingredient>();
         _log = log;
         _manipulator = manipulator;
+        _patchManipulator = patchManipulator;
         _patchLocator = patchLocator;
         _fileLocator = fileLocator;
         _fileLocations = fileLocations;
@@ -126,7 +130,7 @@ public class IngredientStore {
             ingredient.patchFile = patchFilePath;
             String ingredientName = ingredient.getName();
             if(!_ingredients.containsKey(ingredientName)) {
-                Ingredient patchedIngredient = _manipulator.applyPatch(ingredient, patchFilePath, Ingredient.class);
+                Ingredient patchedIngredient = _patchManipulator.applyPatch(ingredient, patchFilePath, Ingredient.class);
                 _log.debug("Pre-patch ingredient values: " + ingredient.getIdentifier() + " p: " + ingredient.price + " fv: " + ingredient.foodValue);
                 if(patchedIngredient != null) {
                     patchedIngredient.filePath = filePath;

@@ -52,4 +52,12 @@ public class PriceHandler extends DefaultNodeProvider implements IJsonHandler {
         Double nodeVal = node.get("value").asDouble();
         return nodeVal != ingredient.price;
     }
+
+    @Override
+    public String getShortStringValue(Ingredient ingredient) {
+        if(ingredient.hasPrice()) {
+            return "p: " + ingredient.price;
+        }
+        return null;
+    }
 }

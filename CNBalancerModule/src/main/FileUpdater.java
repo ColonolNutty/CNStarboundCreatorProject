@@ -1,6 +1,7 @@
 package main;
 
 import com.colonolnutty.module.shareddata.CNLog;
+import com.colonolnutty.module.shareddata.JsonPatchManipulator;
 import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 import com.colonolnutty.module.shareddata.JsonManipulator;
 import com.colonolnutty.module.shareddata.locators.FileLocator;
@@ -24,6 +25,7 @@ public class FileUpdater {
     private CNLog _log;
     private BalancerSettings _settings;
     private JsonManipulator _manipulator;
+    private JsonPatchManipulator _patchManipulator;
     private IngredientUpdater _ingredientUpdater;
     private IngredientStore _ingredientStore;
     private FileLocator _fileLocator;
@@ -33,6 +35,7 @@ public class FileUpdater {
     public FileUpdater(CNLog log,
                        BalancerSettings settings,
                        JsonManipulator manipulator,
+                       JsonPatchManipulator patchManipulator,
                        IngredientUpdater ingredientUpdater,
                        IngredientStore ingredientStore,
                        FileLocator fileLocator,
@@ -41,6 +44,7 @@ public class FileUpdater {
         _log = log;
         _settings = settings;
         _manipulator = manipulator;
+        _patchManipulator = patchManipulator;
         _ingredientUpdater = ingredientUpdater;
         _ingredientStore = ingredientStore;
         _fileLocator = fileLocator;
@@ -124,7 +128,7 @@ public class FileUpdater {
 
             if(isPatchFile) {
                 _log.writeToAll("Attempting to update applyPatch: " + ingredientName);
-                _manipulator.writeAsPatch(ingredient.patchFile, ingredient);
+                _patchManipulator.write(ingredient.patchFile, ingredient);
             }
             else {
                 _log.writeToAll("Attempting to update file: " + ingredientName);

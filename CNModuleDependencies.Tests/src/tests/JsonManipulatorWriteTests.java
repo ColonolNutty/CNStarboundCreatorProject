@@ -1,8 +1,13 @@
 package tests;
 
+import com.colonolnutty.module.shareddata.JsonManipulator;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
 import tests.fakeclasses.TestObject;
 
+import javax.sound.midi.Patch;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

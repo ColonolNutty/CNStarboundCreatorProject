@@ -1,5 +1,6 @@
 package com.colonolnutty.module.shareddata.jsonhandlers;
 
+import com.colonolnutty.module.shareddata.CNLog;
 import com.colonolnutty.module.shareddata.DefaultNodeProvider;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
@@ -116,5 +117,26 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
         }
 
         return needsUpdate;
+    }
+
+    @Override
+    public String getShortStringValue(Ingredient ingredient) {
+        if(!ingredient.hasEffects()) {
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder("effects: ");
+        for(JsonNode effectNodes : ingredient.effects) {
+            JsonNode lastEffect = effectNodes.get(effectNodes.size() - 1);
+            for(JsonNode effectNode : effectNodes) {
+                String name = effectNode.get("effect").asText();
+                String duration = effectNode.get("duration").asText();
+
+                stringBuilder.append("{ n: \"" + name + "\" d: " + duration + " }");
+                if(!effectNode.equals(lastEffect)) {
+                    stringBuilder.append(", ");
+                }
+            }
+        }
+        return stringBuilder.toString();
     }
 }

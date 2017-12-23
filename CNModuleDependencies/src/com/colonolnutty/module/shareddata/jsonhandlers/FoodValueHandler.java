@@ -52,4 +52,12 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
         Double nodeVal = node.get("value").asDouble();
         return nodeVal != ingredient.foodValue;
     }
+
+    @Override
+    public String getShortStringValue(Ingredient ingredient) {
+        if(ingredient.hasFoodValue()) {
+            return "fv: " + ingredient.foodValue;
+        }
+        return null;
+    }
 }

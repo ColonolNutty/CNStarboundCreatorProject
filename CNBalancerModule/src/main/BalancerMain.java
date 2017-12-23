@@ -41,21 +41,22 @@ public class BalancerMain extends MainFunctionModule implements IReadFiles {
         StopWatchTimer timer = new StopWatchTimer(_log);
         timer.start();
         JsonManipulator manipulator = new JsonManipulator(_log, _settings);
+        JsonPatchManipulator patchManipulator = new JsonPatchManipulator(_log, _settings);
         PatchLocator patchLocator = new PatchLocator(_log);
         ArrayList<String> searchLocations = setupSearchLocations(_settings);
         FileLocator fileLocator = new FileLocator(_log);
 
-        StatusEffectStore statusEffectStore = new StatusEffectStore(_log, fileLocator, manipulator, patchLocator, searchLocations);
-        IngredientStore ingredientStore = new IngredientStore(_log, manipulator, patchLocator, fileLocator, searchLocations, _settings.fileTypesToUpdate);
+        StatusEffectStore statusEffectStore = new StatusEffectStore(_log, fileLocator, manipulator, patchManipulator, patchLocator, searchLocations);
+        IngredientStore ingredientStore = new IngredientStore(_log, manipulator, patchManipulator, patchLocator, fileLocator, searchLocations, _settings.fileTypesToUpdate);
         IngredientOverrides ingredientOverrides = loadIngredientOverrides(_settings.ingredientOverridePath);
         if(ingredientOverrides != null) {
             ingredientStore.overrideIngredients(ingredientOverrides.ingredients);
         }
-        RecipeStore recipeStore = new RecipeStore(_log, manipulator, patchLocator, fileLocator, searchLocations);
+        RecipeStore recipeStore = new RecipeStore(_log, manipulator, patchManipulator, patchLocator, fileLocator, searchLocations);
         IngredientDataCalculator ingredientDataCalculator = new IngredientDataCalculator(_log, _settings, recipeStore, ingredientStore, statusEffectStore, manipulator);
         IngredientUpdater ingredientUpdater = new IngredientUpdater(_log, _settings, manipulator, ingredientStore, ingredientDataCalculator);
 
-        FileUpdater fileUpdater = new FileUpdater(_log, _settings, manipulator, ingredientUpdater, ingredientStore, fileLocator, searchLocations, _progressController);
+        FileUpdater fileUpdater = new FileUpdater(_log, _settings, manipulator, patchManipulator, ingredientUpdater, ingredientStore, fileLocator, searchLocations, _progressController);
         fileUpdater.updateValues(_settings.fileTypesToUpdate);
 
         timer.logTime();
