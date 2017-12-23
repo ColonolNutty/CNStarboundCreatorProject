@@ -44,9 +44,7 @@
     {
       "op" : "add",
       "path" : "/effects",
-      "value" : [
-        []
-      ]
+      "value" : [[ ]]
     }
   ],
   [
@@ -72,15 +70,22 @@
     },
     {
       "op" : "replace",
+      "path" : "/blahblah",
+      "value" : {
+        "one" : 24.0,
+        "two" : 10,
+        "five" : false
+      }
+    },
+    {
+      "op" : "replace",
       "path" : "/nope/noeo/noesa",
       "value" : "(4432423"
     },
     {
       "op" : "replace",
       "path" : "/effects",
-      "value" : [
-        []
-      ]
+      "value" : [[ ]]
     }
   ]
 ]

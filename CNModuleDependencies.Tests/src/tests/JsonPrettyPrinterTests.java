@@ -368,5 +368,23 @@ public class JsonPrettyPrinterTests {
         assertEquals(expectedResult, result);
     }
 
+
+    @Test
+    public void formatAsIntended_should_return_formatted_object() {
+        String expectedResult = "{"
+                + "\r\n" + "  \"one\" : [[ ]]"
+                + "\r\n" + "}";
+        ObjectNode objNode = _nodeProvider.createObjectNode();
+        ArrayNode arrNodeOne = _nodeProvider.createArrayNode();
+        ArrayNode subNodeArr = _nodeProvider.createArrayNode();
+        arrNodeOne.add(subNodeArr);
+        objNode.put("one",  arrNodeOne);
+        String asIntendedResult = _printer.formatAsIntended(objNode, 0);
+        assertEquals(expectedResult, asIntendedResult);
+        String result = _printer.formatObject(objNode, 0);
+        assertEquals(expectedResult, result);
+        assertEquals(result, asIntendedResult);
+    }
+
     //patch
 }
