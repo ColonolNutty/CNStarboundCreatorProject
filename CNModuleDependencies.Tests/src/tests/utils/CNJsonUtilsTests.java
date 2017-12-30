@@ -5,10 +5,14 @@ import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
 import com.colonolnutty.module.shareddata.utils.CNMathUtils;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONObject;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * User: Jack's Computer
@@ -105,4 +109,25 @@ public class CNJsonUtilsTests {
         assertEquals("I am path", result);
     }
     //getNodePath
+
+    //getPropertyNames
+
+    @Test
+    public void getPropertyNames_should_return_empty_list_when_no_properties() {
+        JSONObject obj = new JSONObject();
+        ArrayList<String> result = CNJsonUtils.getPropertyNames(obj);
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getPropertyNames_should_return_property_names() {
+        JSONObject obj = new JSONObject();
+        obj.put("One", 24.0);
+        obj.put("Two", 5.0);
+        ArrayList<String> result = CNJsonUtils.getPropertyNames(obj);
+        assertEquals(2, result.size());
+        assertTrue(result.contains("One"));
+        assertTrue(result.contains("Two"));
+    }
+
 }

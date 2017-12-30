@@ -6,12 +6,6 @@ import com.colonolnutty.module.shareddata.models.PropertyOrder;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
-import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.github.fge.jsonpatch.JsonPatch;
-import com.github.fge.jsonpatch.JsonPatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -103,7 +97,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
             String toWriteObj = _fileWriter.writeValueAsString(obj);
             JSONObject toWrite = new JSONObject(toWriteObj);
 
-            String result = _prettyPrinter.makePretty(toWrite, 0);
+            String result = _prettyPrinter.formatObject(toWrite, 0);
             if(result == null || result.equals("")) {
                 return;
             }
@@ -128,7 +122,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
                 return;
             }
 
-            String result = _prettyPrinter.makePretty(combined, 0);
+            String result = _prettyPrinter.formatObject(combined, 0);
             if(result == null || result.equals("")) {
                 return;
             }
@@ -174,7 +168,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
                 return;
             }
 
-            String result = _prettyPrinter.makePretty(combined, 0);
+            String result = _prettyPrinter.formatObject(combined, 0);
             if(result == null || result.equals("")) {
                 return;
             }

@@ -1,9 +1,11 @@
 package com.colonolnutty.module.shareddata.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * User: Jack's Computer
@@ -17,6 +19,13 @@ public abstract class CNJsonUtils {
                 || node.isInt()
                 || node.isBoolean()
                 || node.isTextual();
+    }
+
+    public static boolean isValueType(Object obj) {
+        return obj instanceof Double
+                || obj instanceof Integer
+                || obj instanceof Boolean
+                || obj instanceof String;
     }
 
     public static boolean hasTestNode(JsonNode node) {
@@ -57,5 +66,14 @@ public abstract class CNJsonUtils {
             pathName = node.get("path").asText();
         }
         return pathName;
+    }
+
+    public static ArrayList<String> getPropertyNames(JSONObject obj) {
+        ArrayList<String> properties = new ArrayList<String>();
+        Iterator<String> keys = obj.keys();
+        while(keys.hasNext()) {
+            properties.add(keys.next());
+        }
+        return properties;
     }
 }

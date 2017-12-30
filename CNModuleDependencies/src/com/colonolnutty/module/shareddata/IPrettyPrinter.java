@@ -10,6 +10,6 @@ import org.json.JSONObject;
  * Time: 11:35 AM
  */
 public interface IPrettyPrinter {
-    String makePretty(JSONObject obj, int indentSize);
-    String makePretty(JsonNode node, int indentSize);
+    String formatObject(JSONObject obj, int indentSize);
+    String formatArray(JsonNode node, int indentSize);
 }

@@ -123,7 +123,7 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
             }
             _log.writeToAll(4, "Applying update to applyPatch file: " + ingredient.getName());
             logValues(ingredient);
-            String prettyJson = _prettyPrinter.makePretty(newPatch, 0);
+            String prettyJson = _prettyPrinter.formatArray(newPatch, 0);
             if(prettyJson == null || prettyJson.equals("")) {
                 _log.writeToAll(4, skipMessage);
                 return;
@@ -138,7 +138,7 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
         File file = new File(fileName);
         file.getParentFile().mkdirs();
         try {
-            String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
+            String prettyJson = _prettyPrinter.formatArray(patchNodes, 0);
             if (prettyJson == null || prettyJson.equals("")) {
                 return;
             }

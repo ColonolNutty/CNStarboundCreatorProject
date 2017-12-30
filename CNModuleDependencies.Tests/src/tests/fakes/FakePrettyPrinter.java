@@ -13,12 +13,12 @@ import org.json.JSONObject;
 public class FakePrettyPrinter implements IPrettyPrinter {
 
     @Override
-    public String makePretty(JSONObject obj, int indentSize) {
+    public String formatObject(JSONObject obj, int indentSize) {
         return obj.toString();
     }
 
     @Override
-    public String makePretty(JsonNode node, int indentSize) {
+    public String formatArray(JsonNode node, int indentSize) {
         return node.asText();
     }
 }
