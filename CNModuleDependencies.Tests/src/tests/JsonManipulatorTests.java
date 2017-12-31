@@ -2,6 +2,7 @@ package tests;
 
 import com.colonolnutty.module.shareddata.*;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
+import com.colonolnutty.module.shareddata.prettyprinters.IPrettyPrinter;
 import tests.fakes.FakeFileWriter;
 import tests.fakes.FakePrettyPrinter;
 

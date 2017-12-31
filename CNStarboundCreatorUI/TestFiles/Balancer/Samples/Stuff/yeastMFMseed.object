@@ -16,7 +16,7 @@
   "humanDescription" : "Yeast in a jar, just add water!",
   "hylotlDescription" : "Yeast in a jar. Needs watering",
   "inventoryIcon" : "yeastMFMseedicon.png",
-  "orientations" : [ 
+  "orientations" : [
     {
       "imagePosition" : [ 0, 0 ],
       "frames" : 1,
@@ -25,21 +25,17 @@
       "spaceScan" : 0.1,
       "dualImage" : "yeastMFMseed.png:<color>.<stage>.<alt>",
       "anchors" : [ "bottom" ]
-    } ],
+    }
+  ],
   "largeImage" : "yeastMFMseed.png:default.default.default",
-  "stages" : [ 
-    {
-      "duration" : [ 600, 600 ]
-    },
-
-    {
-      "duration" : [ 840, 840 ]
-    },
-
+  "stages" : [
+    { "duration" : [ 600, 600 ] },
+    { "duration" : [ 840, 840 ] },
     {
       "alts" : 5,
       "resetToStage" : 1,
       "harvestPool" : "yeastMFMHarvest"
-    } ],
+    }
+  ],
   "maxImmersion" : 1.0
 }

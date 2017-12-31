@@ -5,6 +5,8 @@ import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.PropertyOrder;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.Recipe;
+import com.colonolnutty.module.shareddata.prettyprinters.IPrettyPrinter;
+import com.colonolnutty.module.shareddata.prettyprinters.JSONObjectPrettyPrinter;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,33 +40,35 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
         else {
             _forceUpdate = settings.forceUpdate;
         }
+
         if(settings.propertiesToUpdate == null) {
             _keysToWrite = new ArrayList<String>();
         }
         else {
             _keysToWrite = CNCollectionUtils.toStringArrayList(settings.propertiesToUpdate);
         }
-        if(settings.propertyOrderFile == null) {
-            _prettyPrinter = new JsonPrettyPrinter(new String[0]);
-            return;
-        }
-        try {
-            PropertyOrder propertyOrder = _fileReader.read(settings.propertyOrderFile, PropertyOrder.class);
-            String[] order = new String[0];
-            if(propertyOrder != null) {
-                order = propertyOrder.order;
-            }
-            _prettyPrinter = new JsonPrettyPrinter(order);
-        }
-        catch(IOException e) {
-            _log.error("propertyOrderFile.json file not found", e);
-        }
 
+        //Json Handlers
         _jsonHandlers = new ArrayList<IJsonHandler>();
         _jsonHandlers.add(new PriceHandler());
         _jsonHandlers.add(new FoodValueHandler());
         _jsonHandlers.add(new EffectsHandler());
         _jsonHandlers.add(new DescriptionHandler());
+
+        //Pretty Printers
+        _prettyPrinter = new JSONObjectPrettyPrinter();
+        if(settings.propertyOrderFile == null) {
+            return;
+        }
+        try {
+            PropertyOrder propertyOrder = _fileReader.read(settings.propertyOrderFile, PropertyOrder.class);
+            if(propertyOrder != null) {
+                _prettyPrinter.setPropertyOrder(propertyOrder.order);
+            }
+        }
+        catch(IOException e) {
+            _log.error("propertyOrderFile.json file not found", e);
+        }
     }
 
     public void setPrettyPrinter(IPrettyPrinter prettyPrinter) { _prettyPrinter = prettyPrinter; }
@@ -97,7 +101,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
             String toWriteObj = _fileWriter.writeValueAsString(obj);
             JSONObject toWrite = new JSONObject(toWriteObj);
 
-            String result = _prettyPrinter.formatObject(toWrite, 0);
+            String result = _prettyPrinter.makePretty(toWrite, 0);
             if(result == null || result.equals("")) {
                 return;
             }
@@ -122,7 +126,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
                 return;
             }
 
-            String result = _prettyPrinter.formatObject(combined, 0);
+            String result = _prettyPrinter.makePretty(combined, 0);
             if(result == null || result.equals("")) {
                 return;
             }
@@ -168,7 +172,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
                 return;
             }
 
-            String result = _prettyPrinter.formatObject(combined, 0);
+            String result = _prettyPrinter.makePretty(combined, 0);
             if(result == null || result.equals("")) {
                 return;
             }
@@ -214,9 +218,4 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
     private boolean canWriteKey(String key) {
         return _keysToWrite.contains(key);
     }
-
-    //Odd ball methods that could be moved
-
-    //Odd ball methods that could be moved
-
 }

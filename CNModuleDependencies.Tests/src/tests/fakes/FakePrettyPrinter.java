@@ -1,24 +1,21 @@
 package tests.fakes;
 
-import com.colonolnutty.module.shareddata.IPrettyPrinter;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import org.json.JSONObject;
+import com.colonolnutty.module.shareddata.prettyprinters.BasePrettyPrinter;
+import org.json.JSONException;
 
 /**
  * User: Jack's Computer
  * Date: 12/18/2017
  * Time: 11:34 AM
  */
-public class FakePrettyPrinter implements IPrettyPrinter {
-
+public class FakePrettyPrinter extends BasePrettyPrinter {
     @Override
-    public String formatObject(JSONObject obj, int indentSize) {
+    public String makePretty(Object obj, int indentSize) throws JSONException {
         return obj.toString();
     }
 
     @Override
-    public String formatArray(JsonNode node, int indentSize) {
-        return node.asText();
+    public boolean canPrettyPrint(Object obj) {
+        return true;
     }
 }

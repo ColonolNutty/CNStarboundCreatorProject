@@ -2,8 +2,12 @@ package com.colonolnutty.module.shareddata;
 
 import com.colonolnutty.module.shareddata.jsonhandlers.*;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.NodeAvailability;
+import com.colonolnutty.module.shareddata.models.PatchNodes;
 import com.colonolnutty.module.shareddata.models.PropertyOrder;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
+import com.colonolnutty.module.shareddata.prettyprinters.IPrettyPrinter;
+import com.colonolnutty.module.shareddata.prettyprinters.JsonNodePrettyPrinter;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -46,33 +50,35 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
         else {
             _forceUpdate = settings.forceUpdate;
         }
+
         if(settings.propertiesToUpdate == null) {
             _keysToWrite = new ArrayList<String>();
         }
         else {
             _keysToWrite = CNCollectionUtils.toStringArrayList(settings.propertiesToUpdate);
         }
-        if(settings.propertyOrderFile == null) {
-            _prettyPrinter = new JsonPrettyPrinter(new String[0]);
-            return;
-        }
-        try {
-            PropertyOrder propertyOrder = _fileReader.read(settings.propertyOrderFile, PropertyOrder.class);
-            String[] order = new String[0];
-            if(propertyOrder != null) {
-                order = propertyOrder.order;
-            }
-            _prettyPrinter = new JsonPrettyPrinter(order);
-        }
-        catch(IOException e) {
-            _log.error("propertyOrderFile.json file not found", e);
-        }
 
+        //Json Handlers
         _jsonHandlers = new ArrayList<IJsonHandler>();
         _jsonHandlers.add(new PriceHandler());
         _jsonHandlers.add(new FoodValueHandler());
         _jsonHandlers.add(new EffectsHandler());
         _jsonHandlers.add(new DescriptionHandler());
+
+        //Pretty Printers
+        _prettyPrinter = new JsonNodePrettyPrinter();
+        if(settings.propertyOrderFile == null) {
+            return;
+        }
+        try {
+            PropertyOrder propertyOrder = _fileReader.read(settings.propertyOrderFile, PropertyOrder.class);
+            if(propertyOrder != null) {
+                    _prettyPrinter.setPropertyOrder(propertyOrder.order);
+            }
+        }
+        catch(IOException e) {
+            _log.error("propertyOrderFile.json file not found", e);
+        }
     }
 
     public void setPrettyPrinter(IPrettyPrinter prettyPrinter) { _prettyPrinter = prettyPrinter; }
@@ -123,7 +129,7 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
             }
             _log.writeToAll(4, "Applying update to applyPatch file: " + ingredient.getName());
             logValues(ingredient);
-            String prettyJson = _prettyPrinter.formatArray(newPatch, 0);
+            String prettyJson = _prettyPrinter.makePretty(newPatch, 0);
             if(prettyJson == null || prettyJson.equals("")) {
                 _log.writeToAll(4, skipMessage);
                 return;
@@ -138,7 +144,7 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
         File file = new File(fileName);
         file.getParentFile().mkdirs();
         try {
-            String prettyJson = _prettyPrinter.formatArray(patchNodes, 0);
+            String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
             if (prettyJson == null || prettyJson.equals("")) {
                 return;
             }
@@ -272,35 +278,39 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
             NodeAvailability nodeAvailability = nodesAvailability.get(key);
             IJsonHandler handler = findNodeHandler(nodeAvailability.PathName);
             if(handler == null) {
-                if(nodeAvailability.TestNode != null && nodeAvailability.NonTestNode != null) {
+                if(nodeAvailability.TestNode != null
+                        && nodeAvailability.NonTestNodes != null
+                        && nodeAvailability.NonTestNodes.size() > 0) {
                     newTestNodes.add(nodeAvailability.TestNode);
                 }
-                if(nodeAvailability.NonTestNode != null) {
-                    newNonTestNodes.add(nodeAvailability.NonTestNode);
+                if(nodeAvailability.hasNonTestNodes()) {
+                    newNonTestNodes.addAll(nodeAvailability.NonTestNodes);
                 }
                 continue;
             }
 
-            if(nodeAvailability.NonTestNode == null) {
+            if(!nodeAvailability.hasNonTestNodes()) {
                 JsonNode replaceNode = handler.createReplaceNode(ingredient);
                 if(replaceNode != null) {
-                    nodeAvailability.NonTestNode = replaceNode;
+                    nodeAvailability.NonTestNodes = new ArrayList<JsonNode>();
+                    nodeAvailability.NonTestNodes.add(replaceNode);
                 }
             }
 
-            if(nodeAvailability.TestNode == null && nodeAvailability.NonTestNode != null) {
+            if(nodeAvailability.TestNode == null
+                    && nodeAvailability.hasNonTestNodes()) {
                 JsonNode testNode = handler.createTestNode(ingredient);
                 if(testNode != null) {
                     nodeAvailability.TestNode = testNode;
                 }
             }
             // If there is no NonTestNode then we remove the TestNode. No Changes. No Test.
-            if(nodeAvailability.NonTestNode == null) {
+            if(!nodeAvailability.hasNonTestNodes()) {
                 nodeAvailability.TestNode = null;
             }
 
-            if(nodeAvailability.NonTestNode != null) {
-                newNonTestNodes.add(nodeAvailability.NonTestNode);
+            if(nodeAvailability.hasNonTestNodes()) {
+                newNonTestNodes.addAll(nodeAvailability.NonTestNodes);
             }
             if(nodeAvailability.TestNode != null) {
                 newTestNodes.add(nodeAvailability.TestNode);
@@ -312,8 +322,13 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
                 continue;
             }
 
-            if(nodeAvailability.NonTestNode != null) {
-                needsUpdate = handler.needsUpdate(nodeAvailability.NonTestNode, ingredient);
+            if(nodeAvailability.hasNonTestNodes()) {
+                for(JsonNode node : nodeAvailability.NonTestNodes) {
+                    needsUpdate = handler.needsUpdate(node, ingredient);
+                    if(needsUpdate) {
+                        break;
+                    }
+                }
             }
         }
         if(newTestNodes.size() == 0 && newNonTestNodes.size() == 0) {
@@ -336,7 +351,7 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
         return found;
     }
 
-    private Hashtable<String, NodeAvailability> getNodeAvailability(PatchNodes patchNodes) {
+    public Hashtable<String, NodeAvailability> getNodeAvailability(PatchNodes patchNodes) {
         Hashtable<String, NodeAvailability> nodeMap = new Hashtable<String, NodeAvailability>();
 
         for(JsonNode testNode : patchNodes.TestNodes) {
@@ -363,6 +378,9 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
             if(nodePathName == null) {
                 continue;
             }
+            if(nodePathName.endsWith("/-")) {
+                nodePathName = nodePathName.replace("/-", "");
+            }
             NodeAvailability nodeAvailable;
             if(nodeMap.containsKey(nodePathName)) {
                 nodeAvailable = nodeMap.get(nodePathName);
@@ -372,9 +390,10 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
                 nodeMap.put(nodePathName, nodeAvailable);
             }
             nodeAvailable.PathName = nodePathName;
-            if(nodeAvailable.NonTestNode == null) {
-                nodeAvailable.NonTestNode = nonTestNode;
+            if(!nodeAvailable.hasNonTestNodes()) {
+                nodeAvailable.NonTestNodes = new ArrayList<JsonNode>();
             }
+            nodeAvailable.NonTestNodes.add(nonTestNode);
         }
         return nodeMap;
     }
@@ -396,27 +415,6 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
         _log.endSubBundle();
         if(logCombined) {
             _log.debug(stringBuilder.toString(), 4);
-        }
-    }
-
-
-    public class PatchNodes {
-        public ArrayList<JsonNode> TestNodes;
-        public ArrayList<JsonNode> NonTestNodes;
-
-        public PatchNodes(ArrayList<JsonNode> testNodes, ArrayList<JsonNode> nonTestNodes) {
-            TestNodes = testNodes;
-            NonTestNodes = nonTestNodes;
-        }
-    }
-
-    private class NodeAvailability {
-        public String PathName;
-        public JsonNode TestNode;
-        public JsonNode NonTestNode;
-
-        public NodeAvailability(String pathName) {
-            PathName = pathName;
         }
     }
 }

@@ -76,4 +76,13 @@ public abstract class CNJsonUtils {
         }
         return properties;
     }
+    
+    public static ArrayList<String> getPropertyNames(JsonNode node) {
+        ArrayList<String> properties = new ArrayList<String>();
+        Iterator<String> keys = node.fieldNames();
+        while(keys.hasNext()) {
+            properties.add(keys.next());
+        }
+        return properties;
+    }
 }

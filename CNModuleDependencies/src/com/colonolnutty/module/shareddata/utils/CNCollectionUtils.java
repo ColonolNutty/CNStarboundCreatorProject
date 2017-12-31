@@ -3,6 +3,7 @@ package com.colonolnutty.module.shareddata.utils;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 /**
  * User: Jack's Computer
@@ -50,5 +51,13 @@ public abstract class CNCollectionUtils {
             }
         }
         return found;
+    }
+
+    public static ArrayList<String> toArrayList(Enumeration<String> keys) {
+        ArrayList<String> arr = new ArrayList<String>();
+        while(keys.hasMoreElements()) {
+            arr.add(keys.nextElement());
+        }
+        return arr;
     }
 }

@@ -130,4 +130,21 @@ public class CNJsonUtilsTests {
         assertTrue(result.contains("Two"));
     }
 
+    @Test
+    public void getNodePropertyNames_should_return_empty_list_when_no_properties() {
+        ObjectNode node = _nodeProvider.createObjectNode();
+        ArrayList<String> result = CNJsonUtils.getPropertyNames(node);
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getNodePropertyNames_should_return_property_names() {
+        ObjectNode node = _nodeProvider.createObjectNode();
+        node.put("One", 24.0);
+        node.put("Two", 5.0);
+        ArrayList<String> result = CNJsonUtils.getPropertyNames(node);
+        assertEquals(2, result.size());
+        assertTrue(result.contains("One"));
+        assertTrue(result.contains("Two"));
+    }
 }

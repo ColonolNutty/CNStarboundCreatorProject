@@ -1,7 +1,11 @@
 package tests;
 
 import com.colonolnutty.module.shareddata.*;
+import com.colonolnutty.module.shareddata.models.NodeAvailability;
+import com.colonolnutty.module.shareddata.models.PatchNodes;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
+import com.colonolnutty.module.shareddata.prettyprinters.IPrettyPrinter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
@@ -9,6 +13,9 @@ import org.junit.Test;
 import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
 import tests.fakes.*;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -50,7 +57,7 @@ public class JsonPatchManipulatorTests {
 
     @Test
     public void sortPatchNodes_should_return_empty_when_patch_is_null() {
-        JsonPatchManipulator.PatchNodes result = _manipulator.sortPatchNodes(null);
+        PatchNodes result = _manipulator.sortPatchNodes(null);
         assertNotNull(result);
         assertNotNull(result.TestNodes);
         assertNotNull(result.NonTestNodes);
@@ -61,7 +68,7 @@ public class JsonPatchManipulatorTests {
     @Test
     public void sortPatchNodes_should_return_empty_when_patch_is_empty() {
         ArrayNode patchNodes = _nodeProvider.createArrayNode();
-        JsonPatchManipulator.PatchNodes result = _manipulator.sortPatchNodes(patchNodes);
+        PatchNodes result = _manipulator.sortPatchNodes(patchNodes);
         assertNotNull(result);
         assertNotNull(result.TestNodes);
         assertNotNull(result.NonTestNodes);
@@ -73,7 +80,7 @@ public class JsonPatchManipulatorTests {
     public void sortPatchNodes_should_return_empty_when_patch_is_not_an_array() {
         ObjectNode patchNodes = _nodeProvider.createObjectNode();
         patchNodes.put("name", "1");
-        JsonPatchManipulator.PatchNodes result = _manipulator.sortPatchNodes(patchNodes);
+        PatchNodes result = _manipulator.sortPatchNodes(patchNodes);
         assertNotNull(result);
         assertNotNull(result.TestNodes);
         assertNotNull(result.NonTestNodes);
@@ -125,7 +132,7 @@ public class JsonPatchManipulatorTests {
         nonTestArr.add(nonTestNodeThreeArr);
 
         patchNodes.add(nonTestArr);
-        JsonPatchManipulator.PatchNodes result = _manipulator.sortPatchNodes(patchNodes);
+        PatchNodes result = _manipulator.sortPatchNodes(patchNodes);
         assertNotNull(result);
         assertNotNull(result.TestNodes);
         assertNotNull(result.NonTestNodes);
@@ -156,7 +163,7 @@ public class JsonPatchManipulatorTests {
         ObjectNode nonTestReplaceNode = _nodeProvider.createReplaceStringNode("/onetwothree", "\"banana\"");
         nonTestNode.add(nonTestReplaceNode);
         patchNodes.add(nonTestNode);
-        JsonPatchManipulator.PatchNodes result = _manipulator.sortPatchNodes(patchNodes);
+        PatchNodes result = _manipulator.sortPatchNodes(patchNodes);
         assertNotNull(result);
         assertNotNull(result.TestNodes);
         assertNotNull(result.NonTestNodes);
@@ -164,6 +171,75 @@ public class JsonPatchManipulatorTests {
         assertEquals(1, result.NonTestNodes.size());
         assertTrue(result.TestNodes.contains(testNode));
         assertTrue(result.NonTestNodes.contains(nonTestReplaceNode));
+    }
+
+    @Test
+    public void getNodeAvailability_should_group_test_nodes_and_add_array_nodes_properly() {
+        String path = "/interactions";
+        ArrayNode firstTestNode = _nodeProvider.createTestAddArrayNode(path);
+        ObjectNode firstAddNode = _nodeProvider.createAddStringNode(path + "/-", "valueOne");
+        ArrayList<JsonNode> testNodes = new ArrayList<JsonNode>();
+        testNodes.add(firstTestNode);
+        ArrayList<JsonNode> nonTestNodes = new ArrayList<JsonNode>();
+        nonTestNodes.add(firstAddNode);
+        PatchNodes patchNodes = new PatchNodes(testNodes, nonTestNodes);
+        Hashtable<String, NodeAvailability> result = _manipulator.getNodeAvailability(patchNodes);
+        assertEquals(1, result.size());
+        assertTrue(result.containsKey(path));
+        NodeAvailability nodeAv = result.get(path);
+        assertTrue(nodeAv.hasNonTestNodes());
+        assertEquals(1, nodeAv.NonTestNodes.size());
+        assertEquals(firstAddNode, nodeAv.NonTestNodes.get(0));
+        assertEquals(firstTestNode, nodeAv.TestNode);
+    }
+
+    @Test
+    public void getNodeAvailability_should_group_test_nodes_and_add_nodes_properly() {
+        String path = "/pathOne";
+        String pathTwo = "/pathTwo";
+        ArrayNode firstTestNode = _nodeProvider.createTestAddArrayNode(path);
+        ArrayNode secondTestNode = _nodeProvider.createTestAddStringNode(pathTwo);
+        ObjectNode firstAddNode = _nodeProvider.createAddStringNode(path, "valueOne");
+        ObjectNode secondAddNode = _nodeProvider.createAddStringNode(pathTwo, "valueTwo");
+        ArrayList<JsonNode> testNodes = new ArrayList<JsonNode>();
+        testNodes.add(firstTestNode);
+        testNodes.add(secondTestNode);
+        ArrayList<JsonNode> nonTestNodes = new ArrayList<JsonNode>();
+        nonTestNodes.add(firstAddNode);
+        nonTestNodes.add(secondAddNode);
+        PatchNodes patchNodes = new PatchNodes(testNodes, nonTestNodes);
+        Hashtable<String, NodeAvailability> result = _manipulator.getNodeAvailability(patchNodes);
+        assertEquals(2, result.size());
+        assertTrue(result.containsKey(path));
+        assertTrue(result.containsKey(pathTwo));
+        NodeAvailability nodeAv = result.get(path);
+        assertTrue(nodeAv.hasNonTestNodes());
+        assertEquals(1, nodeAv.NonTestNodes.size());
+        assertEquals(firstAddNode, nodeAv.NonTestNodes.get(0));
+        assertEquals(firstTestNode, nodeAv.TestNode);
+        NodeAvailability nodeAvTwo = result.get(pathTwo);
+        assertEquals(1, nodeAvTwo.NonTestNodes.size());
+        assertEquals(secondAddNode, nodeAvTwo.NonTestNodes.get(0));
+        assertEquals(secondTestNode, nodeAvTwo.TestNode);
+    }
+
+    @Test
+    public void getNodeAvailability_should_allow_duplicates() {
+        String path = "/interactions";
+        ObjectNode firstAddNode = _nodeProvider.createAddStringNode(path, "valueOne");
+        ObjectNode secondAddNode = _nodeProvider.createAddStringNode(path, "valueTwo");
+        ArrayList<JsonNode> nonTestNodes = new ArrayList<JsonNode>();
+        nonTestNodes.add(firstAddNode);
+        nonTestNodes.add(secondAddNode);
+        PatchNodes patchNodes = new PatchNodes(new ArrayList<JsonNode>(), nonTestNodes);
+        Hashtable<String, NodeAvailability> result = _manipulator.getNodeAvailability(patchNodes);
+        assertEquals(1, result.size());
+        assertTrue(result.containsKey(path));
+        NodeAvailability nodeAv = result.get(path);
+        assertTrue(nodeAv.hasNonTestNodes());
+        assertEquals(2, nodeAv.NonTestNodes.size());
+        assertEquals(firstAddNode, nodeAv.NonTestNodes.get(0));
+        assertEquals(secondAddNode, nodeAv.NonTestNodes.get(1));
     }
 
     //sortPatchNodes
