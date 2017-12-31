@@ -10,4 +10,9 @@ public class ConsoleDebugWriter extends DebugWriter {
     public void writeln(String text) {
         System.out.println(text);
     }
+
+    @Override
+    public void write(Exception e) {
+        e.printStackTrace(System.out);
+    }
 }

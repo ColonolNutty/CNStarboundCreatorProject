@@ -3,6 +3,7 @@ package tests.prettyprinters;
 import com.colonolnutty.module.shareddata.NodeProvider;
 import com.colonolnutty.module.shareddata.prettyprinters.BasePrettyPrinter;
 import com.colonolnutty.module.shareddata.prettyprinters.JSONObjectPrettyPrinter;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -25,6 +26,29 @@ public class JSONObjectPrettyPrinterTests {
     }
 
     //formatObject
+
+    @Test
+    public void formatObject_should_return_formatted_object_with_null_properties() {
+        String expectedResult = "{"
+                + BasePrettyPrinter.NEW_LINE + "  \"one\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "  \"three\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "}";
+        JSONObject obj = new JSONObject();
+        obj.put("one", 24.0);
+        obj.put("two", "null");
+        obj.put("three", 25.0);
+        String result = _printer.makePretty(obj, 0);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void formatObject_should_return_single_property_object_with_null_property() {
+        String expectedResult = "{ }";
+        JSONObject obj = new JSONObject();
+        obj.put("one", "null");
+        String result = _printer.formatObject(obj, 0, false);
+        assertEquals(expectedResult, result);
+    }
 
     @Test
     public void formatObject_should_return_formatted_object() {

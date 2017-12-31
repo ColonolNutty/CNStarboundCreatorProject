@@ -160,6 +160,29 @@ public class JsonNodePrettyPrinterTests {
     }
 
     @Test
+    public void formatObject_should_return_formatted_object_with_null_property() {
+        String expectedResult = "{"
+                + BasePrettyPrinter.NEW_LINE + "  \"one\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "  \"three\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "}";
+        ObjectNode objNode = _nodeProvider.createObjectNode();
+        objNode.put("one", 24.0);
+        objNode.put("two", "null");
+        objNode.put("three", 25.0);
+        String result = _printer.formatObject(objNode, 0);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void formatObject_should_return_single_property_object_with_null_property() {
+        String expectedResult = "{ }";
+        ObjectNode objNode = _nodeProvider.createObjectNode();
+        objNode.put("one", "null");
+        String result = _printer.formatObject(objNode, 0);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
     public void formatObject_should_return_formatted_object() {
         String expectedResult = "{"
                 + BasePrettyPrinter.NEW_LINE + "  \"one\" : 24.0,"

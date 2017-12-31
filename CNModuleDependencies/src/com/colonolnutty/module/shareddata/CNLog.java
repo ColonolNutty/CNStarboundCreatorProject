@@ -19,7 +19,7 @@ public class CNLog {
     private String debugPrefix = "[DEBUG] ";
     private String errorPrefix = "[ERROR] ";
     private String infoPrefix = "[INFO] ";
-    private PrintWriter writer;
+    private PrintWriter _writer;
     private ArrayList<String> _ignoredErrors;
     private DebugWriter _debugWriter;
     private MessageBundler _messageBundler;
@@ -92,13 +92,20 @@ public class CNLog {
                 _debugWriter.writeln(messagePrefix + message);
             }
         }
-        if(writer != null) {
-            writer.println(messagePrefix + message);
+        if(_writer != null) {
+            _writer.println(messagePrefix + message);
         }
     }
 
     private void writeMessage(Exception e) {
-        writeMessage(MessageType.None, e.toString());
+        if(_settings.enableConsoleDebug) {
+            if(_debugWriter != null) {
+                _debugWriter.writeln(e.getMessage());
+            }
+        }
+        if(_writer != null) {
+            e.printStackTrace(_writer);
+        }
     }
 
     private boolean isIgnoredMessage(String errMessage) {
@@ -196,16 +203,16 @@ public class CNLog {
 
     public void dispose() {
         System.out.println("Closing log.");
-        if(writer != null) {
-            writer.flush();
-            writer.close();
+        if(_writer != null) {
+            _writer.flush();
+            _writer.close();
         }
     }
 
     public void setupDebugLogFile() {
-        if(writer != null) {
-            writer.flush();
-            writer.close();
+        if(_writer != null) {
+            _writer.flush();
+            _writer.close();
         }
         String debugLogFile = _settings.logFile;
         _messageBundler = new MessageBundler();
@@ -220,7 +227,7 @@ public class CNLog {
                 file.delete();
             }
             file.createNewFile();
-            writer = new PrintWriter(file);
+            _writer = new PrintWriter(file);
         }
         catch(IOException e) {
             error(e);

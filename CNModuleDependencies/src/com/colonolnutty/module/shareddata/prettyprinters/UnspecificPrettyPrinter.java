@@ -57,7 +57,12 @@ public class UnspecificPrettyPrinter extends BasePrettyPrinter {
         if(objProperties.size() == 1) {
             String firstProperty = objProperties.get(0);
             Object firstObj = objTable.get(firstProperty);
-            builder.append("{ \"" + firstProperty + "\" : " + formatAsIntended(firstObj, 0, false) + " }");
+            String result = formatAsIntended(firstObj, 0, false);
+            if (result == null) {
+                builder.append("{ }");
+                return builder.toString();
+            }
+            builder.append("{ \"" + firstProperty + "\" : " + result + " }");
             return builder.toString();
         }
         ArrayList<String> sortedProperties = sortProperties(_propertiesInOrder, objProperties);
@@ -66,8 +71,12 @@ public class UnspecificPrettyPrinter extends BasePrettyPrinter {
         for(int i = 0; i < sortedProperties.size(); i++) {
             String propertyName = sortedProperties.get(i);
             Object propertyObj = objTable.get(propertyName);
+            String result = formatAsIntended(propertyObj, currentLevelIndent, false);
+            if(result == null) {
+                continue;
+            }
             builder.append(CNStringUtils.createIndent(currentLevelIndent));
-            builder.append("\"" + propertyName + "\" : " + formatAsIntended(propertyObj, currentLevelIndent, false));
+            builder.append("\"" + propertyName + "\" : " + result);
             if ((i + 1) < sortedProperties.size()) {
                 builder.append("," + NEW_LINE);
             }
@@ -132,6 +141,9 @@ public class UnspecificPrettyPrinter extends BasePrettyPrinter {
     }
 
     public String formatAsIntended(Object obj, int indentSize, boolean shouldIndent) throws JSONException {
+        if(obj == null || obj.toString().equals("null")) {
+            return null;
+        }
         if(obj instanceof ArrayList) {
             return formatArray((ArrayList<Object>) obj, indentSize, shouldIndent);
         }

@@ -7,4 +7,5 @@ package com.colonolnutty.module.shareddata;
  */
 public abstract class DebugWriter {
     public abstract void writeln(String text);
+    public abstract void write(Exception e);
 }

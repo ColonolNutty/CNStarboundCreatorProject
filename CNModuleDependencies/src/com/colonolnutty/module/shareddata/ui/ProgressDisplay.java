@@ -23,7 +23,7 @@ public class ProgressDisplay extends ProgressController {
         }
 
         _progressBar = new JProgressBar();
-        _progressLabel = new JLabel("0/0 completed");
+        _progressLabel = new JLabel("0/0 completed 0%");
 
         _progressPanel = new JPanel();
         GroupLayout layout = new GroupLayout(_progressPanel);
@@ -71,7 +71,11 @@ public class ProgressDisplay extends ProgressController {
     }
 
     private void updateLabel() {
-        String newText = _progressBar.getValue() + "/" + _progressBar.getMaximum() + " completed";
+        int percentage = 0;
+        if(_progressBar.getMaximum() > 0) {
+            percentage = (int)((((double)_progressBar.getValue()) / ((double)_progressBar.getMaximum())) * 100);
+        }
+        String newText = _progressBar.getValue() + "/" + _progressBar.getMaximum() + " completed " + percentage + "%";
         _progressLabel.setText(newText);
         _progressPanel.updateUI();
     }

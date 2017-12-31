@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
@@ -129,7 +130,13 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
             }
             _log.writeToAll(4, "Applying update to applyPatch file: " + ingredient.getName());
             logValues(ingredient);
-            String prettyJson = _prettyPrinter.makePretty(newPatch, 0);
+            String prettyJson = null;
+            try {
+                prettyJson = _prettyPrinter.makePretty(newPatch, 0);
+            }
+            catch(JSONException e) {
+                throw new JSONException("For filepath: " + patchFileName, e);
+            }
             if(prettyJson == null || prettyJson.equals("")) {
                 _log.writeToAll(4, skipMessage);
                 return;
@@ -144,7 +151,13 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
         File file = new File(fileName);
         file.getParentFile().mkdirs();
         try {
-            String prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
+            String prettyJson = null;
+            try {
+                prettyJson = _prettyPrinter.makePretty(patchNodes, 0);
+            }
+            catch(JSONException e) {
+                throw new JSONException("For filepath: " + fileName, e);
+            }
             if (prettyJson == null || prettyJson.equals("")) {
                 return;
             }

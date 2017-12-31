@@ -40,6 +40,10 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         if(objFields.size() == 1) {
             String propOne = objFields.get(0);
             JsonNode subNodeOne = node.get(propOne);
+            String result = formatAsIntended(subNodeOne, 0);
+            if(result == null) {
+                return "{ }";
+            }
             return CNStringUtils.createIndent(indentSize) + "{ \"" + propOne + "\" : " + formatAsIntended(subNodeOne, 0) + " }";
         }
         boolean hasValue = false;
@@ -119,7 +123,7 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
     }
 
     public String formatAsIntended(JsonNode node, int indentSize) {
-        if(node.isNull()) {
+        if(node.isNull() || (node.isTextual() && node.asText().equals("null"))) {
             return null;
         }
         if(CNJsonUtils.isValueType(node)) {
@@ -132,7 +136,7 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         }
 
         if(node.isArray()) {
-            return makePretty(node, indentSize);
+            return formatArray(node, indentSize);
         }
         if(node.isObject()) {
             return formatObject(node, indentSize);

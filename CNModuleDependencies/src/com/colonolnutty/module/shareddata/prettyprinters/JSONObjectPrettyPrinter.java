@@ -33,8 +33,18 @@ public class JSONObjectPrettyPrinter extends BasePrettyPrinter {
             builder.append(CNStringUtils.createIndent(indentSize));
         }
         if(objProperties.size() == 1) {
-            String firstKey = objProperties.get(0);
-            builder.append("{ \"" + firstKey + "\" : " + formatAsIntended(obj.get(firstKey), 0, false) + " }");
+            String firstProperty = objProperties.get(0);
+            try {
+                String result = formatAsIntended(obj.get(firstProperty), 0, false);
+                if(result == null)
+                {
+                    return "{ }";
+                }
+                builder.append("{ \"" + firstProperty + "\" : " + result + " }");
+            }
+            catch(JSONException e) {
+                throw new JSONException("Single property obj, for property: " + firstProperty, e);
+            }
             return builder.toString();
         }
         ArrayList<String> sortedProperties = sortProperties(_propertiesInOrder, objProperties);
@@ -43,8 +53,18 @@ public class JSONObjectPrettyPrinter extends BasePrettyPrinter {
         for(int i = 0; i < sortedProperties.size(); i++) {
             String propertyName = sortedProperties.get(i);
             Object propertyObj = obj.get(propertyName);
+            String result;
+            try {
+                result = formatAsIntended(propertyObj, currentLevelIndent, false);
+            }
+            catch(JSONException e) {
+                throw new JSONException("For property: " + propertyName, e);
+            }
+            if(result == null) {
+                continue;
+            }
             builder.append(CNStringUtils.createIndent(currentLevelIndent));
-            builder.append("\"" + propertyName + "\" : " + formatAsIntended(propertyObj, currentLevelIndent, false));
+            builder.append("\"" + propertyName + "\" : " + result);
             if ((i + 1) < sortedProperties.size()) {
                 builder.append("," + NEW_LINE);
             }
@@ -76,7 +96,13 @@ public class JSONObjectPrettyPrinter extends BasePrettyPrinter {
                 continue;
             }
             Object val = array.get(i);
-            String result = formatAsIntended(val, indentSize + INDENT_SIZE, !containsValueTypes);
+            String result = null;
+            try {
+                result = formatAsIntended(val, indentSize + INDENT_SIZE, !containsValueTypes);
+            }
+            catch(JSONException e) {
+                throw new JSONException("For index: " + i, e);
+            }
             if(result == null) {
                 continue;
             }
@@ -105,7 +131,7 @@ public class JSONObjectPrettyPrinter extends BasePrettyPrinter {
     }
 
     public String formatAsIntended(Object val, int indentSize, boolean includeIndent) throws JSONException {
-        if(val == null) {
+        if(val == null || val.toString().equals("null")) {
             return null;
         }
         if(val instanceof Double || val instanceof Integer || val instanceof Boolean) {

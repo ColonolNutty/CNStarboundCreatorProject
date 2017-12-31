@@ -46,6 +46,11 @@ public class OutputDisplay extends DebugWriter {
         _outputDisplayScroll.getHorizontalScrollBar().setValue(0);
     }
 
+    @Override
+    public void write(Exception e) {
+        writeln(e.getMessage());
+    }
+
     public void updateTreeDisplay(Hashtable<String, MessageBundle> bundles) {
         _topLevelOutputNode.removeAllChildren();
         DefaultTreeModel model = (DefaultTreeModel)_outputTree.getModel();

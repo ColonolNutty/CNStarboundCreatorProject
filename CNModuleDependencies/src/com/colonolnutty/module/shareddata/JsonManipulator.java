@@ -101,7 +101,13 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
             String toWriteObj = _fileWriter.writeValueAsString(obj);
             JSONObject toWrite = new JSONObject(toWriteObj);
 
-            String result = _prettyPrinter.makePretty(toWrite, 0);
+            String result = null;
+            try {
+                result = _prettyPrinter.makePretty(toWrite, 0);
+            }
+            catch(JSONException e) {
+                throw new JSONException("For filepath: " + filePath, e);
+            }
             if(result == null || result.equals("")) {
                 return;
             }
@@ -126,7 +132,13 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
                 return;
             }
 
-            String result = _prettyPrinter.makePretty(combined, 0);
+            String result = null;
+            try {
+                result = _prettyPrinter.makePretty(combined, 0);
+            }
+            catch(JSONException e) {
+                throw new JSONException("For filepath: " + filePath, e);
+            }
             if(result == null || result.equals("")) {
                 return;
             }
@@ -171,8 +183,13 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
             if(combined == null) {
                 return;
             }
-
-            String result = _prettyPrinter.makePretty(combined, 0);
+            String result = null;
+            try {
+                result = _prettyPrinter.makePretty(combined, 0);
+            }
+            catch(JSONException e) {
+                throw new JSONException("For filepath: " + filePath, e);
+            }
             if(result == null || result.equals("")) {
                 return;
             }
