@@ -5,6 +5,7 @@ import com.colonolnutty.module.shareddata.prettyprinters.BasePrettyPrinter;
 import com.colonolnutty.module.shareddata.prettyprinters.JsonNodePrettyPrinter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -28,10 +29,18 @@ public class JsonNodePrettyPrinterTests {
     //formatArray
 
     @Test
-    public void formatArray_should_return_empty_array() {
+    public void formatArray_should_return_empty_array_no_indent() {
         String expectedResult = "[ ]";
         ArrayNode arr = _nodeProvider.createArrayNode();
-        String result = _printer.makePretty(arr, 0);
+        String result = _printer.formatArray(arr, 3, false);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void formatArray_should_return_empty_array_with_indent() {
+        String expectedResult = "   [ ]";
+        ArrayNode arr = _nodeProvider.createArrayNode();
+        String result = _printer.formatArray(arr, 3, true);
         assertEquals(expectedResult, result);
     }
 
@@ -62,6 +71,23 @@ public class JsonNodePrettyPrinterTests {
         ArrayNode arr = _nodeProvider.createArrayNode();
         ObjectNode obj = _nodeProvider.createObjectNode();
         obj.put("one", 24.0);
+        arr.add(obj);
+        String result = _printer.makePretty(arr, 0);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void formatArray_should_return_single_object_multiple_properties_array() {
+        String expectedResult = "["
+                + BasePrettyPrinter.NEW_LINE + "  {"
+                + BasePrettyPrinter.NEW_LINE + "    \"one\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "  }"
+                + BasePrettyPrinter.NEW_LINE + "]";
+        ArrayNode arr = _nodeProvider.createArrayNode();
+        ObjectNode obj = _nodeProvider.createObjectNode();
+        obj.put("one", 24.0);
+        obj.put("two", 25.0);
         arr.add(obj);
         String result = _printer.makePretty(arr, 0);
         assertEquals(expectedResult, result);
@@ -155,7 +181,7 @@ public class JsonNodePrettyPrinterTests {
     public void formatObject_should_return_empty_object() {
         String expectedResult = "{ }";
         ObjectNode objNode = _nodeProvider.createObjectNode();
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -169,7 +195,7 @@ public class JsonNodePrettyPrinterTests {
         objNode.put("one", 24.0);
         objNode.put("two", "null");
         objNode.put("three", 25.0);
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -178,7 +204,7 @@ public class JsonNodePrettyPrinterTests {
         String expectedResult = "{ }";
         ObjectNode objNode = _nodeProvider.createObjectNode();
         objNode.put("one", "null");
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -191,7 +217,23 @@ public class JsonNodePrettyPrinterTests {
         ObjectNode objNode = _nodeProvider.createObjectNode();
         objNode.put("one", 24.0);
         objNode.put("two", 25.0);
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
+        assertEquals(expectedResult, result);
+    }
+    @Test
+    public void formatObject_should_return_single_property_object_with_object_property() {
+        String expectedResult = "{"
+                + BasePrettyPrinter.NEW_LINE + "  \"one\" : {"
+                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "    \"three\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "  }"
+                + BasePrettyPrinter.NEW_LINE + "}";
+        ObjectNode obj = _nodeProvider.createObjectNode();
+        ObjectNode subObj = _nodeProvider.createObjectNode();
+        subObj.put("two", 24.0);
+        subObj.put("three", 25.0);
+        obj.put("one", subObj);
+        String result = _printer.formatObject(obj, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -206,7 +248,7 @@ public class JsonNodePrettyPrinterTests {
         arrNodeOne.add(24.0);
         objNode.put("one",  arrNodeOne);
         objNode.put("two", 25.0);
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -226,7 +268,7 @@ public class JsonNodePrettyPrinterTests {
 
         objNode.put("one",  subNodeArr);
         objNode.put("two", 25.0);
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -262,7 +304,7 @@ public class JsonNodePrettyPrinterTests {
 
         objNode.put("one",  subNodeArr);
         objNode.put("two", 25.0);
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -274,7 +316,7 @@ public class JsonNodePrettyPrinterTests {
         ArrayNode subNodeArr = _nodeProvider.createArrayNode();
         arrNodeOne.add(subNodeArr);
         objNode.put("one",  arrNodeOne);
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -289,7 +331,7 @@ public class JsonNodePrettyPrinterTests {
         subObj.put("three", 24);
         arr.add(subObj);
         objOne.put("zero", arr);
-        String result = _printer.formatObject(objOne, 0);
+        String result = _printer.formatObject(objOne, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -299,7 +341,7 @@ public class JsonNodePrettyPrinterTests {
     public void formatAsIntended_should_return_null() {
         ObjectNode node = _nodeProvider.createObjectNode();
         node.put("blah", (String)null);
-        String result = _printer.formatAsIntended(node.get("blah"), 0);
+        String result = _printer.formatAsIntended(node.get("blah"), 0, false);
         assertNull(result);
     }
 
@@ -307,7 +349,7 @@ public class JsonNodePrettyPrinterTests {
     public void formatAsIntended_should_return_double() {
         ObjectNode node = _nodeProvider.createObjectNode();
         node.put("blah", 24.0);
-        String result = _printer.formatAsIntended(node.get("blah"), 0);
+        String result = _printer.formatAsIntended(node.get("blah"), 0, false);
         assertEquals("24.0", result);
     }
 
@@ -315,7 +357,7 @@ public class JsonNodePrettyPrinterTests {
     public void formatAsIntended_should_return_integer() {
         ObjectNode node = _nodeProvider.createObjectNode();
         node.put("blah", 24);
-        String result = _printer.formatAsIntended(node.get("blah"), 0);
+        String result = _printer.formatAsIntended(node.get("blah"), 0, false);
         assertEquals("24", result);
     }
 
@@ -323,7 +365,7 @@ public class JsonNodePrettyPrinterTests {
     public void formatAsIntended_should_return_boolean() {
         ObjectNode node = _nodeProvider.createObjectNode();
         node.put("blah", true);
-        String result = _printer.formatAsIntended(node.get("blah"), 0);
+        String result = _printer.formatAsIntended(node.get("blah"), 0, false);
         assertEquals("true", result);
     }
 
@@ -331,7 +373,7 @@ public class JsonNodePrettyPrinterTests {
     public void formatAsIntended_should_return_string() {
         ObjectNode node = _nodeProvider.createObjectNode();
         node.put("blah", "yay");
-        String result = _printer.formatAsIntended(node.get("blah"), 0);
+        String result = _printer.formatAsIntended(node.get("blah"), 0, false);
         assertEquals("\"yay\"", result);
     }
 
@@ -340,7 +382,7 @@ public class JsonNodePrettyPrinterTests {
         String expectedResult = "[ \"yay\" ]";
         ArrayNode arr = _nodeProvider.createArrayNode();
         arr.add("yay");
-        String result = _printer.formatAsIntended(arr, 0);
+        String result = _printer.formatAsIntended(arr, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -349,7 +391,7 @@ public class JsonNodePrettyPrinterTests {
         String expectedResult = "{ \"one\" : 24.0 }";
         ObjectNode objNode = _nodeProvider.createObjectNode();
         objNode.put("one", 24.0);
-        String result = _printer.formatAsIntended(objNode, 0);
+        String result = _printer.formatAsIntended(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -362,7 +404,7 @@ public class JsonNodePrettyPrinterTests {
         ObjectNode objNode = _nodeProvider.createObjectNode();
         objNode.put("one", 24.0);
         objNode.put("two", 25.0);
-        String result = _printer.formatAsIntended(objNode, 0);
+        String result = _printer.formatAsIntended(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -374,9 +416,9 @@ public class JsonNodePrettyPrinterTests {
         ArrayNode subNodeArr = _nodeProvider.createArrayNode();
         arrNodeOne.add(subNodeArr);
         objNode.put("one",  arrNodeOne);
-        String asIntendedResult = _printer.formatAsIntended(objNode, 0);
+        String asIntendedResult = _printer.formatAsIntended(objNode, 0, false);
         assertEquals(expectedResult, asIntendedResult);
-        String result = _printer.formatObject(objNode, 0);
+        String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
         assertEquals(result, asIntendedResult);
     }

@@ -21,10 +21,10 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         }
         JsonNode node = (JsonNode) obj;
         if(node.isArray()) {
-            return formatArray(node, indentSize);
+            return formatArray(node, indentSize, false);
         }
         if(node.isObject()) {
-            return formatObject(node, indentSize);
+            return formatObject(node, indentSize, false);
         }
         if(CNJsonUtils.isValueType(node)) {
             return node.asText();
@@ -32,25 +32,55 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         return obj.toString();
     }
 
-    public String formatObject(JsonNode node, int indentSize) throws JSONException {
+    public String formatObject(JsonNode node, int indentSize, boolean includeIndent) throws JSONException {
         ArrayList<String> objFields = CNJsonUtils.getPropertyNames(node);
         if(node.isNull() || objFields.size() == 0) {
             return "{ }";
         }
+        StringBuilder builder = new StringBuilder();
+        if(includeIndent) {
+            builder.append(CNStringUtils.createIndent(indentSize));
+        }
         if(objFields.size() == 1) {
             String propOne = objFields.get(0);
             JsonNode subNodeOne = node.get(propOne);
-            String result = formatAsIntended(subNodeOne, 0);
+            boolean isNonValue = !CNJsonUtils.isValueType(subNodeOne);
+            int subIndent = 0;
+            if(isNonValue) {
+                subIndent = indentSize + INDENT_SIZE;
+            }
+            String result = formatAsIntended(subNodeOne, subIndent, false);
             if(result == null) {
                 return "{ }";
             }
-            return CNStringUtils.createIndent(indentSize) + "{ \"" + propOne + "\" : " + formatAsIntended(subNodeOne, 0) + " }";
+            if(!result.contains(NEW_LINE)) {
+                isNonValue = false;
+                result = result.trim();
+                subIndent = 0;
+            }
+            builder.append(CNStringUtils.createIndent(indentSize));
+            builder.append("{");
+            if(isNonValue) {
+                builder.append(NEW_LINE + CNStringUtils.createIndent(subIndent));
+            }
+            else {
+                builder.append(" ");
+            }
+            builder.append("\"" + propOne + "\" : " + result);
+            if(isNonValue) {
+                builder.append(NEW_LINE);
+            }
+            else {
+                builder.append(" ");
+            }
+            builder.append("}");
+            return builder.toString();
         }
         boolean hasValue = false;
-        StringBuilder builder = new StringBuilder(CNStringUtils.createIndent(indentSize) + "{" + NEW_LINE);
+        builder.append("{" + NEW_LINE);
         for(int i = 0; i < objFields.size(); i++) {
             String fieldName = objFields.get(i);
-            String result = formatAsIntended(node.get(fieldName), indentSize + INDENT_SIZE);
+            String result = formatAsIntended(node.get(fieldName), indentSize + INDENT_SIZE, false);
             if(result == null) {
                 continue;
             }
@@ -67,31 +97,37 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         return builder.toString();
     }
 
-    public String formatArray(JsonNode node, int indentSize) throws JSONException {
+    public String formatArray(JsonNode node, int indentSize, boolean includeIndent) throws JSONException {
         if(!node.isArray()) {
-            return formatObject(node, indentSize);
+            return formatObject(node, indentSize, includeIndent);
         }
+        StringBuilder builder = new StringBuilder();
         int nodeSize = node.size();
         if(nodeSize == 0) {
-            return "[ ]";
+            builder.append("[ ]");
+            return builder.toString();
+        }
+        if(includeIndent) {
+            builder.append(CNStringUtils.createIndent(indentSize));
         }
         JsonNode nodeOne = node.get(0);
         if(nodeSize == 1) {
             if(nodeOne.isArray() && nodeOne.size() == 0) {
-                return "[[ ]]";
+                builder.append("[[ ]]");
+                return builder.toString();
             }
             if(nodeOne.isObject()) {
-                return CNStringUtils.createIndent(indentSize) + "[" + formatObject(nodeOne, 0) + "]";
+                return CNStringUtils.createIndent(indentSize) + "[" + formatObject(nodeOne, 0, true) + "]";
             }
         }
         boolean containsValueTypes = CNJsonUtils.isValueType(nodeOne);
-        StringBuilder builder = new StringBuilder(CNStringUtils.createIndent(indentSize) + "[");
+        builder.append("[");
         if(containsValueTypes) {
             builder.append(" ");
         }
         for(int i = 0; i < nodeSize; i++) {
             JsonNode subNode = node.get(i);
-            String result = formatAsIntended(subNode, indentSize + INDENT_SIZE);
+            String result = formatAsIntended(subNode, indentSize + INDENT_SIZE, !containsValueTypes);
             if(result == null) {
                 continue;
             }
@@ -122,7 +158,7 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         return builder.toString();
     }
 
-    public String formatAsIntended(JsonNode node, int indentSize) {
+    public String formatAsIntended(JsonNode node, int indentSize, boolean includeIndent) {
         if(node.isNull() || (node.isTextual() && node.asText().equals("null"))) {
             return null;
         }
@@ -136,10 +172,10 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         }
 
         if(node.isArray()) {
-            return formatArray(node, indentSize);
+            return formatArray(node, indentSize, includeIndent);
         }
         if(node.isObject()) {
-            return formatObject(node, indentSize);
+            return formatObject(node, indentSize, includeIndent);
         }
         return null;
     }

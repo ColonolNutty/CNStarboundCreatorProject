@@ -20,7 +20,6 @@ public class JsonManipulatorTests {
     protected BaseSettings _settings;
     protected FakeFileWriter _fileWriter;
     protected IFileReader _fileReader;
-    protected NodeProvider _nodeProvider;
     protected IPrettyPrinter _prettyPrinter;
     protected JsonManipulator _manipulator;
 
@@ -39,11 +38,9 @@ public class JsonManipulatorTests {
         _fileWriter = new FakeFileWriter();
         _prettyPrinter = new FakePrettyPrinter();
         _fileReader = mock(IFileReader.class);
-        _nodeProvider = new NodeProvider();
 
         _manipulator.setFileWriter(_fileWriter);
         _manipulator.setFileReader(_fileReader);
-        _manipulator.setNodeProvider(_nodeProvider);
         _manipulator.setPrettyPrinter(_prettyPrinter);
     }
 

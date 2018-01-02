@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.sound.midi.Patch;
 import java.util.ArrayList;
 
 /**
@@ -34,17 +35,43 @@ public class JSONObjectPrettyPrinter extends BasePrettyPrinter {
         }
         if(objProperties.size() == 1) {
             String firstProperty = objProperties.get(0);
+            Object firstObj = obj.get(firstProperty);
+            boolean isNonValue = firstObj instanceof JSONObject || firstObj instanceof JSONArray;
+            int subIndent = 0;
+            if(isNonValue) {
+                subIndent = INDENT_SIZE;
+            }
+            String result = null;
             try {
-                String result = formatAsIntended(obj.get(firstProperty), 0, false);
-                if(result == null)
-                {
-                    return "{ }";
-                }
-                builder.append("{ \"" + firstProperty + "\" : " + result + " }");
+                result = formatAsIntended(firstObj, subIndent, false);
             }
             catch(JSONException e) {
                 throw new JSONException("Single property obj, for property: " + firstProperty, e);
             }
+            if(result == null) {
+                return "{ }";
+            }
+            builder.append("{");
+            if(isNonValue) {
+                builder.append(NEW_LINE);
+            }
+            else {
+                builder.append(" ");
+            }
+            if(isNonValue) {
+                builder.append(CNStringUtils.createIndent(indentSize + INDENT_SIZE));
+            }
+            builder.append("\"" + firstProperty + "\" : " + result);
+            if(isNonValue) {
+                builder.append(NEW_LINE);
+            }
+            else {
+                builder.append(" ");
+            }
+            if(includeIndent) {
+                builder.append(CNStringUtils.createIndent(indentSize));
+            }
+            builder.append("}");
             return builder.toString();
         }
         ArrayList<String> sortedProperties = sortProperties(_propertiesInOrder, objProperties);

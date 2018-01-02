@@ -74,7 +74,8 @@
       "value" : {
         "one" : 24.0,
         "two" : 10,
-        "five" : false
+        "five" : false,
+        "six" : "one"
       }
     },
     {

@@ -2,7 +2,6 @@ package tests.utils;
 
 import com.colonolnutty.module.shareddata.NodeProvider;
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
-import com.colonolnutty.module.shareddata.utils.CNMathUtils;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONObject;
@@ -10,9 +9,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 /**
  * User: Jack's Computer
@@ -128,6 +125,15 @@ public class CNJsonUtilsTests {
         assertEquals(2, result.size());
         assertTrue(result.contains("One"));
         assertTrue(result.contains("Two"));
+    }
+
+    @Test
+    public void getNodePropertyNames_should_handle_null_field_name() {
+        ObjectNode node = _nodeProvider.createObjectNode();
+        node.put((String)null, (String)null);
+        ArrayList<String> result = CNJsonUtils.getPropertyNames(node);
+        assertNotNull(result);
+        assertEquals(0, result.size());
     }
 
     @Test

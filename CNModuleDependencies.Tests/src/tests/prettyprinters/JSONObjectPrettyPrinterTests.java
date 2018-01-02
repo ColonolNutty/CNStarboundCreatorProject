@@ -3,6 +3,7 @@ package tests.prettyprinters;
 import com.colonolnutty.module.shareddata.NodeProvider;
 import com.colonolnutty.module.shareddata.prettyprinters.BasePrettyPrinter;
 import com.colonolnutty.module.shareddata.prettyprinters.JSONObjectPrettyPrinter;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,6 +47,23 @@ public class JSONObjectPrettyPrinterTests {
         String expectedResult = "{ }";
         JSONObject obj = new JSONObject();
         obj.put("one", "null");
+        String result = _printer.formatObject(obj, 0, false);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void formatObject_should_return_single_property_object_with_object_property() {
+        String expectedResult = "{"
+                + BasePrettyPrinter.NEW_LINE + "  \"one\" : {"
+                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "    \"three\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "  }"
+                + BasePrettyPrinter.NEW_LINE + "}";
+        JSONObject obj = new JSONObject();
+        JSONObject subObj = new JSONObject();
+        subObj.put("two", 24.0);
+        subObj.put("three", 25.0);
+        obj.put("one", subObj);
         String result = _printer.formatObject(obj, 0, false);
         assertEquals(expectedResult, result);
     }
@@ -272,6 +290,23 @@ public class JSONObjectPrettyPrinterTests {
         JSONObject obj = new JSONObject();
         obj.put("three", 24);
         arr.put(2, obj);
+        String result = _printer.formatArray(arr, 0, false);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void formatArray_should_return_single_object_multiple_properties_array() {
+        String expectedResult = "["
+                + BasePrettyPrinter.NEW_LINE + "  {"
+                + BasePrettyPrinter.NEW_LINE + "    \"one\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "  }"
+                + BasePrettyPrinter.NEW_LINE + "]";
+        JSONArray arr = new JSONArray();
+        JSONObject obj = new JSONObject();
+        obj.put("one", 24.0);
+        obj.put("two", 25.0);
+        arr.put(0, obj);
         String result = _printer.formatArray(arr, 0, false);
         assertEquals(expectedResult, result);
     }

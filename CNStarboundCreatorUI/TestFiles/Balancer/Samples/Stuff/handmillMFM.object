@@ -29,9 +29,7 @@
         [ 1, 2 ],
         [ 0, 0 ]
       ],
-      "fgAnchors" : [
-        [ 1, 0 ]
-      ],
+      "fgAnchors" : [[ 1, 0 ]],
       "collision" : "platform"
     },
     {
@@ -45,9 +43,7 @@
         [ 1, 2 ],
         [ 1, 0 ]
       ],
-      "fgAnchors" : [
-        [ 0, 0 ]
-      ],
+      "fgAnchors" : [[ 0, 0 ]],
       "collision" : "platform",
       "flipImages" : true
     },
@@ -62,9 +58,7 @@
         [ 1, 2 ],
         [ 0, 0 ]
       ],
-      "fgAnchors" : [
-        [ 0, -1 ]
-      ],
+      "fgAnchors" : [[ 0, -1 ]],
       "collision" : "platform"
     },
     {
@@ -78,9 +72,7 @@
         [ 1, 2 ],
         [ 1, 0 ]
       ],
-      "fgAnchors" : [
-        [ 1, -1 ]
-      ],
+      "fgAnchors" : [[ 1, -1 ]],
       "collision" : "platform",
       "flipImages" : true
     },

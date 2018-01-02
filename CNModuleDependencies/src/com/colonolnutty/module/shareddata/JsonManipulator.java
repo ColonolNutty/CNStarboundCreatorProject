@@ -7,6 +7,7 @@ import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.prettyprinters.IPrettyPrinter;
 import com.colonolnutty.module.shareddata.prettyprinters.JSONObjectPrettyPrinter;
+import com.colonolnutty.module.shareddata.prettyprinters.JsonWrapperPrettyPrinter;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,13 +20,12 @@ import java.util.*;
  * Date: 09/11/2017
  * Time: 12:32 PM
  */
-public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodeProvider {
+public class JsonManipulator implements IReadFiles, IWriteFiles {
     private CNLog _log;
     private ArrayList<String> _keysToWrite;
     private IPrettyPrinter _prettyPrinter;
     private IFileWriter _fileWriter;
     private IFileReader _fileReader;
-    private NodeProvider _nodeProvider;
     private ArrayList<IJsonHandler> _jsonHandlers;
     private boolean _forceUpdate;
 
@@ -33,7 +33,6 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
         _log = log;
         _fileWriter = new FileWriterWrapper();
         _fileReader = new FileReaderWrapper();
-        _nodeProvider = new NodeProvider();
         if(settings.forceUpdate == null) {
             _forceUpdate = false;
         }
@@ -56,7 +55,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
         _jsonHandlers.add(new DescriptionHandler());
 
         //Pretty Printers
-        _prettyPrinter = new JSONObjectPrettyPrinter();
+        _prettyPrinter = new JsonWrapperPrettyPrinter();
         if(settings.propertyOrderFile == null) {
             return;
         }
@@ -79,8 +78,6 @@ public class JsonManipulator implements IReadFiles, IWriteFiles, IRequireNodePro
     }
     @Override
     public void setFileReader(IFileReader reader) { _fileReader = reader; }
-    @Override
-    public void setNodeProvider(NodeProvider nodeProvider) { _nodeProvider = nodeProvider; }
 
     //Read
 

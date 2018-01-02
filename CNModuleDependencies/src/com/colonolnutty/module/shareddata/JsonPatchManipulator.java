@@ -8,6 +8,7 @@ import com.colonolnutty.module.shareddata.models.PropertyOrder;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.prettyprinters.IPrettyPrinter;
 import com.colonolnutty.module.shareddata.prettyprinters.JsonNodePrettyPrinter;
+import com.colonolnutty.module.shareddata.prettyprinters.JsonWrapperPrettyPrinter;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -67,7 +68,7 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
         _jsonHandlers.add(new DescriptionHandler());
 
         //Pretty Printers
-        _prettyPrinter = new JsonNodePrettyPrinter();
+        _prettyPrinter = new JsonWrapperPrettyPrinter();
         if(settings.propertyOrderFile == null) {
             return;
         }

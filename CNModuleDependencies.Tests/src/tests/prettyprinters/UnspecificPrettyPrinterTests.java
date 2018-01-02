@@ -356,6 +356,23 @@ public class UnspecificPrettyPrinterTests {
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    public void formatArray_should_return_single_object_multiple_properties_array() {
+        String expectedResult = "["
+                + BasePrettyPrinter.NEW_LINE + "  {"
+                + BasePrettyPrinter.NEW_LINE + "    \"one\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "  }"
+                + BasePrettyPrinter.NEW_LINE + "]";
+        ArrayList<Object> arr = new ArrayList<Object>();
+        Hashtable<String, Object> obj = new Hashtable<String, Object>();
+        obj.put("one", 24.0);
+        obj.put("two", 25.0);
+        arr.add(obj);
+        String result = _printer.makePretty(arr, 0);
+        assertEquals(expectedResult, result);
+    }
+
     //formatAsIntended
 
     @Test
