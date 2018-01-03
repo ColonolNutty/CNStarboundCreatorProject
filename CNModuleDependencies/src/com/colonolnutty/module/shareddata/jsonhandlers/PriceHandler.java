@@ -10,11 +10,10 @@ import com.fasterxml.jackson.databind.JsonNode;
  * Time: 3:15 PM
  */
 public class PriceHandler extends DefaultNodeProvider implements IJsonHandler {
-    private String _pathName;
+    public static final String PATH_NAME = "/price";
 
     public PriceHandler() {
         super();
-        _pathName = "/price";
     }
 
     @Override
@@ -22,23 +21,30 @@ public class PriceHandler extends DefaultNodeProvider implements IJsonHandler {
         if(ingredient.price == null || ingredient.price < 0.0) {
             return null;
         }
-        return _nodeProvider.createTestAddDoubleNode(_pathName);
+        return _nodeProvider.createTestAddDoubleNode(PATH_NAME);
     }
 
     @Override
     public JsonNode createReplaceNode(Ingredient ingredient) {
-        return _nodeProvider.createReplaceDoubleNode(_pathName, ingredient.price);
+        if(ingredient.price == null || ingredient.price < 0.0) {
+            return null;
+        }
+        return _nodeProvider.createReplaceDoubleNode(PATH_NAME, ingredient.price);
     }
 
     @Override
     public boolean canHandle(String pathName) {
-        return pathName.equals(_pathName);
+        return pathName.equals(PATH_NAME);
     }
 
     @Override
     public boolean needsUpdate(JsonNode node, Ingredient ingredient) {
-        if(node == null || ingredient.price == null) {
+        if(ingredient == null) {
             return false;
+        }
+        boolean ingredientHasFoodValue = ingredient.price != null && ingredient.price >= 0.0;
+        if(node == null) {
+            return ingredientHasFoodValue;
         }
 
         if(node.isArray()) {
@@ -46,11 +52,16 @@ public class PriceHandler extends DefaultNodeProvider implements IJsonHandler {
         }
 
         if(!node.has("value")) {
-            return false;
+            return ingredientHasFoodValue;
         }
 
-        Double nodeVal = node.get("value").asDouble();
-        return nodeVal != ingredient.price;
+        JsonNode foodValue = node.get("value");
+        if(!foodValue.isDouble()) {
+            return ingredientHasFoodValue;
+        }
+
+        Double nodeVal = foodValue.asDouble();
+        return !nodeVal.equals(ingredient.price);
     }
 
     @Override

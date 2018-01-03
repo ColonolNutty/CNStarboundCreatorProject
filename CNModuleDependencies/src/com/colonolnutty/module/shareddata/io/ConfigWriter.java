@@ -1,27 +1,20 @@
-package com.colonolnutty.module.shareddata;
+package com.colonolnutty.module.shareddata.io;
 
-import com.colonolnutty.module.shareddata.io.FileWriterWrapper;
-import com.colonolnutty.module.shareddata.io.IFileWriter;
+import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 
 /**
  * User: Jack's Computer
  * Date: 09/28/2017
  * Time: 12:31 PM
  */
-public class SettingsWriter implements IWriteFiles {
+public class ConfigWriter implements IWriteFiles {
     private CNLog _log;
     private IFileWriter _fileWriter;
 
-    public SettingsWriter(CNLog log) {
+    public ConfigWriter(CNLog log) {
         _log = log;
         setFileWriter(new FileWriterWrapper());
     }

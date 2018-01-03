@@ -1,6 +1,6 @@
 package main;
 
-import com.colonolnutty.module.shareddata.CNLog;
+import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.JsonPatchManipulator;
 import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 import com.colonolnutty.module.shareddata.JsonManipulator;

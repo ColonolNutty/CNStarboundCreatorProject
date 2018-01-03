@@ -1,4 +1,6 @@
-package com.colonolnutty.module.shareddata;
+package com.colonolnutty.module.shareddata.utils;
+
+import com.colonolnutty.module.shareddata.debug.CNLog;
 
 /**
  * User: Jack's Computer

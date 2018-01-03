@@ -11,35 +11,37 @@ import com.fasterxml.jackson.databind.JsonNode;
  * Time: 3:15 PM
  */
 public class DescriptionHandler extends DefaultNodeProvider implements IJsonHandler {
-    private String _pathName;
-
-    public DescriptionHandler() {
-        super();
-        _pathName = "/description";
-    }
+    public static final String PATH_NAME = "/description";
 
     @Override
     public JsonNode createTestNode(Ingredient ingredient) {
         if(CNStringUtils.isNullOrWhitespace(ingredient.description)) {
             return null;
         }
-        return _nodeProvider.createTestAddStringNode(_pathName);
+        return _nodeProvider.createTestAddStringNode(PATH_NAME);
     }
 
     @Override
     public JsonNode createReplaceNode(Ingredient ingredient) {
-        return _nodeProvider.createReplaceStringNode(_pathName, ingredient.description);
+        if(CNStringUtils.isNullOrWhitespace(ingredient.description)) {
+            return null;
+        }
+        return _nodeProvider.createReplaceStringNode(PATH_NAME, ingredient.description);
     }
 
     @Override
     public boolean canHandle(String pathName) {
-        return pathName.equals(_pathName);
+        return pathName.equals(PATH_NAME);
     }
 
     @Override
     public boolean needsUpdate(JsonNode node, Ingredient ingredient) {
-        if(node == null || ingredient.description == null) {
+        if(ingredient == null) {
             return false;
+        }
+        boolean ingredientHasDescription = !CNStringUtils.isNullOrWhitespace(ingredient.description);
+        if(node == null) {
+            return ingredientHasDescription;
         }
 
         if(node.isArray()) {
@@ -47,10 +49,15 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
         }
 
         if(!node.has("value")) {
-            return false;
+            return ingredientHasDescription;
         }
 
-        Double nodeVal = node.get("value").asDouble();
+        JsonNode descriptionNode = node.get("value");
+        if(!descriptionNode.isTextual()) {
+            return ingredientHasDescription;
+        }
+
+        String nodeVal = descriptionNode.asText();
         return !nodeVal.equals(ingredient.description);
     }
 

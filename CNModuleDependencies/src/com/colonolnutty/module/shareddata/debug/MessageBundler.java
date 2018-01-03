@@ -1,4 +1,4 @@
-package com.colonolnutty.module.shareddata;
+package com.colonolnutty.module.shareddata.debug;
 
 import com.colonolnutty.module.shareddata.models.MessageBundle;
 

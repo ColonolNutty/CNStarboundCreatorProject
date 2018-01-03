@@ -1,9 +1,9 @@
 package com.colonolnutty.module.shareddata.locators;
 
-import com.colonolnutty.module.shareddata.CNLog;
+import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.JsonManipulator;
 import com.colonolnutty.module.shareddata.JsonPatchManipulator;
-import com.colonolnutty.module.shareddata.StopWatchTimer;
+import com.colonolnutty.module.shareddata.utils.StopWatchTimer;
 import com.colonolnutty.module.shareddata.models.Recipe;
 
 import java.io.IOException;

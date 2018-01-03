@@ -1,6 +1,6 @@
 package main.ui;
 
-import com.colonolnutty.module.shareddata.SettingsWriter;
+import com.colonolnutty.module.shareddata.io.ConfigWriter;
 import com.colonolnutty.module.shareddata.ui.SettingsDisplayBase;
 import main.settings.RecipeConfigCreatorSettings;
 
@@ -18,10 +18,10 @@ import java.awt.event.FocusListener;
  * Time: 5:04 PM
  */
 public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
-    private SettingsWriter _writer;
+    private ConfigWriter _writer;
     private RecipeConfigCreatorSettings _settings;
 
-    public RecipeConfigCreatorSettingsDisplay(SettingsWriter writer, RecipeConfigCreatorSettings settings) {
+    public RecipeConfigCreatorSettingsDisplay(ConfigWriter writer, RecipeConfigCreatorSettings settings) {
         _settings = settings;
         _writer = writer;
     }

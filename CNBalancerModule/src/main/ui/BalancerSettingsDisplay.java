@@ -2,7 +2,7 @@ package main.ui;
 
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import main.settings.BalancerSettings;
-import com.colonolnutty.module.shareddata.SettingsWriter;
+import com.colonolnutty.module.shareddata.io.ConfigWriter;
 import com.colonolnutty.module.shareddata.ui.SettingsDisplayBase;
 
 import javax.swing.*;
@@ -11,10 +11,10 @@ import javax.swing.text.JTextComponent;
 import java.awt.event.*;
 
 public class BalancerSettingsDisplay extends SettingsDisplayBase {
-    private SettingsWriter _writer;
+    private ConfigWriter _writer;
     private BalancerSettings _settings;
 
-    public BalancerSettingsDisplay(SettingsWriter writer, BalancerSettings settings) {
+    public BalancerSettingsDisplay(ConfigWriter writer, BalancerSettings settings) {
         _writer = writer;
         this._settings = settings;
     }

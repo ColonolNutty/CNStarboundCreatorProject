@@ -1,6 +1,6 @@
 package com.colonolnutty.module.shareddata.ui;
 
-import com.colonolnutty.module.shareddata.DebugWriter;
+import com.colonolnutty.module.shareddata.debug.DebugWriter;
 import com.colonolnutty.module.shareddata.models.MessageBundle;
 
 import javax.swing.*;
@@ -10,8 +10,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
 

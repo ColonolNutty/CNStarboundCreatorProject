@@ -1,7 +1,7 @@
 package com.colonolnutty.module.shareddata.locators;
 
 
-import com.colonolnutty.module.shareddata.CNLog;
+import com.colonolnutty.module.shareddata.debug.CNLog;
 
 import java.io.File;
 import java.util.ArrayList;

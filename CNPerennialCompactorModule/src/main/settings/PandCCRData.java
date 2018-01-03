@@ -1,7 +1,7 @@
 package main.settings;
 
 
-import com.colonolnutty.module.shareddata.CNLog;
+import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.CRData;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 

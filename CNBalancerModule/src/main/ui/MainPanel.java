@@ -1,8 +1,8 @@
 package main.ui;
 
-import com.colonolnutty.module.shareddata.CNLog;
-import com.colonolnutty.module.shareddata.ConfigReader;
-import com.colonolnutty.module.shareddata.SettingsWriter;
+import com.colonolnutty.module.shareddata.debug.CNLog;
+import com.colonolnutty.module.shareddata.io.ConfigReader;
+import com.colonolnutty.module.shareddata.io.ConfigWriter;
 import com.colonolnutty.module.shareddata.models.settings.BasicSettings;
 import com.colonolnutty.module.shareddata.ui.ProgressDisplay;
 import main.settings.BalancerCRData;
@@ -46,7 +46,7 @@ public class MainPanel extends MainFunctionPanel {
         tempLog.dispose();
         _log = new CNLog(_outputDisplay, _settings);
         mainPanel.setVisible(true);
-        SettingsWriter writer = new SettingsWriter(_log);
+        ConfigWriter writer = new ConfigWriter(_log);
         _settingsDisplay = new BalancerSettingsDisplay(writer, _settings);
         _progressDisplay = new ProgressDisplay();
         JPanel progressDisplayPanel = _progressDisplay.get();

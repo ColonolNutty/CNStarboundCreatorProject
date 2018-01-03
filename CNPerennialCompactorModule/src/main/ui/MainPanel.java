@@ -1,8 +1,8 @@
 package main.ui;
 
-import com.colonolnutty.module.shareddata.CNLog;
-import com.colonolnutty.module.shareddata.ConfigReader;
-import com.colonolnutty.module.shareddata.SettingsWriter;
+import com.colonolnutty.module.shareddata.debug.CNLog;
+import com.colonolnutty.module.shareddata.io.ConfigReader;
+import com.colonolnutty.module.shareddata.io.ConfigWriter;
 import com.colonolnutty.module.shareddata.models.MessageBundle;
 import com.colonolnutty.module.shareddata.models.settings.BasicSettings;
 import com.colonolnutty.module.shareddata.ui.MainFunctionPanel;
@@ -44,7 +44,7 @@ public class MainPanel extends MainFunctionPanel {
         _settings = reader.readSettingsFile(new PandCCRData(), PandCSettings.class);
         tempLog.dispose();
         _log = new CNLog(_outputDisplay, _settings);
-        SettingsWriter writer = new SettingsWriter(_log);
+        ConfigWriter writer = new ConfigWriter(_log);
         _settingsDisplay = new PandCSettingsDisplay(writer, _settings);
 
         JPanel settingsPanel = _settingsDisplay.setup(new ActionListener() {

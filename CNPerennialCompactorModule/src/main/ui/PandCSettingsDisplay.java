@@ -1,7 +1,7 @@
 package main.ui;
 
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
-import com.colonolnutty.module.shareddata.SettingsWriter;
+import com.colonolnutty.module.shareddata.io.ConfigWriter;
 import com.colonolnutty.module.shareddata.ui.SettingsDisplayBase;
 import main.settings.PandCSettings;
 
@@ -19,10 +19,10 @@ import java.awt.event.FocusListener;
  * Time: 5:04 PM
  */
 public class PandCSettingsDisplay extends SettingsDisplayBase {
-    private SettingsWriter _writer;
+    private ConfigWriter _writer;
     private PandCSettings _settings;
 
-    public PandCSettingsDisplay(SettingsWriter writer, PandCSettings settings) {
+    public PandCSettingsDisplay(ConfigWriter writer, PandCSettings settings) {
         _settings = settings;
         _writer = writer;
     }

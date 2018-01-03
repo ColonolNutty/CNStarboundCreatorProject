@@ -1,6 +1,6 @@
 package tests;
 
-import com.colonolnutty.module.shareddata.CNLog;
+import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.JsonManipulator;
 import com.colonolnutty.module.shareddata.locators.IngredientStore;
 import com.colonolnutty.module.shareddata.locators.RecipeStore;
@@ -18,7 +18,6 @@ import main.IngredientDataCalculator;
 import main.settings.BalancerSettings;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;

@@ -2,6 +2,7 @@ package com.colonolnutty.module.shareddata.jsonhandlers;
 
 import com.colonolnutty.module.shareddata.DefaultNodeProvider;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
@@ -10,11 +11,10 @@ import com.fasterxml.jackson.databind.JsonNode;
  * Time: 3:15 PM
  */
 public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandler {
-    private String _pathName;
+    public static final String PATH_NAME = "/foodValue";
 
     public FoodValueHandler() {
         super();
-        _pathName = "/foodValue";
     }
 
     @Override
@@ -22,23 +22,30 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
         if(ingredient.foodValue == null || ingredient.foodValue < 0.0) {
             return null;
         }
-        return _nodeProvider.createTestAddDoubleNode(_pathName);
+        return _nodeProvider.createTestAddDoubleNode(PATH_NAME);
     }
 
     @Override
     public JsonNode createReplaceNode(Ingredient ingredient) {
-        return _nodeProvider.createReplaceDoubleNode(_pathName, ingredient.foodValue);
+        if(ingredient.foodValue == null || ingredient.foodValue < 0.0) {
+            return null;
+        }
+        return _nodeProvider.createReplaceDoubleNode(PATH_NAME, ingredient.foodValue);
     }
 
     @Override
     public boolean canHandle(String pathName) {
-        return pathName.equals(_pathName);
+        return pathName.equals(PATH_NAME);
     }
 
     @Override
     public boolean needsUpdate(JsonNode node, Ingredient ingredient) {
-        if(node == null || ingredient.foodValue == null) {
+        if(ingredient == null) {
             return false;
+        }
+        boolean ingredientHasFoodValue = ingredient.foodValue != null && ingredient.foodValue >= 0.0;
+        if(node == null) {
+            return ingredientHasFoodValue;
         }
 
         if(node.isArray()) {
@@ -46,11 +53,16 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
         }
 
         if(!node.has("value")) {
-            return false;
+            return ingredientHasFoodValue;
         }
 
-        Double nodeVal = node.get("value").asDouble();
-        return nodeVal != ingredient.foodValue;
+        JsonNode foodValue = node.get("value");
+        if(!foodValue.isDouble()) {
+            return ingredientHasFoodValue;
+        }
+
+        Double nodeVal = foodValue.asDouble();
+        return !nodeVal.equals(ingredient.foodValue);
     }
 
     @Override

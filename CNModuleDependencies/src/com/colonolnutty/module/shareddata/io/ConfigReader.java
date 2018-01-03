@@ -1,20 +1,11 @@
-package com.colonolnutty.module.shareddata;
+package com.colonolnutty.module.shareddata.io;
 
-import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
-import com.colonolnutty.module.shareddata.io.IFileReader;
-import com.colonolnutty.module.shareddata.io.IFileWriter;
+import com.colonolnutty.module.shareddata.debug.CNLog;
+import com.colonolnutty.module.shareddata.CRData;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.util.ArrayList;
 
 /**
  * User: Jack's Computer

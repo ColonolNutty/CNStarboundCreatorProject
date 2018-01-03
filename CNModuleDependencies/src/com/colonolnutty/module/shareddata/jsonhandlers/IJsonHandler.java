@@ -1,6 +1,5 @@
 package com.colonolnutty.module.shareddata.jsonhandlers;
 
-import com.colonolnutty.module.shareddata.CNLog;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.fasterxml.jackson.databind.JsonNode;
 
