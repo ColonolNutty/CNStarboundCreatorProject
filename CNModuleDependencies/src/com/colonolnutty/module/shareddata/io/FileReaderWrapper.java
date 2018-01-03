@@ -1,4 +1,6 @@
-package com.colonolnutty.module.shareddata;
+package com.colonolnutty.module.shareddata.io;
+
+import com.colonolnutty.module.shareddata.MapperWrapper;
 
 import java.io.*;
 

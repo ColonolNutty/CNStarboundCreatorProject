@@ -1,6 +1,8 @@
 package main.crafters;
 
 import com.colonolnutty.module.shareddata.*;
+import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
+import com.colonolnutty.module.shareddata.io.IFileReader;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.IngredientListItem;
 import main.settings.RecipeCreatorSettings;

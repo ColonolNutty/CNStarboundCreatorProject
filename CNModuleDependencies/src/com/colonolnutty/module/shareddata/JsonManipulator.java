@@ -1,12 +1,15 @@
 package com.colonolnutty.module.shareddata;
 
+import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
+import com.colonolnutty.module.shareddata.io.FileWriterWrapper;
+import com.colonolnutty.module.shareddata.io.IFileReader;
+import com.colonolnutty.module.shareddata.io.IFileWriter;
 import com.colonolnutty.module.shareddata.jsonhandlers.*;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.PropertyOrder;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.prettyprinters.IPrettyPrinter;
-import com.colonolnutty.module.shareddata.prettyprinters.JSONObjectPrettyPrinter;
 import com.colonolnutty.module.shareddata.prettyprinters.JsonWrapperPrettyPrinter;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import org.json.JSONException;
@@ -27,18 +30,11 @@ public class JsonManipulator implements IReadFiles, IWriteFiles {
     private IFileWriter _fileWriter;
     private IFileReader _fileReader;
     private ArrayList<IJsonHandler> _jsonHandlers;
-    private boolean _forceUpdate;
 
     public JsonManipulator(CNLog log, BaseSettings settings) {
         _log = log;
         _fileWriter = new FileWriterWrapper();
         _fileReader = new FileReaderWrapper();
-        if(settings.forceUpdate == null) {
-            _forceUpdate = false;
-        }
-        else {
-            _forceUpdate = settings.forceUpdate;
-        }
 
         if(settings.propertiesToUpdate == null) {
             _keysToWrite = new ArrayList<String>();
@@ -180,7 +176,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles {
             if(combined == null) {
                 return;
             }
-            String result = null;
+            String result;
             try {
                 result = _prettyPrinter.makePretty(combined, 0);
             }

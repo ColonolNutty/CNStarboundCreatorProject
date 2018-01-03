@@ -1,6 +1,6 @@
 package tests;
 
-import com.colonolnutty.module.shareddata.FileReaderWrapper;
+import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
 import com.colonolnutty.module.shareddata.models.ItemDescriptor;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import org.junit.Test;

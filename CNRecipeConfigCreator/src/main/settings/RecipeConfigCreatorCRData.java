@@ -1,7 +1,9 @@
 package main.settings;
 
 
+import com.colonolnutty.module.shareddata.CNLog;
 import com.colonolnutty.module.shareddata.CRData;
+import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 
 import java.util.ArrayList;
 
@@ -12,13 +14,8 @@ import java.util.ArrayList;
  */
 public class RecipeConfigCreatorCRData extends CRData {
     @Override
-    public ArrayList<String> getPropertyNames() {
+    protected ArrayList<String> getPropertyNames() {
         ArrayList<String> settingNames = new ArrayList<String>();
-        settingNames.add("propertyOrderFile");
-        settingNames.add("logFile");
-        settingNames.add("enableTreeView");
-        settingNames.add("enableConsoleDebug");
-        settingNames.add("enableVerboseLogging");
 
         settingNames.add("creationPath");
         settingNames.add("ingredientListFile");
@@ -40,5 +37,29 @@ public class RecipeConfigCreatorCRData extends CRData {
     @Override
     public String getSettingsFilePath() {
         return "configuration\\recipeCreatorSettings.json";
+    }
+
+    @Override
+    public <T extends BaseSettings> boolean settingsAreValid(T baseSettings, CNLog log) {
+        if(!(baseSettings instanceof RecipeConfigCreatorSettings)) {
+            return false;
+        }
+        RecipeConfigCreatorSettings settings = (RecipeConfigCreatorSettings) baseSettings;
+
+        return verifySettings(log, settings,
+                settings.creationPath,
+                settings.ingredientListFile,
+                settings.recipeTemplateFile,
+                settings.ingredientTemplateFile,
+                settings.ingredientImageTemplateFile,
+                settings.recipeConfigFileName,
+                settings.filePrefix,
+                settings.fileSuffix,
+                settings.fileExtension,
+                settings.outputItemDescription,
+                settings.outputItemShortDescription,
+                settings.countPerIngredient,
+                settings.numberOfIngredientsPerRecipe,
+                settings.configAsPatchFile);
     }
 }

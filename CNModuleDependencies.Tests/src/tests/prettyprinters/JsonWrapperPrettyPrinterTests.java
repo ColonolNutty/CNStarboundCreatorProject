@@ -1,9 +1,7 @@
 package tests.prettyprinters;
 
 import com.colonolnutty.module.shareddata.NodeProvider;
-import com.colonolnutty.module.shareddata.models.json.ArrayNodeWrapper;
-import com.colonolnutty.module.shareddata.models.json.IJsonWrapper;
-import com.colonolnutty.module.shareddata.models.json.JsonNodeWrapper;
+import com.colonolnutty.module.shareddata.models.json.*;
 import com.colonolnutty.module.shareddata.prettyprinters.BasePrettyPrinter;
 import com.colonolnutty.module.shareddata.prettyprinters.JsonWrapperPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,10 +13,8 @@ import org.junit.Test;
 
 import java.util.Hashtable;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static junit.framework.TestCase.*;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Jack's Computer
@@ -80,7 +76,7 @@ public class JsonWrapperPrettyPrinterTests {
     }
 
     @Test
-    public void makePretty_formats_JsonNode_Value_Type() {
+    public void makePretty_formats_JsonNode_value_type() {
         String expectedResult = "24.0";
         String pathName = "blah";
         ObjectNode obj = _nodeProvider.createObjectNode();
@@ -91,11 +87,32 @@ public class JsonWrapperPrettyPrinterTests {
     }
 
     @Test
-    public void makePretty_formats_JsonNode_String() {
+    public void makePretty_formats_JsonNode_string() {
         String expectedResult = "\"I am string\"";
         String pathName = "blah";
         ObjectNode obj = _nodeProvider.createObjectNode();
         obj.put(pathName, "I am string");
+        JsonNode toSend = obj.get(pathName);
+        String result = _printer.makePretty(toSend, 0);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void makePretty_formats_JsonNode_null_string_as_null() {
+        String pathName = "blah";
+        ObjectNode obj = _nodeProvider.createObjectNode();
+        obj.put(pathName, (String)null);
+        JsonNode toSend = obj.get(pathName);
+        String result = _printer.makePretty(toSend, 0);
+        assertNull(result);
+    }
+
+    @Test
+    public void makePretty_formats_JsonNode_string_with_escaped_characters() {
+        String expectedResult = "\"\\\"I am string\\\"\"";
+        String pathName = "blah";
+        ObjectNode obj = _nodeProvider.createObjectNode();
+        obj.put(pathName, "\"I am string\"");
         JsonNode toSend = obj.get(pathName);
         String result = _printer.makePretty(toSend, 0);
         assertEquals(expectedResult, result);
@@ -555,7 +572,6 @@ public class JsonWrapperPrettyPrinterTests {
         assertFormatArray(arr, expectedResult);
     }
 
-
     @Test
     public void formatArray_should_return_single_object_with_multiple_sub_objects_array() {
         String expectedResult = "["
@@ -580,14 +596,13 @@ public class JsonWrapperPrettyPrinterTests {
         assertFormatArray(arr, expectedResult);
     }
 
-
-    private String assertFormatArray(ArrayNode arr, String expectedResult, int indentSize, boolean shouldIndent) {
-        String result = _printer.formatArray(new ArrayNodeWrapper(arr), indentSize, shouldIndent);
+    private String assertFormatArray(JsonNode arr, String expectedResult, int indentSize, boolean shouldIndent) {
+        String result = _printer.formatArray(new JsonNodeWrapper(arr), indentSize, shouldIndent);
         assertEquals(expectedResult, result);
         return result;
     }
 
-    private String assertFormatArray(ArrayNode obj, String expectedResult) {
+    private String assertFormatArray(JsonNode obj, String expectedResult) {
         return assertFormatArray(obj, expectedResult, 0, false);
     }
 
@@ -658,7 +673,7 @@ public class JsonWrapperPrettyPrinterTests {
         String expectedResult = "[ \"yay\" ]";
         ArrayNode arr = _nodeProvider.createArrayNode();
         arr.add("yay");
-        String result = _printer.formatAsIntended(new ArrayNodeWrapper(arr), 0, false);
+        String result = _printer.formatAsIntended(new JsonNodeWrapper(arr), 0, false);
         assertEquals(expectedResult, result);
     }
 
@@ -690,5 +705,76 @@ public class JsonWrapperPrettyPrinterTests {
 
     private String assertFormatAsIntended(JsonNode obj, String expectedResult) {
         return assertFormatAsIntended(obj, expectedResult, 0, false);
+    }
+
+    //wrapObject
+
+    @Test
+    public void wrapObject_should_give_null_for_null() {
+        IJsonWrapper wrapper = _printer.wrapObject(null);
+        assertNull(wrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_null_for_unknown() {
+        Hashtable<String, Object> obj = new Hashtable<String, Object>();
+        IJsonWrapper wrapper = _printer.wrapObject(obj);
+        assertNull(wrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_JSONObjectWrapper_for_JSONObject() {
+        IJsonWrapper wrapper = _printer.wrapObject(new JSONObject());
+        assertTrue(wrapper instanceof JSONObjectWrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_JSONArrayWrapper_for_JSONArray() {
+        IJsonWrapper wrapper = _printer.wrapObject(new JSONArray());
+        assertTrue(wrapper instanceof JSONArrayWrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_JsonNodeWrapper_for_ObjectNode() {
+        IJsonWrapper wrapper = _printer.wrapObject(_nodeProvider.createObjectNode());
+        assertTrue(wrapper instanceof JsonNodeWrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_JsonNodeWrapper_for_ArrayNode() {
+        IJsonWrapper wrapper = _printer.wrapObject(_nodeProvider.createArrayNode());
+        assertTrue(wrapper instanceof JsonNodeWrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_JsonNodeWrapper_for_value_type_node() {
+        ObjectNode obj = _nodeProvider.createObjectNode();
+        obj.put("blah", 1);
+        IJsonWrapper wrapper = _printer.wrapObject(obj.get("blah"));
+        assertTrue(wrapper instanceof JsonNodeWrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_ValueTypeWrapper_for_boolean() {
+        IJsonWrapper wrapper = _printer.wrapObject(true);
+        assertTrue(wrapper instanceof ValueTypeWrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_ValueTypeWrapper_for_double() {
+        IJsonWrapper wrapper = _printer.wrapObject(24.0);
+        assertTrue(wrapper instanceof ValueTypeWrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_ValueTypeWrapper_for_integer() {
+        IJsonWrapper wrapper = _printer.wrapObject(24);
+        assertTrue(wrapper instanceof ValueTypeWrapper);
+    }
+
+    @Test
+    public void wrapObject_should_give_ValueTypeWrapper_for_strings() {
+        IJsonWrapper wrapper = _printer.wrapObject("one");
+        assertTrue(wrapper instanceof ValueTypeWrapper);
     }
 }

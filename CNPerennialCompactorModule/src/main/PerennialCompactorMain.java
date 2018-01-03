@@ -1,6 +1,8 @@
 package main;
 
 import com.colonolnutty.module.shareddata.*;
+import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
+import com.colonolnutty.module.shareddata.io.IFileReader;
 import com.colonolnutty.module.shareddata.locators.FileLocator;
 import com.colonolnutty.module.shareddata.models.Farmable;
 import com.colonolnutty.module.shareddata.models.ObjectFrames;

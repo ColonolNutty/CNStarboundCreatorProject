@@ -1,7 +1,9 @@
 package main.settings;
 
 
+import com.colonolnutty.module.shareddata.CNLog;
 import com.colonolnutty.module.shareddata.CRData;
+import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 
 import java.util.ArrayList;
 
@@ -12,14 +14,8 @@ import java.util.ArrayList;
  */
 public class PandCCRData extends CRData {
     @Override
-    public ArrayList<String> getPropertyNames() {
+    protected ArrayList<String> getPropertyNames() {
         ArrayList<String> settingNames = new ArrayList<String>();
-        settingNames.add("propertyOrderFile");
-        settingNames.add("logFile");
-        settingNames.add("enableTreeView");
-        settingNames.add("enableConsoleDebug");
-        settingNames.add("enableVerboseLogging");
-
         settingNames.add("locationsOfCrops");
         settingNames.add("creationPath");
         settingNames.add("makePerennial");
@@ -32,5 +28,20 @@ public class PandCCRData extends CRData {
     @Override
     public String getSettingsFilePath() {
         return "configuration\\perennialAndCompactorConfig.json";
+    }
+
+    @Override
+    public <T extends BaseSettings> boolean settingsAreValid(T baseSettings, CNLog log) {
+        if(!(baseSettings instanceof PandCSettings)) {
+            return false;
+        }
+        PandCSettings settings = (PandCSettings) baseSettings;
+
+        return verifySettings(log, settings,
+                settings.locationsOfCrops,
+                settings.creationPath,
+                settings.makePerennial,
+                settings.makeCompact,
+                settings.makePatchFiles);
     }
 }

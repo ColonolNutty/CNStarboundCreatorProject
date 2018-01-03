@@ -1,6 +1,6 @@
 package tests.fakes;
 
-import com.colonolnutty.module.shareddata.IFileWriter;
+import com.colonolnutty.module.shareddata.io.IFileWriter;
 import com.colonolnutty.module.shareddata.MapperWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;

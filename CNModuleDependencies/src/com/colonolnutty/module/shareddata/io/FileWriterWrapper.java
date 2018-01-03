@@ -1,5 +1,6 @@
-package com.colonolnutty.module.shareddata;
+package com.colonolnutty.module.shareddata.io;
 
+import com.colonolnutty.module.shareddata.MapperWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.JsonNode;

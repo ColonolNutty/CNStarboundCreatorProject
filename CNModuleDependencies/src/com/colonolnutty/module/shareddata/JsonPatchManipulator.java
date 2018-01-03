@@ -1,5 +1,9 @@
 package com.colonolnutty.module.shareddata;
 
+import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
+import com.colonolnutty.module.shareddata.io.FileWriterWrapper;
+import com.colonolnutty.module.shareddata.io.IFileReader;
+import com.colonolnutty.module.shareddata.io.IFileWriter;
 import com.colonolnutty.module.shareddata.jsonhandlers.*;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.NodeAvailability;
@@ -7,7 +11,6 @@ import com.colonolnutty.module.shareddata.models.PatchNodes;
 import com.colonolnutty.module.shareddata.models.PropertyOrder;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.prettyprinters.IPrettyPrinter;
-import com.colonolnutty.module.shareddata.prettyprinters.JsonNodePrettyPrinter;
 import com.colonolnutty.module.shareddata.prettyprinters.JsonWrapperPrettyPrinter;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
@@ -30,14 +33,13 @@ import java.util.Hashtable;
  * Date: 12/23/2017
  * Time: 10:41 AM
  */
-public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNodeProvider {
+public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFiles, IWriteFiles {
 
     private CNLog _log;
     private ArrayList<String> _keysToWrite;
     private IPrettyPrinter _prettyPrinter;
     private IFileWriter _fileWriter;
     private IFileReader _fileReader;
-    private NodeProvider _nodeProvider;
     private ArrayList<IJsonHandler> _jsonHandlers;
     private boolean _forceUpdate;
 
@@ -45,7 +47,6 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
         _log = log;
         _fileWriter = new FileWriterWrapper();
         _fileReader = new FileReaderWrapper();
-        _nodeProvider = new NodeProvider();
         if(settings.forceUpdate == null) {
             _forceUpdate = false;
         }
@@ -91,8 +92,6 @@ public class JsonPatchManipulator implements IReadFiles, IWriteFiles, IRequireNo
     }
     @Override
     public void setFileReader(IFileReader reader) { _fileReader = reader; }
-    @Override
-    public void setNodeProvider(NodeProvider nodeProvider) { _nodeProvider = nodeProvider; }
 
     public void write(String patchFileName, Ingredient ingredient) {
         if (patchFileName == null) {

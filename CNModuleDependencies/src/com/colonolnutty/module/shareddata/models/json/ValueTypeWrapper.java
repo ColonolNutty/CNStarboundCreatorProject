@@ -37,6 +37,9 @@ public class ValueTypeWrapper implements IJsonWrapper {
         if(_val instanceof String) {
             return "\"" + CNStringUtils.escapeString(_val.toString()) + "\"";
         }
-        return _val.toString();
+        if(_val instanceof Boolean || _val instanceof Double || _val instanceof Integer) {
+            return _val.toString();
+        }
+        return null;
     }
 }

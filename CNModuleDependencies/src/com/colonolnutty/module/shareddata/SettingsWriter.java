@@ -1,5 +1,7 @@
 package com.colonolnutty.module.shareddata;
 
+import com.colonolnutty.module.shareddata.io.FileWriterWrapper;
+import com.colonolnutty.module.shareddata.io.IFileWriter;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
@@ -15,16 +17,13 @@ import java.io.Writer;
  * Date: 09/28/2017
  * Time: 12:31 PM
  */
-public class SettingsWriter {
+public class SettingsWriter implements IWriteFiles {
     private CNLog _log;
-    private ObjectMapper _mapper;
+    private IFileWriter _fileWriter;
 
     public SettingsWriter(CNLog log) {
         _log = log;
-        JsonFactory jf = new JsonFactory();
-        jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
-        _mapper = new ObjectMapper(jf);
-        _mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        setFileWriter(new FileWriterWrapper());
     }
 
     public void write(BaseSettings settings) {
@@ -34,12 +33,16 @@ public class SettingsWriter {
             return;
         }
         try {
-            Writer writer = new FileWriter(settingsLocation);
-            _mapper.writeValue(writer, settings);
-            writer.close();
+            String result = _fileWriter.writeValueAsString(settings);
+            _fileWriter.writeData(settingsLocation, result);
         }
         catch(IOException e) {
             _log.error("[IOE] Failed to write file: " + settingsLocation, e);
         }
+    }
+
+    @Override
+    public void setFileWriter(IFileWriter fileWriter) {
+        _fileWriter = fileWriter;
     }
 }

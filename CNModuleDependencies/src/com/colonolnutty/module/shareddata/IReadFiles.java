@@ -1,5 +1,7 @@
 package com.colonolnutty.module.shareddata;
 
+import com.colonolnutty.module.shareddata.io.IFileReader;
+
 /**
  * User: Jack's Computer
  * Date: 12/16/2017

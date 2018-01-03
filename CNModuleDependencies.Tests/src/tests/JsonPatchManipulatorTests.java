@@ -1,6 +1,7 @@
 package tests;
 
 import com.colonolnutty.module.shareddata.*;
+import com.colonolnutty.module.shareddata.io.IFileReader;
 import com.colonolnutty.module.shareddata.models.NodeAvailability;
 import com.colonolnutty.module.shareddata.models.PatchNodes;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;

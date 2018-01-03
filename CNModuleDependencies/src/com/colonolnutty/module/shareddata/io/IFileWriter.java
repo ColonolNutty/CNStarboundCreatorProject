@@ -1,4 +1,4 @@
-package com.colonolnutty.module.shareddata;
+package com.colonolnutty.module.shareddata.io;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;

@@ -1,4 +1,4 @@
-package com.colonolnutty.module.shareddata;
+package com.colonolnutty.module.shareddata.io;
 
 import java.io.IOException;
 

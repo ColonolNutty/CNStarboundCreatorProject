@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Date: 01/01/2018
  * Time: 2:17 PM
  */
-public class JsonNodeWrapper implements IJsonObjectWrapper {
+public class JsonNodeWrapper implements IJsonObjectWrapper, IJsonArrayWrapper {
     private JsonNode _node;
     private ArrayList<String> _fieldNames;
     private Boolean _isValueType;
@@ -25,15 +25,24 @@ public class JsonNodeWrapper implements IJsonObjectWrapper {
 
     @Override
     public IJsonWrapper get(String fieldName) {
-        if(_node == null || !_node.isObject() || !_node.has(fieldName)) {
+        if(!isObject() || _node == null || !_node.has(fieldName)) {
             return null;
         }
         JsonNode subNode = _node.get(fieldName);
         if(subNode.isNull()) {
             return null;
         }
-        if(subNode.isArray()) {
-            return new ArrayNodeWrapper((ArrayNode) subNode);
+        return new JsonNodeWrapper(subNode);
+    }
+
+    @Override
+    public IJsonWrapper get(int index) {
+        if(!isArray() || _node == null || size() == 0 || !_node.has(index)) {
+            return null;
+        }
+        JsonNode subNode = _node.get(index);
+        if(subNode.isNull()) {
+            return null;
         }
         return new JsonNodeWrapper(subNode);
     }
@@ -86,15 +95,38 @@ public class JsonNodeWrapper implements IJsonObjectWrapper {
     }
 
     @Override
+    public boolean firstItemIsValueType() {
+        Object firstItem = get(0);
+        if(firstItem == null) {
+            return false;
+        }
+        if(!(firstItem instanceof IJsonWrapper)) {
+            return false;
+        }
+        return ((IJsonWrapper) firstItem).isValueType();
+    }
+
+    @Override
+    public int size() {
+        if(_node == null) {
+            return 0;
+        }
+        return _node.size();
+    }
+
+    @Override
     public String toString() {
-        if(_node == null || _node.isNull() || (_node.isTextual() && _node.asText().equals("null"))) {
+        if(_node == null || _node.isNull()) {
             return null;
+        }
+        if(_node.isTextual()) {
+            if(_node.asText().equals("null")) {
+                return null;
+            }
+            return "\"" + CNStringUtils.escapeString(_node.asText()) + "\"";
         }
         if(isObject() || isArray()) {
             return _node.toString();
-        }
-        if(_node.isTextual()) {
-            return "\"" + CNStringUtils.escapeString(_node.asText()) + "\"";
         }
         return _node.asText();
     }

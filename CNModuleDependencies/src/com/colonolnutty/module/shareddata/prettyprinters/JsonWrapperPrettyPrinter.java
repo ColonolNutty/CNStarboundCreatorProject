@@ -17,40 +17,14 @@ import java.util.ArrayList;
  * Time: 2:30 PM
  */
 public class JsonWrapperPrettyPrinter extends BasePrettyPrinter {
+
     @Override
     public String makePretty(Object obj, int indentSize) throws JSONException {
-        if(!canPrettyPrint(obj)) {
+        IJsonWrapper wrapped = wrapObject(obj);
+        if(wrapped == null) {
             return null;
         }
-        if(obj instanceof JSONObject) {
-            return formatObject(new JSONObjectWrapper((JSONObject) obj), indentSize, false);
-        }
-        if(obj instanceof JSONArray) {
-            return formatArray(new JSONArrayWrapper((JSONArray) obj), indentSize, false);
-        }
-        if(!(obj instanceof JsonNode)) {
-            return null;
-        }
-        JsonNode node = (JsonNode) obj;
-        if(node.isNull()) {
-            return null;
-        }
-        if(node.isObject()) {
-            return formatObject(new JsonNodeWrapper(node), indentSize, false);
-        }
-        if(node.isArray()) {
-            return formatArray(new ArrayNodeWrapper((ArrayNode) node), indentSize, false);
-        }
-        if(node.isTextual()) {
-            if(node.asText().equals("null")) {
-                return null;
-            }
-            return "\"" + node.asText() + "\"";
-        }
-        if(CNJsonUtils.isValueType(node)) {
-            return node.asText();
-        }
-        return null;
+        return formatAsIntended(wrapped, indentSize, false);
     }
 
     public String formatObject(IJsonObjectWrapper obj, int indentSize, boolean shouldIndent) {
@@ -227,7 +201,7 @@ public class JsonWrapperPrettyPrinter extends BasePrettyPrinter {
             return null;
         }
         String objStr = obj.toString();
-        if(objStr == null || objStr.equals("null")) {
+        if(objStr == null) {
             return null;
         }
         if(obj.isArray()) {
@@ -236,7 +210,10 @@ public class JsonWrapperPrettyPrinter extends BasePrettyPrinter {
         if(obj.isObject()) {
             return formatObject((IJsonObjectWrapper) obj, indentSize, shouldIndent);
         }
-        return objStr;
+        if(obj.isValueType()) {
+            return objStr;
+        }
+        return null;
     }
 
     public ArrayList<String> sortProperties(String[] propertyNamesInOrder, ArrayList<String> properties) {
@@ -257,10 +234,30 @@ public class JsonWrapperPrettyPrinter extends BasePrettyPrinter {
         return sortedProperties;
     }
 
+    public IJsonWrapper wrapObject(Object obj) {
+        if(obj == null) {
+            return null;
+        }
+        if(!canPrettyPrint(obj)) {
+            return null;
+        }
+        if(obj instanceof JSONObject) {
+            return new JSONObjectWrapper((JSONObject) obj);
+        }
+        if(obj instanceof JSONArray) {
+            return new JSONArrayWrapper((JSONArray) obj);
+        }
+        if(obj instanceof JsonNode) {
+            return new JsonNodeWrapper((JsonNode) obj);
+        }
+        return new ValueTypeWrapper(obj);
+    }
+
     @Override
     public boolean canPrettyPrint(Object obj) {
-        return obj instanceof JSONObject
-                || obj instanceof JSONArray
-                || obj instanceof JsonNode;
+        return obj instanceof JSONObject || obj instanceof JSONArray
+                || obj instanceof JsonNode || obj instanceof String
+                || obj instanceof Boolean || obj instanceof Double
+                || obj instanceof Integer;
     }
 }

@@ -1,9 +1,10 @@
 package com.colonolnutty.module.shareddata.locators;
 
 import com.colonolnutty.module.shareddata.*;
+import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
+import com.colonolnutty.module.shareddata.io.IFileReader;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.StatusEffect;
-import com.github.fge.jsonpatch.JsonPatch;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
 package main;
 
 import com.colonolnutty.module.shareddata.*;
+import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
+import com.colonolnutty.module.shareddata.io.IFileReader;
 import com.colonolnutty.module.shareddata.locators.*;
 import com.colonolnutty.module.shareddata.models.IngredientOverrides;
-import com.colonolnutty.module.shareddata.ui.ConfirmationController;
 import com.colonolnutty.module.shareddata.ui.ProgressController;
-import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import main.settings.BalancerSettings;
 
 import java.io.FileNotFoundException;
