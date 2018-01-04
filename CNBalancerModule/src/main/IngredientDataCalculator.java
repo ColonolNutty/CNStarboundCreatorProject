@@ -13,6 +13,7 @@ import com.colonolnutty.module.shareddata.models.*;
 import com.colonolnutty.module.shareddata.utils.CNMathUtils;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.models.BalancedIngredient;
 import main.settings.BalancerSettings;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -70,18 +71,20 @@ public class IngredientDataCalculator implements IReadFiles, IRequireNodeProvide
     }
 
     private Ingredient calculateNewValues(Recipe recipe) {
+        Ingredient newIngredient = balanceIngredient(recipe);
+        _ingredientStore.updateIngredient(newIngredient);
+        return _ingredientStore.getIngredient(newIngredient.getName());
+    }
+
+    public Ingredient balanceIngredient(Recipe recipe) {
         Double increasePercentage = _settings.increasePercentage;
         ArrayList<RecipeIngredient> recipeIngredients = findIngredientsFor(recipe);
-
-        Double newFoodValue = 0.0;
-        Double newPrice = 0.0;
-
         String outputName = recipe.output.item;
+        BalancedIngredient balancedIngredient = new BalancedIngredient(outputName);
         boolean isRawFood = outputName.startsWith("raw");
         String subName = "Calculating \"" + outputName + "\" values";
         _log.startSubBundle(subName);
         _log.debug(subName);
-        Hashtable<String, Integer> effectValues = new Hashtable<String, Integer>();
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
@@ -94,8 +97,8 @@ public class IngredientDataCalculator implements IReadFiles, IRequireNodeProvide
             if(ingredient == null) {
                 continue;
             }
-            newPrice += calculateValue(recipeIngredient.count, ingredient.price, increasePercentage);
-            newFoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue, increasePercentage);
+            balancedIngredient.Price += calculateValue(recipeIngredient.count, ingredient.price, increasePercentage);
+            balancedIngredient.FoodValue += calculateValue(recipeIngredient.count, ingredient.foodValue, increasePercentage);
 
             if(!_settings.enableEffectsUpdate || !ingredient.hasEffects()) {
                 _log.endSubBundle();
@@ -103,19 +106,12 @@ public class IngredientDataCalculator implements IReadFiles, IRequireNodeProvide
             }
 
             Hashtable<String, Integer> ingredientEffects = getEffects(ingredient, isRawFood);
-            Enumeration<String> subEffectNames = ingredientEffects.keys();
-            while(subEffectNames.hasMoreElements()) {
-                String subEffectName = subEffectNames.nextElement();
-                Integer subEffectDuration = ingredientEffects.get(subEffectName);
-
-                if(!effectValues.containsKey(subEffectName)) {
-                    effectValues.put(subEffectName, subEffectDuration);
-                }
-                else {
-                    int existingValue = effectValues.get(subEffectName);
-                    int durationAddition = (int)(subEffectDuration * recipeIngredient.count);
-                    effectValues.put(subEffectName, existingValue + durationAddition);
-                }
+            Enumeration<String> effectNames = ingredientEffects.keys();
+            while(effectNames.hasMoreElements()) {
+                String effectName = effectNames.nextElement();
+                Integer effectDuration = ingredientEffects.get(effectName);
+                int duration = calculateValue(recipeIngredient.count, (double)effectDuration, _settings.increasePercentage).intValue();
+                balancedIngredient.addOrUpdateEffect(effectName, duration);
             }
 
             _log.endSubBundle();
@@ -124,26 +120,26 @@ public class IngredientDataCalculator implements IReadFiles, IRequireNodeProvide
         _log.endSubBundle();
 
         Double outputCount = recipe.output.count;
-        ArrayNode combined = null;
-        if(_settings.enableEffectsUpdate) {
-            ArrayNode combinedEffects = toEffectsArrayNode(outputName, effectValues, outputCount);
-            combined = _nodeProvider.createArrayNode();
-            combined.add(combinedEffects);
-        }
 
         if(outputCount <= 0.0) {
             outputCount = 1.0;
         }
-        newPrice = CNMathUtils.roundTwoDecimalPlaces(newPrice / outputCount);
-        newFoodValue = CNMathUtils.roundTwoDecimalPlaces(newFoodValue / outputCount);
+        balancedIngredient.Price = CNMathUtils.roundTwoDecimalPlaces(balancedIngredient.Price / outputCount);
+        balancedIngredient.FoodValue = CNMathUtils.roundTwoDecimalPlaces(balancedIngredient.FoodValue / outputCount);
 
-        _log.debug("After calculations, the new values for: " + outputName + " are p: " + newPrice + " and fv: " + newFoodValue);
+        _log.debug("After calculations, the new values for: \"" + outputName + "\" are p: " + balancedIngredient.Price + " and fv: " + balancedIngredient.FoodValue);
 
-        Ingredient newIngredient = new Ingredient(outputName, newPrice, newFoodValue, combined);
-        Ingredient existingIngredient = _ingredientStore.getIngredient(outputName);
-        newIngredient.description = createDescription(existingIngredient.description, recipe);
-        _ingredientStore.updateIngredient(newIngredient);
-        return _ingredientStore.getIngredient(outputName);
+        ArrayNode combined = null;
+        if(_settings.enableEffectsUpdate) {
+            ArrayNode combinedEffects = toEffectsArrayNode(balancedIngredient.ItemName, balancedIngredient.Effects, recipe.output.count);
+            combined = _nodeProvider.createArrayNode();
+            combined.add(combinedEffects);
+        }
+
+        Ingredient newIngredient = new Ingredient(balancedIngredient.ItemName, balancedIngredient.Price, balancedIngredient.FoodValue, combined);
+        Ingredient existingIngredient = _ingredientStore.getIngredient(balancedIngredient.ItemName);
+        newIngredient.description = createDescription(existingIngredient.description, recipe, _friendlyGroupNames);
+        return newIngredient;
     }
 
     public Hashtable<String, Integer> getEffects(Ingredient ingredient, boolean isRawFood) {
@@ -232,7 +228,7 @@ public class IngredientDataCalculator implements IReadFiles, IRequireNodeProvide
         return (value * count) + (value * increasePercentage);
     }
 
-    public String createDescription(String description, Recipe recipe) {
+    public String createDescription(String description, Recipe recipe, HashMap<String, String> friendlyGroupNames) {
         if(CNStringUtils.isNullOrWhitespace(description)) {
             return null;
         }
@@ -240,7 +236,7 @@ public class IngredientDataCalculator implements IReadFiles, IRequireNodeProvide
 
         String existingDescriptionText = splitOnDelimiter[splitOnDelimiter.length - 1];
 
-        ArrayList<String> recipeGroupNames = getRecipeGroupNames(recipe, _friendlyGroupNames);
+        ArrayList<String> recipeGroupNames = getRecipeGroupNames(recipe, friendlyGroupNames);
         if(recipeGroupNames == null || recipeGroupNames.isEmpty()) {
             return description;
         }
@@ -264,7 +260,7 @@ public class IngredientDataCalculator implements IReadFiles, IRequireNodeProvide
 
     public ArrayList<String> getRecipeGroupNames(Recipe recipe, HashMap<String, String> friendlyGroupNames) {
         ArrayList<String> groupNames = new ArrayList<String>();
-        if(recipe == null || recipe.groups == null) {
+        if(recipe == null || recipe.groups == null || friendlyGroupNames == null) {
             return groupNames;
         }
         for(int i = 0; i < recipe.groups.length; i++) {

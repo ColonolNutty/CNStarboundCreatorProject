@@ -9,8 +9,6 @@ public class ItemDescriptor {
     public String item;
     public Double count;
 
-    public ItemDescriptor() {}
-
     public ItemDescriptor(String item, Double count) {
         this.item = item;
         this.count = count;

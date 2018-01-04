@@ -14,59 +14,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/DescriptionHandlerTests.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/EffectsHandlerTests.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/FoodValueHandlerTests.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/PriceHandlerTests.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" afterPath="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/BalancerMain.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/BalancerMain.java" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/FileUpdater.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/FileUpdater.java" />
       <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientUpdater.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientUpdater.java" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/settings/BalancerCRData.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/settings/BalancerCRData.java" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/ui/BalancerSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/ui/BalancerSettingsDisplay.java" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/ui/MainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonManipulatorTests.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonManipulatorTests.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonPatchManipulatorTests.java" afterPath="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonPatchManipulatorTests.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CNLog.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/CNLog.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CRData.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CRData.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ConfigReader.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigReader.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ConsoleDebugWriter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/ConsoleDebugWriter.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/DebugWriter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/DebugWriter.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/IReadFiles.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/IReadFiles.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/IWriteFiles.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/IWriteFiles.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPatchManipulator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPatchManipulator.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/MessageBundler.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/MessageBundler.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/SettingsWriter.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigWriter.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/StopWatchTimer.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/utils/StopWatchTimer.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/DescriptionHandler.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/DescriptionHandler.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/EffectsHandler.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/EffectsHandler.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/FoodValueHandler.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/FoodValueHandler.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/IJsonHandler.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/IJsonHandler.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/PriceHandler.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/PriceHandler.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/FileLocator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/FileLocator.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/IngredientStore.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/IngredientStore.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/PatchLocator.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/PatchLocator.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/RecipeStore.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/RecipeStore.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/StatusEffectStore.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/StatusEffectStore.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/OutputDisplay.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/OutputDisplay.java" />
-      <change beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
-      <change beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" />
-      <change beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/MainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/PandCSettingsDisplay.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/RecipeConfigCreatorMain.java" afterPath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/RecipeConfigCreatorMain.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/settings/RecipeConfigCreatorCRData.java" afterPath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/settings/RecipeConfigCreatorCRData.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/ui/MainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/ui/RecipeConfigCreatorSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/ui/RecipeConfigCreatorSettingsDisplay.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCreatorMain.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCreatorMain.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/IngredientCrafter.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/IngredientCrafter.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/RecipeCrafter.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/RecipeCrafter.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/MainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/RecipeCreatorSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/RecipeCreatorSettingsDisplay.java" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch" />
+      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" />
@@ -80,7 +32,92 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="525" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
+      <file leaf-file-name="IngredientDataCalculatorTests.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-546">
+              <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <folding>
+                <element signature="docComment;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#IngredientDataCalculatorTests#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_balance_ingredient_for_recipe_with_one_input#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_balance_ingredient_for_recipe_with_two_inputs#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_balance_ingredient_for_recipe_with_one_input_with_count_above_one#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="e#5424#5439#0" expanded="false" />
+                <element signature="method#should_balance_ingredient_for_recipe_with_two_inputs_of_different_counts#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="e#6441#6472#0" expanded="false" />
+                <element signature="method#should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="e#8060#8091#0" expanded="false" />
+                <element signature="method#should_balance_ingredient_for_recipe_with_output_greater_than_one#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="e#10137#10168#0" expanded="false" />
+                <element signature="method#assertAndConvertEffectsArray#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#createEffect#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#createIngredient#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#createRecipe#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_exclude_effects_with_just_a_name_and_no_default_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_handle_effects_with_just_a_name#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_add_durations_together_for_duplicate_effects#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_exclude_effects_with_negative_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_exclude_effects_with_no_name#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_exclude_effects_with_zero_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_give_effects_with_one_effect#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_give_null_description_with_null_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_give_null_description_with_empty_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_give_null_description_with_whitespace_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="e#20295#20311#0" expanded="true" />
+                <element signature="e#20738#20754#0" expanded="true" />
+                <element signature="method#should_create_method_text_with_null_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_create_method_text_with_no_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_create_method_text_with_one_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_create_method_text_with_two_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_empty_array_with_null_recipe#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_empty_array_with_null_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_empty_array_with_no_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_the_names_of_recipe_groups_with_one_group#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_the_names_of_recipe_groups_with_two_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_only_groups_with_friendly_names#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_zero_when_increasePercentage_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_zero_when_value_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_return_zero_when_count_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_use_count_of_one_when_count_less_than_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_use_count_of_one_when_count_is_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_use_value_of_zero_when_value_less_than_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_use_value_of_zero_when_value_is_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#should_calculate_with_increase_percentage#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#createFriendlyGroupNames#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+                <element signature="method#createEffectsArray#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IngredientDataCalculator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="237" column="0" lean-forward="true" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+              <folding>
+                <element signature="docComment;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="method#IngredientDataCalculator#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="method#updateIngredient#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="method#balanceIngredient#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="method#getEffects#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="e#6838#6855#0" expanded="true" />
+                <element signature="method#findIngredientsFor#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="e#8938#8956#0" expanded="true" />
+                <element signature="docComment;method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="e#11408#11416#0" expanded="true" />
+                <element signature="method#readFriendlyNames#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="e#11982#11998#0" expanded="true" />
+                <element signature="method#toEffectsArrayNode#0;class#IngredientDataCalculator#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -92,8 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>property</find>
-      <find>prop</find>
       <find>formatObjectAsIntended</find>
       <find>JsonPrettyPrinter</find>
       <find>.trim</find>
@@ -122,6 +157,8 @@
       <find>description</find>
       <find>foodValue</find>
       <find>FoodValueHandler</find>
+      <find>createDescription</find>
+      <find>_friendlyGroupNames</find>
     </findStrings>
     <replaceStrings>
       <replace>setupCheckBox</replace>
@@ -170,10 +207,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/JSONObjectWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/JsonModelFactory.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ArrayNodeWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/JsonNodeWrapper.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ObjectNodeWrapper.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/JsonArrayWrapper.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JsonModelFactory.java" />
@@ -221,6 +254,10 @@
         <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/FoodValueHandlerTests.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/DescriptionHandlerTests.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/EffectsHandlerTests.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" />
       </list>
     </option>
   </component>
@@ -248,8 +285,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -260,53 +298,44 @@
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies" type="462c0819:PsiDirectoryNode" />
+              <item name="CNBalancerModule" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies" type="462c0819:PsiDirectoryNode" />
+              <item name="CNBalancerModule" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies" type="462c0819:PsiDirectoryNode" />
+              <item name="CNBalancerModule" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="shareddata" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies.Tests" type="462c0819:PsiDirectoryNode" />
+              <item name="CNBalancerModule.Tests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies.Tests" type="462c0819:PsiDirectoryNode" />
+              <item name="CNBalancerModule.Tests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies.Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNModuleDependencies.Tests" type="462c0819:PsiDirectoryNode" />
+              <item name="CNBalancerModule.Tests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="jsonhandlers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -365,7 +394,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PriceHandlerTests">
+  <component name="RunManager" selected="JUnit.IngredientDataCalculatorTests">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -385,18 +414,18 @@
       <module name="CNStarboundCreatorUI" />
       <envs />
     </configuration>
-    <configuration name="DescriptionHandlerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IngredientDataCalculatorTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="tests.jsonhandlers.*" />
+          <option name="PATTERN" value="tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="CNModuleDependencies.Tests" />
+      <module name="CNBalancerModule.Tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.jsonhandlers" />
-      <option name="MAIN_CLASS_NAME" value="tests.jsonhandlers.DescriptionHandlerTests" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="" />
@@ -411,19 +440,19 @@
       <dir value="$PROJECT_DIR$" />
       <patterns />
     </configuration>
-    <configuration name="DescriptionHandlerTests.needsUpdate_should_return_false_when_existing_and_ingredient_are_same" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IngredientDataCalculatorTests.should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="tests.jsonhandlers.*" />
+          <option name="PATTERN" value="tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="CNModuleDependencies.Tests" />
+      <module name="CNBalancerModule.Tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.jsonhandlers" />
-      <option name="MAIN_CLASS_NAME" value="tests.jsonhandlers.DescriptionHandlerTests" />
-      <option name="METHOD_NAME" value="needsUpdate_should_return_false_when_existing_and_ingredient_are_same" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
+      <option name="METHOD_NAME" value="should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
@@ -437,19 +466,19 @@
       <dir value="$PROJECT_DIR$" />
       <patterns />
     </configuration>
-    <configuration name="DescriptionHandlerTests.needsUpdate_should_return_true_when_existing_is_null_and_ingredient_is_not" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="tests.jsonhandlers.*" />
+          <option name="PATTERN" value="tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="CNModuleDependencies.Tests" />
+      <module name="CNBalancerModule.Tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.jsonhandlers" />
-      <option name="MAIN_CLASS_NAME" value="tests.jsonhandlers.DescriptionHandlerTests" />
-      <option name="METHOD_NAME" value="needsUpdate_should_return_true_when_existing_is_null_and_ingredient_is_not" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
+      <option name="METHOD_NAME" value="should_give_description_containing_recipe_groups" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
@@ -463,20 +492,20 @@
       <dir value="$PROJECT_DIR$" />
       <patterns />
     </configuration>
-    <configuration name="FoodValueHandlerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IngredientDataCalculatorTests.should_give_description_when_recipe_has_no_groups" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="tests.jsonhandlers.*" />
+          <option name="PATTERN" value="tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="CNModuleDependencies.Tests" />
+      <module name="CNBalancerModule.Tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.jsonhandlers" />
-      <option name="MAIN_CLASS_NAME" value="tests.jsonhandlers.FoodValueHandlerTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
+      <option name="METHOD_NAME" value="should_give_description_when_recipe_has_no_groups" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
@@ -489,20 +518,20 @@
       <dir value="$PROJECT_DIR$" />
       <patterns />
     </configuration>
-    <configuration name="PriceHandlerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IngredientDataCalculatorTests.should_keep_existing_description_with_groups" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="tests.jsonhandlers.*" />
+          <option name="PATTERN" value="tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="CNModuleDependencies.Tests" />
+      <module name="CNBalancerModule.Tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.jsonhandlers" />
-      <option name="MAIN_CLASS_NAME" value="tests.jsonhandlers.PriceHandlerTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
+      <option name="METHOD_NAME" value="should_keep_existing_description_with_groups" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
@@ -565,19 +594,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.DescriptionHandlerTests" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.DescriptionHandlerTests.needsUpdate_should_return_true_when_existing_is_null_and_ingredient_is_not" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.DescriptionHandlerTests.needsUpdate_should_return_false_when_existing_and_ingredient_are_same" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.FoodValueHandlerTests" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.PriceHandlerTests" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_give_description_when_recipe_has_no_groups" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_keep_existing_description_with_groups" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.PriceHandlerTests" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.FoodValueHandlerTests" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.DescriptionHandlerTests" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.DescriptionHandlerTests.needsUpdate_should_return_false_when_existing_and_ingredient_are_same" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.DescriptionHandlerTests.needsUpdate_should_return_true_when_existing_is_null_and_ingredient_is_not" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_keep_existing_description_with_groups" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_give_description_when_recipe_has_no_groups" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts" />
       </list>
     </recent_temporary>
   </component>
@@ -598,42 +627,52 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DescriptionHandlerTests - 2018.01.03 at 14h 19m 39s.xml">
-      <configuration name="DescriptionHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests - 2018.01.04 at 13h 01m 20s.xml">
+      <configuration name="IngredientDataCalculatorTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DescriptionHandlerTests - 2018.01.03 at 14h 20m 00s.xml">
-      <configuration name="DescriptionHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests - 2018.01.04 at 13h 02m 06s.xml">
+      <configuration name="IngredientDataCalculatorTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FoodValueHandlerTests - 2018.01.03 at 14h 24m 56s.xml">
-      <configuration name="FoodValueHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests - 2018.01.04 at 13h 15m 03s.xml">
+      <configuration name="IngredientDataCalculatorTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FoodValueHandlerTests - 2018.01.03 at 14h 26m 08s.xml">
-      <configuration name="FoodValueHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests_should_give_description_containing_recipe_groups - 2018.01.04 at 12h 50m 19s.xml">
+      <configuration name="IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FoodValueHandlerTests - 2018.01.03 at 14h 26m 52s.xml">
-      <configuration name="FoodValueHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests_should_give_description_containing_recipe_groups - 2018.01.04 at 12h 50m 39s.xml">
+      <configuration name="IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FoodValueHandlerTests - 2018.01.03 at 14h 27m 24s.xml">
-      <configuration name="FoodValueHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests_should_give_description_containing_recipe_groups - 2018.01.04 at 12h 52m 03s.xml">
+      <configuration name="IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FoodValueHandlerTests - 2018.01.03 at 14h 29m 42s.xml">
-      <configuration name="FoodValueHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests_should_give_description_when_recipe_has_no_groups - 2018.01.04 at 12h 52m 41s.xml">
+      <configuration name="IngredientDataCalculatorTests.should_give_description_when_recipe_has_no_groups" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PriceHandlerTests - 2018.01.03 at 14h 31m 12s.xml">
-      <configuration name="PriceHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests_should_give_description_when_recipe_has_no_groups - 2018.01.04 at 12h 52m 56s.xml">
+      <configuration name="IngredientDataCalculatorTests.should_give_description_when_recipe_has_no_groups" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PriceHandlerTests - 2018.01.03 at 14h 32m 31s.xml">
-      <configuration name="PriceHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests_should_keep_existing_description_with_groups - 2018.01.04 at 13h 02m 24s.xml">
+      <configuration name="IngredientDataCalculatorTests.should_keep_existing_description_with_groups" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PriceHandlerTests - 2018.01.03 at 14h 33m 27s.xml">
-      <configuration name="PriceHandlerTests" configurationId="JUnit" />
+    <history-entry file="IngredientDataCalculatorTests_should_keep_existing_description_with_groups - 2018.01.04 at 13h 02m 38s.xml">
+      <configuration name="IngredientDataCalculatorTests.should_keep_existing_description_with_groups" configurationId="JUnit" />
     </history-entry>
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22289157" sideWeight="0.49783784" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -645,7 +684,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36862105" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36862105" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29638556" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972856" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -713,176 +752,24 @@
           <option name="timeStamp" value="611" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="616" />
+      <option name="time" value="630" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/prettyprinters/JsonNodePrettyPrinter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/utils/CNJsonUtilsTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePath_should_return_first_non_empty_path_found#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePath_should_return_first_path_found#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePath_should_return_null_for_empty_arraynode#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePath_should_return_null_from_objectnode_inside_arraynode_with_no_path#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePath_should_return_path_from_objectnode_inside_arraynode_inside_arraynode#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePath_should_return_path_from_objectnode_inside_arraynode#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePath_should_return_null_from_objectnode_with_no_path#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePath_should_return_path_from_objectnode#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="e#3705#3718#0" expanded="false" />
-            <element signature="method#getPropertyNames_should_return_empty_list_when_no_properties#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getPropertyNames_should_return_property_names#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePropertyNames_should_return_empty_list_when_no_properties#0;class#CNJsonUtilsTests#0" expanded="false" />
-            <element signature="method#getNodePropertyNames_should_return_property_names#0;class#CNJsonUtilsTests#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/prettyprinters/JsonNodePrettyPrinterTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JSONObjectWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#454#455#0" expanded="false" />
-            <element signature="e#480#481#0" expanded="false" />
-            <element signature="e#1348#1349#0" expanded="false" />
-            <element signature="e#1376#1377#0" expanded="false" />
-            <element signature="e#1423#1424#0" expanded="false" />
-            <element signature="e#1450#1451#0" expanded="false" />
-            <element signature="e#1496#1497#0" expanded="false" />
-            <element signature="e#1524#1525#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="234" column="18" lean-forward="false" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="18" />
-          <folding>
-            <element signature="e#10065#10066#0" expanded="false" />
-            <element signature="e#10148#10149#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/JSONObjectWrapperTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JSONArrayWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="36" column="39" lean-forward="false" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="39" />
-          <folding>
-            <element signature="e#324#325#0" expanded="false" />
-            <element signature="e#358#359#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4788">
-          <caret line="264" column="0" lean-forward="true" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/JSONArrayWrapperTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_item_is_null#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_index_below_zero#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_index_above_size#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_array_is_null#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_value_type_wrapper_for_value_types#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_json_object_wrapper_for_objects#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_json_array_wrapper_for_arrays#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#size_should_give_zero_with_null_array#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#size_should_give_size#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#isValueType_should_be_false#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#isArray_should_be_true#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_null_when_array_is_null#0;class#JSONArrayWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_array_toString#0;class#JSONArrayWrapperTests#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/utils/CNJsonUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-          <folding>
-            <element signature="docComment;class#CNJsonUtils#0" expanded="false" />
-            <element signature="method#hasTestNode#0;class#CNJsonUtils#0" expanded="false" />
-            <element signature="method#hasPathName#0;class#CNJsonUtils#0" expanded="false" />
-            <element signature="method#getNodePath#0;class#CNJsonUtils#0" expanded="false" />
-            <element signature="method#getPropertyNames#0;class#CNJsonUtils#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/ArrayNodeWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/ArrayNodeWrapperTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/ArrayNodeWrapper.java" />
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/ArrayNodeWrapperTests.java" />
     <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JsonNodeWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="125" column="12" lean-forward="false" selection-start-line="125" selection-start-column="12" selection-end-line="125" selection-end-column="12" />
-          <folding>
-            <element signature="method#fieldNames#0;class#JsonNodeWrapper#0" expanded="false" />
-            <element signature="method#isArray#0;class#JsonNodeWrapper#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -890,45 +777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1966">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#firstItemIsValueType_should_be_false_when_first_item_is_null#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#firstItemIsValueType_should_be_false_when_first_item_is_array#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#firstItemIsValueType_should_be_false_when_first_item_is_object#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#firstItemIsValueType_should_be_true_when_first_item_is_value_type#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_item_is_null#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_index_below_zero#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_index_above_size#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_array_is_null#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_json_node_wrapper_for_arrays#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#size_should_give_zero_with_null_array#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#size_should_give_size#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_null_when_array_is_null#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_array_toString#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_node_does_not_contain_property#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_node_is_null#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_null_when_node_is_array#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_json_node_wrapper_for_value_types#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_json_node_wrapper_for_objects#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#get_should_give_array_node_wrapper_for_arrays#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#fieldNames_should_give_empty_list_when_node_is_a_null_node#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#fieldNames_should_give_empty_list_with_null_node#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#fieldNames_retrieves_field_names#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#fieldNames_should_be_created_only_once#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#isValueType_should_be_true_when_node_is_a_value_type#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#isObject_should_be_true_when_node_is_an_object#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#isArray_should_be_true_when_node_is_array#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_null_when_node_is_null#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_null_when_node_is_a_null_node#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_null_when_node_is_a_null_string#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_null_when_node_is_a_null_string_escaped#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_object_node_toString#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_return_array_node_toString#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_handle_booleans#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_handle_integers#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_handle_double#0;class#JsonNodeWrapperTests#0" expanded="false" />
-            <element signature="method#toString_should_handle_strings#0;class#JsonNodeWrapperTests#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -936,7 +784,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="18" column="22" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -944,7 +791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -952,7 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -960,67 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#JsonWrapperPrettyPrinterTests#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_null_as_null#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_JSONObject#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_JSONArray#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_ObjectNode#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_ArrayNode#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_JsonNode_value_type#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_JsonNode_string#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_JsonNode_null_string_as_null#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#makePretty_formats_JsonNode_string_with_escaped_characters#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_formatted_object#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_formatted_object_with_null_property#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_formatted_object_with_sub_double_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_formatted_object_with_sub_objects#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_formatted_object_with_sub_array_of_objects#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_formatted_object_with_priority_properties#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_formatted_object_with_double_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_single_property_object_with_null_property#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_single_property_object#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_single_property_object_with_single_property_sub_object#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatObject_should_return_single_property_object_with_sub_object#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#assertFormatObject#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#assertFormatObject#1;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_empty_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_empty_double_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_array_of_doubles#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_array_of_integers#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_array_of_booleans#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_array_of_strings#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_exclude_null_entries#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_combination_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_single_item_sub_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_single_item_sub_array_with_multi_item_sub_arrays#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_sub_array_of_multi_property_objects_indent_three_levels#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_sub_array_of_multi_property_objects_different_indents#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_single_property_object_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_single_object_multiple_properties_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_multi_object_variable_properties_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_combination_single_property_object_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_single_object_with_single_sub_objects_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_single_object_with_single_sub_array_of_objects_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatArray_should_return_single_object_with_multiple_sub_objects_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#assertFormatArray#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#assertFormatArray#1;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_null#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_null_for_null_string#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_null_when_toString_is_null#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_double#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_integer#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_boolean#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_string#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_array#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_single_property_object#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#formatAsIntended_should_return_object#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#assertFormatAsIntended#0;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="method#assertFormatAsIntended#1;class#JsonWrapperPrettyPrinterTests#0" expanded="false" />
-            <element signature="e#28222#28238#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1028,10 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
           <caret line="35" column="9" lean-forward="false" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
-          <folding>
-            <element signature="e#313#314#0" expanded="false" />
-            <element signature="e#339#340#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1054,7 +834,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1062,7 +841,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1070,7 +848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1078,7 +855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1086,14 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#FileWriterWrapper#0" expanded="false" />
-            <element signature="method#writeValueAsString#0;class#FileWriterWrapper#0" expanded="false" />
-            <element signature="method#treeToValue#0;class#FileWriterWrapper#0" expanded="false" />
-            <element signature="method#createFile#0;class#FileWriterWrapper#0" expanded="false" />
-            <element signature="method#writeData#0;class#FileWriterWrapper#0" expanded="false" />
-            <element signature="method#writeData#1;class#FileWriterWrapper#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1101,15 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="106" column="44" lean-forward="false" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1117,7 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1125,7 +883,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1134">
           <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1133,7 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1141,7 +897,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1149,7 +904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="861">
           <caret line="47" column="43" lean-forward="false" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1167,7 +921,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="17" column="65" lean-forward="true" selection-start-line="17" selection-start-column="65" selection-end-line="17" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1175,7 +928,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1183,7 +935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1191,9 +942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1201,9 +949,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1211,9 +956,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1221,7 +963,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1245,7 +986,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1284,7 +1024,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="41" lean-forward="false" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1292,50 +1031,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
-          <folding>
-            <element signature="docComment;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#EffectsHandlerTests#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#needsUpdate_should_return_true_when_ingredient_has_effects_and_existing_does_not#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#needsUpdate_should_return_true_when_existing_has_effects_and_ingredient_does_not#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#needsUpdate_should_return_false_when_ingredient_and_existing_are_null#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#createTestNode_should_give_null_when_ingredient_has_no_effects#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#createReplaceNode_should_give_replace_node_when_ingredient_has_effects#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#canHandle_should_return_true_when_path_name_matches#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#canHandle_should_return_true_when_path_name_does_not_match#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffectsNodeFromNode_should_give_null_if_object_has_no_value_property#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffectsNodeFromNode_should_give_null_when_node_is_value_type#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffectsNodeFromNode_should_give_null_when_object_value_property_is_an_object#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffectsNodeFromNode_should_give_null_when_object_value_property_is_value_type#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffectsNodeFromNode_should_give_array_when_object_value_property_is_an_array#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffectsNodeFromNode_should_give_array_when_node_is_array#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_is_null#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_is_an_object#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_is_an_empty_array#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_contains_more_than_one_item#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_contains_an_object#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_contains_an_empty_array#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_contains_an_array_of_arrays#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_contains_an_array_of_non_effect_objects#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_contains_an_array_of_objects_missing_duration#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_null_when_node_contains_an_array_of_objects_missing_effect_property#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_give_effects#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getEffects_should_exclude_invalid_effects#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#createEffectNode#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#checkShouldUpdate_should_return_true_when_sizes_are_different#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#checkShouldUpdate_should_return_true_when_keys_are_different#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#checkShouldUpdate_should_return_true_when_values_are_different#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#checkShouldUpdate_should_return_false_when_values_are_same#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_return_null_when_ingredient_has_no_effects#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_give_null_when_node_contains_more_than_one_item#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_give_null_when_node_contains_an_object#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_give_null_when_node_contains_an_empty_array#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_give_null_when_node_contains_an_array_of_arrays#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_give_null_when_node_contains_an_array_of_non_effect_objects#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_give_null_when_node_contains_an_array_of_objects_missing_duration#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_give_null_when_node_contains_an_array_of_objects_missing_effect_property#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_should_return_effects_of_ingredient#0;class#EffectsHandlerTests#0" expanded="false" />
-            <element signature="method#getShortStringValue_runAndAssert#0;class#EffectsHandlerTests#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1343,20 +1038,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#DescriptionHandlerTests#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#createTestNode_should_give_null_when_ingredient_has_null_description#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#createTestNode_should_give_null_when_ingredient_has_empty_description#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#createTestNode_should_give_null_when_ingredient_has_whitespace_description#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#createTestNode_should_give_test_node_when_ingredient_has_description#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#createReplaceNode_should_give_null_when_ingredient_has_null_description#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#createReplaceNode_should_give_null_when_ingredient_has_empty_description#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#createReplaceNode_should_give_null_when_ingredient_has_whitespace_description#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#createReplaceNode_should_give_replace_node_when_ingredient_has_description#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#canHandle_should_return_true_when_path_matches#0;class#DescriptionHandlerTests#0" expanded="false" />
-            <element signature="method#canHandle_should_return_false_when_path_does_not_match#0;class#DescriptionHandlerTests#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1364,9 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1375,8 +1053,162 @@
         <state relative-caret-position="378">
           <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding>
-            <element signature="e#461#462#0" expanded="true" />
-            <element signature="e#484#485#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="false" />
+            <element signature="e#484#485#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/FileLocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/FileUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/settings/BalancerSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-630">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="237" column="0" lean-forward="true" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="method#IngredientDataCalculator#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="method#updateIngredient#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="method#balanceIngredient#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="method#getEffects#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="e#6838#6855#0" expanded="true" />
+            <element signature="method#findIngredientsFor#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="e#8938#8956#0" expanded="true" />
+            <element signature="docComment;method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="e#11408#11416#0" expanded="true" />
+            <element signature="method#readFriendlyNames#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="e#11982#11998#0" expanded="true" />
+            <element signature="method#toEffectsArrayNode#0;class#IngredientDataCalculator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/CNBalancerModule.Tests/lib/mockito-core-2.12.2.jar!/org/mockito/stubbing/OngoingStubbing.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/CNBalancerModule.Tests/lib/mockito-core-2.12.2.jar!/org/mockito/Mockito.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="919">
+          <caret line="65" column="25" lean-forward="true" selection-start-line="65" selection-start-column="25" selection-end-line="65" selection-end-column="25" />
+          <folding>
+            <element signature="e#2543#2544#0" expanded="true" />
+            <element signature="e#2595#2596#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-546">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#IngredientDataCalculatorTests#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_balance_ingredient_for_recipe_with_one_input#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_balance_ingredient_for_recipe_with_two_inputs#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_balance_ingredient_for_recipe_with_one_input_with_count_above_one#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="e#5424#5439#0" expanded="false" />
+            <element signature="method#should_balance_ingredient_for_recipe_with_two_inputs_of_different_counts#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="e#6441#6472#0" expanded="false" />
+            <element signature="method#should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="e#8060#8091#0" expanded="false" />
+            <element signature="method#should_balance_ingredient_for_recipe_with_output_greater_than_one#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="e#10137#10168#0" expanded="false" />
+            <element signature="method#assertAndConvertEffectsArray#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#createEffect#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#createIngredient#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#createRecipe#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_exclude_effects_with_just_a_name_and_no_default_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_handle_effects_with_just_a_name#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_add_durations_together_for_duplicate_effects#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_exclude_effects_with_negative_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_exclude_effects_with_no_name#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_exclude_effects_with_zero_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_give_effects_with_one_effect#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_give_null_description_with_null_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_give_null_description_with_empty_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_give_null_description_with_whitespace_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="e#20295#20311#0" expanded="true" />
+            <element signature="e#20738#20754#0" expanded="true" />
+            <element signature="method#should_create_method_text_with_null_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_create_method_text_with_no_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_create_method_text_with_one_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_create_method_text_with_two_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_empty_array_with_null_recipe#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_empty_array_with_null_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_empty_array_with_no_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_the_names_of_recipe_groups_with_one_group#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_the_names_of_recipe_groups_with_two_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_only_groups_with_friendly_names#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_zero_when_increasePercentage_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_zero_when_value_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_return_zero_when_count_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_use_count_of_one_when_count_less_than_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_use_count_of_one_when_count_is_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_use_value_of_zero_when_value_less_than_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_use_value_of_zero_when_value_is_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#should_calculate_with_increase_percentage#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#createFriendlyGroupNames#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="method#createEffectsArray#0;class#IngredientDataCalculatorTests#0" expanded="false" />
           </folding>
         </state>
       </provider>
