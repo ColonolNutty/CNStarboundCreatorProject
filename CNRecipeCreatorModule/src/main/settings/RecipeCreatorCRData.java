@@ -2,8 +2,9 @@ package main.settings;
 
 
 import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.CRData;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
+import com.colonolnutty.module.shareddata.models.settings.CRData;
+import com.colonolnutty.module.shareddata.models.settings.ICRData;
 
 import java.util.ArrayList;
 
@@ -12,9 +13,9 @@ import java.util.ArrayList;
  * Date: 10/08/2017
  * Time: 10:29 AM
  */
-public class RecipeCreatorCRData extends CRData {
+public class RecipeCreatorCRData extends CRData<RecipeCreatorSettings> {
     @Override
-    protected ArrayList<String> getPropertyNames() {
+    public ArrayList<String> getPropertyNames() {
         ArrayList<String> settingNames = new ArrayList<String>();
         settingNames.add("creationPath");
         settingNames.add("ingredientListFile");
@@ -39,12 +40,7 @@ public class RecipeCreatorCRData extends CRData {
     }
 
     @Override
-    public <T extends BaseSettings> boolean settingsAreValid(T baseSettings, CNLog log) {
-        if(!(baseSettings instanceof RecipeCreatorSettings)) {
-            return false;
-        }
-        RecipeCreatorSettings settings = (RecipeCreatorSettings) baseSettings;
-
+    public boolean settingsAreValid(RecipeCreatorSettings settings, CNLog log) {
         return verifySettings(log, settings,
                 settings.creationPath,
                 settings.ingredientListFile,

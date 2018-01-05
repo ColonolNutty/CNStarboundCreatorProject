@@ -8,80 +8,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="btf-1.2">
+      <library name="CNModuleDependencies">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/btf-1.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="guava-23.0">
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/guava-23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="jackson-annotations-2.2.4">
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/jackson-annotations-2.2.4.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="jackson-core-2.2.4">
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/jackson-core-2.2.4.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="jackson-coreutils-1.8">
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/jackson-coreutils-1.8.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="jackson-databind-2.2.4">
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/jackson-databind-2.2.4.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="json-20170516">
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/json-20170516.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="json-patch-1.9">
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/json-patch-1.9.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="msg-simple-1.1">
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/msg-simple-1.1.jar!/" />
         </CLASSES>
         <JAVADOC />

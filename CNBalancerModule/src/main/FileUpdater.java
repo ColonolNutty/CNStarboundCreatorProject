@@ -1,12 +1,12 @@
 package main;
 
-import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.JsonPatchManipulator;
-import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 import com.colonolnutty.module.shareddata.JsonManipulator;
+import com.colonolnutty.module.shareddata.JsonPatchManipulator;
+import com.colonolnutty.module.shareddata.debug.CNLog;
+import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 import com.colonolnutty.module.shareddata.locators.FileLocator;
 import com.colonolnutty.module.shareddata.locators.IngredientStore;
-import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.ui.ConfirmationController;
 import com.colonolnutty.module.shareddata.ui.ProgressController;
 import main.settings.BalancerSettings;

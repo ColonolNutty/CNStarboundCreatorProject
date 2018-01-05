@@ -1,7 +1,7 @@
 package com.colonolnutty.module.shareddata.debug;
 
-import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.MessageBundle;
+import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 
 import java.io.*;
@@ -23,14 +23,26 @@ public class CNLog {
     private ArrayList<String> _ignoredErrors;
     private DebugWriter _debugWriter;
     private MessageBundler _messageBundler;
-    private BaseSettings _settings;
+    private boolean _enableVerboseLogging;
+    private boolean _enableConsoleDebug;
+    private String _logFile;
 
-    public CNLog(DebugWriter debugWriter, BaseSettings settings) {
-        _settings = settings;
+    public CNLog(DebugWriter debugWriter) {
         _debugWriter = debugWriter;
         _ignoredErrors = new ArrayList<String>();
         _ignoredErrors.add("value differs from expectations");
-        setupDebugLogFile();
+    }
+
+    public void setVerboseLogging(boolean enableVerbose) {
+        _enableVerboseLogging = enableVerbose;
+    }
+
+    public void setConsoleDebug(boolean enableConsoleDebug) {
+        _enableConsoleDebug = enableConsoleDebug;
+    }
+
+    public void setLogFile(String logFile) {
+        _logFile = logFile;
     }
 
     public void debug(String message) {
@@ -84,10 +96,10 @@ public class CNLog {
                 messagePrefix = errorPrefix;
                 break;
         }
-        if(isDebug && !_settings.enableVerboseLogging) {
+        if(isDebug && !_enableVerboseLogging) {
             return;
         }
-        if(!isDebug ||  _settings.enableConsoleDebug) {
+        if(!isDebug ||  _enableConsoleDebug) {
             if(_debugWriter != null) {
                 _debugWriter.writeln(messagePrefix + message);
             }
@@ -98,7 +110,7 @@ public class CNLog {
     }
 
     private void writeMessage(Exception e) {
-        if(_settings.enableConsoleDebug) {
+        if(_enableConsoleDebug) {
             if(_debugWriter != null) {
                 _debugWriter.writeln(e.getMessage());
             }
@@ -214,7 +226,7 @@ public class CNLog {
             _writer.flush();
             _writer.close();
         }
-        String debugLogFile = _settings.logFile;
+        String debugLogFile = _logFile;
         _messageBundler = new MessageBundler();
         if(debugLogFile == null) {
             info("'logFile' not specified in configuration file, using default: " + defaultLogFile);

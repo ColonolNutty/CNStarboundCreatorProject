@@ -7,6 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="CNModuleDependencies" />
+    <orderEntry type="module" module-name="CNStarboundCreator.Shared" />
     <orderEntry type="module-library">
       <library name="CNRecipeConfigCreatorLibrary">
         <CLASSES>
@@ -24,6 +26,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="CNModuleDependencies" />
   </component>
 </module>

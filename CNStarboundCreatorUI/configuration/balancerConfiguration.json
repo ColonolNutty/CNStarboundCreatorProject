@@ -1,9 +1,9 @@
 {
-  "propertyOrderFile" : "configuration\\propertyOrder.json",
   "logFile" : "logs\\updatelog.log",
-  "enableTreeView" : true,
   "enableConsoleDebug" : true,
+  "enableTreeView" : true,
   "enableVerboseLogging" : true,
+  "propertyOrderFile" : "configuration\\propertyOrder.json",
   "propertiesToUpdate" : [ "foodValue", "price", "effects", "description" ],
   "forceUpdate" : true,
   "locationsToUpdate" : [ "TestFiles\\Balancer\\Samples" ],

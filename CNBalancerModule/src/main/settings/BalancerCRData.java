@@ -2,8 +2,8 @@ package main.settings;
 
 
 import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.CRData;
-import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
+import com.colonolnutty.module.shareddata.models.settings.CRData;
+import com.colonolnutty.module.shareddata.models.settings.ICRData;
 
 import java.util.ArrayList;
 
@@ -12,9 +12,9 @@ import java.util.ArrayList;
  * Date: 10/08/2017
  * Time: 10:22 AM
  */
-public class BalancerCRData extends CRData {
+public class BalancerCRData extends CRData<BalancerSettings> implements ICRData<BalancerSettings> {
     @Override
-    protected ArrayList<String> getPropertyNames() {
+    public ArrayList<String> getPropertyNames() {
         ArrayList<String> settingNames = new ArrayList<String>();
         settingNames.add("propertiesToUpdate");
         settingNames.add("forceUpdate");
@@ -40,12 +40,7 @@ public class BalancerCRData extends CRData {
     }
 
     @Override
-    public <T extends BaseSettings> boolean settingsAreValid(T baseSettings, CNLog log) {
-        if(!(baseSettings instanceof BalancerSettings)) {
-            return false;
-        }
-        BalancerSettings settings = (BalancerSettings) baseSettings;
-
+    public boolean settingsAreValid(BalancerSettings settings, CNLog log) {
         return verifySettings(log, settings,
                 settings.propertiesToUpdate,
                 settings.forceUpdate,

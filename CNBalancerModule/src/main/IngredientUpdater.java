@@ -1,11 +1,11 @@
 package main;
 
-import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 import com.colonolnutty.module.shareddata.JsonManipulator;
+import com.colonolnutty.module.shareddata.debug.CNLog;
+import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 import com.colonolnutty.module.shareddata.locators.IngredientStore;
 import main.settings.BalancerSettings;
-import com.colonolnutty.module.shareddata.models.Ingredient;
 
 import java.io.File;
 import java.io.IOException;

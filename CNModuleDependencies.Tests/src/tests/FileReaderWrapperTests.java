@@ -1,9 +1,9 @@
 package tests;
 
 import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
-import com.colonolnutty.module.shareddata.models.ItemDescriptor;
-import com.colonolnutty.module.shareddata.models.Recipe;
 import org.junit.Test;
+import tests.testmodels.TestModel;
+import tests.testmodels.TestSubModel;
 
 import java.io.IOException;
 
@@ -27,13 +27,13 @@ public class FileReaderWrapperTests {
     @Test
     public void can_read_from_file() throws IOException {
         String testRecipeFilePath = "testFiles\\testrecipe.recipe";
-        Recipe recipe = _wrapper.read(testRecipeFilePath, Recipe.class);
+        TestModel recipe = _wrapper.read(testRecipeFilePath, TestModel.class);
         assertNotNull(recipe);
         assertEquals(2, recipe.input.length);
-        ItemDescriptor ingredOne = recipe.input[0];
+        TestSubModel ingredOne = recipe.input[0];
         assertEquals("testIngredient1", ingredOne.item);
         assertEquals(1.0, ingredOne.count);
-        ItemDescriptor ingredTwo = recipe.input[1];
+        TestSubModel ingredTwo = recipe.input[1];
         assertEquals("testIngredient2", ingredTwo.item);
         assertEquals(4.0, ingredTwo.count);
         assertEquals(2, recipe.groups.length);

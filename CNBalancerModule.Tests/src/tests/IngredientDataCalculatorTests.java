@@ -1,20 +1,13 @@
 package tests;
 
+import com.colonolnutty.module.shareddata.JsonManipulator;
 import com.colonolnutty.module.shareddata.NodeProvider;
 import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.JsonManipulator;
-import com.colonolnutty.module.shareddata.locators.IngredientStore;
-import com.colonolnutty.module.shareddata.locators.RecipeStore;
-import com.colonolnutty.module.shareddata.locators.StatusEffectStore;
-import com.colonolnutty.module.shareddata.models.Ingredient;
-import com.colonolnutty.module.shareddata.models.ItemDescriptor;
-import com.colonolnutty.module.shareddata.models.Recipe;
-import com.colonolnutty.module.shareddata.models.StatusEffect;
+import com.colonolnutty.module.shareddata.locators.*;
+import com.colonolnutty.module.shareddata.models.*;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.IngredientDataCalculator;

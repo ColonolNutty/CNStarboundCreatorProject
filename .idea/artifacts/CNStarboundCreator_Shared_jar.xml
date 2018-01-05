@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="CNStarboundCreator.Shared:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CNStarboundCreator_Shared_jar</output-path>
+    <root id="archive" name="CNStarboundCreator.Shared.jar">
+      <element id="module-output" name="CNStarboundCreator.Shared" />
+      <element id="module-output" name="CNModuleDependencies" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/btf-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/guava-23.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/jackson-annotations-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/jackson-core-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/jackson-coreutils-1.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/jackson-databind-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/json-20170516.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/json-patch-1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNStarboundCreator.Shared/lib/msg-simple-1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/btf-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/guava-23.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-annotations-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-core-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-coreutils-1.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/jackson-databind-2.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/json-20170516.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/json-patch-1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/msg-simple-1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

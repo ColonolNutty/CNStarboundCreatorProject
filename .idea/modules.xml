@@ -9,6 +9,8 @@
       <module fileurl="file://$PROJECT_DIR$/CNPerennialCompactorModule/CNPerennialCompactorModule.iml" filepath="$PROJECT_DIR$/CNPerennialCompactorModule/CNPerennialCompactorModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNRecipeConfigCreator/CNRecipeConfigCreator.iml" filepath="$PROJECT_DIR$/CNRecipeConfigCreator/CNRecipeConfigCreator.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNRecipeCreatorModule/CNRecipeCreatorModule.iml" filepath="$PROJECT_DIR$/CNRecipeCreatorModule/CNRecipeCreatorModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNStarboundCreator.Shared/CNStarboundCreator.Shared.iml" filepath="$PROJECT_DIR$/CNStarboundCreator.Shared/CNStarboundCreator.Shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/CNStarboundCreator.Shared.Tests.iml" filepath="$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/CNStarboundCreator.Shared.Tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNStarboundCreatorProject.iml" filepath="$PROJECT_DIR$/CNStarboundCreatorProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/CNStarboundCreatorUI/CNStarboundCreatorUI.iml" filepath="$PROJECT_DIR$/CNStarboundCreatorUI/CNStarboundCreatorUI.iml" />
     </modules>

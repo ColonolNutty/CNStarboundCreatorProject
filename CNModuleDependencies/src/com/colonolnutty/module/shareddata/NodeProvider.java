@@ -1,5 +1,6 @@
 package com.colonolnutty.module.shareddata;
 
+import com.colonolnutty.module.shareddata.io.MapperWrapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 

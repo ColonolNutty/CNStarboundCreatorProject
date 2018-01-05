@@ -2,25 +2,30 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
+      <artifact name="CNBalancerModule.Tests:jar" />
+      <artifact name="CNBalancerModule:jar" />
+      <artifact name="CNModuleDependencies.Tests:jar" />
       <artifact name="CNModuleDependencies:jar" />
       <artifact name="CNPerennialCompactorModule:jar" />
-      <artifact name="CNPriceFoodValueBalancerModule:jar" />
+      <artifact name="CNRecipeConfigCreator:jar" />
       <artifact name="CNRecipeCreatorModule:jar" />
-      <artifact name="CNStarboundCreatorModuleLoader:jar" />
+      <artifact name="CNStarboundCreator.Shared.Tests:jar" />
+      <artifact name="CNStarboundCreator.Shared:jar" />
+      <artifact name="CNStarboundCreatorUI:jar" />
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/RecipeCreatorSettingsDisplay.java" line="21" />
+    <bookmark url="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/cnrecipecreatormodule/ui/RecipeCreatorSettingsDisplay.java" line="21" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" afterPath="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" />
+      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ModuleLoader.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ModuleLoader.java" />
+      <change beforePath="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" afterPath="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" />
+      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/configuration/balancerConfiguration.json" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/configuration/balancerConfiguration.json" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" />
+      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeConfigCreator.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeConfigCreator.jar" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -33,85 +38,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file leaf-file-name="IngredientDataCalculatorTests.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java">
+      <file leaf-file-name="ModuleLoader.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ModuleLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-546">
-              <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state relative-caret-position="149">
+              <caret line="28" column="72" lean-forward="false" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
               <folding>
-                <element signature="docComment;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#IngredientDataCalculatorTests#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_balance_ingredient_for_recipe_with_one_input#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_balance_ingredient_for_recipe_with_two_inputs#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_balance_ingredient_for_recipe_with_one_input_with_count_above_one#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="e#5424#5439#0" expanded="false" />
-                <element signature="method#should_balance_ingredient_for_recipe_with_two_inputs_of_different_counts#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="e#6441#6472#0" expanded="false" />
-                <element signature="method#should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="e#8060#8091#0" expanded="false" />
-                <element signature="method#should_balance_ingredient_for_recipe_with_output_greater_than_one#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="e#10137#10168#0" expanded="false" />
-                <element signature="method#assertAndConvertEffectsArray#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#createEffect#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#createIngredient#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#createRecipe#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_exclude_effects_with_just_a_name_and_no_default_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_handle_effects_with_just_a_name#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_add_durations_together_for_duplicate_effects#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_exclude_effects_with_negative_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_exclude_effects_with_no_name#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_exclude_effects_with_zero_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_give_effects_with_one_effect#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_give_null_description_with_null_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_give_null_description_with_empty_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_give_null_description_with_whitespace_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="e#20295#20311#0" expanded="true" />
-                <element signature="e#20738#20754#0" expanded="true" />
-                <element signature="method#should_create_method_text_with_null_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_create_method_text_with_no_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_create_method_text_with_one_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_create_method_text_with_two_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_empty_array_with_null_recipe#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_empty_array_with_null_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_empty_array_with_no_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_the_names_of_recipe_groups_with_one_group#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_the_names_of_recipe_groups_with_two_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_only_groups_with_friendly_names#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_zero_when_increasePercentage_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_zero_when_value_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_return_zero_when_count_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_use_count_of_one_when_count_less_than_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_use_count_of_one_when_count_is_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_use_value_of_zero_when_value_less_than_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_use_value_of_zero_when_value_is_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#should_calculate_with_increase_percentage#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#createFriendlyGroupNames#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-                <element signature="method#createEffectsArray#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IngredientDataCalculator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="237" column="0" lean-forward="true" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
-              <folding>
-                <element signature="docComment;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="method#IngredientDataCalculator#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="method#updateIngredient#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="method#balanceIngredient#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="method#getEffects#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="e#6838#6855#0" expanded="true" />
-                <element signature="method#findIngredientsFor#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="e#8938#8956#0" expanded="true" />
-                <element signature="docComment;method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="e#11408#11416#0" expanded="true" />
-                <element signature="method#readFriendlyNames#0;class#IngredientDataCalculator#0" expanded="false" />
-                <element signature="e#11982#11998#0" expanded="true" />
-                <element signature="method#toEffectsArrayNode#0;class#IngredientDataCalculator#0" expanded="false" />
+                <element signature="e#458#478#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,20 +55,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>formatObjectAsIntended</find>
-      <find>JsonPrettyPrinter</find>
-      <find>.trim</find>
-      <find>Unknown object type</find>
-      <find>error</find>
-      <find>formatAsIntended</find>
-      <find>ArrayList</find>
       <find>\&quot;&quot;</find>
       <find>JsonNodeWrapper</find>
       <find>ArrayNode</find>
@@ -159,9 +85,15 @@
       <find>FoodValueHandler</find>
       <find>createDescription</find>
       <find>_friendlyGroupNames</find>
+      <find>BasicSettings</find>
+      <find>CNSCBaseSettings</find>
+      <find>_settings.enableVerboseLogging</find>
+      <find>_settings.enableConsoleDebug</find>
+      <find>setupDebugLogFile</find>
+      <find>CRData</find>
+      <find>BaseSettings</find>
     </findStrings>
     <replaceStrings>
-      <replace>setupCheckBox</replace>
       <replace>addField(settingsDisplay,</replace>
       <replace>CNUtils.createIndent(</replace>
       <replace>_settings.enableConsoleDebug</replace>
@@ -191,6 +123,7 @@
       <replace>getEffectsNodeFromNode</replace>
       <replace>foodValue</replace>
       <replace>price</replace>
+      <replace>_enableConsoleDebug</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNBalancerModule</dir>
@@ -207,57 +140,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ObjectNodeWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/JsonArrayWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JsonModelFactory.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/ObjectNodeWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/IJsonWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JsonArrayWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/prettyprinters/JsonWrapperPrinter.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/IJsonArrayWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/IJsonObjectWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/JsonManipulatorTests.java" />
-        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/utils/CNJsonUtils.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/utils/CNJsonUtilsTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JSONObjectWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/JSONObjectWrapperTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JSONArrayWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/JSONArrayWrapperTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/ArrayNodeWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/ArrayNodeWrapperTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/NodeProvider.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/JsonNodeWrapperTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JsonNodeWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/prettyprinters/JsonWrapperPrettyPrinterTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/ValueTypeWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/prettyprinters/JsonWrapperPrettyPrinter.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/ValueTypeWrapperTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/FileWriterWrapper.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPatchManipulator.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CRData.java" />
-        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java" />
-        <option value="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/settings/RecipeConfigCreatorCRData.java" />
-        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/settings/BalancerCRData.java" />
-        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" />
-        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/flourMFM.consumable" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ConfigReader.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/SettingsWriter.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ConfigWriter.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigWriter.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/EffectsHandler.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/DescriptionHandler.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/FoodValueHandler.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/PriceHandler.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/PriceHandlerTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/FoodValueHandlerTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/DescriptionHandlerTests.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/EffectsHandlerTests.java" />
-        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java" />
-        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" />
-        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/jsonhandlers/DescriptionHandlerTests.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/jsonhandlers/EffectsHandlerTests.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/jsonhandlers/FoodValueHandlerTests.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/JsonManipulatorReadTests.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCreatorMain.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/CNCrafter.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/RecipeCrafter.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/IngredientCrafter.java" />
+        <option value="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/RecipeConfigCreatorMain.java" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientUpdater.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/FileUpdater.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/BalancerMain.java" />
         <option value="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/settings/CNSCData.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/settings/CNBasicSettings.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/SBasicSettings.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/settings/CNSCBaseSettings.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/JsonManipulator.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/JsonPatchManipulator.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/JsonPatchManipulatorTests.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/ui/MainWindow.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/CNBaseSettings.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/JsonManipulatorTests.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigWriter.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/BasicSettings.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/settings/BaseSettings.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/BaseSettings.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/CNLog.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/ICRData.java" />
+        <option value="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/settings/RecipeConfigCreatorCRData.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/IConfigReader.java" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/settings/BalancerCRData.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigReader.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/MainFunctionPanel.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/IMainFunctionPanel.java" />
+        <option value="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/ui/MainPanel.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/ui/MainPanel.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/ui/MainPanel.java" />
+        <option value="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/ui/MainPanel.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/MainWindow.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/Main.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/cnperennialcompactormodule/ui/MainPanel.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/cnbalancermodule/ui/MainPanel.java" />
+        <option value="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/cnrecipeconfigcreator/ui/RecipeConfigCreatorSettingsDisplay.java" />
+        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/cnrecipecreatormodule/ui/RecipeCreatorSettingsDisplay.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/CRData.java" />
+        <option value="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" />
+        <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ModuleLoader.java" />
       </list>
     </option>
   </component>
@@ -286,8 +219,8 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -298,44 +231,34 @@
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNBalancerModule" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreator.Shared" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNBalancerModule" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreator.Shared" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNBalancerModule" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreator.Shared" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="shareddata" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNBalancerModule.Tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNBalancerModule.Tests" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreator.Shared" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
-              <item name="CNBalancerModule.Tests" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="shareddata" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -343,7 +266,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.26819924" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CNModuleDependencies.Tests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Jack's Computer/IdeaProjects/CNStarboundCreatorProject/CNRecipeCreatorModule/src/main/ui/MainPanel.java" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models" />
   </component>
@@ -360,23 +283,25 @@
       <recent name="com.colonolnutty.module.shareddata.utils.CNFileUtils" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="main.cnbalancermodule" />
+      <recent name="com.colonolnutty.module.shareddata.models.settings" />
+      <recent name="com.colonolnutty.module.shareddata.io" />
       <recent name="com.colonolnutty.module.shareddata.debug" />
       <recent name="com.colonolnutty.module.shareddata.utils" />
-      <recent name="com.colonolnutty.module.shareddata.io" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNModuleDependencies.Tests\testfiles" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreatorUI\configuration" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNRecipeConfigCreator\src\main\settings" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNRecipeConfigCreator\src\main\ui" />
-      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNRecipeConfigCreator\src\main" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNModuleDependencies.Tests" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreator.Shared.Tests\src" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreator.Shared.Tests" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreator.Shared.Tests\lib" />
+      <recent name="C:\Users\Jack's Computer\IdeaProjects\CNStarboundCreatorProject\CNStarboundCreator.Shared\src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="tests.testmodels" />
+      <recent name="com.colonolnutty.module.shareddata.locators" />
       <recent name="tests.jsonhandlers" />
       <recent name="tests.models.json" />
       <recent name="tests.utils" />
-      <recent name="com.colonolnutty.module.shareddata.jsonhandlers" />
-      <recent name="main" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.colonolnutty.module.shareddata.utils" />
@@ -394,7 +319,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.IngredientDataCalculatorTests">
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -414,135 +339,19 @@
       <module name="CNStarboundCreatorUI" />
       <envs />
     </configuration>
-    <configuration name="IngredientDataCalculatorTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="CNBalancerModule.Tests" />
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
+      <module name="" />
       <envs />
-      <dir value="$PROJECT_DIR$" />
-      <patterns />
-    </configuration>
-    <configuration name="IngredientDataCalculatorTests.should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="CNBalancerModule.Tests" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
-      <option name="METHOD_NAME" value="should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$" />
-      <patterns />
-    </configuration>
-    <configuration name="IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="CNBalancerModule.Tests" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
-      <option name="METHOD_NAME" value="should_give_description_containing_recipe_groups" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$" />
-      <patterns />
-    </configuration>
-    <configuration name="IngredientDataCalculatorTests.should_give_description_when_recipe_has_no_groups" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="CNBalancerModule.Tests" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
-      <option name="METHOD_NAME" value="should_give_description_when_recipe_has_no_groups" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$" />
-      <patterns />
-    </configuration>
-    <configuration name="IngredientDataCalculatorTests.should_keep_existing_description_with_groups" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="CNBalancerModule.Tests" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.IngredientDataCalculatorTests" />
-      <option name="METHOD_NAME" value="should_keep_existing_description_with_groups" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$" />
-      <patterns />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -577,38 +386,6 @@
       <module name="MoreFarmingUpdateValues" />
       <envs />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <list size="6">
-      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_give_description_when_recipe_has_no_groups" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_keep_existing_description_with_groups" />
-    </list>
-    <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_keep_existing_description_with_groups" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_give_description_when_recipe_has_no_groups" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_give_description_containing_recipe_groups" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.IngredientDataCalculatorTests.should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -669,7 +446,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -679,24 +455,24 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5518868" sideWeight="0.50324327" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40361446" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40361446" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36862105" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29638556" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3762215" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972856" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36144578" sideWeight="0.49675676" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3686747" sideWeight="0.49675676" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.586747" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -751,464 +527,414 @@
           <properties />
           <option name="timeStamp" value="611" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigReader.java</url>
+          <line>33</line>
+          <properties />
+          <option name="timeStamp" value="664" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigReader.java</url>
+          <line>25</line>
+          <properties />
+          <option name="timeStamp" value="670" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/CNBalancerModule/src/main/cnbalancermodule/ui/MainPanel.java</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="671" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigReader.java</url>
+          <line>26</line>
+          <properties />
+          <option name="timeStamp" value="672" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigReader.java</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="673" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="630" />
+      <option name="time" value="678" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/utils/CNJsonUtils.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/jsonhandlers/EffectsHandlerTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        <state relative-caret-position="231">
+          <caret line="38" column="14" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/ArrayNodeWrapper.java" />
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/ArrayNodeWrapperTests.java" />
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/JsonNodeWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="125" column="12" lean-forward="false" selection-start-line="125" selection-start-column="12" selection-end-line="125" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/JsonNodeWrapperTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1966">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/CNModuleDependencies/lib/jackson-databind-2.2.4.jar!/com/fasterxml/jackson/databind/JsonNode.class">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/jsonhandlers/FoodValueHandlerTests.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="18" column="22" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <caret line="32" column="12" lean-forward="false" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/prettyprinters/BasePrettyPrinter.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/jsonhandlers/PriceHandlerTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/models/json/ValueTypeWrapperTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/prettyprinters/JsonWrapperPrettyPrinterTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/json/ValueTypeWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="35" column="9" lean-forward="false" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/prettyprinters/JsonWrapperPrettyPrinter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="242" column="9" lean-forward="false" selection-start-line="242" selection-start-column="9" selection-end-line="242" selection-end-column="9" />
+        <state relative-caret-position="231">
+          <caret line="53" column="11" lean-forward="true" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
           <folding>
-            <element signature="docComment;class#JsonWrapperPrettyPrinter#0" expanded="false" />
-            <element signature="method#formatObject#0;class#JsonWrapperPrettyPrinter#0" expanded="false" />
-            <element signature="method#formatArray#0;class#JsonWrapperPrettyPrinter#0" expanded="false" />
-            <element signature="method#formatSingleItemArray#0;class#JsonWrapperPrettyPrinter#0" expanded="false" />
-            <element signature="method#formatSinglePropertyObject#0;class#JsonWrapperPrettyPrinter#0" expanded="false" />
-            <element signature="method#sortProperties#0;class#JsonWrapperPrettyPrinter#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/MainFunctionModule.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/JsonManipulatorReadTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        <state relative-caret-position="42">
+          <caret line="2" column="50" lean-forward="false" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/MapperWrapper.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/JsonManipulatorWriteTests.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
-          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/ConsoleDebugWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/configuration/balancerConfiguration.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/FileWriterWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonPatchManipulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/DebugWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/CNLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/FileReaderWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeConfigCreator/src/main/settings/RecipeConfigCreatorCRData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
           <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java">
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/RecipeCreatorMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="47" column="43" lean-forward="false" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/settings/BalancerCRData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="3654">
+          <caret line="191" column="46" lean-forward="false" selection-start-line="191" selection-start-column="46" selection-end-line="191" selection-end-column="46" />
           <folding>
-            <element signature="e#469#477#0" expanded="false" />
+            <element signature="e#6967#6987#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="17" column="65" lean-forward="true" selection-start-line="17" selection-start-column="65" selection-end-line="17" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/flourMFM.consumable">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/utils/StopWatchTimer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/CRData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/DefaultNodeProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/EffectsHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="51" />
-          <folding>
-            <element signature="docComment;class#EffectsHandler#0" expanded="false" />
-            <element signature="method#createTestNode#0;class#EffectsHandler#0" expanded="false" />
-            <element signature="method#needsUpdate#0;class#EffectsHandler#0" expanded="false" />
-            <element signature="method#getShortStringValue#0;class#EffectsHandler#0" expanded="false" />
-            <element signature="method#getEffectsNodeFromNode#0;class#EffectsHandler#0" expanded="false" />
-            <element signature="method#getEffects#0;class#EffectsHandler#0" expanded="false" />
-            <element signature="method#checkShouldUpdate#0;class#EffectsHandler#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/CNModuleDependencies.Tests/lib/jackson-databind-2.2.4.jar!/com/fasterxml/jackson/databind/node/ObjectNode.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/NodeProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="89" column="22" lean-forward="false" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/DescriptionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="method#createTestNode#0;class#DescriptionHandler#0" expanded="false" />
-            <element signature="method#createReplaceNode#0;class#DescriptionHandler#0" expanded="false" />
-            <element signature="method#getShortStringValue#0;class#DescriptionHandler#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/FoodValueHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding>
-            <element signature="e#536#537#0" expanded="false" />
-            <element signature="e#559#560#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/FoodValueHandlerTests.java">
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/CNCrafter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="10" column="41" lean-forward="false" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+          <caret line="13" column="60" lean-forward="false" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/EffectsHandlerTests.java">
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/RecipeCrafter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/DescriptionHandlerTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies.Tests/src/tests/jsonhandlers/PriceHandlerTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/jsonhandlers/PriceHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="126">
+          <caret line="49" column="22" lean-forward="false" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
           <folding>
-            <element signature="e#461#462#0" expanded="false" />
-            <element signature="e#484#485#0" expanded="false" />
+            <element signature="e#1543#1559#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/JsonManipulator.java">
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/crafters/IngredientCrafter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+        <state relative-caret-position="189">
+          <caret line="53" column="24" lean-forward="false" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/locators/FileLocator.java">
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+        <state relative-caret-position="189">
+          <caret line="9" column="40" lean-forward="false" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/IngredientUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="76" column="46" lean-forward="false" selection-start-line="76" selection-start-column="46" selection-end-line="76" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/FileUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="245">
+          <caret line="114" column="16" lean-forward="false" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/settings/CNSCData.java" />
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/settings/CNBasicSettings.java" />
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/settings/CNSCBaseSettings.java" />
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/JsonManipulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="203">
+          <caret line="30" column="50" lean-forward="false" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/JsonPatchManipulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="36" column="55" lean-forward="false" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/JsonPatchManipulatorTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="43" column="36" lean-forward="false" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeConfigCreator/src/main/RecipeConfigCreatorMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="24" column="12" lean-forward="false" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/PerennialCompactorMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/BalancerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-658">
+          <caret line="24" column="12" lean-forward="false" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="456" column="19" lean-forward="false" selection-start-line="456" selection-start-column="19" selection-end-line="456" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/settings/BalancerSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        <state relative-caret-position="164">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/Ingredient.java">
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared.Tests/src/tests/JsonManipulatorTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-630">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="102">
+          <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java">
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigWriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="237" column="0" lean-forward="true" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+        <state relative-caret-position="271">
+          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
           <folding>
-            <element signature="docComment;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="method#IngredientDataCalculator#0;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="method#updateIngredient#0;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="method#balanceIngredient#0;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="method#getEffects#0;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="e#6838#6855#0" expanded="true" />
-            <element signature="method#findIngredientsFor#0;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="e#8938#8956#0" expanded="true" />
-            <element signature="docComment;method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="method#calculateValue#0;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="e#11408#11416#0" expanded="true" />
-            <element signature="method#readFriendlyNames#0;class#IngredientDataCalculator#0" expanded="false" />
-            <element signature="e#11982#11998#0" expanded="true" />
-            <element signature="method#toEffectsArrayNode#0;class#IngredientDataCalculator#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/CNBalancerModule.Tests/lib/mockito-core-2.12.2.jar!/org/mockito/stubbing/OngoingStubbing.class">
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/BasicSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        <state relative-caret-position="147">
+          <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/settings/BaseSettings.java" />
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/BaseSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/CNBalancerModule.Tests/lib/mockito-core-2.12.2.jar!/org/mockito/Mockito.class">
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/ICRData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="919">
-          <caret line="65" column="25" lean-forward="true" selection-start-line="65" selection-start-column="25" selection-end-line="65" selection-end-column="25" />
+        <state relative-caret-position="252">
+          <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeConfigCreator/src/main/settings/RecipeConfigCreatorSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/IConfigReader.java" />
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/settings/PandCCRData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="33" column="58" lean-forward="false" selection-start-line="33" selection-start-column="58" selection-end-line="33" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeConfigCreator/src/main/settings/RecipeConfigCreatorCRData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="42" column="63" lean-forward="false" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="63" />
           <folding>
-            <element signature="e#2543#2544#0" expanded="true" />
-            <element signature="e#2595#2596#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java">
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorCRData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-546">
-          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        <state relative-caret-position="126">
+          <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
           <folding>
-            <element signature="docComment;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#IngredientDataCalculatorTests#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_balance_ingredient_for_recipe_with_one_input#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_balance_ingredient_for_recipe_with_two_inputs#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_balance_ingredient_for_recipe_with_one_input_with_count_above_one#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="e#5424#5439#0" expanded="false" />
-            <element signature="method#should_balance_ingredient_for_recipe_with_two_inputs_of_different_counts#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="e#6441#6472#0" expanded="false" />
-            <element signature="method#should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="e#8060#8091#0" expanded="false" />
-            <element signature="method#should_balance_ingredient_for_recipe_with_output_greater_than_one#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="e#10137#10168#0" expanded="false" />
-            <element signature="method#assertAndConvertEffectsArray#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#createEffect#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#createIngredient#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#createRecipe#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_exclude_effects_with_just_a_name_and_no_default_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_handle_effects_with_just_a_name#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_add_durations_together_for_duplicate_effects#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_exclude_effects_with_negative_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_exclude_effects_with_no_name#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_exclude_effects_with_zero_duration#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_give_effects_with_one_effect#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_give_null_description_with_null_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_give_null_description_with_empty_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_give_null_description_with_whitespace_description#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="e#20295#20311#0" expanded="true" />
-            <element signature="e#20738#20754#0" expanded="true" />
-            <element signature="method#should_create_method_text_with_null_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_create_method_text_with_no_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_create_method_text_with_one_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_create_method_text_with_two_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_empty_array_with_null_recipe#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_empty_array_with_null_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_empty_array_with_no_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_the_names_of_recipe_groups_with_one_group#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_the_names_of_recipe_groups_with_two_groups#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_only_groups_with_friendly_names#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_zero_when_increasePercentage_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_zero_when_value_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_return_zero_when_count_is_null#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_use_count_of_one_when_count_less_than_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_use_count_of_one_when_count_is_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_use_value_of_zero_when_value_less_than_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_use_value_of_zero_when_value_is_zero#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#should_calculate_with_increase_percentage#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#createFriendlyGroupNames#0;class#IngredientDataCalculatorTests#0" expanded="false" />
-            <element signature="method#createEffectsArray#0;class#IngredientDataCalculatorTests#0" expanded="false" />
+            <element signature="docComment;class#RecipeCreatorCRData#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/settings/RecipeCreatorSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/CNLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNPerennialCompactorModule/src/main/cnperennialcompactormodule/ui/MainPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/IMainFunctionPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/cnbalancermodule/ui/BalancerSettingsDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeConfigCreator/src/main/cnrecipeconfigcreator/ui/MainPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeConfigCreator/src/main/cnrecipeconfigcreator/ui/RecipeConfigCreatorSettingsDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/cnrecipecreatormodule/ui/MainPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <element signature="e#1937#1960#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNRecipeCreatorModule/src/main/cnrecipecreatormodule/ui/RecipeCreatorSettingsDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/src/com/colonolnutty/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/cnbalancermodule/ui/MainPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/ConfigReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/settings/BalancerCRData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding>
+            <element signature="docComment;class#BalancerCRData#0" expanded="false" />
+            <element signature="method#getPropertyNames#0;class#BalancerCRData#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="31" lean-forward="false" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/CRData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#CRData#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ModuleLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="28" column="72" lean-forward="false" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="72" />
+          <folding>
+            <element signature="e#458#478#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1219,7 +945,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>CNModuleDependencies:jar</last-edited>
+          <last-edited>CNStarboundCreator.Shared:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1232,7 +958,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>No facets are configured</last-edited>
+          <last-edited>Detection</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1267,12 +993,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>CNStarboundCreatorUI</last-edited>
+          <last-edited>CNRecipeCreatorModule</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.26819924" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1292,7 +1017,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>CNStarboundCreatorLibrary</last-edited>
+          <last-edited>CNModuleDependencies</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

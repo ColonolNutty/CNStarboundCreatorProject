@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="CNModuleDependencies" />
+    <orderEntry type="module" module-name="CNStarboundCreator.Shared" />
     <orderEntry type="module-library">
       <library name="CNStarboundCreatorLibrary">
         <CLASSES>

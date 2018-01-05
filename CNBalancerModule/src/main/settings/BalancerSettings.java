@@ -2,7 +2,6 @@ package main.settings;
 
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 /**
  * User: Jack's Computer

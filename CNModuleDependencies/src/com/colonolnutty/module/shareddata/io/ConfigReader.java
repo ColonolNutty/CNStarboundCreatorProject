@@ -1,8 +1,8 @@
 package com.colonolnutty.module.shareddata.io;
 
 import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.CRData;
 import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
+import com.colonolnutty.module.shareddata.models.settings.ICRData;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.io.IOException;
  * Date: 09/11/2017
  * Time: 2:33 PM
  */
-public class ConfigReader implements IReadFiles {
+public class ConfigReader<T extends BaseSettings> implements IReadFiles {
     private CNLog _log;
     private IFileReader _fileReader;
 
@@ -21,10 +21,10 @@ public class ConfigReader implements IReadFiles {
         _fileReader = new FileReaderWrapper();
     }
 
-    public <T extends BaseSettings> T readSettingsFile(CRData crData, Class<T> classOfT) {
+    public T readSettingsFile(ICRData<T> crData, Class<T> classOfT) {
         String configFile = crData.getSettingsFilePath();
         File file = new File(configFile);
-        _log.info("Looking for configuration file at path: " + file.getAbsolutePath());
+        System.out.println("Looking for configuration file at path: " + file.getAbsolutePath());
         try {
             T settings = _fileReader.read(configFile, classOfT);
             if(settings == null || !crData.settingsAreValid(settings, _log)) {
@@ -34,7 +34,8 @@ public class ConfigReader implements IReadFiles {
             return settings;
         }
         catch(IOException e) {
-            _log.error("Could not read configuration settings file: " + configFile, e);
+            System.out.println("[ERROR] Could not read configuration settings file: " + configFile);
+            e.printStackTrace(System.out);
         }
         return null;
     }
