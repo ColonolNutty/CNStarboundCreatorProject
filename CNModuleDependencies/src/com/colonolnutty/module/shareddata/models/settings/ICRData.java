@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Date: 01/05/2018
  * Time: 12:38 PM
  */
-public interface ICRData<T extends BaseSettings> {
+public interface ICRData<T extends CNBaseSettings> {
     ArrayList<String> getPropertyNames();
     String getSettingsFilePath();
     boolean settingsAreValid(T baseSettings, CNLog log);

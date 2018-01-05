@@ -1,7 +1,7 @@
 package com.colonolnutty.module.shareddata.io;
 
 import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
+import com.colonolnutty.module.shareddata.models.settings.CNBaseSettings;
 import com.colonolnutty.module.shareddata.models.settings.ICRData;
 
 import java.io.File;
@@ -12,7 +12,7 @@ import java.io.IOException;
  * Date: 09/11/2017
  * Time: 2:33 PM
  */
-public class ConfigReader<T extends BaseSettings> implements IReadFiles {
+public class ConfigReader<T extends CNBaseSettings> implements IReadFiles {
     private CNLog _log;
     private IFileReader _fileReader;
 

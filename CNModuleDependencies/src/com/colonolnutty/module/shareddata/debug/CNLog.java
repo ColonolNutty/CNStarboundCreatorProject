@@ -1,7 +1,6 @@
 package com.colonolnutty.module.shareddata.debug;
 
 import com.colonolnutty.module.shareddata.models.MessageBundle;
-import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 
 import java.io.*;

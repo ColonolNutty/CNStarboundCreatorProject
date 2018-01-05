@@ -1,7 +1,7 @@
 package com.colonolnutty.module.shareddata.io;
 
 import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
+import com.colonolnutty.module.shareddata.models.settings.CNBaseSettings;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class ConfigWriter implements IWriteFiles {
         setFileWriter(new FileWriterWrapper());
     }
 
-    public void write(BaseSettings settings) {
+    public void write(CNBaseSettings settings) {
         String settingsLocation = settings.configLocation;
         if(settingsLocation == null) {
             _log.error("Failed to write settings");

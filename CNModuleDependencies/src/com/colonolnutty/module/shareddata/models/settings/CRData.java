@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Date: 10/08/2017
  * Time: 10:26 AM
  */
-public abstract class CRData<T extends BaseSettings> implements ICRData<T> {
+public abstract class CRData<T extends CNBaseSettings> implements ICRData<T> {
 
     protected boolean verifySettings(CNLog log, T settings, Object... objs) {
         ArrayList<String> properties = getPropertyNames();

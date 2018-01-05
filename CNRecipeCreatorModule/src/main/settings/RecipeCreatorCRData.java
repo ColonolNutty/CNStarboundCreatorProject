@@ -2,9 +2,7 @@ package main.settings;
 
 
 import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.models.settings.BaseSettings;
 import com.colonolnutty.module.shareddata.models.settings.CRData;
-import com.colonolnutty.module.shareddata.models.settings.ICRData;
 
 import java.util.ArrayList;
 
