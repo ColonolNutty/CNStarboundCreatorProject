@@ -19,6 +19,7 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
         this._settings = settings;
     }
 
+    @Override
     public JPanel setup(ActionListener onRun) {
         JPanel settingsDisplay = new JPanel();
         GroupLayout layout = new GroupLayout(settingsDisplay);

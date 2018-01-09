@@ -1,20 +1,12 @@
 package main.cnperennialcompactormodule.ui;
 
-import com.colonolnutty.module.shareddata.debug.CNLog;
-import com.colonolnutty.module.shareddata.io.ConfigReader;
-import com.colonolnutty.module.shareddata.io.ConfigWriter;
-import com.colonolnutty.module.shareddata.models.MessageBundle;
-import com.colonolnutty.module.shareddata.models.settings.BasicSettings;
+import com.colonolnutty.module.shareddata.ui.DefaultMainPanel;
 import com.colonolnutty.module.shareddata.ui.IMainFunctionPanel;
-import com.colonolnutty.module.shareddata.ui.OutputDisplay;
 import main.settings.PandCSettings;
 import main.settings.PandCCRData;
 import main.PerennialCompactorMain;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -22,81 +14,18 @@ import java.util.Hashtable;
  * Time: 5:01 PM
  */
 public class MainPanel implements IMainFunctionPanel {
-    private CNLog _log;
-    private PandCSettings _settings;
-    private OutputDisplay _outputDisplay;
-    private PandCSettingsDisplay _settingsDisplay;
+    private DefaultMainPanel _mainPanel;
 
     @Override
     public JPanel create() {
-        JPanel mainPanel = new JPanel();
-        GroupLayout layout = new GroupLayout(mainPanel);
-        mainPanel.setLayout(layout);
-
-        _outputDisplay = new OutputDisplay();
-        JPanel outputDisplayPanel = _outputDisplay.get();
-        if(_log != null) {
-            _log.dispose();
+        if(_mainPanel == null) {
+            _mainPanel = new DefaultMainPanel(getName(),
+                    PandCSettings.class,
+                    PandCSettingsDisplay.class,
+                    PerennialCompactorMain.class,
+                    PandCCRData.class);
         }
-
-        CNLog tempLog = new CNLog(_outputDisplay);
-        BasicSettings tempSettings = new BasicSettings();
-        tempLog.setLogFile(tempSettings.logFile);
-        tempLog.setVerboseLogging(tempSettings.enableVerboseLogging);
-        tempLog.setConsoleDebug(tempSettings.enableConsoleDebug);
-        tempLog.setupDebugLogFile();
-        ConfigReader<PandCSettings> reader = new ConfigReader<PandCSettings>(tempLog);
-        _settings = reader.readSettingsFile(new PandCCRData(), PandCSettings.class);
-        tempLog.dispose();
-        _log = new CNLog(_outputDisplay);
-        _log.setLogFile(_settings.logFile);
-        _log.setVerboseLogging(_settings.enableVerboseLogging);
-        _log.setConsoleDebug(_settings.enableConsoleDebug);
-        _log.setupDebugLogFile();
-        ConfigWriter writer = new ConfigWriter(_log);
-        _settingsDisplay = new PandCSettingsDisplay(writer, _settings);
-
-        JPanel settingsPanel = _settingsDisplay.setup(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final JButton source = (JButton) e.getSource();
-                source.setEnabled(false);
-                Thread thread = new Thread() {
-                    public void run() {
-                        try {
-                            _log.clear();
-                            _log.setupDebugLogFile();
-                            _outputDisplay.clear();
-                            _settingsDisplay.disable();
-                            PerennialCompactorMain creator = new PerennialCompactorMain(_settings, _log);
-                            creator.run();
-                            Hashtable<String, MessageBundle> messages = _log.getMessages();
-                            _outputDisplay.updateTreeDisplay(messages);
-                        }
-                        catch(Exception e1) {
-                            e1.printStackTrace();
-                        }
-                        finally {
-                            source.setEnabled(true);
-                            _settingsDisplay.enable();
-                        }
-                    }
-                };
-                thread.start();
-            }
-        });
-        layout.setHorizontalGroup(
-                layout.createParallelGroup()
-                        .addComponent(settingsPanel)
-                        .addComponent(outputDisplayPanel)
-        );
-        layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                        .addComponent(settingsPanel)
-                        .addComponent(outputDisplayPanel)
-        );
-        mainPanel.setVisible(true);
-        return mainPanel;
+        return _mainPanel.create();
     }
 
     @Override
@@ -106,8 +35,8 @@ public class MainPanel implements IMainFunctionPanel {
 
     @Override
     public void dispose() {
-        if(_log != null) {
-            _log.dispose();
+        if(_mainPanel != null) {
+            _mainPanel.dispose();
         }
     }
 }

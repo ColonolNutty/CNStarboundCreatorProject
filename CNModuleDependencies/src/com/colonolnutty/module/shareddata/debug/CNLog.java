@@ -1,6 +1,8 @@
 package com.colonolnutty.module.shareddata.debug;
 
 import com.colonolnutty.module.shareddata.models.MessageBundle;
+import com.colonolnutty.module.shareddata.models.settings.BasicSettings;
+import com.colonolnutty.module.shareddata.models.settings.CNBaseSettings;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 
 import java.io.*;
@@ -27,9 +29,17 @@ public class CNLog {
     private String _logFile;
 
     public CNLog(DebugWriter debugWriter) {
+        this(debugWriter, new BasicSettings());
+    }
+
+    public CNLog(DebugWriter debugWriter, CNBaseSettings settings) {
         _debugWriter = debugWriter;
         _ignoredErrors = new ArrayList<String>();
         _ignoredErrors.add("value differs from expectations");
+        setVerboseLogging(settings.enableVerboseLogging);
+        setConsoleDebug(settings.enableConsoleDebug);
+        setLogFile(settings.logFile);
+        setupDebugLogFile();
     }
 
     public void setVerboseLogging(boolean enableVerbose) {

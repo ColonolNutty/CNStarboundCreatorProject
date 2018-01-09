@@ -1,6 +1,8 @@
 package com.colonolnutty.module.shareddata.io;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.util.List;
 
 /**
  * User: Jack's Computer
@@ -38,5 +40,10 @@ public class FileReaderWrapper extends MapperWrapper implements IFileReader {
         }
         br.close();
         return fileData;
+    }
+
+    @Override
+    public List<String> readAllLines(File file) throws IOException {
+        return Files.readAllLines(file.toPath());
     }
 }

@@ -1,5 +1,6 @@
 package com.colonolnutty.module.shareddata.ui;
 
+import com.colonolnutty.module.shareddata.models.settings.CNBaseSettings;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 
 import javax.swing.*;
@@ -20,11 +21,13 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
  * Date: 10/04/2017
  * Time: 5:49 PM
  */
-public abstract class SettingsDisplayBase {
+public abstract class SettingsDisplayBase<T extends CNBaseSettings> {
     protected Hashtable<String, JTextComponent> _textFields;
     protected Hashtable<String, JCheckBox> _checkBoxes;
     protected Hashtable<String, JSlider> _sliders;
     protected int minTextEntryHeight = 30;
+
+    public abstract JPanel setup(ActionListener onRun);
 
     protected SettingsDisplayBase() {
         _textFields = new Hashtable<String, JTextComponent>();

@@ -26,6 +26,7 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
         _writer = writer;
     }
 
+    @Override
     public JPanel setup(ActionListener onRun) {
         JPanel settingsDisplay = new JPanel();
         GroupLayout layout = new GroupLayout(settingsDisplay);

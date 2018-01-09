@@ -1,6 +1,8 @@
 package com.colonolnutty.module.shareddata.io;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * User: Jack's Computer
@@ -10,4 +12,5 @@ import java.io.IOException;
 public interface IFileReader {
     <T> T read(String filePath, Class<T> classOfT) throws IOException;
     String readFile(String filePath) throws IOException;
+    List<String> readAllLines(File file) throws IOException;
 }
