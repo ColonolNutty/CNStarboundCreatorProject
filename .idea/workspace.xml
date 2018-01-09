@@ -19,26 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/FileFinder.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/IFileFinder.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/DefaultMainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/cnbalancermodule/ui/BalancerSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/cnbalancermodule/ui/BalancerSettingsDisplay.java" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/cnbalancermodule/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/cnbalancermodule/ui/MainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/CNLog.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/debug/CNLog.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/FileReaderWrapper.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/FileReaderWrapper.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/IFileReader.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/io/IFileReader.java" />
-      <change beforePath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/SettingsDisplayBase.java" afterPath="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ui/SettingsDisplayBase.java" />
-      <change beforePath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/cnperennialcompactormodule/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNPerennialCompactorModule/src/main/cnperennialcompactormodule/ui/MainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/cnrecipeconfigcreator/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/cnrecipeconfigcreator/ui/MainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/cnrecipeconfigcreator/ui/RecipeConfigCreatorSettingsDisplay.java" afterPath="$PROJECT_DIR$/CNRecipeConfigCreator/src/main/cnrecipeconfigcreator/ui/RecipeConfigCreatorSettingsDisplay.java" />
-      <change beforePath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/cnrecipecreatormodule/ui/MainPanel.java" afterPath="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/cnrecipecreatormodule/ui/MainPanel.java" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNPerennialCompactorModule.jar" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeConfigCreator.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeConfigCreator.jar" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNRecipeCreatorModule.jar" />
+      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/src/META-INF/MANIFEST.MF" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -300,6 +281,42 @@
               <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="colonolnutty" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNStarboundCreatorProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNStarboundCreatorProject" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="CNStarboundCreatorUI_jar" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -309,7 +326,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.26819924" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -501,7 +518,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5518868" sideWeight="0.50324327" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40361446" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40361446" sideWeight="0.49783784" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1007,7 +1024,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>CNStarboundCreator.Shared:jar</last-edited>
+          <last-edited>CNStarboundCreatorUI:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
