@@ -297,6 +297,35 @@ public class JsonWrapperPrettyPrinterTests {
         assertFormatObject(obj, expectedResult);
     }
 
+    @Test
+    public void formatObject_should_return_single_property_object_with_sub_object_and_sub_array_of_objects() {
+        String expectedResult = "{"
+                + BasePrettyPrinter.NEW_LINE + "  \"four\" : ["
+                + BasePrettyPrinter.NEW_LINE + "    {"
+                + BasePrettyPrinter.NEW_LINE + "      \"six\" : 25.0,"
+                + BasePrettyPrinter.NEW_LINE + "      \"seven\" : 26.0"
+                + BasePrettyPrinter.NEW_LINE + "    }"
+                + BasePrettyPrinter.NEW_LINE + "  ],"
+                + BasePrettyPrinter.NEW_LINE + "  \"one\" : {"
+                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 25.0,"
+                + BasePrettyPrinter.NEW_LINE + "    \"three\" : 26.0"
+                + BasePrettyPrinter.NEW_LINE + "  }"
+                + BasePrettyPrinter.NEW_LINE + "}";
+        ObjectNode obj = _nodeProvider.createObjectNode();
+        ArrayNode subArr = _nodeProvider.createArrayNode();
+        ObjectNode subSubObj = _nodeProvider.createObjectNode();
+        subSubObj.put("six", 25.0);
+        subSubObj.put("seven", 26.0);
+        subArr.add(subSubObj);
+        obj.put("four", subArr);
+        ObjectNode subObj = _nodeProvider.createObjectNode();
+        subObj.put("two", 25.0);
+        subObj.put("three", 26.0);
+        obj.put("one", subObj);
+        assertFormatObject(obj, expectedResult);
+    }
+
+
     private String assertFormatObject(ObjectNode obj, String expectedResult, int indentSize, boolean shouldIndent) {
         String result = _printer.formatObject(new JsonNodeWrapper(obj), indentSize, shouldIndent);
         assertEquals(expectedResult, result);

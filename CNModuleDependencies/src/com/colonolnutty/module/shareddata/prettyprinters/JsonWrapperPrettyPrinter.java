@@ -149,10 +149,7 @@ public class JsonWrapperPrettyPrinter extends BasePrettyPrinter {
         }
         builder.append(result);
         if(isMultilineObject) {
-            builder.append(NEW_LINE);
-            if(shouldIndent) {
-                builder.append(CNStringUtils.createIndent(indentSize));
-            }
+            builder.append(NEW_LINE + CNStringUtils.createIndent(indentSize));
         }
         else {
             builder.append(" ");
