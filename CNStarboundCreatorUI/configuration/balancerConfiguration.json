@@ -4,7 +4,7 @@
   "enableTreeView" : true,
   "enableVerboseLogging" : true,
   "propertyOrderFile" : "configuration\\propertyOrder.json",
-  "propertiesToUpdate" : [ "foodValue", "price", "effects", "description" ],
+  "propertiesToUpdate" : [ "foodValue", "price", "effects", "description", "printable" ],
   "forceUpdate" : true,
   "locationsToUpdate" : [ "TestFiles\\Balancer\\Samples" ],
   "includeLocations" : [ "TestFiles\\Balancer\\NonStuff" ],

@@ -125,6 +125,7 @@ public class FileUpdater {
             }
             String[] relativePathNames = startPathBundle(filePath, currentDirectory);
             _log.startSubBundle("Update");
+            ForceSetProperties.forceSet(ingredient);
 
             if(isPatchFile) {
                 _log.writeToAll("Attempting to update applyPatch: " + ingredientName);

@@ -37,7 +37,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles {
             _keysToWrite = new ArrayList<String>();
         }
         else {
-            _keysToWrite = CNCollectionUtils.toStringArrayList(settings.propertiesToUpdate);
+            _keysToWrite = CNCollectionUtils.toArrayList(settings.propertiesToUpdate);
         }
 
         //Json Handlers
@@ -169,7 +169,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles {
             String fileData = _fileReader.readFile(filePath);
             String toWriteObj = _fileWriter.writeValueAsString(obj);
             JSONObject toWrite = new JSONObject(toWriteObj);
-            JSONObject combined = combineJsonValues(toWrite, fileData, filePath.endsWith(".consumable"));
+            JSONObject combined = combineJsonValues(toWrite, fileData, filePath.endsWith(".object"), filePath.endsWith(".consumable"));
             if(combined == null) {
                 return;
             }
@@ -197,6 +197,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles {
 
     private JSONObject combineJsonValues(JSONObject toWrite,
                                          String existingJson,
+                                         boolean canUpdatePrintable,
                                          boolean canUpdateEffects) {
         if(existingJson == null) {
             return null;
@@ -207,7 +208,7 @@ public class JsonManipulator implements IReadFiles, IWriteFiles {
             Iterator<String> toUpdateKeys = toWrite.keys();
             while (toUpdateKeys.hasNext()) {
                 String key = toUpdateKeys.next();
-                if(canWriteKey(key) && (existingObject.has(key) || (canUpdateEffects && key.equals("effects")))) {
+                if(canWriteKey(key) && (existingObject.has(key) || (canUpdateEffects && key.equals("effects")) || (canUpdatePrintable && key.equals("printable")))) {
                     Object value = toWrite.get(key);
                     if(value != null) {
                         existingObject.put(key, value);

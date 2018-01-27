@@ -172,6 +172,9 @@ public class IngredientStore {
             _log.debug("Overriding ingredient price: " + existing.getName() + " with " + ingredient.price);
             existing.price = ingredient.price;
         }
+        if(ingredient.printable != null) {
+            existing.printable = ingredient.printable;
+        }
         if(ingredient.effects != null || isOverride) {
             existing.effects = ingredient.effects;
         }

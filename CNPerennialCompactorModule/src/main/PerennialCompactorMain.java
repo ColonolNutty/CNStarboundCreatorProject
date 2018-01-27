@@ -49,7 +49,7 @@ public class PerennialCompactorMain extends MainFunctionModule implements IReadF
         StopWatchTimer timer = new StopWatchTimer(_log);
         timer.start("Running");
 
-        ArrayList<String> cropLocations = CNCollectionUtils.toStringArrayList(_settings.locationsOfCrops);
+        ArrayList<String> cropLocations = CNCollectionUtils.toArrayList(_settings.locationsOfCrops);
         _log.debug("Locating seeds");
 
         FileLocator fileLocator = new FileLocator(_log);

@@ -60,7 +60,7 @@ public class IngredientUpdater {
             if(!_settings.forceUpdate
                     && meetsMinimumValues(updatedIngredient)
                     && ingredientsAreEqual(originalIngredient, updatedIngredient)) {
-                _log.debug("    Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName());
+                _log.debug("Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), 4);
                 return null;
             }
             return ingredient.getName();

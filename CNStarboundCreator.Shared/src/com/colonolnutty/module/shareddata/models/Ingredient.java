@@ -27,6 +27,7 @@ public class Ingredient {
     public Object interactData;
     public Object breakDropOptions;
     public ArrayNode effects;
+    public Boolean printable;
 
     @JsonIgnore
     public static int DefaultEffectDuration = 60;
@@ -285,6 +286,7 @@ public class Ingredient {
         copyIngred.interactData = this.interactData;
         copyIngred.breakDropOptions = this.breakDropOptions;
         copyIngred.effects = this.effects;
+        copyIngred.printable = this.printable;
         return copyIngred;
     }
 }

@@ -49,7 +49,7 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
             _keysToWrite = new ArrayList<String>();
         }
         else {
-            _keysToWrite = CNCollectionUtils.toStringArrayList(settings.propertiesToUpdate);
+            _keysToWrite = CNCollectionUtils.toArrayList(settings.propertiesToUpdate);
         }
 
         //Json Handlers

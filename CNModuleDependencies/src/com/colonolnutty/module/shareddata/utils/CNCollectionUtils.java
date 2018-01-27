@@ -2,6 +2,7 @@ package com.colonolnutty.module.shareddata.utils;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -11,52 +12,101 @@ import java.util.Enumeration;
  * Time: 11:12 AM
  */
 public abstract class CNCollectionUtils {
-    public static ArrayList<String> toStringArrayList(String[] strs) {
-        ArrayList<String> arr = new ArrayList<String>();
-        for(String str : strs) {
-            arr.add(str);
-        }
-        return arr;
-    }
-
-    public static String[] toStringArray(ArrayList<String> strs) {
-        String[] arr = new String[strs.size()];
-        for(int i = 0; i < strs.size(); i++) {
-            arr[i] = strs.get(i);
-        }
-        return arr;
-    }
-
     public static boolean isEmpty(ArrayNode node) {
         return node == null || node.size() == 0;
     }
 
-    public static String[] combine(String[] one, String[] two) {
-        String[] ingredientFileExtensions = new String[one.length + two.length];
-        for(int i = 0; i < one.length; i++) {
-            ingredientFileExtensions[i] = one[i];
-        }
-        for(int i = 0; i < two.length; i++) {
-            ingredientFileExtensions[i + one.length] = two[i];
-        }
-        return ingredientFileExtensions;
+    public static <T> boolean isEmpty(T[] arr) {
+        return arr == null || arr.length == 0;
     }
 
-    public static boolean contains(ArrayList<String> arr, String val) {
+    public static <T> boolean hasCount(ArrayList<T> arr, int count) {
+        return arr != null && arr.size() == count;
+    }
+
+    public static <T> boolean hasMultiple(ArrayList<T> arr) {
+        return arr != null && arr.size() > 1;
+    }
+
+    public static <T> boolean hasMultiple(T[] arr) {
+        return arr != null && arr.length > 1;
+    }
+
+    public static <T> T getSingleOrNull(T[] values) {
+        if(values.length == 0 || hasMultiple(values)) {
+            return null;
+        }
+        return values[0];
+    }
+
+    public static <T> T getSingleOrNull(ArrayList<T> values) {
+        if(values.isEmpty() || hasMultiple(values)) {
+           return null;
+        }
+        return values.get(0);
+    }
+
+    public static <T> ArrayList<T> combine(ArrayList<T>... values) {
+        ArrayList<T> result = new ArrayList<T>();
+        for(ArrayList<T> value : values) {
+            for(T val : value) {
+                result.add(val);
+            }
+        }
+        return result;
+    }
+
+    public static <T> T[] combine(Class<T> classOfType, T[]... values) {
+        int totalLength = 0;
+        for(T[] value : values) {
+            totalLength += value.length;
+        }
+        T[] result = (T[]) Array.newInstance(classOfType, totalLength);
+        int currentIdx = 0;
+        for(T[] value : values) {
+            for (T val : value) {
+                result[currentIdx] = val;
+                currentIdx++;
+            }
+        }
+        return result;
+    }
+
+    public static <T> boolean contains(ArrayList<T> arr, T val) {
         boolean found = false;
-        for(int i = 0; i < arr.size(); i++) {
-            if(arr.get(i).equals(val)) {
+        for(T value : arr) {
+            if(value.equals(val)) {
                 found = true;
-                i = arr.size();
+                break;
             }
         }
         return found;
     }
 
-    public static ArrayList<String> toArrayList(Enumeration<String> keys) {
-        ArrayList<String> arr = new ArrayList<String>();
+    public static <T> ArrayList<T> toArrayList(Enumeration<T> keys) {
+        ArrayList<T> arr = new ArrayList<T>();
         while(keys.hasMoreElements()) {
             arr.add(keys.nextElement());
+        }
+        return arr;
+    }
+
+    public static <T> T[] toArray(Class<T> classOfType, Enumeration<T> keys) {
+        return toArray(classOfType, toArrayList(keys));
+    }
+
+    public static <T> ArrayList<T> toArrayList(T[] values) {
+        ArrayList<T> arr = new ArrayList<T>();
+        for(int i = 0; i < values.length; i++) {
+            arr.add(values[i]);
+        }
+        return arr;
+    }
+
+    public static <T> T[] toArray(Class<T> classOfType, ArrayList<T> values) {
+        T[] arr =  (T[])Array.newInstance(classOfType, values.size());
+        for(int i = 0; i < values.size(); i++) {
+            arr[i] = values.get(i);
         }
         return arr;
     }

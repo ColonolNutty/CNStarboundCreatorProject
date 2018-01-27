@@ -95,6 +95,9 @@ public class FileLocator {
 
     private ArrayList<String> getFilePaths(File directory) {
         ArrayList<String> filePaths = new ArrayList<String>();
+        if(directory == null || !directory.exists()) {
+            return filePaths;
+        }
         //getTextArea all the files from a directory
         File[] fList = directory.listFiles();
         for (File file : fList){
