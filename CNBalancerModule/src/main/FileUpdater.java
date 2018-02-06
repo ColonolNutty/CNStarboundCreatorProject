@@ -170,6 +170,9 @@ public class FileUpdater {
     }
 
     private void verifyMinimumValues(Ingredient ingredient) {
+        if(ingredient.price != null && ingredient.price < 1.0 && ingredient.price > 0.0) {
+            ingredient.price = 1.0;
+        }
         if(ingredient.foodValue != null && ingredient.foodValue < _settings.minimumFoodValue) {
             ingredient.foodValue = (double)_settings.minimumFoodValue;
         }

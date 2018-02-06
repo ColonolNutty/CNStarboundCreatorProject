@@ -15,9 +15,7 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.*;
 
 /**
  * User: Jack's Computer
@@ -274,8 +272,8 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
             return null;
         }
         boolean needsUpdate = false;
-        ArrayList<JsonNode> newTestNodes = new ArrayList<JsonNode>();
-        ArrayList<JsonNode> newNonTestNodes = new ArrayList<JsonNode>();
+        Hashtable<String, JsonNode> newTestNodes = new Hashtable<String, JsonNode>();
+        Hashtable<String, ArrayList<JsonNode>> newNonTestNodes = new Hashtable<String, ArrayList<JsonNode>>();
         Enumeration<String> keys = nodesAvailability.keys();
         while(keys.hasMoreElements()) {
             String key = keys.nextElement();
@@ -285,10 +283,10 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
                 if(nodeAvailability.TestNode != null
                         && nodeAvailability.NonTestNodes != null
                         && nodeAvailability.NonTestNodes.size() > 0) {
-                    newTestNodes.add(nodeAvailability.TestNode);
+                    newTestNodes.put(nodeAvailability.PathName, nodeAvailability.TestNode);
                 }
                 if(nodeAvailability.hasNonTestNodes()) {
-                    newNonTestNodes.addAll(nodeAvailability.NonTestNodes);
+                    newNonTestNodes.put(nodeAvailability.PathName, nodeAvailability.NonTestNodes);
                 }
                 continue;
             }
@@ -314,10 +312,10 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
             }
 
             if(nodeAvailability.hasNonTestNodes()) {
-                newNonTestNodes.addAll(nodeAvailability.NonTestNodes);
+                newNonTestNodes.put(nodeAvailability.PathName, nodeAvailability.NonTestNodes);
             }
             if(nodeAvailability.TestNode != null) {
-                newTestNodes.add(nodeAvailability.TestNode);
+                newTestNodes.put(nodeAvailability.PathName, nodeAvailability.TestNode);
             }
 
             //If forcing an update, no need to check, needsUpdate will be true no matter what
@@ -339,7 +337,27 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
             return null;
         }
         if(_forceUpdate || needsUpdate) {
-            return new PatchNodes(newTestNodes, newNonTestNodes);
+            ArrayList<String> testNodePaths = CNCollectionUtils.toArrayList(newTestNodes.keys());
+            Comparator<String> comparator = Comparator.naturalOrder();
+
+            Collections.sort(testNodePaths, comparator);
+            ArrayList<JsonNode> testNodes = new ArrayList<JsonNode>();
+
+            for(String path : testNodePaths) {
+                testNodes.add(newTestNodes.get(path));
+            }
+
+            ArrayList<String> nonTestNodePaths = CNCollectionUtils.toArrayList(newNonTestNodes.keys());
+
+
+            Collections.sort(nonTestNodePaths, comparator);
+
+            ArrayList<JsonNode> nonTestNodes = new ArrayList<JsonNode>();
+            for(String path : nonTestNodePaths) {
+                nonTestNodes.addAll(newNonTestNodes.get(path));
+            }
+
+            return new PatchNodes(testNodes, nonTestNodes);
         }
         return null;
     }
