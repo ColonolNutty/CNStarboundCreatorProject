@@ -19,17 +19,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c8216d-db1f-47de-b145-26ef2b0b1b84" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/collectors/EffectsCollectorTests.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/collectors/EffectsCollector.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/collectors/FoodValueCollector.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/collectors/ICollector.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/collectors/PriceCollector.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" afterPath="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" />
       <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" afterPath="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/flourMFM.consumable" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/flourMFM.consumable" />
-      <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/yeastMFMseed.object" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/yeastMFMseed.object" />
+      <change beforePath="$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java" afterPath="" />
       <change beforePath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" afterPath="$PROJECT_DIR$/CNStarboundCreatorUI/modules/CNBalancerModule.jar" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -42,36 +34,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file leaf-file-name="IngredientDataCalculator.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="IngredientDataCalculator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="84" column="14" lean-forward="false" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
+            <state relative-caret-position="357">
+              <caret line="120" column="81" lean-forward="false" selection-start-line="120" selection-start-column="81" selection-end-line="120" selection-end-column="81" />
               <folding>
-                <element signature="e#3782#3794#0" expanded="true" />
-                <element signature="e#9866#9867#0" expanded="true" />
-                <element signature="e#9906#9907#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#3485#3497#0" expanded="true" />
+                <element signature="e#9368#9369#0" expanded="true" />
+                <element signature="e#9408#9409#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BalancedIngredient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="battersimpleMFM.consumable.patch" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CNStarboundCreatorUI/TestFiles/Balancer/Samples/Stuff/battersimpleMFM.consumable.patch">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -166,7 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CNRecipeCreatorModule/src/main/cnrecipecreatormodule/ui/RecipeCreatorSettingsDisplay.java" />
         <option value="$PROJECT_DIR$/CNStarboundCreator.Shared/src/com/colonolnutty/module/shareddata/models/ItemDescriptor.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/ModuleLoader.java" />
         <option value="$PROJECT_DIR$/CNModuleDependencies/src/com/colonolnutty/module/shareddata/models/settings/CNBaseSettings.java" />
@@ -212,11 +184,12 @@
         <option value="$PROJECT_DIR$/CNBalancerModule/src/main/FileUpdater.java" />
         <option value="$PROJECT_DIR$/CNBalancerModule/src/main/collectors/ICollector.java" />
         <option value="$PROJECT_DIR$/CNBalancerModule/src/main/collectors/PriceCollector.java" />
-        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" />
         <option value="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/IngredientDataCalculatorTests.java" />
         <option value="$PROJECT_DIR$/CNBalancerModule.Tests/src/tests/collectors/EffectsCollectorTests.java" />
         <option value="$PROJECT_DIR$/CNBalancerModule/src/main/collectors/EffectsCollector.java" />
         <option value="$PROJECT_DIR$/CNBalancerModule/src/main/collectors/FoodValueCollector.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java" />
+        <option value="$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java" />
       </list>
     </option>
   </component>
@@ -1120,18 +1093,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="84" column="14" lean-forward="false" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
-          <folding>
-            <element signature="e#3782#3794#0" expanded="true" />
-            <element signature="e#9866#9867#0" expanded="true" />
-            <element signature="e#9906#9907#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/collectors/PriceCollector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1161,9 +1122,9 @@
         <state relative-caret-position="189">
           <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6948#6949#0" expanded="true" />
-            <element signature="e#6992#6993#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#6948#6949#0" expanded="false" />
+            <element signature="e#6992#6993#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1173,16 +1134,8 @@
         <state relative-caret-position="693">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1191,6 +1144,27 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/models/BalancedIngredient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="30" lean-forward="false" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CNBalancerModule/src/main/IngredientDataCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="120" column="81" lean-forward="false" selection-start-line="120" selection-start-column="81" selection-end-line="120" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3485#3497#0" expanded="true" />
+            <element signature="e#9368#9369#0" expanded="true" />
+            <element signature="e#9408#9409#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

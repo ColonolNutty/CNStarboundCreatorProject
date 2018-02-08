@@ -10,23 +10,18 @@ import com.colonolnutty.module.shareddata.locators.IngredientStore;
 import com.colonolnutty.module.shareddata.locators.RecipeStore;
 import com.colonolnutty.module.shareddata.locators.StatusEffectStore;
 import com.colonolnutty.module.shareddata.models.*;
-import com.colonolnutty.module.shareddata.utils.CNMathUtils;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.collectors.EffectsCollector;
 import main.collectors.FoodValueCollector;
 import main.collectors.ICollector;
 import main.collectors.PriceCollector;
-import main.models.BalancedIngredient;
 import main.settings.BalancerSettings;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -82,7 +77,6 @@ public class IngredientDataCalculator implements IReadFiles {
         Double increasePercentage = _settings.increasePercentage;
         ArrayList<RecipeIngredient> recipeIngredients = findIngredientsFor(recipe);
         String outputName = recipe.output.item;
-        BalancedIngredient balancedIngredient = new BalancedIngredient(outputName);
         boolean isRawFood = outputName.startsWith("raw");
         String subName = "Calculating \"" + outputName + "\" values";
         _log.startSubBundle(subName);
@@ -120,13 +114,11 @@ public class IngredientDataCalculator implements IReadFiles {
             outputCount = 1.0;
         }
 
-        _log.debug("After calculations, the new values for: \"" + outputName + "\" are p: " + balancedIngredient.Price + " and fv: " + balancedIngredient.FoodValue);
-
-        Ingredient newIngredient = new Ingredient(balancedIngredient.ItemName);
+        Ingredient newIngredient = new Ingredient(outputName);
         for(ICollector collector : collectors) {
             collector.applyData(newIngredient, outputCount);
         }
-        Ingredient existingIngredient = _ingredientStore.getIngredient(balancedIngredient.ItemName);
+        Ingredient existingIngredient = _ingredientStore.getIngredient(outputName);
         newIngredient.description = createDescription(existingIngredient.description, recipe, _friendlyGroupNames);
         return newIngredient;
     }
