@@ -2,18 +2,6 @@
   [
     {
       "op" : "test",
-      "path" : "/foodValue",
-      "inverse" : true
-    },
-    {
-      "op" : "add",
-      "path" : "/foodValue",
-      "value" : 0.0
-    }
-  ],
-  [
-    {
-      "op" : "test",
       "path" : "/description",
       "inverse" : true
     },
@@ -21,18 +9,6 @@
       "op" : "add",
       "path" : "/description",
       "value" : ""
-    }
-  ],
-  [
-    {
-      "op" : "test",
-      "path" : "/price",
-      "inverse" : true
-    },
-    {
-      "op" : "add",
-      "path" : "/price",
-      "value" : 0.0
     }
   ],
   [
@@ -49,24 +25,33 @@
   ],
   [
     {
+      "op" : "test",
+      "path" : "/foodValue",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/foodValue",
+      "value" : 0.0
+    }
+  ],
+  [
+    {
+      "op" : "test",
+      "path" : "/price",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/price",
+      "value" : 0.0
+    }
+  ],
+  [
+    {
       "op" : "replace",
       "path" : "/banana",
       "value" : "(fdsafdsay"
-    },
-    {
-      "op" : "replace",
-      "path" : "/foodValue",
-      "value" : 2.1
-    },
-    {
-      "op" : "replace",
-      "path" : "/description",
-      "value" : "(BLEND)(PREP):-} Waty"
-    },
-    {
-      "op" : "replace",
-      "path" : "/price",
-      "value" : 239.4
     },
     {
       "op" : "replace",
@@ -80,13 +65,28 @@
     },
     {
       "op" : "replace",
-      "path" : "/nope/noeo/noesa",
-      "value" : "(4432423"
+      "path" : "/description",
+      "value" : "(BLEND)(PREP):-} Waty"
     },
     {
       "op" : "replace",
       "path" : "/effects",
       "value" : [[ ]]
+    },
+    {
+      "op" : "replace",
+      "path" : "/foodValue",
+      "value" : 2.1
+    },
+    {
+      "op" : "replace",
+      "path" : "/nope/noeo/noesa",
+      "value" : "(4432423"
+    },
+    {
+      "op" : "replace",
+      "path" : "/price",
+      "value" : 239.4
     }
   ]
 ]

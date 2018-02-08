@@ -29,7 +29,6 @@ import static org.mockito.Mockito.when;
  */
 public class IngredientDataCalculatorTests {
 
-    private ObjectMapper _mapper;
     private CNLog _logMock;
     private BalancerSettings _settings;
     private RecipeStore _recipeStoreMock;
@@ -40,10 +39,6 @@ public class IngredientDataCalculatorTests {
     private NodeProvider _nodeProvider;
 
     public IngredientDataCalculatorTests() {
-        JsonFactory jf = new JsonFactory();
-        jf.enable(JsonParser.Feature.ALLOW_COMMENTS);
-        _mapper = new ObjectMapper(jf);
-        _mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 
         _logMock = mock(CNLog.class);
         _settings = new BalancerSettings();
@@ -295,127 +290,6 @@ public class IngredientDataCalculatorTests {
         recipe.input = inputs;
         return recipe;
     }
-
-    //getEffects
-    @Test
-    public void should_exclude_effects_with_just_a_name_and_no_default_duration() {
-        StatusEffect[] statusEffects = new StatusEffect[2];
-        statusEffects[0] = new StatusEffect("One", 5);
-        statusEffects[1] = new StatusEffect("Two", 10);
-        ArrayNode effectsArr = createEffectsArray(statusEffects);
-
-        ArrayNode subArr = (ArrayNode)effectsArr.get(0);
-        subArr.add("Three");
-
-        Ingredient ingredient = new Ingredient();
-        ingredient.effects = effectsArr;
-        Hashtable<String, Integer> result = _calculator.getEffects(ingredient, false);
-        assertEquals(2, result.size());
-        assertTrue(result.containsKey("One"));
-        assertEquals(5, (int)result.get("One"));
-        assertTrue(result.containsKey("Two"));
-        assertEquals(10, (int)result.get("Two"));
-        assertFalse(result.containsKey("Three"));
-    }
-
-    @Test
-    public void should_handle_effects_with_just_a_name() {
-        StatusEffect[] statusEffects = new StatusEffect[2];
-        statusEffects[0] = new StatusEffect("One", 5);
-        statusEffects[1] = new StatusEffect("Two", 10);
-        ArrayNode effectsArr = createEffectsArray(statusEffects);
-
-        ArrayNode subArr = (ArrayNode)effectsArr.get(0);
-        subArr.add("Three");
-        when(_statusEffectStoreMock.getDefaultStatusEffectDuration("Three")).thenReturn(200);
-
-        Ingredient ingredient = new Ingredient();
-        ingredient.effects = effectsArr;
-        Hashtable<String, Integer> result = _calculator.getEffects(ingredient, false);
-        assertEquals(3, result.size());
-        assertTrue(result.containsKey("One"));
-        assertEquals(5, (int)result.get("One"));
-        assertTrue(result.containsKey("Two"));
-        assertEquals(10, (int)result.get("Two"));
-        assertTrue(result.containsKey("Three"));
-        assertEquals(200, (int)result.get("Three"));
-    }
-
-    @Test
-    public void should_add_durations_together_for_duplicate_effects() {
-        StatusEffect[] statusEffects = new StatusEffect[3];
-        statusEffects[0] = new StatusEffect("One", 5);
-        statusEffects[1] = new StatusEffect("Two", 20);
-        statusEffects[2] = new StatusEffect("Two", 5);
-        ArrayNode effectsArr = createEffectsArray(statusEffects);
-        Ingredient ingredient = new Ingredient();
-        ingredient.effects = effectsArr;
-        Hashtable<String, Integer> result = _calculator.getEffects(ingredient, false);
-        assertEquals(2, result.size());
-        assertTrue(result.containsKey("One"));
-        assertEquals(5, (int)result.get("One"));
-        assertTrue(result.containsKey("Two"));
-        assertEquals(25, (int)result.get("Two"));
-    }
-
-    @Test
-    public void should_exclude_effects_with_negative_duration() {
-        StatusEffect[] statusEffects = new StatusEffect[2];
-        statusEffects[0] = new StatusEffect("One", 5);
-        statusEffects[1] = new StatusEffect("Two", -20);
-        ArrayNode effectsArr = createEffectsArray(statusEffects);
-        Ingredient ingredient = new Ingredient();
-        ingredient.effects = effectsArr;
-        Hashtable<String, Integer> result = _calculator.getEffects(ingredient, false);
-        assertEquals(1, result.size());
-        assertFalse(result.containsKey("Two"));
-        assertTrue(result.containsKey("One"));
-        assertEquals(5, (int)result.get("One"));
-    }
-
-    @Test
-    public void should_exclude_effects_with_no_name() {
-        StatusEffect[] statusEffects = new StatusEffect[2];
-        statusEffects[0] = new StatusEffect("One", 5);
-        statusEffects[1] = new StatusEffect("", 20);
-        ArrayNode effectsArr = createEffectsArray(statusEffects);
-        Ingredient ingredient = new Ingredient();
-        ingredient.effects = effectsArr;
-        Hashtable<String, Integer> result = _calculator.getEffects(ingredient, false);
-        assertEquals(1, result.size());
-        assertFalse(result.containsKey(""));
-        assertTrue(result.containsKey("One"));
-        assertEquals(5, (int)result.get("One"));
-    }
-
-    @Test
-    public void should_exclude_effects_with_zero_duration() {
-        StatusEffect[] statusEffects = new StatusEffect[2];
-        statusEffects[0] = new StatusEffect("One", 5);
-        statusEffects[1] = new StatusEffect("Two", 0);
-        ArrayNode effectsArr = createEffectsArray(statusEffects);
-        Ingredient ingredient = new Ingredient();
-        ingredient.effects = effectsArr;
-        Hashtable<String, Integer> result = _calculator.getEffects(ingredient, false);
-        assertEquals(1, result.size());
-        assertFalse(result.containsKey("Two"));
-        assertTrue(result.containsKey("One"));
-        assertEquals(5, (int)result.get("One"));
-    }
-
-    @Test
-    public void should_give_effects_with_one_effect() {
-        StatusEffect[] statusEffects = new StatusEffect[1];
-        statusEffects[0] = new StatusEffect("One", 5);
-        ArrayNode effectsArr = createEffectsArray(statusEffects);
-        Ingredient ingredient = new Ingredient();
-        ingredient.effects = effectsArr;
-        Hashtable<String, Integer> result = _calculator.getEffects(ingredient, false);
-        assertEquals(1, result.size());
-        assertTrue(result.containsKey("One"));
-        assertEquals(5, (int)result.get("One"));
-    }
-    //getEffects
 
     //createDescription
     @Test
@@ -689,20 +563,5 @@ public class IngredientDataCalculatorTests {
         friendlyGroupNames.put("one", "One");
         friendlyGroupNames.put("two", "Two");
         return friendlyGroupNames;
-    }
-
-    private ArrayNode createEffectsArray(StatusEffect[] effects) {
-        ArrayNode subNode = _mapper.createArrayNode();
-        for(int i = 0; i < effects.length; i++) {
-            StatusEffect effect = effects[i];
-            when(_statusEffectStoreMock.getDefaultStatusEffectDuration(effect.name)).thenReturn(effect.defaultDuration);
-            ObjectNode effectNode = _mapper.createObjectNode();
-            effectNode.put("effect", effect.name);
-            effectNode.put("duration", effect.defaultDuration);
-            subNode.add(effectNode);
-        }
-        ArrayNode node = _mapper.createArrayNode();
-        node.add(subNode);
-        return node;
     }
 }

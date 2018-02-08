@@ -26,7 +26,7 @@
       "dualImage" : "yeastMFMseed.png:<color>.<stage>.<alt>",
       "anchors" : [ "bottom" ]
     }
-],
+  ],
   "largeImage" : "yeastMFMseed.png:default.default.default",
   "stages" : [
     { "duration" : [ 600, 600 ] },
