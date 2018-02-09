@@ -74,6 +74,10 @@ public class Ingredient {
         return hasEffects(effects);
     }
 
+    public boolean hasEffects(JsonNode eff) {
+        return effectsNotEmpty(eff) && effectsNotEmpty(eff.get(0));
+    }
+
     public void setName(String name) {
         if(name == null) {
             return;
@@ -252,10 +256,6 @@ public class Ingredient {
             return false;
         }
         return true;
-    }
-
-    public boolean hasEffects(JsonNode eff) {
-        return effectsNotEmpty(eff) && effectsNotEmpty(eff.get(0));
     }
 
     public boolean effectsNotEmpty(JsonNode eff) {

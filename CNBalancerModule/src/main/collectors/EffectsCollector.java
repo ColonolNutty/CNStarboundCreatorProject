@@ -5,11 +5,13 @@ import com.colonolnutty.module.shareddata.NodeProvider;
 import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.locators.StatusEffectStore;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.settings.BalancerSettings;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -19,73 +21,53 @@ import java.util.Hashtable;
  * Date: 02/08/2018
  * Time: 12:22 PM
  */
-public class EffectsCollector implements ICollector, IRequireNodeProvider {
+public class EffectsCollector extends BaseCollector implements ICollector, IRequireNodeProvider {
+    private BalancerSettings _settings;
     private CNLog _log;
-    private Double _increasePercentage;
-    private boolean _isRawFood;
-    private Hashtable<String, Integer> _effects;
     private StatusEffectStore _statusEffectStore;
-    private String[] _excludedEffects;
-    private boolean _enableEffectsUpdate;
     private NodeProvider _nodeProvider;
 
-    public EffectsCollector(boolean enableEffectsUpdate,
-                            String[] excludedEffects, StatusEffectStore statusEffectStore,
-                            boolean isRawFood, CNLog log, Double increasePercentage) {
-        _enableEffectsUpdate = enableEffectsUpdate;
-        _excludedEffects = excludedEffects;
+    private Hashtable<String, Integer> _effects;
+
+    public EffectsCollector(BalancerSettings settings,
+                            CNLog log,
+                            StatusEffectStore statusEffectStore) {
+        _settings = settings;
         _statusEffectStore = statusEffectStore;
-        _isRawFood = isRawFood;
         _log = log;
-        _increasePercentage = increasePercentage;
         _nodeProvider = new NodeProvider();
         _effects = new Hashtable<String, Integer>();
     }
 
     @Override
-    public void collectData(Ingredient ingredient, double inputCount) {
+    public void collectData(Ingredient ingredient, double inputCount, Recipe recipe) {
         if(!ingredient.hasEffects()) {
             return;
         }
-        Hashtable<String, Integer> ingredientEffects = getEffects(ingredient, _isRawFood);
+        boolean isRawFood = recipe.output.item.startsWith("raw");
+        Hashtable<String, Integer> ingredientEffects = getEffects(ingredient, isRawFood);
         Enumeration<String> effectNames = ingredientEffects.keys();
         while(effectNames.hasMoreElements()) {
             String effectName = effectNames.nextElement();
             Integer effectDuration = ingredientEffects.get(effectName);
-            int duration = calculateValue(inputCount, (double)effectDuration, _increasePercentage).intValue();
+            int duration = calculateValue(inputCount, (double)effectDuration, _settings.increasePercentage).intValue();
             addOrUpdateEffect(effectName, duration);
         }
     }
 
     @Override
     public boolean applyData(Ingredient ingredient, double outputCount) {
-        if(_enableEffectsUpdate) {
-            ArrayNode combinedEffects = toEffectsArrayNode(ingredient.getName(), _effects, outputCount);
-            ArrayNode combined = _nodeProvider.createArrayNode();
-            combined.add(combinedEffects);
+        if(!_settings.enableEffectsUpdate || _effects.size() == 0) {
+            return false;
+        }
+        ArrayNode combinedEffects = toEffectsArrayNode(ingredient.getName(), _effects, outputCount);
+        ArrayNode combined = _nodeProvider.createArrayNode();
+        combined.add(combinedEffects);
+        if(!ingredient.effectsAreEqual(combined)) {
             ingredient.effects = combined;
+            return true;
         }
         return false;
-    }
-
-    /**
-     * Calculates using formula: (v * c) + (v * iP)
-     * @param count (c) number of items
-     * @param value (v) value of items
-     * @param increasePercentage (iP) amount of value to add to the total
-     * @return (v * c) + (v * iP)
-     */
-    public Double calculateValue(Double count, Double value, Double increasePercentage) {
-        if(count == null || value == null || increasePercentage == null) {
-            return 0.0;
-        }
-        if(count <= 0.0) {
-            count = 1.0;
-        }
-        if(value < 0.0) {
-            value = 0.0;
-        }
-        return (value * count) + (value * increasePercentage);
     }
 
     public void addOrUpdateEffect(String name, int duration) {
@@ -133,7 +115,7 @@ public class EffectsCollector implements ICollector, IRequireNodeProvider {
 
                 boolean isFoodPoisonOnRawFood = effectName.equals("foodpoison")
                         && isRawFood;
-                if(!isFoodPoisonOnRawFood && CNStringUtils.contains(effectName, _excludedEffects)) {
+                if(!isFoodPoisonOnRawFood && CNStringUtils.contains(effectName, _settings.excludedEffects)) {
                     continue;
                 }
 

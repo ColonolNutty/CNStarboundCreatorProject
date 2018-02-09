@@ -1,54 +1,40 @@
 package main.collectors;
 
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.utils.CNMathUtils;
+import main.settings.BalancerSettings;
 
 /**
  * User: Jack's Computer
  * Date: 02/08/2018
  * Time: 12:21 PM
  */
-public class PriceCollector implements ICollector {
-    private Double _increasePercentage;
+public class PriceCollector extends BaseCollector implements ICollector {
+    private BalancerSettings _settings;
     private Double _totalValue;
 
-    public PriceCollector(Double increasePercentage) {
-        _increasePercentage = increasePercentage;
+    public PriceCollector(BalancerSettings settings) {
+        _settings = settings;
         _totalValue = 0.0;
     }
 
     @Override
-    public void collectData(Ingredient ingredient, double inputCount) {
-        _totalValue += calculateValue(inputCount, ingredient.price, _increasePercentage);
+    public void collectData(Ingredient ingredient, double inputCount, Recipe recipe) {
+        _totalValue += calculateValue(inputCount, ingredient.price, _settings.increasePercentage);
     }
 
     @Override
     public boolean applyData(Ingredient ingredient, double outputCount) {
         double endValue = CNMathUtils.roundTwoDecimalPlaces(_totalValue / outputCount);
+        // Apply minimum value
+        if(endValue < 1.0) {
+            endValue = 1.0;
+        }
         if(ingredient.price == null || !ingredient.price.equals(endValue)) {
             ingredient.price = endValue;
             return true;
         }
         return false;
-    }
-
-    /**
-     * Calculates using formula: (v * c) + (v * iP)
-     * @param count (c) number of items
-     * @param value (v) value of items
-     * @param increasePercentage (iP) amount of value to add to the total
-     * @return (v * c) + (v * iP)
-     */
-    public Double calculateValue(Double count, Double value, Double increasePercentage) {
-        if(count == null || value == null || increasePercentage == null) {
-            return 0.0;
-        }
-        if(count <= 0.0) {
-            count = 1.0;
-        }
-        if(value < 0.0) {
-            value = 0.0;
-        }
-        return (value * count) + (value * increasePercentage);
     }
 }

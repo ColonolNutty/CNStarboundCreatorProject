@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.collectors.EffectsCollector;
+import main.settings.BalancerSettings;
 import org.junit.Test;
 
 import java.util.Hashtable;
@@ -31,6 +32,7 @@ public class EffectsCollectorTests {
     private CNLog _logMock;
     private StatusEffectStore _statusEffectStoreMock;
     private EffectsCollector _collector;
+    private BalancerSettings _settings;
 
     public EffectsCollectorTests() {
         JsonFactory jf = new JsonFactory();
@@ -40,8 +42,11 @@ public class EffectsCollectorTests {
 
         _logMock = mock(CNLog.class);
         _statusEffectStoreMock = mock(StatusEffectStore.class);
-        _collector = new EffectsCollector(true, new String[0],
-                _statusEffectStoreMock, false, _logMock, 0.0);
+        _settings = new BalancerSettings();
+        _settings.enableEffectsUpdate = true;
+        _settings.excludedEffects = new String[0];
+        _settings.increasePercentage = 0.0;
+        _collector = new EffectsCollector(_settings, _logMock, _statusEffectStoreMock);
     }
 
     //getEffects

@@ -36,10 +36,7 @@ public class CNLog {
         _debugWriter = debugWriter;
         _ignoredErrors = new ArrayList<String>();
         _ignoredErrors.add("value differs from expectations");
-        setVerboseLogging(settings.enableVerboseLogging);
-        setConsoleDebug(settings.enableConsoleDebug);
-        setLogFile(settings.logFile);
-        setupDebugLogFile();
+        updateSettings(settings);
     }
 
     public void setVerboseLogging(boolean enableVerbose) {
@@ -219,7 +216,9 @@ public class CNLog {
     }
 
     public void clear() {
-        _messageBundler.clear();
+        if(_messageBundler != null) {
+            _messageBundler.clear();
+        }
     }
 
     public void dispose() {
@@ -253,6 +252,14 @@ public class CNLog {
         catch(IOException e) {
             error(e);
         }
+    }
+
+    public void updateSettings(CNBaseSettings settings) {
+        clear();
+        setVerboseLogging(settings.enableVerboseLogging);
+        setConsoleDebug(settings.enableConsoleDebug);
+        setLogFile(settings.logFile);
+        setupDebugLogFile();
     }
 
     private enum MessageType {

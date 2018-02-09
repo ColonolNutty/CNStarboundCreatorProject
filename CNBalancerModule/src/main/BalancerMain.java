@@ -47,6 +47,7 @@ public class BalancerMain extends MainFunctionModule implements IReadFiles {
         JsonPatchManipulator patchManipulator = new JsonPatchManipulator(_log, _settings);
         PatchLocator patchLocator = new PatchLocator(_log);
         ArrayList<String> searchLocations = setupSearchLocations(_settings);
+        _log.info("Locating files");
         FileLocator fileLocator = new FileLocator(_log);
 
         StatusEffectStore statusEffectStore = new StatusEffectStore(_log, fileLocator, manipulator, patchManipulator, patchLocator, searchLocations);

@@ -83,8 +83,7 @@ public class DefaultMainPanel<T extends CNBaseSettings, Y extends SettingsDispla
                 Thread thread = new Thread() {
                     public void run() {
                         try {
-                            _log.clear();
-                            _log.setupDebugLogFile();
+                            _log.updateSettings(_settings);
                             _outputDisplay.clear();
                             _settingsDisplay.disable();
                             _progressDisplay.reset();

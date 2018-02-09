@@ -56,7 +56,6 @@ public class FileUpdater {
         String[] ingredientFileExts = fileTypesToUpdate;
         String currentDirectory = System.getProperty("user.dir");
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientFileExts);
-
         int totalIterations = filePaths.size() * _settings.numberOfPasses;
         boolean shouldContinue = ConfirmationController.getConfirmation("Total number of iterations (Larger numbers will take awhile): " + totalIterations + ", continue?");
         if(!shouldContinue) {
