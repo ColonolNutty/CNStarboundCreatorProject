@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="Release">
+    <output-path>$PROJECT_DIR$/out/artifacts/Release</output-path>
+    <root id="root">
+      <element id="directory" name="modules">
+        <element id="artifact" artifact-name="CNBalancerModule:jar" />
+        <element id="artifact" artifact-name="CNRecipeConfigCreator:jar" />
+        <element id="artifact" artifact-name="CNPerennialCompactorModule:jar" />
+        <element id="artifact" artifact-name="CNRecipeCreatorModule:jar" />
+      </element>
+      <element id="directory" name="configuration">
+        <element id="dir-copy" path="$PROJECT_DIR$/CNStarboundCreatorUI/configuration" />
+      </element>
+      <element id="artifact" artifact-name="CNStarboundCreatorUI:jar" />
+    </root>
+  </artifact>
+</component>

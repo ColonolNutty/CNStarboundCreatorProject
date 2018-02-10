@@ -1,7 +1,9 @@
 */desktop.ini
 desktop.ini
 out
-updatelog.log
-prerunlog.log
+*.log
+**/*.log
 CNStarboundCreatorUI/TestFiles/RecipeCreator/CreatePath
 CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath
+**/.idea/workspace.xml
+**/.idea/tasks.xml
