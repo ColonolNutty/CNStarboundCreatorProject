@@ -55,11 +55,8 @@ public class IngredientUpdater {
                 _log.debug("No ingredient found in store for: " + ingredientFilePath);
                 return null;
             }
-            Ingredient updatedIngredient = _ingredientDataCalculator.updateIngredient(ingredient);
-            Ingredient originalIngredient = _manipulator.readIngredient(ingredientFilePath);
-            if(!_settings.forceUpdate
-                    && meetsMinimumValues(updatedIngredient)
-                    && ingredientsAreEqual(originalIngredient, updatedIngredient)) {
+            boolean needsUpdate = _ingredientDataCalculator.updateIngredient(ingredient);
+            if(!_settings.forceUpdate && !needsUpdate) {
                 _log.debug("Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), 4);
                 return null;
             }
@@ -96,12 +93,5 @@ public class IngredientUpdater {
         }
         _log.debug("Comparing using both price, foodValue, and effects: " + one.getName(), 4);
         return one.equals(two) && one.effectsAreEqual(two.effects);
-    }
-
-    private boolean meetsMinimumValues(Ingredient ingredient) {
-        if(ingredient.foodValue == null) {
-            return true;
-        }
-        return ingredient.foodValue >= _settings.minimumFoodValue;
     }
 }

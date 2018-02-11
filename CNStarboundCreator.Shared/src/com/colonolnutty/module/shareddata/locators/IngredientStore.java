@@ -64,7 +64,12 @@ public class IngredientStore {
         }
         initializeIngredientStore();
         if(_ingredients.containsKey(itemName)) {
-            return _ingredients.get(itemName);
+            Ingredient found = _ingredients.get(itemName);
+            if(found == null) {
+                found = new Ingredient(itemName);
+                _ingredients.put(itemName, found);
+            }
+            return found;
         }
         else {
             Ingredient ingredient = new Ingredient(itemName);

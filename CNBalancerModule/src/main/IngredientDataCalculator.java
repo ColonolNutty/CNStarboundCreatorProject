@@ -47,16 +47,16 @@ public class IngredientDataCalculator {
         _manipulator = manipulator;
     }
 
-    public Ingredient updateIngredient(Ingredient ingredient) throws IOException{
+    public boolean updateIngredient(Ingredient ingredient) throws IOException{
         Recipe recipe = _recipeStore.locateRecipe(ingredient.getName());
         if(recipe == null) {
             _log.debug("No recipe found for: " + ingredient.getName());
-            return ingredient;
+            return false;
         }
         return balanceIngredient(recipe);
     }
 
-    public Ingredient balanceIngredient(Recipe recipe) {
+    public boolean balanceIngredient(Recipe recipe) {
         ArrayList<RecipeIngredient> recipeIngredients = findIngredientsFor(recipe);
         String outputName = recipe.output.item;
         String subName = "Calculating \"" + outputName + "\" values";
@@ -72,17 +72,17 @@ public class IngredientDataCalculator {
 
         for(int i = 0; i < recipeIngredients.size(); i++) {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
-            Ingredient ingredient = recipeIngredient.ingredient;
-            String subBundleMessage = "Ingredient " + (i + 1) + " name: " + ingredient.getName();
-            _log.debug(subBundleMessage + " c: " + recipeIngredient.count + " p: " + ingredient.price + " fv: " + ingredient.foodValue, 4);
+            Ingredient inputIngredient = recipeIngredient.ingredient;
+            String subBundleMessage = "Ingredient " + (i + 1) + " name: " + inputIngredient.getName();
+            _log.debug(subBundleMessage + " c: " + recipeIngredient.count + " p: " + inputIngredient.price + " fv: " + inputIngredient.foodValue, 4);
             _log.startSubBundle(subBundleMessage);
-            _log.writeToBundle("count: " + recipeIngredient.count, "price: " + ingredient.price, "food value: " + ingredient.foodValue);
+            _log.writeToBundle("count: " + recipeIngredient.count, "price: " + inputIngredient.price, "food value: " + inputIngredient.foodValue);
 
-            if(ingredient == null) {
+            if(inputIngredient == null) {
                 continue;
             }
             for(ICollector collector : collectors) {
-                collector.collectData(ingredient, recipeIngredient.count, recipe);
+                collector.collectData(inputIngredient, recipeIngredient.count, recipe);
             }
 
             _log.endSubBundle();
@@ -96,12 +96,17 @@ public class IngredientDataCalculator {
             outputCount = 1.0;
         }
 
-        Ingredient existingIngredient = _ingredientStore.getIngredient(outputName);
+        //TODO: This will be what determines whether an ingredient needs an update or not
+        boolean needsUpdate = false;
+        Ingredient newIngredient = _ingredientStore.getIngredient(outputName);
         for(ICollector collector : collectors) {
-            collector.applyData(existingIngredient, outputCount);
+            if(collector.applyData(newIngredient, outputCount)) {
+                needsUpdate = true;
+            }
         }
-        _ingredientStore.updateIngredient(existingIngredient);
-        return _ingredientStore.getIngredient(existingIngredient.getName());
+        _log.debug("Recipe Output \"" + outputName + "\" with output count: " + outputCount + " with final price: " + newIngredient.price + " foodValue: " + newIngredient.foodValue, 4);
+        _ingredientStore.updateIngredient(newIngredient);
+        return needsUpdate;
     }
 
     private ArrayList<RecipeIngredient> findIngredientsFor(Recipe recipe) {

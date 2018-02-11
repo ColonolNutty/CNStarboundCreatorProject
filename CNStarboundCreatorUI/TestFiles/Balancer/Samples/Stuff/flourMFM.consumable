@@ -6,7 +6,6 @@
   "description" : "(MILL):-} Nope NONONONO \"What\" NONONONONO",
   "shortdescription" : "No",
   "foodValue" : 2.0,
-  "effects" : [[ ]],
   "inventoryIcon" : "What",
   "learnBlueprintsOnPickup" : [ "doughMFM" ]
 }

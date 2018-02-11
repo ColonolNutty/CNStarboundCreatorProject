@@ -29,7 +29,7 @@ public class FoodValueCollector extends BaseCollector implements ICollector {
         double endValue = CNMathUtils.roundTwoDecimalPlaces(_totalValue / outputCount);
         // Apply minimum value
         if(_settings.minimumFoodValue != null && endValue < _settings.minimumFoodValue) {
-            endValue = _settings.minimumFoodValue;
+            endValue = (double)_settings.minimumFoodValue;
         }
         if(ingredient.foodValue == null || !ingredient.foodValue.equals(endValue)) {
             ingredient.foodValue = endValue;

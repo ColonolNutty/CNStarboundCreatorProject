@@ -79,10 +79,10 @@ public class IngredientDataCalculatorTests {
 
         Recipe recipe = createRecipe(new ItemDescriptor(existing.itemName, 1.0), new String[0], new ItemDescriptor(inOne.itemName, 1.0));
 
-        Ingredient result = _calculator.balanceIngredient(recipe);
-        assertNotNull(result);
-        assertEquals(15.0, result.price);
-        assertEquals(30.0, result.foodValue);
+        boolean result = _calculator.balanceIngredient(recipe);
+        assertTrue(result);
+        assertEquals(15.0, existing.price);
+        assertEquals(30.0, existing.foodValue);
     }
 
     @Test
@@ -100,10 +100,10 @@ public class IngredientDataCalculatorTests {
                 new ItemDescriptor(inOne.getName(), 1.0),
                 new ItemDescriptor(inTwo.getName(), 1.0));
 
-        Ingredient result = _calculator.balanceIngredient(recipe);
-        assertNotNull(result);
-        assertEquals(45.0, result.price);
-        assertEquals(75.0, result.foodValue);
+        boolean result = _calculator.balanceIngredient(recipe);
+        assertTrue(result);
+        assertEquals(45.0, existing.price);
+        assertEquals(75.0, existing.foodValue);
     }
 
     @Test
@@ -121,10 +121,10 @@ public class IngredientDataCalculatorTests {
 
         //10+10 20+5 25
         //20+20 40+10 50
-        Ingredient result = _calculator.balanceIngredient(recipe);
-        assertNotNull(result);
-        assertEquals(25.0, result.price);
-        assertEquals(50.0, result.foodValue);
+        boolean result = _calculator.balanceIngredient(recipe);
+        assertTrue(result);
+        assertEquals(25.0, existing.price);
+        assertEquals(50.0, existing.foodValue);
     }
 
     @Test
@@ -144,10 +144,10 @@ public class IngredientDataCalculatorTests {
 
         //10+10+20+20+20 20+60 80+15 95
         //20+20+30+30+30 40+90 130+25 155
-        Ingredient result = _calculator.balanceIngredient(recipe);
-        assertNotNull(result);
-        assertEquals(95.0, result.price);
-        assertEquals(155.0, result.foodValue);
+        boolean result = _calculator.balanceIngredient(recipe);
+        assertTrue(result);
+        assertEquals(95.0, existing.price);
+        assertEquals(155.0, existing.foodValue);
     }
 
     @Test
@@ -177,9 +177,9 @@ public class IngredientDataCalculatorTests {
 
         //10+10+20+20+20 20+60 80+15 95
         //20+20+30+30+30 40+90 130+25 155
-        Ingredient result = _calculator.balanceIngredient(recipe);
-        assertNotNull(result);
-        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(result.effects);
+        boolean result = _calculator.balanceIngredient(recipe);
+        assertTrue(result);
+        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.effects);
 
         assertTrue(effectsTable.containsKey("effectOne"));
         assertTrue(effectsTable.containsKey("effectTwo"));
@@ -222,12 +222,12 @@ public class IngredientDataCalculatorTests {
 
         //10+10+20+20+20 20+60 80+15 95
         //20+20+30+30+30 40+90 130+25 155
-        Ingredient result = _calculator.balanceIngredient(recipe);
-        assertNotNull(result);
-        assertEquals(9.5, result.price);
-        assertEquals(15.5, result.foodValue);
+        boolean result = _calculator.balanceIngredient(recipe);
+        assertTrue(result);
+        assertEquals(9.5, existing.price);
+        assertEquals(15.5, existing.foodValue);
 
-        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(result.effects);
+        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.effects);
 
         assertTrue(effectsTable.containsKey("effectOne"));
         assertTrue(effectsTable.containsKey("effectTwo"));

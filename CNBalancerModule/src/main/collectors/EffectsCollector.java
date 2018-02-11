@@ -57,8 +57,15 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
 
     @Override
     public boolean applyData(Ingredient ingredient, double outputCount) {
+        if(ingredient.effects != null && !ingredient.hasEffects() && _effects.size() == 0) {
+            ingredient.effects = null;
+            return true;
+        }
         if(!_settings.enableEffectsUpdate || _effects.size() == 0) {
             return false;
+        }
+        if(outputCount <= 0.0) {
+            outputCount = 1.0;
         }
         ArrayNode combinedEffects = toEffectsArrayNode(ingredient.getName(), _effects, outputCount);
         ArrayNode combined = _nodeProvider.createArrayNode();

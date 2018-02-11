@@ -1,6 +1,6 @@
 {
   "logFile" : "logs\\updatelog.log",
-  "enableConsoleDebug" : false,
+  "enableConsoleDebug" : true,
   "enableTreeView" : true,
   "enableVerboseLogging" : true,
   "propertyOrderFile" : "configuration\\propertyOrder.json",
