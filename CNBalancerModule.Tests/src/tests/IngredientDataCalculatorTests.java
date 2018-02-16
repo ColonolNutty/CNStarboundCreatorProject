@@ -57,19 +57,8 @@ public class IngredientDataCalculatorTests {
 
     @Test
     public void should_balance_ingredient_for_recipe_with_one_input() {
-        Ingredient existing = new Ingredient();
-        existing.description = "Blah";
-        existing.price = 24.0;
-        existing.foodValue = 29.0;
-        existing.itemName = "What";
-        existing.effects = _nodeProvider.createArrayNode();
-
-        Ingredient inOne = new Ingredient();
-        inOne.itemName = "inOne";
-        inOne.price = 10.0;
-        inOne.foodValue = 20.0;
-        inOne.description = "What";
-        inOne.effects = _nodeProvider.createArrayNode();
+        Ingredient existing = createIngredient("Blah", 24.0, 29.0, "OutWhat", _nodeProvider.createArrayNode());
+        Ingredient inOne = createIngredient("inOne", 10.0, 20.0, "InOneWhat", _nodeProvider.createArrayNode());
 
         _settings.enableEffectsUpdate = true;
         _settings.increasePercentage = 0.5;

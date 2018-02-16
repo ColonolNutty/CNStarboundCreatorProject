@@ -5,7 +5,7 @@
   "enableVerboseLogging" : true,
   "propertyOrderFile" : "configuration\\propertyOrder.json",
   "propertiesToUpdate" : [ "foodValue", "price", "effects", "description", "printable" ],
-  "forceUpdate" : true,
+  "forceUpdate" : false,
   "locationsToUpdate" : [ "TestFiles\\Balancer\\Samples" ],
   "includeLocations" : [ "TestFiles\\Balancer\\NonStuff" ],
   "excludedEffects" : [ "foodpoison" ],

@@ -38,6 +38,7 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
         _fileReader = new FileReaderWrapper();
         if(settings.forceUpdate == null) {
             _forceUpdate = false;
+            settings.forceUpdate = false;
         }
         else {
             _forceUpdate = settings.forceUpdate;

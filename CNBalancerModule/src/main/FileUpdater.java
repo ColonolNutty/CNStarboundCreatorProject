@@ -77,12 +77,7 @@ public class FileUpdater {
                 _log.startSubBundle(currentPass);
                 String ingredientName = _ingredientUpdater.update(filePath);
                 //If ingredientName is null, it means the file doesn't need an update
-                if(ingredientName == null) {
-                    if(ingredientsToUpdate.containsKey(filePath)) {
-                        ingredientsToUpdate.remove(filePath);
-                    }
-                }
-                else if (!ingredientsToUpdate.containsKey(filePath)) {
+                if (ingredientName != null && !ingredientsToUpdate.containsKey(filePath)) {
                     ingredientsToUpdate.put(filePath, ingredientName);
                 }
                 _log.endSubBundle();
