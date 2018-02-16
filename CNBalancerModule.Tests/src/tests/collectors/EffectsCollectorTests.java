@@ -1,11 +1,15 @@
 package tests.collectors;
 
+import com.colonolnutty.module.shareddata.NodeProvider;
 import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.locators.StatusEffectStore;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.ItemDescriptor;
+import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.models.StatusEffect;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -16,9 +20,7 @@ import org.junit.Test;
 
 import java.util.Hashtable;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,6 +35,7 @@ public class EffectsCollectorTests {
     private StatusEffectStore _statusEffectStoreMock;
     private EffectsCollector _collector;
     private BalancerSettings _settings;
+    private NodeProvider _nodeProvider;
 
     public EffectsCollectorTests() {
         JsonFactory jf = new JsonFactory();
@@ -47,6 +50,7 @@ public class EffectsCollectorTests {
         _settings.excludedEffects = new String[0];
         _settings.increasePercentage = 0.0;
         _collector = new EffectsCollector(_settings, _logMock, _statusEffectStoreMock);
+        _nodeProvider = new NodeProvider();
     }
 
     //getEffects
@@ -170,6 +174,102 @@ public class EffectsCollectorTests {
     }
     //getEffects
 
+    @Test
+    public void should_balance_ingredient_effects_for_recipe_with_two_inputs_of_different_counts() {
+        Ingredient existing = new Ingredient();
+        existing.itemName = "outputOne";
+        existing.effects =  _nodeProvider.createArrayNode();
+        ArrayNode inEffectsOne = _nodeProvider.createArrayNode();
+        ArrayNode inEffectsOneSub = _nodeProvider.createArrayNode();
+        inEffectsOneSub.add(createEffect("effectOne", 10));
+        inEffectsOneSub.add(createEffect("effectTwo", 20));
+        inEffectsOne.add(inEffectsOneSub);
+        ArrayNode inEffectsTwo = _nodeProvider.createArrayNode();
+        ArrayNode inEffectsTwoSub = _nodeProvider.createArrayNode();
+        inEffectsTwoSub.add(createEffect("effectTwo", 10));
+        inEffectsTwoSub.add(createEffect("effectThree", 50));
+        inEffectsTwo.add(inEffectsTwoSub);
+        Ingredient inOne = new Ingredient();
+        inOne.effects = inEffectsOne;
+        Ingredient inTwo = new Ingredient();
+        inTwo.effects = inEffectsTwo;
+
+        _settings.enableEffectsUpdate = true;
+        _settings.increasePercentage = 0.5;
+
+        Recipe recipe = new Recipe();
+        recipe.output = new ItemDescriptor(existing.getName(), 1.0);
+
+        //10+10+20+20+20 20+60 80+15 95
+        //20+20+30+30+30 40+90 130+25 155
+        _collector.collectData(inOne, 2.0, recipe);
+        _collector.collectData(inTwo, 3.0, recipe);
+        _collector.applyData(existing, recipe.output.count);
+
+        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.effects);
+
+        assertTrue(effectsTable.containsKey("effectOne"));
+        assertTrue(effectsTable.containsKey("effectTwo"));
+        assertTrue(effectsTable.containsKey("effectThree"));
+
+        //10+10+5 25
+        assertEquals(25, (int)effectsTable.get("effectOne"));
+
+        //20+20+10+10+10 40+30 70+10+5 85
+        assertEquals(85, (int)effectsTable.get("effectTwo"));
+
+        //50+50+50 150+25 175
+        assertEquals(175, (int)effectsTable.get("effectThree"));
+    }
+
+    @Test
+    public void should_balance_ingredient_for_recipe_with_output_greater_than_one() {
+        Ingredient existing = new Ingredient();
+        existing.itemName = "outputOne";
+        existing.effects =  _nodeProvider.createArrayNode();
+        ArrayNode inEffectsOne = _nodeProvider.createArrayNode();
+        ArrayNode inEffectsOneSub = _nodeProvider.createArrayNode();
+        inEffectsOneSub.add(createEffect("effectOne", 10));
+        inEffectsOneSub.add(createEffect("effectTwo", 20));
+        inEffectsOne.add(inEffectsOneSub);
+        ArrayNode inEffectsTwo = _nodeProvider.createArrayNode();
+        ArrayNode inEffectsTwoSub = _nodeProvider.createArrayNode();
+        inEffectsTwoSub.add(createEffect("effectTwo", 10));
+        inEffectsTwoSub.add(createEffect("effectThree", 50));
+        inEffectsTwo.add(inEffectsTwoSub);
+        Ingredient inOne = new Ingredient();
+        inOne.effects = inEffectsOne;
+        Ingredient inTwo = new Ingredient();
+        inTwo.effects = inEffectsTwo;
+
+        _settings.enableEffectsUpdate = true;
+        _settings.increasePercentage = 0.5;
+
+        Recipe recipe = new Recipe();
+        recipe.output = new ItemDescriptor(existing.getName(), 10.0);
+
+        //10+10+20+20+20 20+60 80+15 95
+        //20+20+30+30+30 40+90 130+25 155
+        _collector.collectData(inOne, 2.0, recipe);
+        _collector.collectData(inTwo, 3.0, recipe);
+        _collector.applyData(existing, recipe.output.count);
+
+        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.effects);
+
+        assertTrue(effectsTable.containsKey("effectOne"));
+        assertTrue(effectsTable.containsKey("effectTwo"));
+        assertTrue(effectsTable.containsKey("effectThree"));
+
+        //10+10+5/10 25/10 2.5 2
+        assertEquals(2, (int)effectsTable.get("effectOne"));
+
+        //20+20+10+10+10 40+30 70+10+5/10 85/10 8.5 8
+        assertEquals(8, (int)effectsTable.get("effectTwo"));
+
+        //50+50+50 150+25 175/10 17.5 17
+        assertEquals(17, (int)effectsTable.get("effectThree"));
+    }
+
     private ArrayNode createEffectsArray(StatusEffect[] effects) {
         ArrayNode subNode = _mapper.createArrayNode();
         for(int i = 0; i < effects.length; i++) {
@@ -183,5 +283,31 @@ public class EffectsCollectorTests {
         ArrayNode node = _mapper.createArrayNode();
         node.add(subNode);
         return node;
+    }
+
+    private Hashtable<String, Integer> assertAndConvertEffectsArray(ArrayNode resultEffects) {
+        assertNotNull(resultEffects);
+        assertTrue(resultEffects.size() > 0);
+        Hashtable<String, Integer> effectsTable = new Hashtable<String, Integer>();
+        ArrayNode effects = (ArrayNode) resultEffects.get(0);
+        for(JsonNode effect : effects) {
+            assertTrue(effect.has("effect"));
+            assertTrue(effect.has("duration"));
+            JsonNode nameNode = effect.get("effect");
+            assertTrue(nameNode.isTextual());
+            String effectName = nameNode.asText();
+            assertFalse(effectsTable.containsKey(effectName));
+            JsonNode durationNode = effect.get("duration");
+            assertTrue(durationNode.isInt());
+            effectsTable.put(effectName, durationNode.asInt());
+        }
+        return effectsTable;
+    }
+
+    private ObjectNode createEffect(String name, int duration) {
+        ObjectNode effect = _nodeProvider.createObjectNode();
+        effect.put("effect", name);
+        effect.put("duration", duration);
+        return effect;
     }
 }
