@@ -79,7 +79,7 @@ public class PriceHandlerTests {
         ingredient.price = 24.0;
         ObjectNode testNode = _nodeProvider.createObjectNode();
         NodeProvider mockNodeProvider = mock(NodeProvider.class);
-        when(mockNodeProvider.createReplaceDoubleNode(PriceHandler.PATH_NAME, ingredient.price)).thenReturn(testNode);
+        when(mockNodeProvider.createReplaceDoubleNode(PriceHandler.PATH_NAME, ingredient.getPrice())).thenReturn(testNode);
         _handler.setNodeProvider(mockNodeProvider);
         JsonNode result = _handler.createReplaceNode(ingredient);
         assertEquals(testNode, result);

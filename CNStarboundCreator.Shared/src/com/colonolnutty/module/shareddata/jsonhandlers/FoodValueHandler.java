@@ -18,7 +18,8 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
 
     @Override
     public JsonNode createTestNode(Ingredient ingredient) {
-        if(ingredient.foodValue == null || ingredient.foodValue < 0.0) {
+        Double foodValue = ingredient.getFoodValue();
+        if(foodValue == null || foodValue < 0.0) {
             return null;
         }
         return _nodeProvider.createTestAddDoubleNode(PATH_NAME);
@@ -26,10 +27,11 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
 
     @Override
     public JsonNode createReplaceNode(Ingredient ingredient) {
-        if(ingredient.foodValue == null || ingredient.foodValue < 0.0) {
+        Double foodValue = ingredient.getFoodValue();
+        if(foodValue == null || foodValue < 0.0) {
             return null;
         }
-        return _nodeProvider.createReplaceDoubleNode(PATH_NAME, ingredient.foodValue);
+        return _nodeProvider.createReplaceDoubleNode(PATH_NAME, foodValue);
     }
 
     @Override
@@ -42,9 +44,10 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
         if(ingredient == null) {
             return false;
         }
-        boolean ingredientHasFoodValue = ingredient.foodValue != null && ingredient.foodValue >= 0.0;
+        Double foodValue = ingredient.getFoodValue();
+        boolean ingredientHasValue = foodValue != null && foodValue >= 0.0;
         if(node == null) {
-            return ingredientHasFoodValue;
+            return ingredientHasValue;
         }
 
         if(node.isArray()) {
@@ -52,22 +55,22 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
         }
 
         if(!node.has("value")) {
-            return ingredientHasFoodValue;
+            return ingredientHasValue;
         }
 
-        JsonNode foodValue = node.get("value");
-        if(!foodValue.isDouble()) {
-            return ingredientHasFoodValue;
+        JsonNode value = node.get("value");
+        if(!value.isDouble()) {
+            return ingredientHasValue;
         }
 
-        Double nodeVal = foodValue.asDouble();
-        return !nodeVal.equals(ingredient.foodValue);
+        Double nodeVal = value.asDouble();
+        return !nodeVal.equals(foodValue);
     }
 
     @Override
     public String getShortStringValue(Ingredient ingredient) {
         if(ingredient.hasFoodValue()) {
-            return "fv: " + ingredient.foodValue;
+            return "fv: " + ingredient.getFoodValue();
         }
         return null;
     }

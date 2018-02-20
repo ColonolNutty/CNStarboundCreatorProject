@@ -20,78 +20,57 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
             return null;
         }
         JsonNode node = (JsonNode) obj;
-        if(node.isArray()) {
-            return formatArray(node, indentSize, false);
-        }
-        if(node.isObject()) {
-            return formatObject(node, indentSize, false);
-        }
-        if(CNJsonUtils.isValueType(node)) {
-            return node.asText();
-        }
-        return obj.toString();
+        return formatAsIntended(node, indentSize, false);
     }
 
     public String formatObject(JsonNode node, int indentSize, boolean includeIndent) throws JSONException {
-        ArrayList<String> objFields = CNJsonUtils.getPropertyNames(node);
-        if(node.isNull() || objFields.size() == 0) {
+        ArrayList<String> objProperties = CNJsonUtils.getPropertyNames(node);
+        if(objProperties.size() == 0) {
             return "{ }";
         }
         StringBuilder builder = new StringBuilder();
         if(includeIndent) {
             builder.append(CNStringUtils.createIndent(indentSize));
         }
-        if(objFields.size() == 1) {
-            String propOne = objFields.get(0);
-            JsonNode subNodeOne = node.get(propOne);
-            boolean isNonValue = !CNJsonUtils.isValueType(subNodeOne);
-            int subIndent = 0;
-            if(isNonValue) {
-                subIndent = indentSize + INDENT_SIZE;
-            }
-            String result = formatAsIntended(subNodeOne, subIndent, false);
+        if(objProperties.size() == 1) {
+            String firstProperty = objProperties.get(0);
+            JsonNode firstObj = node.get(firstProperty);
+            String result = formatAsIntended(firstObj, 0, false);
             if(result == null) {
-                return "{ }";
+                builder.append("{ }");
+                return builder.toString();
             }
-            if(!result.contains(NEW_LINE)) {
-                isNonValue = false;
-                result = result.trim();
-                subIndent = 0;
-            }
-            builder.append(CNStringUtils.createIndent(indentSize));
-            builder.append("{");
-            if(isNonValue) {
-                builder.append(NEW_LINE + CNStringUtils.createIndent(subIndent));
+            if(result.contains(NEW_LINE)) {
+                builder.append("{" + NEW_LINE + CNStringUtils.createIndent(indentSize + INDENT_SIZE));
+                result = result.replace(NEW_LINE,  NEW_LINE + CNStringUtils.createIndent(indentSize + INDENT_SIZE));
             }
             else {
-                builder.append(" ");
+                builder.append("{ ");
             }
-            builder.append("\"" + propOne + "\" : " + result);
-            if(isNonValue) {
-                builder.append(NEW_LINE);
+            builder.append("\"" + firstProperty + "\" : " + result);
+            if(result.contains(NEW_LINE)) {
+                builder.append(NEW_LINE + CNStringUtils.createIndent(indentSize) + "}");
             }
             else {
-                builder.append(" ");
+                builder.append(" }");
             }
-            builder.append("}");
             return builder.toString();
         }
-        boolean hasValue = false;
         builder.append("{" + NEW_LINE);
-        for(int i = 0; i < objFields.size(); i++) {
-            String fieldName = objFields.get(i);
-            String result = formatAsIntended(node.get(fieldName), indentSize + INDENT_SIZE, false);
+        ArrayList<String> sortedProperties = sortProperties(_propertiesInOrder, objProperties);
+        int currentLevelIndent = indentSize + INDENT_SIZE;
+        for(int i = 0; i < sortedProperties.size(); i++) {
+            String propertyName = sortedProperties.get(i);
+            JsonNode propertyObj = node.get(propertyName);
+            String result = formatAsIntended(propertyObj, currentLevelIndent, false);
             if(result == null) {
                 continue;
             }
-            hasValue = true;
-            builder.append(CNStringUtils.createIndent(indentSize + INDENT_SIZE) + "\"" + fieldName + "\" : " + result.trim());
-            if((i + 1) < objFields.size()) {
+            builder.append(CNStringUtils.createIndent(currentLevelIndent));
+            builder.append("\"" + propertyName + "\" : " + result);
+            if((i + 1) < sortedProperties.size()) {
                 builder.append("," + NEW_LINE);
             }
-        }
-        if(!hasValue) {
-            return "{ }";
         }
         builder.append(NEW_LINE + CNStringUtils.createIndent(indentSize) + "}");
         return builder.toString();
@@ -101,23 +80,22 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         if(!node.isArray()) {
             return formatObject(node, indentSize, includeIndent);
         }
-        StringBuilder builder = new StringBuilder();
         int nodeSize = node.size();
         if(nodeSize == 0) {
-            builder.append("[ ]");
-            return builder.toString();
+            return "[ ]";
         }
+        StringBuilder builder = new StringBuilder();
         if(includeIndent) {
             builder.append(CNStringUtils.createIndent(indentSize));
         }
         JsonNode nodeOne = node.get(0);
         if(nodeSize == 1) {
             if(nodeOne.isArray() && nodeOne.size() == 0) {
-                builder.append("[[ ]]");
-                return builder.toString();
+                return "[[ ]]";
             }
             if(nodeOne.isObject()) {
-                return CNStringUtils.createIndent(indentSize) + "[" + formatObject(nodeOne, 0, true) + "]";
+                builder.append("[" + formatObject(nodeOne, 0, false) + "]");
+                return builder.toString();
             }
         }
         boolean containsValueTypes = CNJsonUtils.isValueType(nodeOne);
@@ -133,9 +111,6 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
             }
             if(!containsValueTypes) {
                 builder.append(NEW_LINE);
-            }
-            if(containsValueTypes && (subNode.isObject() || subNode.isArray())) {
-                result = result.trim();
             }
             builder.append(result);
 
@@ -159,16 +134,8 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
     }
 
     public String formatAsIntended(JsonNode node, int indentSize, boolean includeIndent) {
-        if(node.isNull() || (node.isTextual() && node.asText().equals("null"))) {
+        if(node == null || node.isNull() || (node.isTextual() && node.asText().equals("null"))) {
             return null;
-        }
-        if(CNJsonUtils.isValueType(node)) {
-            if (node.isDouble() || node.isInt() || node.isBoolean()) {
-                return node.asText();
-            }
-            if (node.isTextual()) {
-                return "\"" + CNStringUtils.escapeString(node.asText()) + "\"";
-            }
         }
 
         if(node.isArray()) {
@@ -176,6 +143,13 @@ public class JsonNodePrettyPrinter extends BasePrettyPrinter {
         }
         if(node.isObject()) {
             return formatObject(node, indentSize, includeIndent);
+        }
+
+        if(CNJsonUtils.isValueType(node)) {
+            if (node.isTextual()) {
+                return "\"" + CNStringUtils.escapeString(node.asText()) + "\"";
+            }
+            return node.asText();
         }
         return null;
     }

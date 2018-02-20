@@ -38,7 +38,10 @@ public class UnspecificPrettyPrinter extends BasePrettyPrinter {
                 ArrayList<Object> properties = toList(node);
                 return formatArray(properties, indentSize, false);
             }
-            if(CNJsonUtils.isValueType(node)) {
+            if(node.isTextual()) {
+                return "\"" + CNStringUtils.escapeString(node.asText()) + "\"";
+            }
+            else if(CNJsonUtils.isValueType(node)) {
                 return node.asText();
             }
         }
@@ -57,16 +60,29 @@ public class UnspecificPrettyPrinter extends BasePrettyPrinter {
         if(objProperties.size() == 1) {
             String firstProperty = objProperties.get(0);
             Object firstObj = objTable.get(firstProperty);
-            String result = formatAsIntended(firstObj, 0, false);
+            String result = formatAsIntended(firstObj, indentSize, true);
             if (result == null) {
                 builder.append("{ }");
                 return builder.toString();
             }
-            builder.append("{ \"" + firstProperty + "\" : " + result + " }");
+            if(result.contains(NEW_LINE)) {
+                builder.append("{" + NEW_LINE + CNStringUtils.createIndent(indentSize + INDENT_SIZE));
+                result = result.replace(NEW_LINE,  NEW_LINE + CNStringUtils.createIndent(indentSize + INDENT_SIZE));
+            }
+            else {
+                builder.append("{ ");
+            }
+            builder.append("\"" + firstProperty + "\" : " + result);
+            if(result.contains(NEW_LINE)) {
+                builder.append(NEW_LINE + CNStringUtils.createIndent(indentSize) + "}");
+            }
+            else {
+                builder.append(" }");
+            }
             return builder.toString();
         }
-        ArrayList<String> sortedProperties = sortProperties(_propertiesInOrder, objProperties);
         builder.append("{" + NEW_LINE);
+        ArrayList<String> sortedProperties = sortProperties(_propertiesInOrder, objProperties);
         int currentLevelIndent = indentSize + INDENT_SIZE;
         for(int i = 0; i < sortedProperties.size(); i++) {
             String propertyName = sortedProperties.get(i);
@@ -158,25 +174,6 @@ public class UnspecificPrettyPrinter extends BasePrettyPrinter {
         }
         return null;
     }
-
-    public ArrayList<String> sortProperties(String[] propertyNamesInOrder, ArrayList<String> properties) {
-        ArrayList<String> sortedProperties = new ArrayList<String>();
-        if(propertyNamesInOrder != null) {
-            for (String propertyName : propertyNamesInOrder) {
-                if (properties.contains(propertyName)
-                        && !sortedProperties.contains(propertyName)) {
-                    sortedProperties.add(propertyName);
-                }
-            }
-        }
-        for(String propertyName : properties) {
-            if(!sortedProperties.contains(propertyName)) {
-                sortedProperties.add(propertyName);
-            }
-        }
-        return sortedProperties;
-    }
-
 
     public ArrayList<Object> toList(JSONArray arr) {
         ArrayList<Object> objs = new ArrayList<Object>();

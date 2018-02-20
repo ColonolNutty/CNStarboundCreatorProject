@@ -5,6 +5,7 @@ import com.colonolnutty.module.shareddata.NodeProvider;
 import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.locators.StatusEffectStore;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.IngredientProperty;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
@@ -57,7 +58,7 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
 
     @Override
     public boolean applyData(Ingredient ingredient, double outputCount) {
-        if(ingredient.effects != null && !ingredient.hasEffects() && _effects.size() == 0) {
+        if(!ingredient.hasEffects() && _effects.size() == 0) {
             ingredient.effects = null;
             return true;
         }
@@ -70,11 +71,8 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
         ArrayNode combinedEffects = toEffectsArrayNode(ingredient.getName(), _effects, outputCount);
         ArrayNode combined = _nodeProvider.createArrayNode();
         combined.add(combinedEffects);
-        if(!ingredient.effectsAreEqual(combined)) {
-            ingredient.effects = combined;
-            return true;
-        }
-        return false;
+        ingredient.update(IngredientProperty.Effects, combined);
+        return !ingredient.effectsAreEqual(ingredient.getEffects());
     }
 
     public void addOrUpdateEffect(String name, int duration) {
@@ -89,7 +87,11 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
 
     public Hashtable<String, Integer> getEffects(Ingredient ingredient, boolean isRawFood) {
         Hashtable<String, Integer> effectValues = new Hashtable<String, Integer>();
-        for(JsonNode baseNode : ingredient.effects) {
+        ArrayNode ingredientEffects = ingredient.getEffects();
+        if(ingredientEffects == null) {
+            return effectValues;
+        }
+        for(JsonNode baseNode : ingredientEffects){
             if(!baseNode.isArray()) {
                 continue;
             }

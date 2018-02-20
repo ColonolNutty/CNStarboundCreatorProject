@@ -70,28 +70,4 @@ public class IngredientUpdater {
         }
         return null;
     }
-
-    private boolean ingredientsAreEqual(Ingredient one, Ingredient two) {
-        if(one == null || two == null) {
-            return true;
-        }
-        String filePathToCheck = one.filePath;
-        if(filePathToCheck == null) {
-            filePathToCheck = two.filePath;
-        }
-        if(filePathToCheck == null) {
-            return true;
-        }
-        if(CNFileUtils.fileEndsWith(filePathToCheck, _fileTypesIgnoreFoodValues)
-                || CNFileUtils.fileEndsWith(filePathToCheck, _fileTypesIgnoreFoodValues)) {
-            _log.debug("Comparing using only price: " + one.getName(), 4);
-            return one.priceEquals(two);
-        }
-        boolean shouldCheckOther = filePathToCheck.endsWith(".consumable") || filePathToCheck.endsWith(".consumable");
-        if(!shouldCheckOther) {
-            return true;
-        }
-        _log.debug("Comparing using both price, foodValue, and effects: " + one.getName(), 4);
-        return one.equals(two) && one.effectsAreEqual(two.effects);
-    }
 }

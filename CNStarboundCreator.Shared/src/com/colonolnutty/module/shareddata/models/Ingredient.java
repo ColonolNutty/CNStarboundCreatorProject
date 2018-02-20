@@ -1,10 +1,14 @@
 package com.colonolnutty.module.shareddata.models;
 
 import com.colonolnutty.module.shareddata.utils.CNJsonUtils;
+import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * User: Jack's Computer
@@ -28,6 +32,9 @@ public class Ingredient {
     public Object breakDropOptions;
     public ArrayNode effects;
     public Boolean printable;
+
+    @JsonIgnore
+    public Hashtable<IngredientProperty, ArrayList<Object>> _ingredientUpdates;
 
     @JsonIgnore
     public static int DefaultEffectDuration = 60;
@@ -61,17 +68,22 @@ public class Ingredient {
     }
 
     public boolean hasPrice() {
-        return price != null && price > 0.0;
+        Double latestPrice = getPrice();
+        return latestPrice != null && latestPrice > 0.0;
     }
 
     public boolean hasFoodValue() {
-        return foodValue != null && foodValue > 0.0;
+        Double latestFoodValue = getFoodValue();
+        return latestFoodValue != null && latestFoodValue > 0.0;
     }
 
-    public boolean hasDescription() { return description != null && !description.equals(""); }
+    public boolean hasDescription() {
+        String latestDescription = getDescription();
+        return !CNStringUtils.isNullOrWhitespace(latestDescription);
+    }
 
     public boolean hasEffects() {
-        return hasEffects(effects);
+        return hasEffects(getEffects());
     }
 
     public boolean hasEffects(JsonNode eff) {
@@ -128,10 +140,6 @@ public class Ingredient {
         return filePath;
     }
 
-    public boolean priceEquals(Ingredient otherIngredient) {
-        return valuesEqual(price, otherIngredient.price);
-    }
-
     @Override
     public boolean equals(Object other){
         if (other == null) return false;
@@ -141,8 +149,8 @@ public class Ingredient {
         if(getName() == null || !getName().equals(otherIngredient.getName())) {
             return false;
         }
-        return valuesEqual(price, otherIngredient.price)
-                && valuesEqual(foodValue, otherIngredient.foodValue);
+        return valuesEqual(getPrice(), otherIngredient.getPrice())
+                && valuesEqual(getFoodValue(), otherIngredient.getFoodValue());
     }
 
     private boolean valuesEqual(Double one, Double two) {
@@ -170,14 +178,15 @@ public class Ingredient {
         if(selfHasEffects != otherHasEffects) {
             return false;
         }
-        if(effects.size() != otherEffects.size()) {
+        ArrayNode selfEffects = getEffects();
+        if(selfEffects.size() != otherEffects.size()) {
             return false;
         }
         boolean isSame = true;
-        for(int i = 0; i < effects.size(); i++) {
-            if(!effectsAreEqual(effects.get(i), otherEffects.get(i))) {
+        for(int i = 0; i < selfEffects.size(); i++) {
+            if(!effectsAreEqual(selfEffects.get(i), otherEffects.get(i))) {
                 isSame = false;
-                i = effects.size();
+                i = selfEffects.size();
             }
         }
         return isSame;
@@ -262,10 +271,6 @@ public class Ingredient {
         return eff != null && eff.isArray() && eff.size() > 0;
     }
 
-    public boolean hasPatchFile() {
-        return patchFile != null;
-    }
-
     @Override
     public String toString() {
         return getName();
@@ -287,6 +292,47 @@ public class Ingredient {
         copyIngred.breakDropOptions = this.breakDropOptions;
         copyIngred.effects = this.effects;
         copyIngred.printable = this.printable;
+        copyIngred._ingredientUpdates = this._ingredientUpdates;
         return copyIngred;
+    }
+
+    public void update(IngredientProperty property, Object newValue) {
+        if(_ingredientUpdates == null) {
+            _ingredientUpdates = new Hashtable<>();
+        }
+        if(!_ingredientUpdates.containsKey(property)) {
+            _ingredientUpdates.put(property, new ArrayList<Object>());
+        }
+        _ingredientUpdates.get(property).add(newValue);
+    }
+
+    public <T> T getLatestOrDefault(IngredientProperty property, T defaultValue) {
+        if(_ingredientUpdates == null || !_ingredientUpdates.containsKey(property)) {
+            return defaultValue;
+        }
+        return (T) _ingredientUpdates.get(property).get(_ingredientUpdates.get(property).size() - 1);
+    }
+
+    public void applyUpdates() {
+        price = getPrice();
+        foodValue = getFoodValue();
+        description = getDescription();
+        effects = getEffects();
+    }
+
+    public Double getPrice() {
+        return getLatestOrDefault(IngredientProperty.Price, price);
+    }
+
+    public Double getFoodValue() {
+        return getLatestOrDefault(IngredientProperty.FoodValue, foodValue);
+    }
+
+    public String getDescription() {
+        return getLatestOrDefault(IngredientProperty.Description, description);
+    }
+
+    public ArrayNode getEffects() {
+        return getLatestOrDefault(IngredientProperty.Effects, effects);
     }
 }

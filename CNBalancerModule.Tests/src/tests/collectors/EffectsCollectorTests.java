@@ -206,7 +206,7 @@ public class EffectsCollectorTests {
         _collector.collectData(inTwo, 3.0, recipe);
         _collector.applyData(existing, recipe.output.count);
 
-        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.effects);
+        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.getEffects());
 
         assertTrue(effectsTable.containsKey("effectOne"));
         assertTrue(effectsTable.containsKey("effectTwo"));
@@ -254,7 +254,7 @@ public class EffectsCollectorTests {
         _collector.collectData(inTwo, 3.0, recipe);
         _collector.applyData(existing, recipe.output.count);
 
-        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.effects);
+        Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.getEffects());
 
         assertTrue(effectsTable.containsKey("effectOne"));
         assertTrue(effectsTable.containsKey("effectTwo"));

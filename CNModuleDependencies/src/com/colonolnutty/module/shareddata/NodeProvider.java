@@ -74,12 +74,12 @@ public class NodeProvider extends MapperWrapper {
         if(value == null) {
             return null;
         }
-        ObjectNode node = createReplaceNode(pathName);
-        ArrayNode arrNode = node.putArray("value");
+        ObjectNode replaceValueNode = createReplaceNode(pathName);
+        ArrayNode arrNode = replaceValueNode.putArray("value");
         for(int i = 0; i < value.size(); i++) {
             arrNode.add(value.get(i));
         }
-        return node;
+        return replaceValueNode;
     }
 
     public ObjectNode createReplaceDoubleNode(String pathName, Double value) {

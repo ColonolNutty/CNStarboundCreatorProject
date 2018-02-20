@@ -96,7 +96,7 @@ public class DescriptionHandlerTests {
         ingredient.description = "I am description";
         ObjectNode testNode = _nodeProvider.createObjectNode();
         NodeProvider mockNodeProvider = mock(NodeProvider.class);
-        when(mockNodeProvider.createReplaceStringNode(DescriptionHandler.PATH_NAME, ingredient.description)).thenReturn(testNode);
+        when(mockNodeProvider.createReplaceStringNode(DescriptionHandler.PATH_NAME, ingredient.getDescription())).thenReturn(testNode);
         _handler.setNodeProvider(mockNodeProvider);
         JsonNode result = _handler.createReplaceNode(ingredient);
         assertEquals(testNode, result);

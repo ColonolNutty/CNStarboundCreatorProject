@@ -9,6 +9,11 @@ public class TestSubModel {
     public String item;
     public Double count;
 
+    //Used when reading using the Mapper
+    public TestSubModel() {
+        this(null, null);
+    }
+
     public TestSubModel(String item, Double count) {
         this.item = item;
         this.count = count;

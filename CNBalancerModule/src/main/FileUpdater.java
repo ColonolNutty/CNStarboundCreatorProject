@@ -4,6 +4,7 @@ import com.colonolnutty.module.shareddata.JsonManipulator;
 import com.colonolnutty.module.shareddata.JsonPatchManipulator;
 import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.IngredientProperty;
 import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 import com.colonolnutty.module.shareddata.locators.FileLocator;
 import com.colonolnutty.module.shareddata.locators.IngredientStore;
@@ -121,6 +122,7 @@ public class FileUpdater {
             _log.startSubBundle("Update");
             ForceSetProperties.forceSet(ingredient);
 
+            ingredient.applyUpdates();
             if(isPatchFile) {
                 _log.writeToAll("Attempting to update applyPatch: " + ingredientName);
                 _patchManipulator.write(ingredient.patchFile, ingredient);
@@ -164,11 +166,12 @@ public class FileUpdater {
     }
 
     private void verifyMinimumValues(Ingredient ingredient) {
-        if(ingredient.price != null && ingredient.price < 1.0 && ingredient.price > 0.0) {
-            ingredient.price = 1.0;
+        Double latestPrice = ingredient.getPrice();
+        if(latestPrice != null && latestPrice < 1.0 && latestPrice > 0.0) {
+            ingredient.update(IngredientProperty.Price, 1.0);
         }
-        if(ingredient.foodValue != null && ingredient.foodValue < _settings.minimumFoodValue) {
-            ingredient.foodValue = (double)_settings.minimumFoodValue;
+        if(ingredient.getFoodValue() != null && ingredient.getFoodValue() < _settings.minimumFoodValue) {
+            ingredient.update(IngredientProperty.FoodValue, (double)_settings.minimumFoodValue);
         }
     }
 }

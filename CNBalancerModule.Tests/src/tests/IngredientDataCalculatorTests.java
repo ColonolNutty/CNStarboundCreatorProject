@@ -5,16 +5,10 @@ import com.colonolnutty.module.shareddata.NodeProvider;
 import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.locators.*;
 import com.colonolnutty.module.shareddata.models.*;
-import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.IngredientDataCalculator;
 import main.settings.BalancerSettings;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
 
 import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
@@ -70,8 +64,10 @@ public class IngredientDataCalculatorTests {
 
         boolean result = _calculator.balanceIngredient(recipe);
         assertTrue(result);
-        assertEquals(15.0, existing.price);
-        assertEquals(30.0, existing.foodValue);
+        assertEquals(24.0, existing.price);
+        assertEquals(15.0, existing.getLatestOrDefault(IngredientProperty.Price, null));
+        assertEquals(29.0, existing.foodValue);
+        assertEquals(30.0, existing.getLatestOrDefault(IngredientProperty.FoodValue, null));
     }
 
     @Test
@@ -91,8 +87,10 @@ public class IngredientDataCalculatorTests {
 
         boolean result = _calculator.balanceIngredient(recipe);
         assertTrue(result);
-        assertEquals(45.0, existing.price);
-        assertEquals(75.0, existing.foodValue);
+        assertEquals(24.0, existing.price);
+        assertEquals(45.0, existing.getPrice());
+        assertEquals(29.0, existing.foodValue);
+        assertEquals(75.0, existing.getFoodValue());
     }
 
     @Test
@@ -112,8 +110,10 @@ public class IngredientDataCalculatorTests {
         //20+20 40+10 50
         boolean result = _calculator.balanceIngredient(recipe);
         assertTrue(result);
-        assertEquals(25.0, existing.price);
-        assertEquals(50.0, existing.foodValue);
+        assertEquals(24.0, existing.price);
+        assertEquals(25.0, existing.getPrice());
+        assertEquals(29.0, existing.foodValue);
+        assertEquals(50.0, existing.getFoodValue());
     }
 
     @Test
@@ -135,8 +135,10 @@ public class IngredientDataCalculatorTests {
         //20+20+30+30+30 40+90 130+25 155
         boolean result = _calculator.balanceIngredient(recipe);
         assertTrue(result);
-        assertEquals(95.0, existing.price);
-        assertEquals(155.0, existing.foodValue);
+        assertEquals(24.0, existing.price);
+        assertEquals(95.0, existing.getPrice());
+        assertEquals(29.0, existing.foodValue);
+        assertEquals(155.0, existing.getFoodValue());
     }
 
     private Ingredient createIngredient(String itemName, Double price, Double foodValue, String description, ArrayNode effects) {

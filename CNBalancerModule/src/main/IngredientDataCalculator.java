@@ -74,9 +74,9 @@ public class IngredientDataCalculator {
             RecipeIngredient recipeIngredient = recipeIngredients.get(i);
             Ingredient inputIngredient = recipeIngredient.ingredient;
             String subBundleMessage = "Ingredient " + (i + 1) + " name: " + inputIngredient.getName();
-            _log.debug(subBundleMessage + " c: " + recipeIngredient.count + " p: " + inputIngredient.price + " fv: " + inputIngredient.foodValue, 4);
+            _log.debug(subBundleMessage + " c: " + recipeIngredient.count + " p: " + inputIngredient.getPrice() + " fv: " + inputIngredient.getFoodValue(), 4);
             _log.startSubBundle(subBundleMessage);
-            _log.writeToBundle("count: " + recipeIngredient.count, "price: " + inputIngredient.price, "food value: " + inputIngredient.foodValue);
+            _log.writeToBundle("count: " + recipeIngredient.count, "price: " + inputIngredient.getPrice(), "food value: " + inputIngredient.getFoodValue());
 
             if(inputIngredient == null) {
                 continue;
@@ -104,8 +104,7 @@ public class IngredientDataCalculator {
                 needsUpdate = true;
             }
         }
-        _log.debug("Recipe Output \"" + outputName + "\" with output count: " + outputCount + " with final price: " + newIngredient.price + " foodValue: " + newIngredient.foodValue, 4);
-        _ingredientStore.updateIngredient(newIngredient);
+        _log.debug("Recipe Output \"" + outputName + "\" with output count: " + outputCount + " with final price: " + newIngredient.getPrice() + " foodValue: " + newIngredient.getFoodValue(), 4);
         return needsUpdate;
     }
 

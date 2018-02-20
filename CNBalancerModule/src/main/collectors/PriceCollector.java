@@ -1,6 +1,7 @@
 package main.collectors;
 
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.IngredientProperty;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.utils.CNMathUtils;
 import main.settings.BalancerSettings;
@@ -21,7 +22,7 @@ public class PriceCollector extends BaseCollector implements ICollector {
 
     @Override
     public void collectData(Ingredient ingredient, double inputCount, Recipe recipe) {
-        _totalValue += calculateValue(inputCount, ingredient.price, _settings.increasePercentage);
+        _totalValue += calculateValue(inputCount, ingredient.getPrice(), _settings.increasePercentage);
     }
 
     @Override
@@ -31,10 +32,7 @@ public class PriceCollector extends BaseCollector implements ICollector {
         if(endValue < 1.0) {
             endValue = 1.0;
         }
-        if(ingredient.price == null || !ingredient.price.equals(endValue)) {
-            ingredient.price = endValue;
-            return true;
-        }
-        return false;
+        ingredient.update(IngredientProperty.Price, endValue);
+        return ingredient.price != ingredient.getPrice();
     }
 }

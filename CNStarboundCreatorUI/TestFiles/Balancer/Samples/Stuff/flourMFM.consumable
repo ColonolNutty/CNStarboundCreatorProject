@@ -6,6 +6,16 @@
   "description" : "(MILL):-} Nope NONONONO \"What\" NONONONONO",
   "shortdescription" : "No",
   "foodValue" : 2.0,
+  "effects" : [[
+    {
+      "effect" : "jumpboostfood",
+      "duration" : 5
+    },
+    {
+      "effect" : "runboostfood",
+      "duration" : 2
+    }
+  ]],
   "inventoryIcon" : "What",
   "learnBlueprintsOnPickup" : [ "doughMFM" ]
 }

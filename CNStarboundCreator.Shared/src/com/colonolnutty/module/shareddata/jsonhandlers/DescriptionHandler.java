@@ -15,7 +15,7 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
 
     @Override
     public JsonNode createTestNode(Ingredient ingredient) {
-        if(CNStringUtils.isNullOrWhitespace(ingredient.description)) {
+        if(!ingredient.hasDescription()) {
             return null;
         }
         return _nodeProvider.createTestAddStringNode(PATH_NAME);
@@ -23,10 +23,10 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
 
     @Override
     public JsonNode createReplaceNode(Ingredient ingredient) {
-        if(CNStringUtils.isNullOrWhitespace(ingredient.description)) {
+        if(!ingredient.hasDescription()) {
             return null;
         }
-        return _nodeProvider.createReplaceStringNode(PATH_NAME, ingredient.description);
+        return _nodeProvider.createReplaceStringNode(PATH_NAME, ingredient.getDescription());
     }
 
     @Override
@@ -39,9 +39,9 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
         if(ingredient == null) {
             return false;
         }
-        boolean ingredientHasDescription = !CNStringUtils.isNullOrWhitespace(ingredient.description);
+        boolean ingredientHasValue = ingredient.hasDescription();
         if(node == null) {
-            return ingredientHasDescription;
+            return ingredientHasValue;
         }
 
         if(node.isArray()) {
@@ -49,22 +49,22 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
         }
 
         if(!node.has("value")) {
-            return ingredientHasDescription;
+            return ingredientHasValue;
         }
 
-        JsonNode descriptionNode = node.get("value");
-        if(!descriptionNode.isTextual()) {
-            return ingredientHasDescription;
+        JsonNode value = node.get("value");
+        if(!value.isTextual()) {
+            return ingredientHasValue;
         }
 
-        String nodeVal = descriptionNode.asText();
-        return !nodeVal.equals(ingredient.description);
+        String nodeVal = value.asText();
+        return !nodeVal.equals(ingredient.getDescription());
     }
 
     @Override
     public String getShortStringValue(Ingredient ingredient) {
         if(ingredient.hasDescription()) {
-            return "desc: " + ingredient.description;
+            return "desc: " + ingredient.getDescription();
         }
         return null;
     }

@@ -37,8 +37,8 @@ public class JsonNodePrettyPrinterTests {
     }
 
     @Test
-    public void formatArray_should_return_empty_array_with_indent() {
-        String expectedResult = "   [ ]";
+    public void formatArray_should_return_empty_array_specifying_indent_with_no_indent() {
+        String expectedResult = "[ ]";
         ArrayNode arr = _nodeProvider.createArrayNode();
         String result = _printer.formatArray(arr, 3, true);
         assertEquals(expectedResult, result);
@@ -78,12 +78,10 @@ public class JsonNodePrettyPrinterTests {
 
     @Test
     public void formatArray_should_return_single_object_multiple_properties_array() {
-        String expectedResult = "["
-                + BasePrettyPrinter.NEW_LINE + "  {"
-                + BasePrettyPrinter.NEW_LINE + "    \"one\" : 24.0,"
-                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 25.0"
-                + BasePrettyPrinter.NEW_LINE + "  }"
-                + BasePrettyPrinter.NEW_LINE + "]";
+        String expectedResult = "[{"
+                + BasePrettyPrinter.NEW_LINE + "  \"one\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "  \"two\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "}]";
         ArrayNode arr = _nodeProvider.createArrayNode();
         ObjectNode obj = _nodeProvider.createObjectNode();
         obj.put("one", 24.0);
@@ -158,7 +156,7 @@ public class JsonNodePrettyPrinterTests {
         arr.add(objOne);
         arr.add(objTwo);
         arr.add(objThree);
-        String result = _printer.makePretty(arr, 0);
+        String result = _printer.formatArray(arr, 0, true);
         assertEquals(expectedResult, result);
     }
 
@@ -220,6 +218,7 @@ public class JsonNodePrettyPrinterTests {
         String result = _printer.formatObject(objNode, 0, false);
         assertEquals(expectedResult, result);
     }
+
     @Test
     public void formatObject_should_return_single_property_object_with_object_property() {
         String expectedResult = "{"

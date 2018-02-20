@@ -115,6 +115,28 @@ public class UnspecificPrettyPrinterTests {
     }
 
     @Test
+    public void formatObject_should_return_single_property_object_with_object_property() {
+        String expectedResult = "{"
+                + BasePrettyPrinter.NEW_LINE + "  \"one\" : {"
+                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 24.0,"
+                + BasePrettyPrinter.NEW_LINE + "    \"three\" : 25.0"
+                + BasePrettyPrinter.NEW_LINE + "  }"
+                + BasePrettyPrinter.NEW_LINE + "}";
+        String[] propertyOrder = new String[3];
+        propertyOrder[0] = "one";
+        propertyOrder[1] = "two";
+        propertyOrder[2] = "three";
+        _printer.setPropertyOrder(propertyOrder);
+        JSONObject obj = new JSONObject();
+        JSONObject subObj = new JSONObject();
+        subObj.put("two", 24.0);
+        subObj.put("three", 25.0);
+        obj.put("one", subObj);
+        String result = _printer.makePretty(obj, 0);
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
     public void formatObject_should_return_formatted_object_with_sub_double_array() {
         String expectedResult = "{"
                 + BasePrettyPrinter.NEW_LINE + "  \"one\" : 24.0,"
@@ -358,18 +380,16 @@ public class UnspecificPrettyPrinterTests {
 
     @Test
     public void formatArray_should_return_single_object_multiple_properties_array() {
-        String expectedResult = "["
-                + BasePrettyPrinter.NEW_LINE + "  {"
-                + BasePrettyPrinter.NEW_LINE + "    \"one\" : 24.0,"
-                + BasePrettyPrinter.NEW_LINE + "    \"two\" : 25.0"
-                + BasePrettyPrinter.NEW_LINE + "  }"
-                + BasePrettyPrinter.NEW_LINE + "]";
+        String expectedResult = "[{"
+                + BasePrettyPrinter.NEW_LINE + "  \"two\" : 25.0,"
+                + BasePrettyPrinter.NEW_LINE + "  \"one\" : 24.0"
+                + BasePrettyPrinter.NEW_LINE + "}]";
         ArrayList<Object> arr = new ArrayList<Object>();
         Hashtable<String, Object> obj = new Hashtable<String, Object>();
         obj.put("one", 24.0);
         obj.put("two", 25.0);
         arr.add(obj);
-        String result = _printer.makePretty(arr, 0);
+        String result = _printer.formatArray(arr, 0, true);
         assertEquals(expectedResult, result);
     }
 

@@ -6,6 +6,7 @@ import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
 import com.colonolnutty.module.shareddata.io.IFileReader;
 import com.colonolnutty.module.shareddata.io.IReadFiles;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.IngredientProperty;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -56,9 +57,11 @@ public class DescriptionCollector implements ICollector, IReadFiles {
             _log.error("Error reading file: " + _settings.friendlyNamesFilePath, e);
             return false;
         }
-        ingredient.description = createDescription(ingredient.description, _groupNames, _friendlyGroupNames);
-        return false;
+        String newDescription = createDescription(ingredient.getDescription(), _groupNames, _friendlyGroupNames);
+        ingredient.update(IngredientProperty.Description, newDescription);
+        return ingredient.description != ingredient.getDescription();
     }
+
     public String createDescription(String description, String[] groupNames, HashMap<String, String> friendlyGroupNames) {
         if(CNStringUtils.isNullOrWhitespace(description)) {
             return null;

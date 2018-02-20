@@ -77,6 +77,12 @@ public class EffectsHandlerTests {
     public void createTestNode_should_give_test_node_when_ingredient_has_effects() {
         Ingredient ingredient = new Ingredient();
         ingredient.effects = _nodeProvider.createArrayNode();
+        ArrayNode effectsArr = _nodeProvider.createArrayNode();
+        ObjectNode someEffect = _nodeProvider.createObjectNode();
+        someEffect.put("effect", "SomeEffect");
+        someEffect.put("duration", 24.0);
+        effectsArr.add(someEffect);
+        ingredient.effects.add(effectsArr);
         ArrayNode testNode = _nodeProvider.createArrayNode();
         NodeProvider mockNodeProvider = mock(NodeProvider.class);
         when(mockNodeProvider.createTestAddArrayNode(EffectsHandler.PATH_NAME)).thenReturn(testNode);
@@ -99,12 +105,18 @@ public class EffectsHandlerTests {
     public void createReplaceNode_should_give_replace_node_when_ingredient_has_effects() {
         Ingredient ingredient = new Ingredient();
         ingredient.effects = _nodeProvider.createArrayNode();
-        ObjectNode testNode = _nodeProvider.createObjectNode();
+        ArrayNode effectsArr = _nodeProvider.createArrayNode();
+        ObjectNode someEffect = _nodeProvider.createObjectNode();
+        someEffect.put("effect", "SomeEffect");
+        someEffect.put("duration", 24.0);
+        effectsArr.add(someEffect);
+        ingredient.effects.add(effectsArr);
+        ObjectNode replaceValueNode = _nodeProvider.createObjectNode();
         NodeProvider mockNodeProvider = mock(NodeProvider.class);
-        when(mockNodeProvider.createReplaceArrayNode(EffectsHandler.PATH_NAME, ingredient.effects)).thenReturn(testNode);
+        when(mockNodeProvider.createReplaceArrayNode(EffectsHandler.PATH_NAME, ingredient.effects)).thenReturn(replaceValueNode);
         _handler.setNodeProvider(mockNodeProvider);
         JsonNode result = _handler.createReplaceNode(ingredient);
-        assertEquals(testNode, result);
+        assertEquals(replaceValueNode, result);
     }
 
     //canHandle

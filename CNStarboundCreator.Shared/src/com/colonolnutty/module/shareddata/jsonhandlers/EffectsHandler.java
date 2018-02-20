@@ -21,7 +21,7 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
 
     @Override
     public JsonNode createTestNode(Ingredient ingredient) {
-        if(ingredient.effects == null) {
+        if(!ingredient.hasEffects()) {
             return null;
         }
         return _nodeProvider.createTestAddArrayNode(PATH_NAME);
@@ -29,10 +29,10 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
 
     @Override
     public JsonNode createReplaceNode(Ingredient ingredient) {
-        if(ingredient.effects == null) {
+        if(!ingredient.hasEffects()) {
             return null;
         }
-        return _nodeProvider.createReplaceArrayNode(PATH_NAME, ingredient.effects);
+        return _nodeProvider.createReplaceArrayNode(PATH_NAME, ingredient.getEffects());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
 
     @Override
     public boolean needsUpdate(JsonNode node, Ingredient ingredient) {
-        Hashtable<String, Integer> ingredientEffects = getEffects(ingredient.effects);
+        Hashtable<String, Integer> ingredientEffects = getEffects(ingredient.getEffects());
 
         JsonNode effects = getEffectsNodeFromNode(node);
         Hashtable<String, Integer> nodeEffects = getEffects(effects);
@@ -62,7 +62,7 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
         if(!ingredient.hasEffects()) {
             return null;
         }
-        JsonNode effectsNode = ingredient.effects;
+        JsonNode effectsNode = ingredient.getEffects();
         if(effectsNode == null || !effectsNode.isArray() || effectsNode.size() == 0 || effectsNode.size() > 1) {
             return null;
         }
