@@ -36,42 +36,25 @@ public class JSONObjectPrettyPrinter extends BasePrettyPrinter {
         if(objProperties.size() == 1) {
             String firstProperty = objProperties.get(0);
             Object firstObj = obj.get(firstProperty);
-            boolean isNonValue = firstObj instanceof JSONObject || firstObj instanceof JSONArray;
-            int subIndent = 0;
-            if(isNonValue) {
-                subIndent = INDENT_SIZE;
-            }
-            String result = null;
-            try {
-                result = formatAsIntended(firstObj, subIndent, false);
-            }
-            catch(JSONException e) {
-                throw new JSONException("Single property obj, for property: " + firstProperty, e);
-            }
+            String result = formatAsIntended(firstObj, 0, false);
             if(result == null) {
-                return "{ }";
+                builder.append("{ }");
+                return builder.toString();
             }
-            builder.append("{");
-            if(isNonValue) {
-                builder.append(NEW_LINE);
+            if(result.contains(NEW_LINE)) {
+                builder.append("{" + NEW_LINE + CNStringUtils.createIndent(indentSize + INDENT_SIZE));
+                result = result.replace(NEW_LINE,  NEW_LINE + CNStringUtils.createIndent(indentSize + INDENT_SIZE));
             }
             else {
-                builder.append(" ");
-            }
-            if(isNonValue) {
-                builder.append(CNStringUtils.createIndent(indentSize + INDENT_SIZE));
+                builder.append("{ ");
             }
             builder.append("\"" + firstProperty + "\" : " + result);
-            if(isNonValue) {
-                builder.append(NEW_LINE);
+            if(result.contains(NEW_LINE)) {
+                builder.append(NEW_LINE + CNStringUtils.createIndent(indentSize) + "}");
             }
             else {
-                builder.append(" ");
+                builder.append(" }");
             }
-            if(includeIndent) {
-                builder.append(CNStringUtils.createIndent(indentSize));
-            }
-            builder.append("}");
             return builder.toString();
         }
         ArrayList<String> sortedProperties = sortProperties(_propertiesInOrder, objProperties);

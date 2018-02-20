@@ -185,9 +185,7 @@ public class JSONObjectPrettyPrinterTests {
 
     @Test
     public void formatObject_should_return_formatted_object_with_double_array() {
-        String expectedResult = "{"
-                + BasePrettyPrinter.NEW_LINE + "  \"one\" : [[ ]]"
-                + BasePrettyPrinter.NEW_LINE + "}";
+        String expectedResult = "{ \"one\" : [[ ]] }";
         JSONObject obj = new JSONObject();
         JSONArray arrNodeOne = new JSONArray();
         JSONArray subNodeArr = new JSONArray();
@@ -386,9 +384,7 @@ public class JSONObjectPrettyPrinterTests {
 
     @Test
     public void formatAsIntended_should_return_formatted_object() {
-        String expectedResult = "{"
-                + BasePrettyPrinter.NEW_LINE + "  \"one\" : [[ ]]"
-                + BasePrettyPrinter.NEW_LINE + "}";
+        String expectedResult = "{ \"one\" : [[ ]] }";
         JSONObject obj = new JSONObject();
         JSONArray arr = new JSONArray();
         JSONArray subArr = new JSONArray();
