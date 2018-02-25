@@ -151,7 +151,7 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
         Enumeration<String> effectKeys = effects.keys();
         while(effectKeys.hasMoreElements()) {
             String effectName = effectKeys.nextElement();
-            int effectDuration = (int)(effects.get(effectName)/outputCount);
+            int effectDuration = (int)effects.get(effectName);//(int)(effects.get(effectName)/outputCount);
             if(effectDuration == 0) {
                 continue;
             }

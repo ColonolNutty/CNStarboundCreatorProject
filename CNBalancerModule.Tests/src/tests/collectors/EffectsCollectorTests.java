@@ -260,14 +260,15 @@ public class EffectsCollectorTests {
         assertTrue(effectsTable.containsKey("effectTwo"));
         assertTrue(effectsTable.containsKey("effectThree"));
 
+        //No output division
         //10+10+5/10 25/10 2.5 2
-        assertEquals(2, (int)effectsTable.get("effectOne"));
+        assertEquals(25, (int)effectsTable.get("effectOne"));
 
         //20+20+10+10+10 40+30 70+10+5/10 85/10 8.5 8
-        assertEquals(8, (int)effectsTable.get("effectTwo"));
+        assertEquals(85, (int)effectsTable.get("effectTwo"));
 
         //50+50+50 150+25 175/10 17.5 17
-        assertEquals(17, (int)effectsTable.get("effectThree"));
+        assertEquals(175, (int)effectsTable.get("effectThree"));
     }
 
     private ArrayNode createEffectsArray(StatusEffect[] effects) {
