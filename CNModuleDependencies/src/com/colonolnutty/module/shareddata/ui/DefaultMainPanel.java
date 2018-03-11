@@ -89,7 +89,13 @@ public class DefaultMainPanel<T extends CNBaseSettings, Y extends SettingsDispla
                             _progressDisplay.reset();
                             Z mainRun = _mainRunClass.getConstructor(_settingsClass, CNLog.class, ProgressController.class).newInstance(_settings, _log, _progressDisplay);
                             mainRun.run();
-                            Hashtable<String, MessageBundle> messages = _log.getMessages();
+                            Hashtable<String, MessageBundle> messages;
+                            if(_settings.enableTreeView) {
+                                messages = _log.getMessages();
+                            }
+                            else {
+                                messages = new Hashtable<>();
+                            }
                             _outputDisplay.updateTreeDisplay(messages);
                         }
                         catch(Exception e1) {

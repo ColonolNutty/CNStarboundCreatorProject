@@ -18,6 +18,11 @@ public class PriceHandler extends DefaultNodeProvider implements IJsonHandler {
     }
 
     @Override
+    public String getPathName() {
+        return PATH_NAME;
+    }
+
+    @Override
     public JsonNode createTestNode(Ingredient ingredient) {
         Double price = ingredient.getPrice();
         if(price == null || price < 0.0) {
@@ -38,6 +43,11 @@ public class PriceHandler extends DefaultNodeProvider implements IJsonHandler {
     @Override
     public boolean canHandle(String pathName) {
         return pathName.equals(PATH_NAME);
+    }
+
+    @Override
+    public boolean canHandle(Ingredient ingredient) {
+        return true;
     }
 
     @Override

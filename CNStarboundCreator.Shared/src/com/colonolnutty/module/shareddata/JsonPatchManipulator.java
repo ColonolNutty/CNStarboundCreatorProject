@@ -269,65 +269,77 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
     }
 
     private PatchNodes addMissingPatchNodes(Hashtable<String, NodeAvailability> nodesAvailability, Ingredient ingredient) {
-        if(nodesAvailability.size() == 0) {
-            return null;
-        }
         boolean needsUpdate = false;
         Hashtable<String, JsonNode> newTestNodes = new Hashtable<String, JsonNode>();
         Hashtable<String, ArrayList<JsonNode>> newNonTestNodes = new Hashtable<String, ArrayList<JsonNode>>();
-        Enumeration<String> keys = nodesAvailability.keys();
-        while(keys.hasMoreElements()) {
-            String key = keys.nextElement();
-            NodeAvailability nodeAvailability = nodesAvailability.get(key);
-            IJsonHandler handler = findNodeHandler(nodeAvailability.PathName);
-            if(handler == null) {
-                if(nodeAvailability.TestNode != null
-                        && nodeAvailability.NonTestNodes != null
-                        && nodeAvailability.NonTestNodes.size() > 0) {
-                    newTestNodes.put(nodeAvailability.PathName, nodeAvailability.TestNode);
+        if(nodesAvailability.size() == 0) {
+            for(IJsonHandler handler : _jsonHandlers) {
+                if(handler.canHandle(ingredient)) {
+                    newTestNodes.put(handler.getPathName(), handler.createTestNode(ingredient));
+                    JsonNode replaceNode = handler.createReplaceNode(ingredient);
+                    if(replaceNode != null) {
+                        ArrayList<JsonNode> nonTestNodes = new ArrayList<JsonNode>();
+                        nonTestNodes.add(replaceNode);
+                        newNonTestNodes.put(handler.getPathName(), nonTestNodes);
+                    }
+                    needsUpdate = true;
                 }
+            }
+        }
+        else {
+            Enumeration<String> keys = nodesAvailability.keys();
+            while(keys.hasMoreElements()) {
+                String key = keys.nextElement();
+                NodeAvailability nodeAvailability = nodesAvailability.get(key);
+                IJsonHandler handler = findNodeHandler(nodeAvailability.PathName);
+                if(handler == null) {
+                    if(nodeAvailability.TestNode != null
+                            && nodeAvailability.NonTestNodes != null
+                            && nodeAvailability.NonTestNodes.size() > 0) {
+                        newTestNodes.put(nodeAvailability.PathName, nodeAvailability.TestNode);
+                    }
+                    if(nodeAvailability.hasNonTestNodes()) {
+                        newNonTestNodes.put(nodeAvailability.PathName, nodeAvailability.NonTestNodes);
+                    }
+                    continue;
+                }
+
+                if(nodeAvailability.hasNonTestNodes()) {
+                    for(JsonNode node : nodeAvailability.NonTestNodes) {
+                        if(handler.needsUpdate(node, ingredient)) {
+                            nodeAvailability.NonTestNodes = new ArrayList<JsonNode>();
+                            nodeAvailability.NonTestNodes.add(handler.createReplaceNode(ingredient));
+                            newNonTestNodes.put(nodeAvailability.PathName, nodeAvailability.NonTestNodes);
+                            needsUpdate = true;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    JsonNode replaceNode = handler.createReplaceNode(ingredient);
+                    if(replaceNode != null) {
+                        nodeAvailability.NonTestNodes = new ArrayList<JsonNode>();
+                        nodeAvailability.NonTestNodes.add(replaceNode);
+                    }
+                }
+
+                if(nodeAvailability.TestNode == null
+                        && nodeAvailability.hasNonTestNodes()) {
+                    JsonNode testNode = handler.createTestNode(ingredient);
+                    if(testNode != null) {
+                        nodeAvailability.TestNode = testNode;
+                    }
+                }
+                // If there is no NonTestNode then we remove the TestNode. No Changes. No Test.
+                if(!nodeAvailability.hasNonTestNodes()) {
+                    nodeAvailability.TestNode = null;
+                }
+
                 if(nodeAvailability.hasNonTestNodes()) {
                     newNonTestNodes.put(nodeAvailability.PathName, nodeAvailability.NonTestNodes);
                 }
-                continue;
-            }
-
-            if(!nodeAvailability.hasNonTestNodes()) {
-                JsonNode replaceNode = handler.createReplaceNode(ingredient);
-                if(replaceNode != null) {
-                    nodeAvailability.NonTestNodes = new ArrayList<JsonNode>();
-                    nodeAvailability.NonTestNodes.add(replaceNode);
-                }
-            }
-
-            if(nodeAvailability.TestNode == null
-                    && nodeAvailability.hasNonTestNodes()) {
-                JsonNode testNode = handler.createTestNode(ingredient);
-                if(testNode != null) {
-                    nodeAvailability.TestNode = testNode;
-                }
-            }
-            // If there is no NonTestNode then we remove the TestNode. No Changes. No Test.
-            if(!nodeAvailability.hasNonTestNodes()) {
-                nodeAvailability.TestNode = null;
-            }
-
-            if(nodeAvailability.hasNonTestNodes()) {
-                newNonTestNodes.put(nodeAvailability.PathName, nodeAvailability.NonTestNodes);
-            }
-            if(nodeAvailability.TestNode != null) {
-                newTestNodes.put(nodeAvailability.PathName, nodeAvailability.TestNode);
-            }
-
-            if(nodeAvailability.hasNonTestNodes()) {
-                for(JsonNode node : nodeAvailability.NonTestNodes) {
-                    if(handler.needsUpdate(node, ingredient)) {
-                        nodeAvailability.NonTestNodes = new ArrayList<JsonNode>();
-                        nodeAvailability.NonTestNodes.add(handler.createReplaceNode(ingredient));
-                        newNonTestNodes.put(nodeAvailability.PathName, nodeAvailability.NonTestNodes);
-                        needsUpdate = true;
-                        break;
-                    }
+                if(nodeAvailability.TestNode != null) {
+                    newTestNodes.put(nodeAvailability.PathName, nodeAvailability.TestNode);
                 }
             }
         }

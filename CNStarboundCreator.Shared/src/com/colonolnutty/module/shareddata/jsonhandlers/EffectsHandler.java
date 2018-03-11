@@ -21,6 +21,11 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
     }
 
     @Override
+    public String getPathName() {
+        return PATH_NAME;
+    }
+
+    @Override
     public JsonNode createTestNode(Ingredient ingredient) {
         if(!ingredient.hasEffects()) {
             return null;
@@ -39,6 +44,11 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
     @Override
     public boolean canHandle(String pathName) {
         return pathName.equals(PATH_NAME);
+    }
+
+    @Override
+    public boolean canHandle(Ingredient ingredient) {
+        return ingredient.filePath.endsWith(".item") || ingredient.filePath.endsWith(".consumable");
     }
 
     @Override

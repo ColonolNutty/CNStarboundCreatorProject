@@ -9,9 +9,11 @@ import com.fasterxml.jackson.databind.JsonNode;
  * Time: 3:15 PM
  */
 public interface IJsonHandler {
+    String getPathName();
     JsonNode createTestNode(Ingredient ingredient);
     JsonNode createReplaceNode(Ingredient ingredient);
     boolean canHandle(String pathName);
+    boolean canHandle(Ingredient ingredient);
     boolean needsUpdate(JsonNode node, Ingredient ingredient);
     String getShortStringValue(Ingredient ingredient);
 }

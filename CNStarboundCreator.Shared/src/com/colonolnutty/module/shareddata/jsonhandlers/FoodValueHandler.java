@@ -18,6 +18,11 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
     }
 
     @Override
+    public String getPathName() {
+        return PATH_NAME;
+    }
+
+    @Override
     public JsonNode createTestNode(Ingredient ingredient) {
         Double foodValue = ingredient.getFoodValue();
         if(foodValue == null || foodValue < 0.0) {
@@ -38,6 +43,11 @@ public class FoodValueHandler extends DefaultNodeProvider implements IJsonHandle
     @Override
     public boolean canHandle(String pathName) {
         return pathName.equals(PATH_NAME);
+    }
+
+    @Override
+    public boolean canHandle(Ingredient ingredient) {
+        return ingredient.filePath.endsWith(".consumable");
     }
 
     @Override

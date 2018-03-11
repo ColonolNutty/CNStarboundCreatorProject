@@ -2,7 +2,7 @@
   "logFile" : "logs\\updatelog.log",
   "enableConsoleDebug" : true,
   "enableTreeView" : true,
-  "enableVerboseLogging" : true,
+  "enableVerboseLogging" : false,
   "propertyOrderFile" : "configuration\\propertyOrder.json",
   "propertiesToUpdate" : [ "foodValue", "price", "effects", "description", "printable" ],
   "forceUpdate" : false,

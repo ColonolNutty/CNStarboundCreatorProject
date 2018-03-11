@@ -15,6 +15,11 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
     public static final String PATH_NAME = "/description";
 
     @Override
+    public String getPathName() {
+        return PATH_NAME;
+    }
+
+    @Override
     public JsonNode createTestNode(Ingredient ingredient) {
         if(!ingredient.hasDescription()) {
             return null;
@@ -33,6 +38,11 @@ public class DescriptionHandler extends DefaultNodeProvider implements IJsonHand
     @Override
     public boolean canHandle(String pathName) {
         return pathName.equals(PATH_NAME);
+    }
+
+    @Override
+    public boolean canHandle(Ingredient ingredient) {
+        return true;
     }
 
     @Override
