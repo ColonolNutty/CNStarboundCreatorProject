@@ -11,4 +11,5 @@ import com.colonolnutty.module.shareddata.models.Recipe;
 public interface ICollector {
     void collectData(Ingredient ingredient, double inputCount, Recipe recipe);
     boolean applyData(Ingredient ingredient, double outputCount);
+    String getDescriptionOfUpdate(Ingredient ingredient);
 }

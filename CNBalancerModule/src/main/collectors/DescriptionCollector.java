@@ -25,7 +25,6 @@ import java.util.HashMap;
 public class DescriptionCollector implements ICollector, IReadFiles {
     public static final String RECIPE_GROUP_DELIMITER = ":-} ";
 
-    private JsonManipulator _manipulator;
     private IFileReader _fileReader;
     private BalancerSettings _settings;
     private CNLog _log;
@@ -59,7 +58,30 @@ public class DescriptionCollector implements ICollector, IReadFiles {
         }
         String newDescription = createDescription(ingredient.getDescription(), _groupNames, _friendlyGroupNames);
         ingredient.update(IngredientProperty.Description, newDescription);
-        return ingredient.description != ingredient.getDescription();
+        String value = ingredient.getDescription();
+        if(ingredient.description == null && value != null) {
+            return true;
+        }
+        if(ingredient.description != null && value == null) {
+            return true;
+        }
+        if(ingredient.description == null && value == null) {
+            return false;
+        }
+        return !ingredient.description.equals(value);
+    }
+
+    @Override
+    public String getDescriptionOfUpdate(Ingredient ingredient) {
+        String oldDescription = ingredient.description;
+        String newDescription = ingredient.getDescription();
+        if(oldDescription == null) {
+            oldDescription = "none";
+        }
+        if(newDescription == null) {
+            newDescription = "none";
+        }
+        return "Description was: " + oldDescription + " it is now: " + newDescription;
     }
 
     public String createDescription(String description, String[] groupNames, HashMap<String, String> friendlyGroupNames) {

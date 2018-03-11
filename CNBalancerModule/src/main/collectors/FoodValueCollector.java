@@ -33,6 +33,32 @@ public class FoodValueCollector extends BaseCollector implements ICollector {
             endValue = (double)_settings.minimumFoodValue;
         }
         ingredient.update(IngredientProperty.FoodValue, endValue);
-        return ingredient.foodValue != ingredient.getFoodValue();
+        if(ingredient.filePath != null && !ingredient.filePath.endsWith(".consumable")) {
+            return false;
+        }
+        Double value = ingredient.getFoodValue();
+        if(ingredient.foodValue == null && value == null) {
+            return false;
+        }
+        if(ingredient.foodValue == null && value != null) {
+            return true;
+        }
+        if(ingredient.foodValue != null && value == null) {
+            return true;
+        }
+        return !ingredient.foodValue.equals(value);
+    }
+
+    @Override
+    public String getDescriptionOfUpdate(Ingredient ingredient) {
+        Double oldVal = ingredient.foodValue;
+        Double newVal = ingredient.getFoodValue();
+        if(oldVal == null) {
+            oldVal = 0.0;
+        }
+        if(newVal == null) {
+            newVal = 0.0;
+        }
+        return "Food Value was: " + oldVal + " it is now: " + newVal;
     }
 }

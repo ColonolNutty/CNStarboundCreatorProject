@@ -10,6 +10,7 @@ import com.colonolnutty.module.shareddata.locators.FileLocator;
 import com.colonolnutty.module.shareddata.locators.IngredientStore;
 import com.colonolnutty.module.shareddata.ui.ConfirmationController;
 import com.colonolnutty.module.shareddata.ui.ProgressController;
+import main.models.IngredientUpdateResult;
 import main.settings.BalancerSettings;
 
 import java.io.File;
@@ -76,10 +77,15 @@ public class FileUpdater {
                 }
                 String[] relativePathNames = startPathBundle(filePath, currentDirectory);
                 _log.startSubBundle(currentPass);
-                String ingredientName = _ingredientUpdater.update(filePath);
+                IngredientUpdateResult result = _ingredientUpdater.update(filePath);
                 //If ingredientName is null, it means the file doesn't need an update
-                if (ingredientName != null && !ingredientsToUpdate.containsKey(filePath)) {
-                    ingredientsToUpdate.put(filePath, ingredientName);
+                if (result.NeedsUpdate && result.IngredientName != null && !ingredientsToUpdate.containsKey(filePath)) {
+                    _log.debug("File set for update: " + filePath);
+                    ingredientsToUpdate.put(filePath, result.IngredientName);
+                }
+                else if(!result.NeedsUpdate && ingredientsToUpdate.containsKey(filePath)) {
+                    _log.debug("File removed for update: " + filePath);
+                    ingredientsToUpdate.remove(filePath);
                 }
                 _log.endSubBundle();
                 _log.endSubBundle();

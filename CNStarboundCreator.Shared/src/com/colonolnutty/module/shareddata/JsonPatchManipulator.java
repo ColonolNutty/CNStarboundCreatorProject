@@ -303,6 +303,9 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
                     }
                     continue;
                 }
+                if(!handler.canHandle(ingredient)) {
+                    continue;
+                }
 
                 if(nodeAvailability.hasNonTestNodes()) {
                     for(JsonNode node : nodeAvailability.NonTestNodes) {

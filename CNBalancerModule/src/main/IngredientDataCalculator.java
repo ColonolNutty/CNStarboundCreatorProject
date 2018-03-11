@@ -102,6 +102,7 @@ public class IngredientDataCalculator {
         for(ICollector collector : collectors) {
             if(collector.applyData(newIngredient, outputCount)) {
                 needsUpdate = true;
+                _log.debug(collector.getDescriptionOfUpdate(newIngredient));
             }
         }
         _log.debug("Recipe Output \"" + outputName + "\" with output count: " + outputCount + " with final price: " + newIngredient.getPrice() + " foodValue: " + newIngredient.getFoodValue(), 4);

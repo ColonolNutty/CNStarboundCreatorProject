@@ -48,7 +48,7 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
 
     @Override
     public boolean canHandle(Ingredient ingredient) {
-        return ingredient.filePath.endsWith(".item") || ingredient.filePath.endsWith(".consumable");
+        return ingredient.filePath.endsWith(".consumable");
     }
 
     @Override

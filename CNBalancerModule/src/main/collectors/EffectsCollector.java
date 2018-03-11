@@ -27,6 +27,7 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
     private CNLog _log;
     private StatusEffectStore _statusEffectStore;
     private NodeProvider _nodeProvider;
+    private boolean _isRawFood = false;
 
     private Hashtable<String, Integer> _effects;
 
@@ -45,8 +46,8 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
         if(!ingredient.hasEffects()) {
             return;
         }
-        boolean isRawFood = recipe.output.item.startsWith("raw");
-        Hashtable<String, Integer> ingredientEffects = getEffects(ingredient, isRawFood);
+        _isRawFood = recipe.output.item.startsWith("raw");
+        Hashtable<String, Integer> ingredientEffects = getEffects(ingredient, _isRawFood);
         Enumeration<String> effectNames = ingredientEffects.keys();
         while(effectNames.hasMoreElements()) {
             String effectName = effectNames.nextElement();
@@ -58,9 +59,11 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
 
     @Override
     public boolean applyData(Ingredient ingredient, double outputCount) {
+        if(ingredient.filePath != null && !ingredient.filePath.endsWith(".consumable")) {
+            return false;
+        }
         if(!ingredient.hasEffects() && _effects.size() == 0) {
-            ingredient.effects = null;
-            return true;
+            return false;
         }
         if(!_settings.enableEffectsUpdate || _effects.size() == 0) {
             return false;
@@ -72,7 +75,39 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
         ArrayNode combined = _nodeProvider.createArrayNode();
         combined.add(combinedEffects);
         ingredient.update(IngredientProperty.Effects, combined);
-        return !ingredient.effectsAreEqual(ingredient.getEffects());
+        return !ingredient.effectsAreEqual(ingredient.effects, ingredient.getEffects());
+    }
+
+    @Override
+    public String getDescriptionOfUpdate(Ingredient ingredient) {
+        boolean hasOldEffects = ingredient.hasEffects(ingredient.effects);
+        boolean hasNewEffects = ingredient.hasEffects(ingredient.getEffects());
+        if(!hasOldEffects && !hasNewEffects) {
+            return "No Change";
+        }
+        if(!hasOldEffects && hasNewEffects) {
+            return "Has New Effects, but no Old Effects";
+        }
+        if(hasOldEffects && !hasNewEffects) {
+            return "Has Old Effects, but no New Effects";
+        }
+        Hashtable<String, Integer> oldEffects = getEffects(ingredient.effects, ingredient, _isRawFood);
+        StringBuilder builder = new StringBuilder("Old Effects: ");
+        Enumeration<String> oldEffectKeys = oldEffects.keys();
+        while(oldEffectKeys.hasMoreElements()) {
+            String effectName = oldEffectKeys.nextElement();
+            Integer duration = oldEffects.get(effectName);
+            builder.append("\n Effect: '" + effectName + "' Duration: " + duration);
+        }
+        Hashtable<String, Integer> newEffects = getEffects(ingredient.getEffects(), ingredient, _isRawFood);
+        builder.append("\nNew Effects: ");
+        Enumeration<String> newEffectKeys = oldEffects.keys();
+        while(newEffectKeys.hasMoreElements()) {
+            String effectName = newEffectKeys.nextElement();
+            Integer duration = newEffects.get(effectName);
+            builder.append("\n Effect: '" + effectName + "' Duration: " + duration);
+        }
+        return builder.toString();
     }
 
     public void addOrUpdateEffect(String name, int duration) {
@@ -86,8 +121,12 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
     }
 
     public Hashtable<String, Integer> getEffects(Ingredient ingredient, boolean isRawFood) {
-        Hashtable<String, Integer> effectValues = new Hashtable<String, Integer>();
         ArrayNode ingredientEffects = ingredient.getEffects();
+        return getEffects(ingredientEffects, ingredient, isRawFood);
+    }
+
+    public Hashtable<String, Integer> getEffects(ArrayNode ingredientEffects, Ingredient ingredient, boolean isRawFood) {
+        Hashtable<String, Integer> effectValues = new Hashtable<String, Integer>();
         if(ingredientEffects == null) {
             return effectValues;
         }

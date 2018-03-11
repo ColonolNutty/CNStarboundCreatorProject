@@ -1,7 +1,7 @@
 {
   "logFile" : "logs\\updatelog.log",
-  "enableConsoleDebug" : true,
-  "enableTreeView" : true,
+  "enableConsoleDebug" : false,
+  "enableTreeView" : false,
   "enableVerboseLogging" : false,
   "propertyOrderFile" : "configuration\\propertyOrder.json",
   "propertiesToUpdate" : [ "foodValue", "price", "effects", "description", "printable" ],

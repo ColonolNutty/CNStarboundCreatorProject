@@ -192,7 +192,7 @@ public class Ingredient {
         return isSame;
     }
 
-    private boolean effectsAreEqual(JsonNode effectsOne, JsonNode effectsTwo) {
+    public boolean effectsAreEqual(JsonNode effectsOne, JsonNode effectsTwo) {
         boolean selfHasEffects = effectsNotEmpty(effectsOne);
         boolean otherHasEffects = effectsNotEmpty(effectsTwo);
         if(!selfHasEffects && !otherHasEffects) {

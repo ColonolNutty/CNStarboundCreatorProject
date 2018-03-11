@@ -33,6 +33,29 @@ public class PriceCollector extends BaseCollector implements ICollector {
             endValue = 1.0;
         }
         ingredient.update(IngredientProperty.Price, endValue);
-        return ingredient.price != ingredient.getPrice();
+        Double value = ingredient.getPrice();
+        if(ingredient.price == null && value == null) {
+            return false;
+        }
+        if(ingredient.price == null && value != null) {
+            return true;
+        }
+        if(ingredient.price != null && value == null) {
+            return true;
+        }
+        return !ingredient.price.equals(value);
+    }
+
+    @Override
+    public String getDescriptionOfUpdate(Ingredient ingredient) {
+        Double oldVal = ingredient.price;
+        Double newVal = ingredient.getPrice();
+        if(oldVal == null) {
+            oldVal = 0.0;
+        }
+        if(newVal == null) {
+            newVal = 0.0;
+        }
+        return "Price was: " + oldVal + " it is now: " + newVal;
     }
 }

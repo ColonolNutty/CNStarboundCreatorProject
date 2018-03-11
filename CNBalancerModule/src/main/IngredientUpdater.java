@@ -5,6 +5,7 @@ import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.utils.CNFileUtils;
 import com.colonolnutty.module.shareddata.locators.IngredientStore;
+import main.models.IngredientUpdateResult;
 import main.settings.BalancerSettings;
 
 import java.io.File;
@@ -44,7 +45,7 @@ public class IngredientUpdater {
         _fileTypesIgnoreFoodValues.add(".material");
     }
 
-    public String update(String ingredientFilePath) {
+    public IngredientUpdateResult update(String ingredientFilePath) {
         try {
             File ingredientFile = new File(ingredientFilePath);
             String messageOne = "Calculating values for: " + ingredientFile.getName();
@@ -53,14 +54,14 @@ public class IngredientUpdater {
             Ingredient ingredient = _ingredientStore.getIngredientWithFilePath(ingredientFilePath);
             if(ingredient == null) {
                 _log.debug("No ingredient found in store for: " + ingredientFilePath);
-                return null;
+                return new IngredientUpdateResult(false, null);
             }
             boolean needsUpdate = _ingredientDataCalculator.updateIngredient(ingredient);
             if(!_settings.forceUpdate && !needsUpdate) {
                 _log.debug("Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), 4);
-                return null;
+                return new IngredientUpdateResult(false, null);
             }
-            return ingredient.getName();
+            return new IngredientUpdateResult(needsUpdate, ingredient.getName());
         }
         catch(IOException e) {
             _log.error("[IOE] While attempting to update: " + ingredientFilePath, e);
