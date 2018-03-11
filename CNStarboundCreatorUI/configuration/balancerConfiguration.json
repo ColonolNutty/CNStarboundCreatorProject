@@ -15,6 +15,7 @@
   "numberOfPasses" : 8,
   "enableEffectsUpdate" : true,
   "includeCraftGroups" : true,
+  "showConfirmation" : false,
   "friendlyNamesFilePath" : "configuration\\friendlyNames.json",
   "fileTypesToUpdate" : [ ".item", ".consumable", ".object", ".matitem", ".liqitem", ".projectile", ".liquid", ".matitem" ]
 }

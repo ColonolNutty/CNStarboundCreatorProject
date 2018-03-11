@@ -58,7 +58,7 @@ public class FileUpdater {
         String currentDirectory = System.getProperty("user.dir");
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientFileExts);
         int totalIterations = filePaths.size() * _settings.numberOfPasses;
-        boolean shouldContinue = ConfirmationController.getConfirmation("Total number of iterations (Larger numbers will take awhile): " + totalIterations + ", continue?");
+        boolean shouldContinue = !_settings.showConfirmation || ConfirmationController.getConfirmation("Total number of iterations (Larger numbers will take awhile): " + totalIterations + ", continue?");
         if(!shouldContinue) {
             _log.debug("User chose to not continue, aborting balance");
             return;
@@ -96,7 +96,7 @@ public class FileUpdater {
         }
 
         int totalToUpdate = ingredientsToUpdate.size();
-        boolean shouldUpdateIngredients = ConfirmationController.getConfirmation("Number of files to update: " + totalToUpdate + ", continue?");
+        boolean shouldUpdateIngredients = !_settings.showConfirmation || ConfirmationController.getConfirmation("Number of files to update: " + totalToUpdate + ", continue?");
         if(!shouldUpdateIngredients) {
             _log.debug("User chose to abort, aborting balancer");
             return;

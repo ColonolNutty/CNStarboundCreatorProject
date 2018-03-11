@@ -28,6 +28,7 @@ public class BalancerCRData extends CRData<BalancerSettings> implements ICRData<
         settingNames.add("numberOfPasses");
         settingNames.add("enableEffectsUpdate");
         settingNames.add("includeCraftGroups");
+        settingNames.add("showConfirmation");
         settingNames.add("friendlyNamesFilePath");
         settingNames.add("fileTypesToUpdate");
 
@@ -53,6 +54,7 @@ public class BalancerCRData extends CRData<BalancerSettings> implements ICRData<
                 settings.numberOfPasses,
                 settings.enableEffectsUpdate,
                 settings.includeCraftGroups,
+                settings.showConfirmation,
                 settings.friendlyNamesFilePath,
                 settings.fileTypesToUpdate);
     }

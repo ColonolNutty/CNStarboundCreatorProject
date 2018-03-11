@@ -112,6 +112,10 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                 "Force Update",
                 "forceUpdate",
                 _settings.forceUpdate);
+        JPanel showConfirmation = createField(FieldType.CheckBox,
+                "Show Confirmation",
+                "showConfirmation",
+                _settings.showConfirmation);
         JButton runButton = createButton("Run", onRun);
 
         layout.setHorizontalGroup(
@@ -159,6 +163,7 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                                         .addComponent(enableEffectsUpdate)
                                         .addComponent(includeCraftGroups)
                                         .addComponent(forceUpdate)
+                                        .addComponent(showConfirmation)
                         )
         );
         layout.setVerticalGroup(
@@ -205,6 +210,7 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
                                         .addComponent(enableEffectsUpdate)
                                         .addComponent(includeCraftGroups)
                                         .addComponent(forceUpdate)
+                                        .addComponent(showConfirmation)
                         )
         );
 
@@ -375,6 +381,14 @@ public class BalancerSettingsDisplay extends SettingsDisplayBase {
             public void stateChanged(ChangeEvent e) {
                 JCheckBox checkbox = (JCheckBox)e.getSource();
                 _settings.forceUpdate = checkbox.isSelected();
+                writeSettings();
+            }
+        });
+        setupCheckBoxListener("showConfirmation", new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkbox = (JCheckBox)e.getSource();
+                _settings.showConfirmation = checkbox.isSelected();
                 writeSettings();
             }
         });
