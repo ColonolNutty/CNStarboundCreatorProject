@@ -3,6 +3,7 @@ package com.colonolnutty.module.shareddata.jsonhandlers;
 import com.colonolnutty.module.shareddata.DefaultNodeProvider;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * User: Jack's Computer

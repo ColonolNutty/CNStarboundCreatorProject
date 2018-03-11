@@ -319,16 +319,13 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
                 newTestNodes.put(nodeAvailability.PathName, nodeAvailability.TestNode);
             }
 
-            //If forcing an update, no need to check, needsUpdate will be true no matter what
-            //If needsUpdate already true, no need to check, updating anyways
-            if(_forceUpdate || needsUpdate) {
-                continue;
-            }
-
             if(nodeAvailability.hasNonTestNodes()) {
                 for(JsonNode node : nodeAvailability.NonTestNodes) {
-                    needsUpdate = handler.needsUpdate(node, ingredient);
-                    if(needsUpdate) {
+                    if(handler.needsUpdate(node, ingredient)) {
+                        nodeAvailability.NonTestNodes = new ArrayList<JsonNode>();
+                        nodeAvailability.NonTestNodes.add(handler.createReplaceNode(ingredient));
+                        newNonTestNodes.put(nodeAvailability.PathName, nodeAvailability.NonTestNodes);
+                        needsUpdate = true;
                         break;
                     }
                 }
