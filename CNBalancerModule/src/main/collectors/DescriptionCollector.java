@@ -70,9 +70,13 @@ public class DescriptionCollector implements ICollector, IReadFiles {
 
         String existingDescriptionText = splitOnDelimiter[splitOnDelimiter.length - 1];
 
+        if(!_settings.includeCraftGroups) {
+            return existingDescriptionText;
+        }
+
         ArrayList<String> recipeGroupNames = getRecipeGroupNames(groupNames, friendlyGroupNames);
         if(recipeGroupNames == null || recipeGroupNames.isEmpty()) {
-            return description;
+            return existingDescriptionText;
         }
 
         String groupText = createMethodText(recipeGroupNames);
