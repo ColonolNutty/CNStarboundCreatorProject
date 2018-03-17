@@ -59,13 +59,10 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
 
     @Override
     public boolean applyData(Ingredient ingredient, double outputCount) {
-        if(ingredient.filePath != null && !ingredient.filePath.endsWith(".consumable")) {
-            return false;
-        }
         if(!ingredient.hasEffects() && _effects.size() == 0) {
             return false;
         }
-        if(!_settings.enableEffectsUpdate || _effects.size() == 0) {
+        if(!_settings.enableEffectsUpdate) {
             return false;
         }
         if(outputCount <= 0.0) {
@@ -75,6 +72,9 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
         ArrayNode combined = _nodeProvider.createArrayNode();
         combined.add(combinedEffects);
         ingredient.update(IngredientProperty.Effects, combined);
+        if(ingredient.filePath != null && !ingredient.filePath.endsWith(".consumable")) {
+            return false;
+        }
         return !ingredient.effectsAreEqual(ingredient.effects, ingredient.getEffects());
     }
 

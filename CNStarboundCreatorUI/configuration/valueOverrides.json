@@ -94,7 +94,29 @@
   },
   {
     "itemName": "sugarcaneBMB",
-    "foodValue": 5.7
+    "foodValue": 5.7,
+    "effects" : [[
+      {
+        "effect" : "maxenergyscalingboost",
+        "duration" : 105
+      },
+      {
+        "effect" : "maxenergyscalingboostfood",
+        "duration" : 32
+      },
+      {
+        "effect" : "jumpboostfood",
+        "duration" : 52
+      },
+      {
+        "effect" : "runboostfood",
+        "duration" : 52
+      },
+      {
+        "effect" : "ragefood",
+        "duration" : 105
+      }
+    ]]
   }
  ]
 }

@@ -58,24 +58,36 @@
       "path" : "/effects",
       "value" : [[
         {
+          "effect" : "maxenergyscalingboost",
+          "duration" : 115
+        },
+        {
+          "effect" : "maxenergyscalingboostfood",
+          "duration" : 34
+        },
+        {
           "effect" : "jumpboostfood",
-          "duration" : 5
+          "duration" : 56
         },
         {
           "effect" : "runboostfood",
-          "duration" : 2
+          "duration" : 56
+        },
+        {
+          "effect" : "ragefood",
+          "duration" : 115
         }
       ]]
     },
     {
       "op" : "replace",
       "path" : "/foodValue",
-      "value" : 4.2
+      "value" : 6.3
     },
     {
       "op" : "replace",
       "path" : "/price",
-      "value" : 38.22
+      "value" : 47.04
     }
   ]
 ]
