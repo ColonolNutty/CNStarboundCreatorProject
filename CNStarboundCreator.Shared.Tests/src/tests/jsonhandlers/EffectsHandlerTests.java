@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
+import tests.shared.TestBase;
 
 import java.util.Hashtable;
 
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.*;
  * Date: 01/03/2018
  * Time: 12:35 PM
  */
-public class EffectsHandlerTests {
+public class EffectsHandlerTests extends TestBase {
 
     private NodeProvider _nodeProvider;
     private EffectsHandler _handler;
@@ -343,6 +344,81 @@ public class EffectsHandlerTests {
             obj.put("duration", duration);
         }
         return obj;
+    }
+
+    //getMutuallyExclusiveEffects
+
+    @Test
+    public void getMutuallyExclusiveEffects_should_handle_foodpoison_mutually_exclusive_effects() {
+        ArrayNode node = _nodeProvider.createArrayNode();
+        ArrayNode subNode = _nodeProvider.createArrayNode();
+        ObjectNode one = _nodeProvider.createObjectNode();
+        one.put("effect", "foodpoison");
+        one.put("duration", 2);
+        subNode.add(one);
+        ObjectNode two = _nodeProvider.createObjectNode();
+        two.put("effect", "poisonblock");
+        two.put("duration", 24);
+        subNode.add(two);
+        ObjectNode three = _nodeProvider.createObjectNode();
+        three.put("effect", "antidote");
+        three.put("duration", 64);
+        subNode.add(three);
+        node.add(subNode);
+        Ingredient ingredient = new Ingredient();
+        ingredient.effects = node;
+
+        _handler.updateIngredientEffects(ingredient);
+        Hashtable<String, Integer> effects = assertAndConvertEffectsArray(ingredient.getEffects());
+        assertContainsKey(effects, "foodpoison");
+        assertNotContainsKey(effects, "poisonblock");
+        assertNotContainsKey(effects, "antidote");
+    }
+
+    @Test
+    public void getMutuallyExclusiveEffects_should_handle_weakpoison_mutually_exclusive_effects() {
+        ArrayNode node = _nodeProvider.createArrayNode();
+        ArrayNode subNode = _nodeProvider.createArrayNode();
+        ObjectNode one = _nodeProvider.createObjectNode();
+        one.put("effect", "weakpoison");
+        one.put("duration", 2);
+        subNode.add(one);
+        ObjectNode two = _nodeProvider.createObjectNode();
+        two.put("effect", "poisonblock");
+        two.put("duration", 24);
+        subNode.add(two);
+        ObjectNode three = _nodeProvider.createObjectNode();
+        three.put("effect", "antidote");
+        three.put("duration", 64);
+        subNode.add(three);
+        node.add(subNode);
+        Ingredient ingredient = new Ingredient();
+        ingredient.effects = node;
+
+        _handler.updateIngredientEffects(ingredient);
+        Hashtable<String, Integer> effects = assertAndConvertEffectsArray(ingredient.getEffects());
+        assertContainsKey(effects, "weakpoison");
+        assertNotContainsKey(effects, "poisonblock");
+        assertNotContainsKey(effects, "antidote");
+    }
+
+    private Hashtable<String, Integer> assertAndConvertEffectsArray(ArrayNode resultEffects) {
+        assertNotNull(resultEffects);
+        assertTrue(resultEffects.size() > 0);
+        Hashtable<String, Integer> effectsTable = new Hashtable<String, Integer>();
+        ArrayNode effects = (ArrayNode) resultEffects.get(0);
+        for(JsonNode effect : effects) {
+            assertTrue(effect.has("effect"));
+            assertTrue(effect.has("duration"));
+            JsonNode nameNode = effect.get("effect");
+            assertTrue(nameNode.isTextual());
+            String effectName = nameNode.asText();
+            assertNotContainsKey(effectsTable, effectName);
+            JsonNode durationNode = effect.get("duration");
+            assertTrue(durationNode.isInt());
+            effectsTable.put(effectName, durationNode.asInt());
+        }
+        return effectsTable;
     }
 
     //checkShouldUpdate

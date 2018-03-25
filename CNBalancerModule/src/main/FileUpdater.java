@@ -3,6 +3,7 @@ package main;
 import com.colonolnutty.module.shareddata.JsonManipulator;
 import com.colonolnutty.module.shareddata.JsonPatchManipulator;
 import com.colonolnutty.module.shareddata.debug.CNLog;
+import com.colonolnutty.module.shareddata.jsonhandlers.EffectsHandler;
 import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.IngredientProperty;
 import com.colonolnutty.module.shareddata.utils.CNFileUtils;
@@ -117,6 +118,7 @@ public class FileUpdater {
             if (ingredient == null) {
                 continue;
             }
+            updateIngredientEffects(ingredient);
             verifyMinimumValues(ingredient);
             boolean isPatchFile = ingredient.patchFile != null;
             String filePath = isPatchFile ? ingredient.patchFile : ingredient.filePath;
@@ -143,6 +145,11 @@ public class FileUpdater {
             endPathBundle(relativePathNames);
             _progressController.add(1);
         }
+    }
+
+    private void updateIngredientEffects(Ingredient ingredient) {
+        EffectsHandler handler = new EffectsHandler();
+        handler.updateIngredientEffects(ingredient);
     }
 
     private String[] startPathBundle(String fileName, String rootDir) {

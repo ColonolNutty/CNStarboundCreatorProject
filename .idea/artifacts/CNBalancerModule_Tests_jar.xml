@@ -48,6 +48,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/json-20170516.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/json-patch-1.9.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/CNModuleDependencies/lib/msg-simple-1.1.jar" path-in-jar="/" />
+      <element id="module-output" name="CNModuleDependencies.Tests" />
     </root>
   </artifact>
 </component>

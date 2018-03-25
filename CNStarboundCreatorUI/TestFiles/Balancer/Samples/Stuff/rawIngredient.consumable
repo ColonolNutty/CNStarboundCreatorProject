@@ -1,0 +1,21 @@
+{
+  "itemName" : "rawIngredient",
+  "rarity" : "Common",
+  "price" : 8.4,
+  "category" : "cookingIngredient",
+  "description" : "(MILL):-} Nope NONONONO \"What\" NONONONONO",
+  "shortdescription" : "No",
+  "foodValue" : 2.0,
+  "effects" : [[
+    {
+      "effect" : "foodpoison",
+      "duration" : 5
+    },
+    {
+      "effect" : "runboostfood",
+      "duration" : 2
+    }
+  ]],
+  "inventoryIcon" : "What",
+  "learnBlueprintsOnPickup" : [ "doughMFM" ]
+}

@@ -2,9 +2,13 @@ package com.colonolnutty.module.shareddata.jsonhandlers;
 
 import com.colonolnutty.module.shareddata.DefaultNodeProvider;
 import com.colonolnutty.module.shareddata.models.Ingredient;
+import com.colonolnutty.module.shareddata.models.IngredientProperty;
+import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -15,9 +19,19 @@ import java.util.Hashtable;
  */
 public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler {
     public static final String PATH_NAME = "/effects";
+    private static Hashtable<String, ArrayList<String>> _mutuallyExclusiveEffects;
 
     public EffectsHandler() {
         super();
+        _mutuallyExclusiveEffects = new Hashtable<>();
+        ArrayList<String> foodPoisonMutuallyExclusiveEffects = new ArrayList<>();
+        foodPoisonMutuallyExclusiveEffects.add("poisonblock");
+        foodPoisonMutuallyExclusiveEffects.add("antidote");
+        _mutuallyExclusiveEffects.put("foodpoison", foodPoisonMutuallyExclusiveEffects);
+        ArrayList<String> weakPoisonEffects = new ArrayList<>();
+        weakPoisonEffects.add("antidote");
+        weakPoisonEffects.add("poisonblock");
+        _mutuallyExclusiveEffects.put("weakpoison", weakPoisonEffects);
     }
 
     @Override
@@ -189,5 +203,68 @@ public class EffectsHandler extends DefaultNodeProvider implements IJsonHandler 
             }
         }
         return shouldUpdate;
+    }
+
+    public ArrayNode getMutuallyExclusiveEffects(JsonNode effectsNode) {
+        if(effectsNode == null || !effectsNode.isArray() || effectsNode.size() == 0 || effectsNode.size() > 1) {
+            return null;
+        }
+        JsonNode effectsSubNode = effectsNode.get(0);
+        if(!effectsSubNode.isArray() || effectsSubNode.size() == 0) {
+            return null;
+        }
+
+        Hashtable<String, Integer> effects = new Hashtable<String, Integer>();
+        for(int i = 0; i < effectsSubNode.size(); i++) {
+            JsonNode subSubNode = effectsSubNode.get(i);
+            if(!subSubNode.isObject()
+                    || !subSubNode.has("effect")
+                    || !subSubNode.has("duration")) {
+                continue;
+            }
+            JsonNode effectNode = subSubNode.get("effect");
+            JsonNode durationNode = subSubNode.get("duration");
+            if(!effectNode.isTextual() || !durationNode.isInt()) {
+                continue;
+            }
+            String name = effectNode.asText();
+            Integer duration = durationNode.asInt();
+            if(!effects.containsKey(name)) {
+                effects.put(name, duration);
+            }
+        }
+        if(effects.size() == 0) {
+            return null;
+        }
+        Enumeration<String> keys = effects.keys();
+        while(keys.hasMoreElements()) {
+            String name = keys.nextElement();
+            if(_mutuallyExclusiveEffects.containsKey(name)) {
+                ArrayList<String> mutuallyExclusiveEffects = _mutuallyExclusiveEffects.get(name);
+                for(String eff : mutuallyExclusiveEffects) {
+                    if(effects.containsKey(eff)) {
+                        effects.remove(eff);
+                    }
+                }
+            }
+        }
+
+        ArrayNode node = _nodeProvider.createArrayNode();
+        ArrayNode subNode = _nodeProvider.createArrayNode();
+        Enumeration<String> newKeys = effects.keys();
+        while(newKeys.hasMoreElements()) {
+            String key = newKeys.nextElement();
+            Integer duration = effects.get(key);
+            ObjectNode objNode = _nodeProvider.createObjectNode();
+            objNode.put("effect", key);
+            objNode.put("duration", duration);
+            subNode.add(objNode);
+        }
+        node.add(subNode);
+        return node;
+    }
+
+    public void updateIngredientEffects(Ingredient ingredient) {
+        ingredient.update(IngredientProperty.Effects, getMutuallyExclusiveEffects(ingredient.getEffects()));
     }
 }

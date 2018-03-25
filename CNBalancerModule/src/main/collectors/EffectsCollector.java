@@ -86,10 +86,10 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
             return "No Change";
         }
         if(!hasOldEffects && hasNewEffects) {
-            return "Has New Effects, but no Old Effects";
+            return "Has New Effects, but no Existing Effects";
         }
         if(hasOldEffects && !hasNewEffects) {
-            return "Has Old Effects, but no New Effects";
+            return "Has Existing Effects, but no New Effects";
         }
         Hashtable<String, Integer> oldEffects = getEffects(ingredient.effects, ingredient, _isRawFood);
         StringBuilder builder = new StringBuilder("Old Effects: ");
@@ -161,9 +161,11 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
                     continue;
                 }
 
-                boolean isFoodPoisonOnRawFood = effectName.equals("foodpoison")
-                        && isRawFood;
-                if(!isFoodPoisonOnRawFood && CNStringUtils.contains(effectName, _settings.excludedEffects)) {
+                boolean isFoodPoisonEffect = effectName.equals("foodpoison");
+
+                boolean isFoodPoisonOnRawFood = isFoodPoisonEffect && isRawFood;
+                boolean isExcludedEffect = CNStringUtils.contains(effectName, _settings.excludedEffects);
+                if(!isFoodPoisonOnRawFood && isExcludedEffect) {
                     continue;
                 }
 

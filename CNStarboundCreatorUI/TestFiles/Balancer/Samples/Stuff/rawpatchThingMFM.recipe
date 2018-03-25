@@ -1,0 +1,8 @@
+{
+  "input" : [
+    { "item" : "rawIngredient", "count" : 1 },
+    { "item" : "nonrawIngredient", "count" : 1 }
+  ],
+  "output" : { "item" : "rawpatchThingMFM", "count" : 5 },
+  "groups" : [ "millingMFM" ]
+}

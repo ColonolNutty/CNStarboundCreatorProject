@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.collectors.EffectsCollector;
 import main.settings.BalancerSettings;
 import org.junit.Test;
+import tests.shared.TestBase;
 
 import java.util.Hashtable;
 
@@ -29,7 +30,7 @@ import static org.mockito.Mockito.when;
  * Date: 02/08/2018
  * Time: 1:18 PM
  */
-public class EffectsCollectorTests {
+public class EffectsCollectorTests extends TestBase {
     private ObjectMapper _mapper;
     private CNLog _logMock;
     private StatusEffectStore _statusEffectStoreMock;
@@ -68,11 +69,11 @@ public class EffectsCollectorTests {
         ingredient.effects = effectsArr;
         Hashtable<String, Integer> result = _collector.getEffects(ingredient, false);
         assertEquals(2, result.size());
-        assertTrue(result.containsKey("One"));
+        assertContainsKey(result, "One");
         assertEquals(5, (int)result.get("One"));
-        assertTrue(result.containsKey("Two"));
+        assertContainsKey(result, "Two");
         assertEquals(10, (int)result.get("Two"));
-        assertFalse(result.containsKey("Three"));
+        assertNotContainsKey(result, "Three");
     }
 
     @Test
@@ -90,11 +91,11 @@ public class EffectsCollectorTests {
         ingredient.effects = effectsArr;
         Hashtable<String, Integer> result = _collector.getEffects(ingredient, false);
         assertEquals(3, result.size());
-        assertTrue(result.containsKey("One"));
+        assertContainsKey(result, "One");
         assertEquals(5, (int)result.get("One"));
-        assertTrue(result.containsKey("Two"));
+        assertContainsKey(result, "Two");
         assertEquals(10, (int)result.get("Two"));
-        assertTrue(result.containsKey("Three"));
+        assertContainsKey(result, "Three");
         assertEquals(200, (int)result.get("Three"));
     }
 
@@ -109,9 +110,9 @@ public class EffectsCollectorTests {
         ingredient.effects = effectsArr;
         Hashtable<String, Integer> result = _collector.getEffects(ingredient, false);
         assertEquals(2, result.size());
-        assertTrue(result.containsKey("One"));
+        assertContainsKey(result, "One");
         assertEquals(5, (int)result.get("One"));
-        assertTrue(result.containsKey("Two"));
+        assertContainsKey(result, "Two");
         assertEquals(25, (int)result.get("Two"));
     }
 
@@ -125,8 +126,8 @@ public class EffectsCollectorTests {
         ingredient.effects = effectsArr;
         Hashtable<String, Integer> result = _collector.getEffects(ingredient, false);
         assertEquals(1, result.size());
-        assertFalse(result.containsKey("Two"));
-        assertTrue(result.containsKey("One"));
+        assertNotContainsKey(result, "Two");
+        assertContainsKey(result, "One");
         assertEquals(5, (int)result.get("One"));
     }
 
@@ -140,8 +141,8 @@ public class EffectsCollectorTests {
         ingredient.effects = effectsArr;
         Hashtable<String, Integer> result = _collector.getEffects(ingredient, false);
         assertEquals(1, result.size());
-        assertFalse(result.containsKey(""));
-        assertTrue(result.containsKey("One"));
+        assertNotContainsKey(result, "");
+        assertContainsKey(result, "One");
         assertEquals(5, (int)result.get("One"));
     }
 
@@ -155,8 +156,8 @@ public class EffectsCollectorTests {
         ingredient.effects = effectsArr;
         Hashtable<String, Integer> result = _collector.getEffects(ingredient, false);
         assertEquals(1, result.size());
-        assertFalse(result.containsKey("Two"));
-        assertTrue(result.containsKey("One"));
+        assertNotContainsKey(result, "Two");
+        assertContainsKey(result, "One");
         assertEquals(5, (int)result.get("One"));
     }
 
@@ -169,8 +170,44 @@ public class EffectsCollectorTests {
         ingredient.effects = effectsArr;
         Hashtable<String, Integer> result = _collector.getEffects(ingredient, false);
         assertEquals(1, result.size());
-        assertTrue(result.containsKey("One"));
+        assertContainsKey(result, "One");
         assertEquals(5, (int)result.get("One"));
+    }
+
+    @Test
+    public void should_include_foodpoison_effect_when_food_is_raw() {
+        String effectOne = "EffectOne";
+        String effectTwo = "foodpoison";
+        StatusEffect[] statusEffects = new StatusEffect[3];
+        statusEffects[0] = new StatusEffect(effectOne, 5);
+        statusEffects[1] = new StatusEffect(effectTwo, 20);
+        statusEffects[2] = new StatusEffect(effectTwo, 5);
+        ArrayNode effectsArr = createEffectsArray(statusEffects);
+        Ingredient ingredient = new Ingredient();
+        ingredient.effects = effectsArr;
+        Hashtable<String, Integer> result = _collector.getEffects(ingredient, true);
+        assertEquals(2, result.size());
+        assertContainsKey(result, effectOne);
+        assertEquals(5, (int)result.get(effectOne));
+        assertContainsKey(result, effectTwo);
+        assertEquals(25, (int)result.get(effectTwo));
+    }
+
+    @Test
+    public void should_exclude_foodpoison_effect_when_food_is_not_raw() {
+        String effectOne = "effectOne";
+        String effectTwo = "foodpoison";
+        StatusEffect[] statusEffects = new StatusEffect[3];
+        statusEffects[0] = new StatusEffect(effectOne, 5);
+        statusEffects[1] = new StatusEffect(effectTwo, 20);
+        statusEffects[2] = new StatusEffect(effectTwo, 5);
+        ArrayNode effectsArr = createEffectsArray(statusEffects);
+        Ingredient ingredient = new Ingredient();
+        ingredient.effects = effectsArr;
+        Hashtable<String, Integer> result = _collector.getEffects(ingredient, false);
+        assertContainsKey(result, effectOne);
+        assertEquals(5, (int)result.get(effectOne));
+        assertNotContainsKey(result, effectTwo);
     }
     //getEffects
 
@@ -208,9 +245,9 @@ public class EffectsCollectorTests {
 
         Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.getEffects());
 
-        assertTrue(effectsTable.containsKey("effectOne"));
-        assertTrue(effectsTable.containsKey("effectTwo"));
-        assertTrue(effectsTable.containsKey("effectThree"));
+        assertContainsKey(effectsTable, "effectOne");
+        assertContainsKey(effectsTable, "effectTwo");
+        assertContainsKey(effectsTable, "effectThree");
 
         //10+10+5 25
         assertEquals(25, (int)effectsTable.get("effectOne"));
@@ -224,18 +261,21 @@ public class EffectsCollectorTests {
 
     @Test
     public void should_balance_ingredient_for_recipe_with_output_greater_than_one() {
+        String effectOneName = "effectOne";
+        String effectTwoName = "effectTwo";
+        String effectThreeName = "effectThree";
         Ingredient existing = new Ingredient();
         existing.itemName = "outputOne";
         existing.effects =  _nodeProvider.createArrayNode();
         ArrayNode inEffectsOne = _nodeProvider.createArrayNode();
         ArrayNode inEffectsOneSub = _nodeProvider.createArrayNode();
-        inEffectsOneSub.add(createEffect("effectOne", 10));
-        inEffectsOneSub.add(createEffect("effectTwo", 20));
+        inEffectsOneSub.add(createEffect(effectOneName, 10));
+        inEffectsOneSub.add(createEffect(effectTwoName, 20));
         inEffectsOne.add(inEffectsOneSub);
         ArrayNode inEffectsTwo = _nodeProvider.createArrayNode();
         ArrayNode inEffectsTwoSub = _nodeProvider.createArrayNode();
-        inEffectsTwoSub.add(createEffect("effectTwo", 10));
-        inEffectsTwoSub.add(createEffect("effectThree", 50));
+        inEffectsTwoSub.add(createEffect(effectTwoName, 10));
+        inEffectsTwoSub.add(createEffect(effectThreeName, 50));
         inEffectsTwo.add(inEffectsTwoSub);
         Ingredient inOne = new Ingredient();
         inOne.effects = inEffectsOne;
@@ -256,19 +296,19 @@ public class EffectsCollectorTests {
 
         Hashtable<String, Integer> effectsTable = assertAndConvertEffectsArray(existing.getEffects());
 
-        assertTrue(effectsTable.containsKey("effectOne"));
-        assertTrue(effectsTable.containsKey("effectTwo"));
-        assertTrue(effectsTable.containsKey("effectThree"));
+        assertContainsKey(effectsTable, effectOneName);
+        assertContainsKey(effectsTable, effectTwoName);
+        assertContainsKey(effectsTable, effectThreeName);
 
         //No output division
         //10+10+5/10 25/10 2.5 2
-        assertEquals(25, (int)effectsTable.get("effectOne"));
+        assertEquals(25, (int)effectsTable.get(effectOneName));
 
         //20+20+10+10+10 40+30 70+10+5/10 85/10 8.5 8
-        assertEquals(85, (int)effectsTable.get("effectTwo"));
+        assertEquals(85, (int)effectsTable.get(effectTwoName));
 
         //50+50+50 150+25 175/10 17.5 17
-        assertEquals(175, (int)effectsTable.get("effectThree"));
+        assertEquals(175, (int)effectsTable.get(effectThreeName));
     }
 
     private ArrayNode createEffectsArray(StatusEffect[] effects) {
@@ -297,7 +337,7 @@ public class EffectsCollectorTests {
             JsonNode nameNode = effect.get("effect");
             assertTrue(nameNode.isTextual());
             String effectName = nameNode.asText();
-            assertFalse(effectsTable.containsKey(effectName));
+            assertNotContainsKey(effectsTable, effectName);
             JsonNode durationNode = effect.get("duration");
             assertTrue(durationNode.isInt());
             effectsTable.put(effectName, durationNode.asInt());

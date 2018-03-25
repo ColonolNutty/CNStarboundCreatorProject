@@ -8,8 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="CNModuleDependencies" />
-    <orderEntry type="module" module-name="CNStarboundCreator.Shared" />
     <orderEntry type="module" module-name="CNBalancerModule" />
+    <orderEntry type="module" module-name="CNStarboundCreator.Shared" />
+    <orderEntry type="module" module-name="CNModuleDependencies.Tests" />
     <orderEntry type="module-library">
       <library name="CNBalancerModule.Tests">
         <CLASSES>

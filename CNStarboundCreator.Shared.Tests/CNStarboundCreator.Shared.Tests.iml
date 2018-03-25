@@ -32,5 +32,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="CNModuleDependencies.Tests" />
   </component>
 </module>
