@@ -30,24 +30,21 @@ public class IngredientDataCalculator {
     private BalancerSettings _settings;
     private RecipeStore _recipeStore;
     private IngredientStore _ingredientStore;
-    private JsonManipulator _manipulator;
     private StatusEffectStore _statusEffectStore;
 
     public IngredientDataCalculator(CNLog log,
                                     BalancerSettings settings,
                                     RecipeStore recipeStore,
                                     IngredientStore ingredientStore,
-                                    StatusEffectStore statusEffectStore,
-                                    JsonManipulator manipulator){
+                                    StatusEffectStore statusEffectStore){
         _log = log;
         _settings = settings;
         _recipeStore = recipeStore;
         _ingredientStore = ingredientStore;
         _statusEffectStore = statusEffectStore;
-        _manipulator = manipulator;
     }
 
-    public boolean updateIngredient(Ingredient ingredient) throws IOException{
+    public boolean updateIngredient(Ingredient ingredient) {
         Recipe recipe = _recipeStore.locateRecipe(ingredient.getName());
         if(recipe == null) {
             _log.debug("No recipe found for: " + ingredient.getName());
@@ -103,6 +100,7 @@ public class IngredientDataCalculator {
             if(collector.applyData(newIngredient, outputCount)) {
                 needsUpdate = true;
                 _log.debug(collector.getDescriptionOfUpdate(newIngredient));
+                _log.debug("Updating due to " + collector.getName() + " needing update");
             }
         }
         _log.debug("Recipe Output \"" + outputName + "\" with output count: " + outputCount + " with final price: " + newIngredient.getPrice() + " foodValue: " + newIngredient.getFoodValue(), 4);

@@ -32,6 +32,22 @@ public class Ingredient {
     public Object breakDropOptions;
     public ArrayNode effects;
     public Boolean printable;
+    public String uiConfig;
+    public Object closeSounds;
+    public Object openSounds;
+    public Object scripts;
+    public Object interactions;
+    public Integer frameCooldown;
+    public Object interactAction;
+    public Integer maximumLiquidLevel;
+    public Integer autoCloseCooldown;
+    public String outputConfig;
+    public String objectType;
+    public String recipeGroup;
+    public Integer scriptDelta;
+    public Integer slotCount;
+    public Object stages;
+    public Object colonyTags;
 
     @JsonIgnore
     public Hashtable<IngredientProperty, ArrayList<Object>> _ingredientUpdates;
@@ -167,104 +183,6 @@ public class Ingredient {
             return false;
         }
         return one.equals(two);
-    }
-
-    public boolean effectsAreEqual(JsonNode otherEffects) {
-        boolean selfHasEffects = hasEffects();
-        boolean otherHasEffects = hasEffects(otherEffects);
-        if(!selfHasEffects && !otherHasEffects) {
-            return true;
-        }
-        if(selfHasEffects != otherHasEffects) {
-            return false;
-        }
-        ArrayNode selfEffects = getEffects();
-        if(selfEffects.size() != otherEffects.size()) {
-            return false;
-        }
-        boolean isSame = true;
-        for(int i = 0; i < selfEffects.size(); i++) {
-            if(!effectsAreEqual(selfEffects.get(i), otherEffects.get(i))) {
-                isSame = false;
-                i = selfEffects.size();
-            }
-        }
-        return isSame;
-    }
-
-    public boolean effectsAreEqual(JsonNode effectsOne, JsonNode effectsTwo) {
-        boolean selfHasEffects = effectsNotEmpty(effectsOne);
-        boolean otherHasEffects = effectsNotEmpty(effectsTwo);
-        if(!selfHasEffects && !otherHasEffects) {
-            return true;
-        }
-        if(selfHasEffects != otherHasEffects) {
-            return false;
-        }
-        if(effectsOne.isArray() != effectsTwo.isArray()) {
-            return false;
-        }
-        if(!effectsOne.isArray()) {
-            boolean effectsOneIsValueType = CNJsonUtils.isValueType(effectsOne);
-            boolean effectsTwoIsValueType = CNJsonUtils.isValueType(effectsTwo);
-            if(effectsOneIsValueType && effectsTwoIsValueType) {
-                return effectsOne.asText().equals(effectsTwo.asText());
-            }
-            if(effectsOneIsValueType || effectsTwoIsValueType) {
-                return false;
-            }
-            return false;
-        }
-        if(effectsOne.size() != effectsTwo.size()) {
-            return false;
-        }
-
-        boolean isSame = true;
-        for(int i = 0; i < effectsOne.size(); i++) {
-            JsonNode selfEffect = effectsOne.get(i);
-            JsonNode otherEffect = effectsTwo.get(i);
-            if(selfEffect.isArray() && otherEffect.isArray()) {
-                if(!effectsAreEqual(selfEffect, otherEffect)) {
-                    isSame = false;
-                    i = effectsOne.size();
-                }
-                continue;
-            }
-            boolean selfIsValueType = CNJsonUtils.isValueType(selfEffect);
-            boolean otherIsValueType = CNJsonUtils.isValueType(otherEffect);
-            if(selfIsValueType && otherIsValueType) {
-                if(!selfEffect.asText().equals(otherEffect.asText())) {
-                    isSame = false;
-                }
-            }
-            else if(selfIsValueType || otherIsValueType) {
-                isSame = false;
-            }
-            else {
-                if(!fieldIsSame(selfEffect, otherEffect, "effect")) {
-                    isSame = false;
-                }
-                else if(!fieldIsSame(selfEffect, otherEffect, "duration")) {
-                    isSame = false;
-                }
-            }
-            if(!isSame) {
-                i = effectsOne.size();
-            }
-        }
-        return isSame;
-    }
-
-    private boolean fieldIsSame(JsonNode selfEffect, JsonNode otherEffect, String fieldName) {
-        if(selfEffect.has(fieldName) && otherEffect.has(fieldName)) {
-            if(!selfEffect.get(fieldName).asText().equals(otherEffect.get(fieldName).asText())) {
-                return false;
-            }
-        }
-        else if(selfEffect.has(fieldName) || otherEffect.has(fieldName)) {
-            return false;
-        }
-        return true;
     }
 
     public boolean effectsNotEmpty(JsonNode eff) {

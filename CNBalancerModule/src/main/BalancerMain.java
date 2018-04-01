@@ -57,7 +57,7 @@ public class BalancerMain extends MainFunctionModule implements IReadFiles {
             ingredientStore.overrideIngredients(ingredientOverrides.ingredients);
         }
         RecipeStore recipeStore = new RecipeStore(_log, manipulator, patchManipulator, patchLocator, fileLocator, searchLocations);
-        IngredientDataCalculator ingredientDataCalculator = new IngredientDataCalculator(_log, _settings, recipeStore, ingredientStore, statusEffectStore, manipulator);
+        IngredientDataCalculator ingredientDataCalculator = new IngredientDataCalculator(_log, _settings, recipeStore, ingredientStore, statusEffectStore);
         IngredientUpdater ingredientUpdater = new IngredientUpdater(_log, _settings, manipulator, ingredientStore, ingredientDataCalculator);
 
         FileUpdater fileUpdater = new FileUpdater(_log, _settings, manipulator, patchManipulator, ingredientUpdater, ingredientStore, fileLocator, searchLocations, _progressController);

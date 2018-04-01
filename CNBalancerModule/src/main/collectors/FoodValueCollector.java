@@ -36,6 +36,9 @@ public class FoodValueCollector extends BaseCollector implements ICollector {
         if(ingredient.filePath != null && !ingredient.filePath.endsWith(".consumable")) {
             return false;
         }
+        if(ingredient.patchFile != null && !ingredient.patchFile.endsWith(".consumable.patch")) {
+            return false;
+        }
         Double value = ingredient.getFoodValue();
         if(ingredient.foodValue == null && value == null) {
             return false;
@@ -60,5 +63,10 @@ public class FoodValueCollector extends BaseCollector implements ICollector {
             newVal = 0.0;
         }
         return "Food Value was: " + oldVal + " it is now: " + newVal;
+    }
+
+    @Override
+    public String getName() {
+        return "Food Value";
     }
 }

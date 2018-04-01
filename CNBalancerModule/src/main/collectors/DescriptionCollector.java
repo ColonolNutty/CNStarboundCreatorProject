@@ -84,6 +84,11 @@ public class DescriptionCollector implements ICollector, IReadFiles {
         return "Description was: " + oldDescription + " it is now: " + newDescription;
     }
 
+    @Override
+    public String getName() {
+        return "Description";
+    }
+
     public String createDescription(String description, String[] groupNames, HashMap<String, String> friendlyGroupNames) {
         if(CNStringUtils.isNullOrWhitespace(description)) {
             return null;

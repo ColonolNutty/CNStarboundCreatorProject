@@ -26,7 +26,6 @@ public class IngredientDataCalculatorTests {
     private RecipeStore _recipeStoreMock;
     private IngredientStore _ingredientStoreMock;
     private StatusEffectStore _statusEffectStoreMock;
-    private JsonManipulator _jsonManipulatorMock;
     private IngredientDataCalculator _calculator;
     private NodeProvider _nodeProvider;
 
@@ -37,13 +36,11 @@ public class IngredientDataCalculatorTests {
         _recipeStoreMock = mock(RecipeStore.class);
         _ingredientStoreMock = mock(IngredientStore.class);
         _statusEffectStoreMock = mock(StatusEffectStore.class);
-        _jsonManipulatorMock = mock(JsonManipulator.class);
         _calculator = new IngredientDataCalculator(_logMock,
                 _settings,
                 _recipeStoreMock,
                 _ingredientStoreMock,
-                _statusEffectStoreMock,
-                _jsonManipulatorMock);
+                _statusEffectStoreMock);
         _nodeProvider = new NodeProvider();
     }
 

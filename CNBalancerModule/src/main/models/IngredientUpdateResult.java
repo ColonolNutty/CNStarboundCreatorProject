@@ -1,5 +1,7 @@
 package main.models;
 
+import com.colonolnutty.module.shareddata.models.Ingredient;
+
 /**
  * User: Jack's Computer
  * Date: 03/11/2018
@@ -8,9 +10,13 @@ package main.models;
 public class IngredientUpdateResult {
     public boolean NeedsUpdate;
     public String IngredientName;
+    public Ingredient Ingredient;
 
-    public IngredientUpdateResult(boolean needsUpdate, String ingredientName) {
+    public IngredientUpdateResult(boolean needsUpdate, Ingredient ingredient) {
         NeedsUpdate = needsUpdate;
-        IngredientName = ingredientName;
+        Ingredient = ingredient;
+        if(ingredient != null) {
+            IngredientName = ingredient.getName();
+        }
     }
 }

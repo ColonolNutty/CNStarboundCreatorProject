@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import main.settings.BalancerSettings;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -28,6 +29,7 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
     private StatusEffectStore _statusEffectStore;
     private NodeProvider _nodeProvider;
     private boolean _isRawFood = false;
+    private static Hashtable<String, ArrayList<String>> _mutuallyExclusiveEffects;
 
     private Hashtable<String, Integer> _effects;
 
@@ -39,6 +41,15 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
         _log = log;
         _nodeProvider = new NodeProvider();
         _effects = new Hashtable<String, Integer>();
+        _mutuallyExclusiveEffects = new Hashtable<>();
+        ArrayList<String> foodPoisonMutuallyExclusiveEffects = new ArrayList<>();
+        foodPoisonMutuallyExclusiveEffects.add("poisonblock");
+        foodPoisonMutuallyExclusiveEffects.add("antidote");
+        _mutuallyExclusiveEffects.put("foodpoison", foodPoisonMutuallyExclusiveEffects);
+        ArrayList<String> weakPoisonEffects = new ArrayList<>();
+        weakPoisonEffects.add("antidote");
+        weakPoisonEffects.add("poisonblock");
+        _mutuallyExclusiveEffects.put("weakpoison", weakPoisonEffects);
     }
 
     @Override
@@ -71,11 +82,11 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
         ArrayNode combinedEffects = toEffectsArrayNode(ingredient.getName(), _effects, outputCount);
         ArrayNode combined = _nodeProvider.createArrayNode();
         combined.add(combinedEffects);
-        ingredient.update(IngredientProperty.Effects, combined);
+        ingredient.update(IngredientProperty.Effects, getMutuallyExclusiveEffects(combined));
         if(ingredient.filePath != null && !ingredient.filePath.endsWith(".consumable")) {
             return false;
         }
-        return !ingredient.effectsAreEqual(ingredient.effects, ingredient.getEffects());
+        return !effectsAreEqual(ingredient.effects, ingredient.getEffects());
     }
 
     @Override
@@ -108,6 +119,11 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
             builder.append("\n Effect: '" + effectName + "' Duration: " + duration);
         }
         return builder.toString();
+    }
+
+    @Override
+    public String getName() {
+        return "Effects";
     }
 
     public void addOrUpdateEffect(String name, int duration) {
@@ -162,6 +178,9 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
                 }
 
                 boolean isFoodPoisonEffect = effectName.equals("foodpoison");
+                if(isFoodPoisonEffect && !isRawFood) {
+                    continue;
+                }
 
                 boolean isFoodPoisonOnRawFood = isFoodPoisonEffect && isRawFood;
                 boolean isExcludedEffect = CNStringUtils.contains(effectName, _settings.excludedEffects);
@@ -210,4 +229,130 @@ public class EffectsCollector extends BaseCollector implements ICollector, IRequ
     public void setNodeProvider(NodeProvider nodeProvider) {
         _nodeProvider = nodeProvider;
     }
+
+    public boolean effectsAreEqual(JsonNode effectsOne, JsonNode effectsTwo) {
+        Hashtable<String, Integer> effectValuesOne = getEffects(effectsOne);
+        Hashtable<String, Integer> effectValuesTwo = getEffects(effectsTwo);
+        if(effectValuesOne == null && effectValuesTwo == null) {
+            return true;
+        }
+        if(effectValuesOne == null || effectValuesTwo == null) {
+            return false;
+        }
+
+        if(effectValuesOne.size() != effectValuesTwo.size()) {
+            return false;
+        }
+
+        boolean isSame = true;
+        Enumeration<String> effectKeysOne = effectValuesOne.keys();
+        while(effectKeysOne.hasMoreElements()) {
+            String key = effectKeysOne.nextElement();
+            if(!effectValuesTwo.containsKey(key)) {
+                isSame = false;
+                break;
+            }
+            if(!effectValuesOne.get(key).equals(effectValuesTwo.get(key))) {
+                isSame = false;
+                break;
+            }
+        }
+        return isSame;
+    }
+
+    public Hashtable<String, Integer> getEffects(JsonNode effectsNode) {
+        if(effectsNode == null || !effectsNode.isArray() || effectsNode.size() == 0 || effectsNode.size() > 1) {
+            return null;
+        }
+        JsonNode effectsSubNode = effectsNode.get(0);
+        if(!effectsSubNode.isArray() || effectsSubNode.size() == 0) {
+            return null;
+        }
+
+        Hashtable<String, Integer> effects = new Hashtable<String, Integer>();
+        for(int i = 0; i < effectsSubNode.size(); i++) {
+            JsonNode subSubNode = effectsSubNode.get(i);
+            if(!subSubNode.isObject()
+                    || !subSubNode.has("effect")
+                    || !subSubNode.has("duration")) {
+                continue;
+            }
+            JsonNode effectNode = subSubNode.get("effect");
+            JsonNode durationNode = subSubNode.get("duration");
+            if(!effectNode.isTextual() || !durationNode.isInt()) {
+                continue;
+            }
+            String name = effectNode.asText();
+            Integer duration = durationNode.asInt();
+            if(!effects.containsKey(name)) {
+                effects.put(name, duration);
+            }
+        }
+        if(effects.size() == 0) {
+            return null;
+        }
+        return effects;
+    }
+
+    public ArrayNode getMutuallyExclusiveEffects(JsonNode effectsNode) {
+        if(effectsNode == null || !effectsNode.isArray() || effectsNode.size() == 0 || effectsNode.size() > 1) {
+            return null;
+        }
+        JsonNode effectsSubNode = effectsNode.get(0);
+        if(!effectsSubNode.isArray() || effectsSubNode.size() == 0) {
+            return null;
+        }
+
+        Hashtable<String, Integer> effects = new Hashtable<String, Integer>();
+        for(int i = 0; i < effectsSubNode.size(); i++) {
+            JsonNode subSubNode = effectsSubNode.get(i);
+            if(!subSubNode.isObject()
+                    || !subSubNode.has("effect")
+                    || !subSubNode.has("duration")) {
+                continue;
+            }
+            JsonNode effectNode = subSubNode.get("effect");
+            JsonNode durationNode = subSubNode.get("duration");
+            if(!effectNode.isTextual() || !durationNode.isInt()) {
+                continue;
+            }
+            String name = effectNode.asText();
+            Integer duration = durationNode.asInt();
+            if(!effects.containsKey(name)) {
+                effects.put(name, duration);
+            }
+        }
+        if(effects.size() == 0) {
+            return null;
+        }
+        Enumeration<String> keys = effects.keys();
+        while(keys.hasMoreElements()) {
+            String name = keys.nextElement();
+            if(_mutuallyExclusiveEffects.containsKey(name)) {
+                ArrayList<String> mutuallyExclusiveEffects = _mutuallyExclusiveEffects.get(name);
+                for(String eff : mutuallyExclusiveEffects) {
+                    if(effects.containsKey(eff)) {
+                        effects.remove(eff);
+                    }
+                }
+            }
+        }
+
+        ArrayNode node = _nodeProvider.createArrayNode();
+        ArrayNode subNode = _nodeProvider.createArrayNode();
+        Enumeration<String> newKeys = effects.keys();
+        while(newKeys.hasMoreElements()) {
+            String key = newKeys.nextElement();
+            Integer duration = effects.get(key);
+            ObjectNode objNode = _nodeProvider.createObjectNode();
+            objNode.put("effect", key);
+            objNode.put("duration", duration);
+            subNode.add(objNode);
+        }
+        node.add(subNode);
+        return node;
+    }
+
+
+
 }

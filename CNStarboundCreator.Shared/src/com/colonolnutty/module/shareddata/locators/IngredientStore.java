@@ -134,9 +134,11 @@ public class IngredientStore {
                 if(patchedIngredient != null) {
                     patchedIngredient.filePath = filePath;
                     patchedIngredient.patchFile = patchFilePath;
+                    _log.debug("Patch values: " + patchedIngredient.getIdentifier() + " p: " + patchedIngredient.getPrice() + " fv: " + patchedIngredient.getFoodValue());
                     updateIngredient(patchedIngredient, true);
                 }
                 else {
+                    _log.debug("No patch ingredient");
                     updateIngredient(ingredient, false);
                 }
             }

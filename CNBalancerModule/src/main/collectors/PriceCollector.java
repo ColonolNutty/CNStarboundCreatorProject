@@ -58,4 +58,9 @@ public class PriceCollector extends BaseCollector implements ICollector {
         }
         return "Price was: " + oldVal + " it is now: " + newVal;
     }
+
+    @Override
+    public String getName() {
+        return "Price";
+    }
 }

@@ -187,7 +187,7 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
                         patchedFileAsJson = patchedNode.toString();
                     }
                     catch(JsonPatchException e) {
-                        //_log.error("Json Test Patch \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
+                        _log.error("Json Test Patch \"" + patchFileName + "\"\n    " + patchFileAsJson, e);
                     }
                 }
             }
@@ -275,14 +275,19 @@ public class JsonPatchManipulator extends DefaultNodeProvider implements IReadFi
         if(nodesAvailability.size() == 0) {
             for(IJsonHandler handler : _jsonHandlers) {
                 if(handler.canHandle(ingredient)) {
-                    newTestNodes.put(handler.getPathName(), handler.createTestNode(ingredient));
-                    JsonNode replaceNode = handler.createReplaceNode(ingredient);
-                    if(replaceNode != null) {
-                        ArrayList<JsonNode> nonTestNodes = new ArrayList<JsonNode>();
-                        nonTestNodes.add(replaceNode);
-                        newNonTestNodes.put(handler.getPathName(), nonTestNodes);
-                    }
+                    JsonNode testNode = handler.createTestNode(ingredient);
                     needsUpdate = true;
+                    if(testNode == null) {
+                        continue;
+                    }
+                    newTestNodes.put(handler.getPathName(), testNode);
+                    JsonNode replaceNode = handler.createReplaceNode(ingredient);
+                    if(replaceNode == null) {
+                        continue;
+                    }
+                    ArrayList<JsonNode> nonTestNodes = new ArrayList<JsonNode>();
+                    nonTestNodes.add(replaceNode);
+                    newNonTestNodes.put(handler.getPathName(), nonTestNodes);
                 }
             }
         }

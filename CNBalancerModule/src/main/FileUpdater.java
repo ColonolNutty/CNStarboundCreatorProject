@@ -81,8 +81,10 @@ public class FileUpdater {
                 IngredientUpdateResult result = _ingredientUpdater.update(filePath);
                 //If ingredientName is null, it means the file doesn't need an update
                 if (result.NeedsUpdate && result.IngredientName != null && !ingredientsToUpdate.containsKey(filePath)) {
-                    _log.debug("File set for update: " + filePath);
-                    ingredientsToUpdate.put(filePath, result.IngredientName);
+                    if(CNFileUtils.fileStartsWith(filePath, _settings.locationsToUpdate) || (result.Ingredient != null && result.Ingredient.patchFile != null)) {
+                        _log.debug("File set for update: " + filePath);
+                        ingredientsToUpdate.put(filePath, result.IngredientName);
+                    }
                 }
                 else if(!result.NeedsUpdate && ingredientsToUpdate.containsKey(filePath)) {
                     _log.debug("File removed for update: " + filePath);
@@ -118,8 +120,8 @@ public class FileUpdater {
             if (ingredient == null) {
                 continue;
             }
-            updateIngredientEffects(ingredient);
-            verifyMinimumValues(ingredient);
+            _log.info("Attempting to update file: " + ingredientName);
+            //verifyMinimumValues(ingredient);
             boolean isPatchFile = ingredient.patchFile != null;
             String filePath = isPatchFile ? ingredient.patchFile : ingredient.filePath;
             if(!CNFileUtils.fileStartsWith(filePath, _settings.locationsToUpdate)) {
@@ -145,11 +147,6 @@ public class FileUpdater {
             endPathBundle(relativePathNames);
             _progressController.add(1);
         }
-    }
-
-    private void updateIngredientEffects(Ingredient ingredient) {
-        EffectsHandler handler = new EffectsHandler();
-        handler.updateIngredientEffects(ingredient);
     }
 
     private String[] startPathBundle(String fileName, String rootDir) {

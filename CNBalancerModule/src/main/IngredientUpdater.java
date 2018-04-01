@@ -46,29 +46,21 @@ public class IngredientUpdater {
     }
 
     public IngredientUpdateResult update(String ingredientFilePath) {
-        try {
-            File ingredientFile = new File(ingredientFilePath);
-            String messageOne = "Calculating values for: " + ingredientFile.getName();
-            _log.startSubBundle(messageOne);
-            _log.debug(messageOne);
-            Ingredient ingredient = _ingredientStore.getIngredientWithFilePath(ingredientFilePath);
-            if(ingredient == null) {
-                _log.debug("No ingredient found in store for: " + ingredientFilePath);
-                return new IngredientUpdateResult(false, null);
-            }
-            boolean needsUpdate = _ingredientDataCalculator.updateIngredient(ingredient);
-            if(!_settings.forceUpdate && !needsUpdate) {
-                _log.debug("Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), 4);
-                return new IngredientUpdateResult(false, null);
-            }
-            return new IngredientUpdateResult(needsUpdate, ingredient.getName());
+        File ingredientFile = new File(ingredientFilePath);
+        String messageOne = "Calculating values for: " + ingredientFile.getName();
+        _log.startSubBundle(messageOne);
+        _log.debug(messageOne);
+        Ingredient ingredient = _ingredientStore.getIngredientWithFilePath(ingredientFilePath);
+        if(ingredient == null) {
+            _log.debug("No ingredient found in store for: " + ingredientFilePath);
+            return new IngredientUpdateResult(false, null);
         }
-        catch(IOException e) {
-            _log.error("[IOE] While attempting to update: " + ingredientFilePath, e);
+        boolean needsUpdate = _ingredientDataCalculator.updateIngredient(ingredient);
+        if(!_settings.forceUpdate && !needsUpdate) {
+            _log.debug("Skipping, values were the same as the ingredient on disk: " + ingredientFile.getName(), 4);
+            return new IngredientUpdateResult(false, null);
         }
-        finally {
-            _log.endSubBundle();
-        }
-        return null;
+        _log.endSubBundle();
+        return new IngredientUpdateResult(needsUpdate, ingredient);
     }
 }

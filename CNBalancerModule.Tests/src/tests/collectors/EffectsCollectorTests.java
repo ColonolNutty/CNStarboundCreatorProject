@@ -54,6 +54,97 @@ public class EffectsCollectorTests extends TestBase {
         _nodeProvider = new NodeProvider();
     }
 
+    //effectsAreEqual
+    @Test
+    public void should_return_true_if_effects_are_equal() {
+        StatusEffect oneOne = new StatusEffect("effOne", 10);
+        StatusEffect oneTwo = new StatusEffect("effTwo", 12);
+        StatusEffect[] arrOne = new StatusEffect[2];
+        arrOne[0] = oneOne;
+        arrOne[1] = oneTwo;
+        ArrayNode nodeOne = createEffectsArray(arrOne);
+        StatusEffect twoOne = new StatusEffect("effOne", 10);
+        StatusEffect twoTwo = new StatusEffect("effTwo", 12);
+        StatusEffect[] arrTwo = new StatusEffect[2];
+        arrTwo[0] = twoOne;
+        arrTwo[1] = twoTwo;
+        ArrayNode nodeTwo = createEffectsArray(arrTwo);
+        assertTrue(_collector.effectsAreEqual(nodeOne, nodeTwo));
+    }
+
+    @Test
+    public void should_return_true_if_effects_are_equal_in_different_orders() {
+        StatusEffect oneOne = new StatusEffect("effTwo", 12);
+        StatusEffect oneTwo = new StatusEffect("effOne", 10);
+        StatusEffect[] arrOne = new StatusEffect[2];
+        arrOne[0] = oneOne;
+        arrOne[1] = oneTwo;
+        ArrayNode nodeOne = createEffectsArray(arrOne);
+        StatusEffect twoOne = new StatusEffect("effOne", 10);
+        StatusEffect twoTwo = new StatusEffect("effTwo", 12);
+        StatusEffect[] arrTwo = new StatusEffect[2];
+        arrTwo[0] = twoOne;
+        arrTwo[1] = twoTwo;
+        ArrayNode nodeTwo = createEffectsArray(arrTwo);
+        assertTrue(_collector.effectsAreEqual(nodeOne, nodeTwo));
+    }
+
+    @Test
+    public void should_return_false_if_effects_have_different_durations() {
+        StatusEffect oneOne = new StatusEffect("effTwo", 13);
+        StatusEffect oneTwo = new StatusEffect("effOne", 10);
+        StatusEffect[] arrOne = new StatusEffect[2];
+        arrOne[0] = oneOne;
+        arrOne[1] = oneTwo;
+        ArrayNode nodeOne = createEffectsArray(arrOne);
+        StatusEffect twoOne = new StatusEffect("effOne", 10);
+        StatusEffect twoTwo = new StatusEffect("effTwo", 12);
+        StatusEffect[] arrTwo = new StatusEffect[2];
+        arrTwo[0] = twoOne;
+        arrTwo[1] = twoTwo;
+        ArrayNode nodeTwo = createEffectsArray(arrTwo);
+        assertFalse(_collector.effectsAreEqual(nodeOne, nodeTwo));
+    }
+
+    @Test
+    public void should_return_false_if_extra_effects_are_found() {
+        StatusEffect oneOne = new StatusEffect("effOne", 10);
+        StatusEffect oneTwo = new StatusEffect("effTwo", 12);
+        StatusEffect[] arrOne = new StatusEffect[2];
+        arrOne[0] = oneOne;
+        arrOne[1] = oneTwo;
+        ArrayNode nodeOne = createEffectsArray(arrOne);
+        StatusEffect twoOne = new StatusEffect("effOne", 10);
+        StatusEffect twoTwo = new StatusEffect("effTwo", 12);
+        StatusEffect twoThree = new StatusEffect("effThree", 24);
+        StatusEffect[] arrTwo = new StatusEffect[3];
+        arrTwo[0] = twoOne;
+        arrTwo[1] = twoTwo;
+        arrTwo[2] = twoThree;
+        ArrayNode nodeTwo = createEffectsArray(arrTwo);
+        assertFalse(_collector.effectsAreEqual(nodeOne, nodeTwo));
+    }
+
+    @Test
+    public void should_return_false_if_effects_are_duplicated() {
+        StatusEffect oneOne = new StatusEffect("effOne", 10);
+        StatusEffect oneTwo = new StatusEffect("effOne", 10);
+        StatusEffect[] arrOne = new StatusEffect[2];
+        arrOne[0] = oneOne;
+        arrOne[1] = oneTwo;
+        ArrayNode nodeOne = createEffectsArray(arrOne);
+        StatusEffect twoOne = new StatusEffect("effOne", 10);
+        StatusEffect twoTwo = new StatusEffect("effTwo", 12);
+        StatusEffect[] arrTwo = new StatusEffect[2];
+        arrTwo[0] = twoOne;
+        arrTwo[1] = twoTwo;
+        ArrayNode nodeTwo = createEffectsArray(arrTwo);
+        assertFalse(_collector.effectsAreEqual(nodeOne, nodeTwo));
+    }
+    //effectsAreEqual
+    
+    //checkShouldUpdate
+
     //getEffects
     @Test
     public void should_exclude_effects_with_just_a_name_and_no_default_duration() {
