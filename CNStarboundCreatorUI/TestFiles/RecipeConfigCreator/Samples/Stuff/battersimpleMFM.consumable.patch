@@ -1,0 +1,93 @@
+[
+  [
+    {
+      "op" : "test",
+      "path" : "/description",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/description",
+      "value" : ""
+    }
+  ],
+  [
+    {
+      "op" : "test",
+      "path" : "/effects",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/effects",
+      "value" : [[ ]]
+    }
+  ],
+  [
+    {
+      "op" : "test",
+      "path" : "/foodValue",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/foodValue",
+      "value" : 0.0
+    }
+  ],
+  [
+    {
+      "op" : "test",
+      "path" : "/price",
+      "inverse" : true
+    },
+    {
+      "op" : "add",
+      "path" : "/price",
+      "value" : 0.0
+    }
+  ],
+  [
+    {
+      "op" : "replace",
+      "path" : "/description",
+      "value" : "(BLEND)(PREP):-} Waty"
+    },
+    {
+      "op" : "replace",
+      "path" : "/effects",
+      "value" : [[
+        {
+          "effect" : "maxenergyscalingboost",
+          "duration" : 115
+        },
+        {
+          "effect" : "maxenergyscalingboostfood",
+          "duration" : 34
+        },
+        {
+          "effect" : "jumpboostfood",
+          "duration" : 56
+        },
+        {
+          "effect" : "runboostfood",
+          "duration" : 56
+        },
+        {
+          "effect" : "ragefood",
+          "duration" : 115
+        }
+      ]]
+    },
+    {
+      "op" : "replace",
+      "path" : "/foodValue",
+      "value" : 6.3
+    },
+    {
+      "op" : "replace",
+      "path" : "/price",
+      "value" : 47.04
+    }
+  ]
+]

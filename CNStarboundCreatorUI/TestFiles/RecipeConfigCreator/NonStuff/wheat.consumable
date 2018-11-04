@@ -1,0 +1,20 @@
+{
+  "itemName": "wheat",
+  "rarity": "Common",
+  "eventCategory": "eventCrop",
+  "price": 40,
+  "description": "Essential for making bread.",
+  "shortdescription": "Wheat",
+  "inventoryIcon": "wheat.png",
+  "effects" : [ [
+    "jumpboostfood",
+    {
+      "effect" : "runboostfood",
+      "duration" : 10
+    }
+  ] ],
+  "foodValue": 2,
+  "category": "cookingIngredient",
+  "maxStack": 1000,
+  "itemTags": ["learn2farm"]
+ }

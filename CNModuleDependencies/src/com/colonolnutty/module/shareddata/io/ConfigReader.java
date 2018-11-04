@@ -27,7 +27,13 @@ public class ConfigReader<T extends CNBaseSettings> implements IReadFiles {
         System.out.println("Looking for configuration file at path: " + file.getAbsolutePath());
         try {
             T settings = _fileReader.read(configFile, classOfT);
-            if(settings == null || !crData.settingsAreValid(settings, _log)) {
+            if (settings == null) {
+                System.out.println("settings were null!");
+                return null;
+            }
+            boolean validationResult = crData.settingsAreValid(settings, _log);
+            if(!validationResult) {
+                System.out.println("crData settings were invalid!");
                 return null;
             }
             settings.configLocation = configFile;

@@ -1,0 +1,41 @@
+{
+  "objectName" : "yeastMFMseed",
+  "colonyTags" : [ "nature" ],
+  "rarity" : "Common",
+  "price" : 8.82,
+  "category" : "seed",
+  "printable" : false,
+  "objectType" : "farmable",
+  "tooltipKind" : "seed",
+  "description" : "(BLEND):-} Nope",
+  "shortdescription" : "Yeast Jar",
+  "apexDescription" : "Cultivating yeast. Seems to need water.",
+  "avianDescription" : "Yeast in a jar. Needs watering",
+  "floranDescription" : "Floran put water on tiny bread mussshroomsss.",
+  "glitchDescription" : "Analysis. This is yeast, but it grows with water?",
+  "humanDescription" : "Yeast in a jar, just add water!",
+  "hylotlDescription" : "Yeast in a jar. Needs watering",
+  "inventoryIcon" : "yeastMFMseedicon.png",
+  "orientations" : [
+    {
+      "imagePosition" : [ 0, 0 ],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+      "requireTilledAnchors" : true,
+      "spaceScan" : 0.1,
+      "dualImage" : "yeastMFMseed.png:<color>.<stage>.<alt>",
+      "anchors" : [ "bottom" ]
+    }
+  ],
+  "largeImage" : "yeastMFMseed.png:default.default.default",
+  "stages" : [
+    { "duration" : [ 600, 600 ] },
+    { "duration" : [ 840, 840 ] },
+    {
+      "alts" : 5,
+      "resetToStage" : 1,
+      "harvestPool" : "yeastMFMHarvest"
+    }
+  ],
+  "maxImmersion" : 1.0
+}

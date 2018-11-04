@@ -72,6 +72,17 @@ public abstract class CNCollectionUtils {
         return result;
     }
 
+    public static <T> boolean contains(T[] arr, T val) {
+        boolean found = false;
+        for(T value : arr) {
+            if(value.equals(val)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
     public static <T> boolean contains(ArrayList<T> arr, T val) {
         boolean found = false;
         for(T value : arr) {

@@ -1,0 +1,13 @@
+{
+  "logFile" : "logs\\updatelog.log",
+  "enableConsoleDebug" : true,
+  "enableTreeView" : false,
+  "enableVerboseLogging" : true,
+  "propertyOrderFile" : "configuration\\propertyOrder.json",
+  "propertiesToUpdate" : null,
+  "forceUpdate" : false,
+  "creationPath" : "TestFiles\\RecipeConfigCreator\\CreatePath",
+  "recipePaths" : [ "TestFiles\\RecipeConfigCreator\\Samples", "TestFiles\\RecipeConfigCreator\\NonStuff" ],
+  "includeRecipeGroups" : [ "bakingMFM", "blendingMFM", "boilingMFM", "canningMFM", "choppingMFM", "churningMFM", "coffeeMFM", "distillingMFM", "freezingMFM", "fryingMFM", "millingMFM", "preparingMFM", "pressingMFM", "purifyingMFM", "mixingMFM", "purifyingMFM", "recyclingMFM", "waterMFM" ],
+  "configAsPatchFile" : false
+}

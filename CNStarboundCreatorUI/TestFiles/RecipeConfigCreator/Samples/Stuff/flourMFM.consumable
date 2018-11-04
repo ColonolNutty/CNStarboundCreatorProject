@@ -1,0 +1,21 @@
+{
+  "itemName" : "flourMFM",
+  "rarity" : "Common",
+  "price" : 8.4,
+  "category" : "cookingIngredient",
+  "description" : "(MILL):-} Nope NONONONO \"What\" NONONONONO",
+  "shortdescription" : "No",
+  "foodValue" : 2.0,
+  "effects" : [[
+    {
+      "effect" : "jumpboostfood",
+      "duration" : 5
+    },
+    {
+      "effect" : "runboostfood",
+      "duration" : 2
+    }
+  ]],
+  "inventoryIcon" : "What",
+  "learnBlueprintsOnPickup" : [ "doughMFM" ]
+}

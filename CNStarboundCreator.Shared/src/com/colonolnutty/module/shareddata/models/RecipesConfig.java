@@ -1,6 +1,7 @@
 package com.colonolnutty.module.shareddata.models;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * User: Jack's Computer
@@ -9,4 +10,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
  */
 public class RecipesConfig {
     public ArrayNode possibleOutput;
+    public ObjectNode recipesToCraft;
+    public ObjectNode recipesCraftFrom;
 }

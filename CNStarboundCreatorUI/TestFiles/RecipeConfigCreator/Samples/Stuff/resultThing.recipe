@@ -1,0 +1,7 @@
+{
+  "input" : [
+    { "item" : "rawThingMFM", "count" : 1 }
+  ],
+  "output" : { "item" : "resultThing", "count" : 5 },
+  "groups" : [ "millingMFM" ]
+}

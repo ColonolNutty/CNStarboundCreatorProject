@@ -73,7 +73,6 @@ public class JsonManipulator implements IReadFiles, IWriteFiles {
     public void setFileReader(IFileReader reader) { _fileReader = reader; }
 
     //Read
-
     public Recipe readRecipe(String path) throws IOException {
         return _fileReader.read(path, Recipe.class);
     }

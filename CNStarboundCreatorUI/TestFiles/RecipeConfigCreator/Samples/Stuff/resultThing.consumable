@@ -1,0 +1,21 @@
+{
+  "itemName" : "resultThing",
+  "rarity" : "Common",
+  "price" : 1.0,
+  "category" : "cookingIngredient",
+  "description" : "(MILL):-} Nope NONONONO \"What\" NONONONONO",
+  "shortdescription" : "No",
+  "foodValue" : 2.0,
+  "effects" : [[
+    {
+      "effect" : "poisonblock",
+      "duration" : 5
+    },
+    {
+      "effect" : "runboostfood",
+      "duration" : 4
+    }
+  ]],
+  "inventoryIcon" : "What",
+  "learnBlueprintsOnPickup" : [ "doughMFM" ]
+}

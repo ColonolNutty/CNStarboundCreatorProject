@@ -5,15 +5,24 @@ import com.colonolnutty.module.shareddata.debug.CNLog;
 import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
 import com.colonolnutty.module.shareddata.io.IFileReader;
 import com.colonolnutty.module.shareddata.io.IReadFiles;
+import com.colonolnutty.module.shareddata.locators.FileLocator;
+import com.colonolnutty.module.shareddata.locators.PatchLocator;
+import com.colonolnutty.module.shareddata.locators.RecipeStore;
 import com.colonolnutty.module.shareddata.models.IngredientListItem;
+import com.colonolnutty.module.shareddata.models.ItemDescriptor;
+import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.models.RecipesConfig;
+import com.colonolnutty.module.shareddata.ui.ProgressController;
+import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
 import com.colonolnutty.module.shareddata.utils.StopWatchTimer;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.locators.RecipeFileLocator;
 import main.settings.RecipeConfigCreatorSettings;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * User: Jack's Computer
@@ -24,15 +33,17 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
 
     private CNLog _log;
     private RecipeConfigCreatorSettings _settings;
+    private ProgressController _controller;
     private JsonManipulator _manipulator;
     private JsonPatchManipulator _patchManipulator;
     private IFileReader _fileReader;
     private NodeProvider _nodeProvider;
 
     public RecipeConfigCreatorMain(RecipeConfigCreatorSettings settings,
-                                   CNLog log) {
+                                   CNLog log, ProgressController controller) {
         _settings = settings;
         _log = log;
+        _controller = controller;
         _manipulator = new JsonManipulator(log, settings);
         _patchManipulator = new JsonPatchManipulator(log, settings);
         _fileReader = new FileReaderWrapper();
@@ -48,15 +59,32 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
         ensureCreatePath();
         StopWatchTimer timer = new StopWatchTimer(_log);
         timer.start("Running");
+        PatchLocator patchLocator = new PatchLocator(_log);
+        ArrayList<String> searchLocations = setupSearchLocations(_settings);
+        _log.info("Locating files");
+        FileLocator fileLocator = new RecipeFileLocator(_log);
 
-        IngredientListItem[] ingredientList = read(_settings.ingredientListFile, IngredientListItem[].class);
-        if(ingredientList == null) {
-            return;
+        RecipeStore recipeStore = new RecipeStore(_log, _manipulator, _patchManipulator, patchLocator, fileLocator, searchLocations);
+
+        Hashtable<String, ArrayList<Recipe>> recipes = recipeStore.getRecipes();
+        Hashtable<String, Hashtable<String, ArrayList<Recipe>>> grouped = groupRecipesByMethod(recipes);
+        Enumeration methodNames = grouped.keys();
+        while(methodNames.hasMoreElements()) {
+            String methodName = (String) methodNames.nextElement();
+            String fileName = _settings.creationPath + "\\" + methodName + "Recipes.config";
+            Hashtable<String, ArrayList<Recipe>> methodRecipes = grouped.get(methodName);
+            writeToConfigurationFile(fileName, CNCollectionUtils.toArrayList(methodRecipes.keys()), methodRecipes);
         }
 
-        ArrayList<String> outputNames = createFromTemplate(ingredientList);
-        writeToConfigurationFile(outputNames);
         timer.logTime();
+    }
+
+    private ArrayList<String> setupSearchLocations(RecipeConfigCreatorSettings settings) {
+        ArrayList<String> searchLocations = new ArrayList<String>();
+        for(String location : settings.recipePaths) {
+            searchLocations.add(location);
+        }
+        return searchLocations;
     }
 
     private void ensureCreatePath() {
@@ -68,27 +96,96 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
         file.mkdirs();
     }
 
-    private void writeToConfigurationFile(ArrayList<String> names) {
+    private Hashtable<String, Hashtable<String, ArrayList<Recipe>>> groupRecipesByMethod(Hashtable<String, ArrayList<Recipe>> recipes) {
+        Hashtable<String, Hashtable<String, ArrayList<Recipe>>> grouped = new Hashtable<>();
+
+        Enumeration itemNames = recipes.keys();
+        while(itemNames.hasMoreElements()) {
+            String itemName = (String) itemNames.nextElement();
+            _log.debug("Checking item: " + itemName);
+            for(Recipe recipe : recipes.get(itemName)) {
+
+                for (String group : recipe.groups) {
+                    if (!CNCollectionUtils.contains(_settings.includeRecipeGroups, group)) {
+                        continue;
+                    }
+                    _log.debug("Checking group: " + group);
+                    Hashtable<String, ArrayList<Recipe>> groupedRecipes = new Hashtable<>();
+                    if (grouped.containsKey(group)) {
+                        groupedRecipes = grouped.get(group);
+                    }
+                    ArrayList<Recipe> itemRecipes = new ArrayList<>();
+                    if(groupedRecipes.containsKey(recipe.output.item)) {
+                        itemRecipes = groupedRecipes.get(recipe.output.item);
+                    }
+                    itemRecipes.add(recipe);
+                    groupedRecipes.put(recipe.output.item, itemRecipes);
+                    _log.debug("Updating group: " + group);
+                    grouped.put(group, groupedRecipes);
+                }
+            }
+        }
+
+        return grouped;
+    }
+
+    private void writeToConfigurationFile(String recipeConfigFileName, ArrayList<String> possibleOutputs, Hashtable<String, ArrayList<Recipe>> recipesToCraft) {
         if(_settings.configAsPatchFile) {
             ArrayNode patchNode = _nodeProvider.createArrayNode();
-            for(String name : names) {
-                patchNode.add(_nodeProvider.createAddStringNode("possibleOutput/-", name));
+            for(String possibleOutput : possibleOutputs) {
+                patchNode.add(_nodeProvider.createAddStringNode("possibleOutput/-", possibleOutput));
             }
-            _patchManipulator.writeNew(_settings.recipeConfigFileName + ".patch", patchNode);
+            _patchManipulator.writeNew(recipeConfigFileName + ".patch", patchNode);
             return;
         }
-        String recipeConfigFile = _settings.recipeConfigFileName;
-        RecipesConfig recipesConfig = read(recipeConfigFile, RecipesConfig.class);
-        if(recipesConfig == null) {
-            recipesConfig = new RecipesConfig();
-            recipesConfig.possibleOutput = _nodeProvider.createArrayNode();
-        }
-        for(String name : names) {
-            if(!contains(recipesConfig.possibleOutput, name)) {
-                recipesConfig.possibleOutput.add(name);
+        RecipesConfig recipesConfig = new RecipesConfig();
+        recipesConfig.possibleOutput = _nodeProvider.createArrayNode();
+        for(String possibleOutput : possibleOutputs) {
+            if(!contains(recipesConfig.possibleOutput, possibleOutput)) {
+                recipesConfig.possibleOutput.add(possibleOutput);
             }
         }
-        _manipulator.writeNew(recipeConfigFile, recipesConfig);
+        if(recipesConfig.recipesToCraft == null) {
+            recipesConfig.recipesToCraft = _nodeProvider.createObjectNode();
+        }
+        if(recipesConfig.recipesCraftFrom == null) {
+            recipesConfig.recipesCraftFrom = _nodeProvider.createObjectNode();
+        }
+        if(recipesConfig.recipesToCraft == null) {
+            recipesConfig.recipesToCraft = _nodeProvider.createObjectNode();
+        }
+        for (String possibleOutput : possibleOutputs) {
+            for(Recipe recipe : recipesToCraft.get(possibleOutput)) {
+                ArrayNode recipes;
+                if (recipesConfig.recipesToCraft.has(recipe.output.item)) {
+                    recipes = (ArrayNode) recipesConfig.recipesToCraft.get(recipe.output.item);
+                }
+                else {
+                    recipes = _nodeProvider.createArrayNode();
+                }
+                ObjectNode recipeNode = _nodeProvider.createObjectNode();
+                ObjectNode inNode = _nodeProvider.createObjectNode();
+                for (ItemDescriptor input : recipe.input) {
+                    ArrayNode inputNames = _nodeProvider.createArrayNode();
+                    if(recipesConfig.recipesCraftFrom.has(input.item)) {
+                        inputNames = (ArrayNode) recipesConfig.recipesCraftFrom.get(input.item);
+                    }
+                    if(!contains(inputNames, recipe.output.item)) {
+                        inputNames.add(recipe.output.item);
+                    }
+                    if (!inNode.has(input.item)) {
+                        inNode.put(input.item, input.count);
+                    }
+                    recipesConfig.recipesCraftFrom.put(input.item, inputNames);
+                }
+                recipeNode.put("in", inNode);
+                recipeNode.put("out", recipe.output.count);
+                recipes.add(recipeNode);
+                recipesConfig.recipesToCraft.put(recipe.output.item, recipes);
+            }
+        }
+
+        _manipulator.writeNew(recipeConfigFileName, recipesConfig);
     }
 
     private boolean contains(ArrayNode node, String name) {
@@ -100,44 +197,6 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
             }
         }
         return contains;
-    }
-
-    public ArrayList<String> createFromTemplate(IngredientListItem[] ingredientNames) {
-        int numberPerRecipe = _settings.numberOfIngredientsPerRecipe;
-
-        _log.startSubBundle("Ingredients");
-        ArrayList<String> newNames = createIngredients(ingredientNames, new ArrayList<IngredientListItem>(), -1, numberPerRecipe);
-        _log.endSubBundle();
-        return newNames;
-    }
-
-    private ArrayList<String> createIngredients(IngredientListItem[] ingredientList,
-                                   ArrayList<IngredientListItem> currentIngredients,
-                                   int currentIngredientIndex,
-                                   int ingredientsLeft) {
-        ArrayList<String> names = new ArrayList<String>();
-        if(ingredientsLeft == 0) {
-            return names;
-        }
-        for(int i = currentIngredientIndex + 1; i < ingredientList.length; i++) {
-            ArrayList<IngredientListItem> ingredients = new ArrayList<IngredientListItem>();
-            ingredients.addAll(currentIngredients);
-            IngredientListItem nextIngredient = ingredientList[i];
-            _log.startSubBundle(nextIngredient.name);
-            ingredients.add(nextIngredient);
-            if(ingredientsLeft != 0) {
-                names.addAll(createIngredients(ingredientList, ingredients, i, ingredientsLeft - 1));
-            }
-
-            String outputName = _settings.filePrefix;
-            for(IngredientListItem ingred : ingredients) {
-                outputName += ingred.shortName;
-            }
-            outputName += _settings.fileSuffix;
-            names.add(outputName);
-            _log.endSubBundle();
-        }
-        return names;
     }
 
     private <T> T read(String path, Class<T> classOfT){
