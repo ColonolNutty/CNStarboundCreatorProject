@@ -14,6 +14,7 @@ import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.models.RecipesConfig;
 import com.colonolnutty.module.shareddata.ui.ProgressController;
 import com.colonolnutty.module.shareddata.utils.CNCollectionUtils;
+import com.colonolnutty.module.shareddata.utils.CNStringUtils;
 import com.colonolnutty.module.shareddata.utils.StopWatchTimer;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -176,13 +177,22 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
                         inputNames.add(recipe.output.item);
                     }
                     if (!inNode.has(input.item)) {
-                        inNode.put(input.item, input.count);
+                        ObjectNode countNode = _nodeProvider.createObjectNode();
+                        countNode.put("count", input.count);
+                        inNode.put(input.item, countNode);
                     }
                     recipesConfig.recipesCraftFrom.put(input.item, inputNames);
                 }
-                recipeNode.put("in", inNode);
-                recipeNode.put("out", recipe.output.count);
+                recipeNode.put("input", inNode);
+                ObjectNode outCount = _nodeProvider.createObjectNode();
+                outCount.put("count", recipe.output.count);
+                recipeNode.put("output", outCount);
                 recipeNode.put("excludeFromRecipeBook", recipe.excludeFromRecipeBook);
+                ArrayNode groupNode = _nodeProvider.createArrayNode();
+                for (String group : recipe.groups) {
+                    groupNode.add(group);
+                }
+                recipeNode.put("groups", groupNode);
                 recipes.add(recipeNode);
                 recipesConfig.recipesToCraft.put(recipe.output.item, recipes);
             }
