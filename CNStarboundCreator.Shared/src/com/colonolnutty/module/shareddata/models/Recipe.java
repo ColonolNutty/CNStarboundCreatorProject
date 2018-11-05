@@ -12,4 +12,5 @@ public class Recipe {
     public ItemDescriptor[] input;
     public ItemDescriptor output;
     public String[] groups;
+    public boolean excludeFromRecipeBook;
 }

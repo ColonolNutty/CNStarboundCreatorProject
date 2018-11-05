@@ -104,7 +104,9 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
             String itemName = (String) itemNames.nextElement();
             _log.debug("Checking item: " + itemName);
             for(Recipe recipe : recipes.get(itemName)) {
-
+                if (CNCollectionUtils.contains(recipe.groups, "ExcludeFromRecipeBook")) {
+                    recipe.excludeFromRecipeBook = true;
+                }
                 for (String group : recipe.groups) {
                     if (!CNCollectionUtils.contains(_settings.includeRecipeGroups, group)) {
                         continue;
@@ -180,6 +182,7 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
                 }
                 recipeNode.put("in", inNode);
                 recipeNode.put("out", recipe.output.count);
+                recipeNode.put("excludeFromRecipeBook", recipe.excludeFromRecipeBook);
                 recipes.add(recipeNode);
                 recipesConfig.recipesToCraft.put(recipe.output.item, recipes);
             }
