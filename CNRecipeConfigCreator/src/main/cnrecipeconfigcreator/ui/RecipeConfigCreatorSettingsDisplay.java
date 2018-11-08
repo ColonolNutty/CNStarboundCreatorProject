@@ -41,6 +41,11 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
                 "What folder will the files be created at? ",
                 "creationPath",
                 _settings.creationPath);
+
+        JPanel friendlyNames = createField(FieldType.TextField,
+                "What file contains friendly names? ",
+                "friendlyNamesFilePath",
+                _settings.friendlyNamesFilePath);
         JPanel recipePaths = addTextArea(
                 "Relative Location of Recipes (Comma Separated): ",
                 "recipePaths",
@@ -91,6 +96,7 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
                                         .addGroup(
                                                 layout.createParallelGroup()
                                                         .addComponent(creationPath)
+                                                        .addComponent(friendlyNames)
                                                         .addComponent(recipePaths)
                                                         .addComponent(includeRecipeGroupsPanel)
                                         )
@@ -123,6 +129,7 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
                                 .addGroup(
                                         layout.createSequentialGroup()
                                                 .addComponent(creationPath)
+                                                .addComponent(friendlyNames)
                                                 .addComponent(recipePaths)
                                                 .addComponent(includeRecipeGroupsPanel)
                                 )
@@ -156,6 +163,17 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
                 _settings.creationPath = text.getText();
+                writeSettings();
+            }
+        });
+        setupTextEntryFocusListener("friendlyNamesFilePath", new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                JTextComponent text = (JTextComponent)e.getSource();
+                _settings.friendlyNamesFilePath = text.getText();
                 writeSettings();
             }
         });

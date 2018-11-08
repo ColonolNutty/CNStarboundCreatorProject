@@ -17,6 +17,7 @@ public class RecipeConfigCreatorCRData extends CRData<RecipeConfigCreatorSetting
         ArrayList<String> settingNames = new ArrayList<String>();
 
         settingNames.add("creationPath");
+        settingNames.add("friendlyNamesFilePath");
         settingNames.add("recipePaths");
         settingNames.add("includeRecipeGroups");
         settingNames.add("configAsPatchFile");
@@ -32,6 +33,7 @@ public class RecipeConfigCreatorCRData extends CRData<RecipeConfigCreatorSetting
     public boolean settingsAreValid(RecipeConfigCreatorSettings settings, CNLog log) {
         return verifySettings(log, settings,
                 settings.creationPath,
+                settings.friendlyNamesFilePath,
                 settings.recipePaths,
                 settings.includeRecipeGroups,
                 settings.configAsPatchFile);
