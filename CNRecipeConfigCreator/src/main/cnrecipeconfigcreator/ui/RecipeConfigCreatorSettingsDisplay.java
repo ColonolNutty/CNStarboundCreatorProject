@@ -54,6 +54,14 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
                 "Recipe Groups to Include in file creation (Comma Separated): ",
                 "includeRecipeGroups",
                 _settings.includeRecipeGroups);
+        JPanel ingredientLocations = addTextArea(
+                "Locations of ingredients (Comma Separated): ",
+                "ingredientLocations",
+                _settings.ingredientLocations);
+        JPanel ingredientFileTypes = addTextArea(
+                "File types of ingredients (Comma Separated): ",
+                "ingredientFileTypes",
+                _settings.ingredientFileTypes);
 
         JPanel propertyOrderFile = createField(FieldType.TextField,
                 "Relative path to file listing the order of JSON properties: ",
@@ -103,6 +111,8 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
                                         //Middle - Middle
                                         .addGroup(
                                                 layout.createParallelGroup()
+                                                        .addComponent(ingredientLocations)
+                                                        .addComponent(ingredientFileTypes)
                                                         .addComponent(propertyOrderFile)
                                                         .addComponent(logFile)
                                         )
@@ -136,6 +146,8 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
                                 //Middle - Middle
                                 .addGroup(
                                         layout.createSequentialGroup()
+                                                .addComponent(ingredientLocations)
+                                                .addComponent(ingredientFileTypes)
                                                 .addComponent(propertyOrderFile)
                                                 .addComponent(logFile)
                                 )
@@ -196,6 +208,28 @@ public class RecipeConfigCreatorSettingsDisplay extends SettingsDisplayBase {
             public void focusLost(FocusEvent e) {
                 JTextComponent text = (JTextComponent)e.getSource();
                 _settings.includeRecipeGroups = CNStringUtils.fromCommaSeparated(text.getText());
+                writeSettings();
+            }
+        });
+        setupTextEntryFocusListener("ingredientLocations", new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                JTextComponent text = (JTextComponent)e.getSource();
+                _settings.ingredientLocations = CNStringUtils.fromCommaSeparated(text.getText());
+                writeSettings();
+            }
+        });
+        setupTextEntryFocusListener("ingredientFileTypes", new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                JTextComponent text = (JTextComponent)e.getSource();
+                _settings.ingredientFileTypes = CNStringUtils.fromCommaSeparated(text.getText());
                 writeSettings();
             }
         });

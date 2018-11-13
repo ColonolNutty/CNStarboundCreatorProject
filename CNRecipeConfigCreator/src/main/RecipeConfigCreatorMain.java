@@ -6,8 +6,10 @@ import com.colonolnutty.module.shareddata.io.FileReaderWrapper;
 import com.colonolnutty.module.shareddata.io.IFileReader;
 import com.colonolnutty.module.shareddata.io.IReadFiles;
 import com.colonolnutty.module.shareddata.locators.FileLocator;
+import com.colonolnutty.module.shareddata.locators.IngredientStore;
 import com.colonolnutty.module.shareddata.locators.PatchLocator;
 import com.colonolnutty.module.shareddata.locators.RecipeStore;
+import com.colonolnutty.module.shareddata.models.Ingredient;
 import com.colonolnutty.module.shareddata.models.ItemDescriptor;
 import com.colonolnutty.module.shareddata.models.Recipe;
 import com.colonolnutty.module.shareddata.models.RecipesConfig;
@@ -18,6 +20,7 @@ import com.colonolnutty.module.shareddata.utils.StopWatchTimer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.locators.IngredientFileLocator;
 import main.locators.RecipeFileLocator;
 import main.settings.RecipeConfigCreatorSettings;
 
@@ -61,13 +64,14 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
         StopWatchTimer timer = new StopWatchTimer(_log);
         timer.start("Running");
         PatchLocator patchLocator = new PatchLocator(_log);
-        ArrayList<String> searchLocations = setupSearchLocations(_settings);
         _log.info("Locating files");
         FileLocator fileLocator = new RecipeFileLocator(_log);
+        FileLocator ingredientFileLocator = new IngredientFileLocator(_log, _settings.ingredientFileTypes);
 
-        RecipeStore recipeStore = new RecipeStore(_log, _manipulator, _patchManipulator, patchLocator, fileLocator, searchLocations);
+        IngredientStore ingredientStore = new IngredientStore(_log, _manipulator, _patchManipulator, patchLocator, ingredientFileLocator, CNCollectionUtils.toArrayList(_settings.ingredientLocations), _settings.ingredientFileTypes);
+        RecipeStore recipeStore = new RecipeStore(_log, _manipulator, _patchManipulator, patchLocator, fileLocator, CNCollectionUtils.toArrayList(_settings.recipePaths));
 
-        HashMap<String, String> friendlyGroupNames = null;
+        HashMap<String, String> friendlyGroupNames;
         try {
             friendlyGroupNames = readFriendlyNames(_settings.friendlyNamesFilePath);
 
@@ -78,7 +82,7 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
                 String methodName = (String) methodNames.nextElement();
                 String fileName = _settings.creationPath + "\\" + methodName + "Recipes.config";
                 Hashtable<String, ArrayList<Recipe>> methodRecipes = grouped.get(methodName);
-                writeToConfigurationFile(fileName, friendlyGroupNames, CNCollectionUtils.toArrayList(methodRecipes.keys()), methodRecipes);
+                writeToConfigurationFile(fileName, friendlyGroupNames, CNCollectionUtils.toArrayList(methodRecipes.keys()), methodRecipes, ingredientStore);
             }
         }
         catch(IOException e) {
@@ -115,14 +119,6 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
         }
 
         return friendlyNames;
-    }
-
-    private ArrayList<String> setupSearchLocations(RecipeConfigCreatorSettings settings) {
-        ArrayList<String> searchLocations = new ArrayList<String>();
-        for(String location : settings.recipePaths) {
-            searchLocations.add(location);
-        }
-        return searchLocations;
     }
 
     private void ensureCreatePath() {
@@ -169,7 +165,7 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
         return grouped;
     }
 
-    private void writeToConfigurationFile(String recipeConfigFileName, HashMap<String, String> friendlyNames, ArrayList<String> possibleOutputs, Hashtable<String, ArrayList<Recipe>> recipesToCraft) {
+    private void writeToConfigurationFile(String recipeConfigFileName, HashMap<String, String> friendlyNames, ArrayList<String> possibleOutputs, Hashtable<String, ArrayList<Recipe>> recipesToCraft, IngredientStore ingredientStore) {
         if(_settings.configAsPatchFile) {
             ArrayNode patchNode = _nodeProvider.createArrayNode();
             for(String possibleOutput : possibleOutputs) {
@@ -193,17 +189,21 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
         }
         for (String possibleOutput : possibleOutputs) {
             ArrayList<String> itemMethods = new ArrayList<>();
-            int idx = 1;
             for(Recipe recipe : recipesToCraft.get(possibleOutput)) {
+                String outputItemName = recipe.output.item;
+                Ingredient outputItemData = ingredientStore.getIngredient(outputItemName);
                 ObjectNode itemData;
-                if (recipesConfig.recipesToCraft.has(recipe.output.item)) {
-                    itemData = (ObjectNode) recipesConfig.recipesToCraft.get(recipe.output.item);
+                if (recipesConfig.recipesToCraft.has(outputItemName)) {
+                    itemData = (ObjectNode) recipesConfig.recipesToCraft.get(outputItemName);
                 }
                 else {
                     itemData = _nodeProvider.createObjectNode();
+                    itemData.put("displayName", outputItemData.shortdescription);
+                    itemData.put("displayNameWithMethods", outputItemData.shortdescription + " ()");
+                    itemData.put("displayName", outputItemData.shortdescription);
                     itemData.put("recipes", _nodeProvider.createArrayNode());
                     itemData.put("methods", _nodeProvider.createObjectNode());
-                    itemData.put("displayMethods", recipe.output.item + "()");
+                    itemData.put("icon", outputItemData.inventoryIcon);
                 }
                 ArrayNode recipes = (ArrayNode) itemData.get("recipes");
                 ObjectNode recipeNode = _nodeProvider.createObjectNode();
@@ -213,20 +213,32 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
                     if(recipesConfig.recipesCraftFrom.has(input.item)) {
                         inputNames = (ArrayNode) recipesConfig.recipesCraftFrom.get(input.item);
                     }
-                    if(!contains(inputNames, recipe.output.item)) {
-                        inputNames.add(recipe.output.item);
+                    if(!contains(inputNames, outputItemName)) {
+                        inputNames.add(outputItemName);
                     }
+                    Ingredient inputItemData = ingredientStore.getIngredient(input.item);
                     if (!inNode.has(input.item)) {
-                        ObjectNode countNode = _nodeProvider.createObjectNode();
-                        countNode.put("count", input.count);
-                        inNode.put(input.item, countNode);
+                        ObjectNode itemNode = _nodeProvider.createObjectNode();
+                        itemNode.put("count", input.count.intValue());
+                        itemNode.put("id", input.item);
+                        itemNode.put("icon", inputItemData.inventoryIcon);
+                        itemNode.put("displayName", inputItemData.shortdescription);
+                        inNode.put(input.item, itemNode);
+                    }
+                    else {
+                        ObjectNode itemNode = (ObjectNode) inNode.get(input.item);
+                        int count = itemNode.get("count").asInt();
+                        count += input.count.intValue();
+                        itemNode.put("count", count);
+                        inNode.put(input.item, itemNode);
                     }
                     recipesConfig.recipesCraftFrom.put(input.item, inputNames);
                 }
                 recipeNode.put("input", inNode);
-                ObjectNode outCount = _nodeProvider.createObjectNode();
-                outCount.put("count", recipe.output.count);
-                recipeNode.put("output", outCount);
+                ObjectNode outNode = _nodeProvider.createObjectNode();
+                outNode.put("name", outputItemName);
+                outNode.put("count", recipe.output.count.intValue());
+                recipeNode.put("output", outNode);
                 recipeNode.put("excludeFromRecipeBook", recipe.excludeFromRecipeBook);
                 ArrayList<String> recipeMethods = new ArrayList<>();
                 ObjectNode itemMethodsNode = (ObjectNode) itemData.get("methods");
@@ -259,11 +271,10 @@ public class RecipeConfigCreatorMain extends MainFunctionModule implements IRead
                 recipeNode.put("methods", methodsNode);
                 recipeNode.put("groups", groupNode);
                 recipes.add(recipeNode);
-                itemData.put("displayMethods", " (" + CNStringUtils.toCommaSeparated(CNCollectionUtils.toArray(String.class, itemMethods)) + ")");
+                itemData.put("displayNameWithMethods", outputItemData.shortdescription + " (" + CNStringUtils.toCommaSeparated(CNCollectionUtils.toArray(String.class, itemMethods)) + ")");
                 itemData.put("methods", itemMethodsNode);
                 itemData.put("recipes", recipes);
                 recipesConfig.recipesToCraft.put(recipe.output.item, itemData);
-                idx += 1;
             }
         }
 

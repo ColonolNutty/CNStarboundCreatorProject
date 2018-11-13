@@ -109,10 +109,15 @@ public class IngredientStore {
         }
         ArrayList<String> ingredientPatchFiles = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientPatchFileExt);
         ArrayList<String> filePaths = _fileLocator.getFilePathsByExtension(_fileLocations, ingredientFileExtensions);
-        for(int i = 0; i < filePaths.size(); i++) {
-            String filePath = filePaths.get(i);
-                String patchFile = _patchLocator.locatePatchFileFor(filePath, ingredientPatchFiles);
-                addIngredient(filePath, patchFile);
+        for(String filePath : filePaths) {
+            if(filePath != null) {
+                _log.debug("Located file path: " + filePath);
+            }
+            String patchFile = _patchLocator.locatePatchFileFor(filePath, ingredientPatchFiles);
+            if(patchFile != null) {
+                _log.debug("Located patch file: " + patchFile);
+            }
+            addIngredient(filePath, patchFile);
         }
         _stopWatch.stop();
         _stopWatch.logTime();

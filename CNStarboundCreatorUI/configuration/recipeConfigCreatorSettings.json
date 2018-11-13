@@ -7,6 +7,8 @@
   "propertiesToUpdate" : null,
   "forceUpdate" : false,
   "creationPath" : "TestFiles\\RecipeConfigCreator\\CreatePath",
+  "ingredientLocations" : [ "TestFiles\\Balancer\\Samples", "TestFiles\\Balancer\\NonStuff" ],
+  "ingredientFileTypes" : [ ".item", ".consumable", ".object", ".matitem", ".liqitem", ".projectile", ".liquid", ".matitem" ],
   "friendlyNamesFilePath" : "configuration\\friendlyNames.json",
   "recipePaths" : [ "TestFiles\\RecipeConfigCreator\\Samples", "TestFiles\\RecipeConfigCreator\\NonStuff" ],
   "includeRecipeGroups" : [ "bakingMFM", "blendingMFM", "boilingMFM", "canningMFM", "choppingMFM", "churningMFM", "coffeeMFM", "distillingMFM", "freezingMFM", "fryingMFM", "millingMFM", "preparingMFM", "pressingMFM", "purifyingMFM", "mixingMFM", "purifyingMFM", "recyclingMFM", "waterMFM" ],

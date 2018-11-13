@@ -21,6 +21,8 @@ public class RecipeConfigCreatorCRData extends CRData<RecipeConfigCreatorSetting
         settingNames.add("recipePaths");
         settingNames.add("includeRecipeGroups");
         settingNames.add("configAsPatchFile");
+        settingNames.add("ingredientLocations");
+        settingNames.add("ingredientFileTypes");
         return settingNames;
     }
 
@@ -36,6 +38,8 @@ public class RecipeConfigCreatorCRData extends CRData<RecipeConfigCreatorSetting
                 settings.friendlyNamesFilePath,
                 settings.recipePaths,
                 settings.includeRecipeGroups,
-                settings.configAsPatchFile);
+                settings.configAsPatchFile,
+                settings.ingredientLocations,
+                settings.ingredientFileTypes);
     }
 }

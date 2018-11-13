@@ -3,6 +3,7 @@ desktop.ini
 out
 *.log
 **/*.log
+CNStarboundCreatorUI/TestFiles/RecipeConfigCreator/CreatePath
 CNStarboundCreatorUI/TestFiles/RecipeCreator/CreatePath
 CNStarboundCreatorUI/TestFiles/PandC/PandCCreatePath
 **/.idea/workspace.xml

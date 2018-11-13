@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecipeConfigCreatorSettings extends BaseSettings {
     public String creationPath;
+    public String[] ingredientLocations;
+    public String[] ingredientFileTypes;
     public String friendlyNamesFilePath;
     public String[] recipePaths;
     public String[] includeRecipeGroups;
