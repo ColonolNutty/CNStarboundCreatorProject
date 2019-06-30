@@ -17,6 +17,36 @@ public class NodeProvider extends MapperWrapper {
         return node;
     }
 
+    public ArrayNode createTestAddObjectNode(String pathName) {
+        ArrayNode nodeArray = createArrayNode();
+        ObjectNode testNode = createTestInverseNode(pathName);
+        nodeArray.add(testNode);
+        ObjectNode node = createAddNode(pathName);
+        node.putObject("value");
+        nodeArray.add(node);
+        return nodeArray;
+    }
+
+    public ArrayNode createTestAddObjectNode(String pathName, ObjectNode node) {
+        ArrayNode nodeArray = createArrayNode();
+        ObjectNode testNode = createTestInverseNode(pathName);
+        nodeArray.add(testNode);
+        ObjectNode addNode = createAddNode(pathName);
+        addNode.put("value", node);
+        nodeArray.add(addNode);
+        return nodeArray;
+    }
+
+    public ArrayNode createTestAddSingleArrayNode(String pathName) {
+        ArrayNode nodeArray = createArrayNode();
+        ObjectNode testNode = createTestInverseNode(pathName);
+        nodeArray.add(testNode);
+        ObjectNode node = createAddNode(pathName);
+        node.putArray("value");
+        nodeArray.add(node);
+        return nodeArray;
+    }
+
     public ArrayNode createTestAddArrayNode(String pathName) {
         ArrayNode nodeArray = createArrayNode();
         ObjectNode testNode = createTestInverseNode(pathName);
@@ -101,6 +131,12 @@ public class NodeProvider extends MapperWrapper {
     }
 
     public ObjectNode createAddStringNode(String pathName, String value) {
+        ObjectNode node = createAddNode(pathName);
+        node.put("value", value);
+        return node;
+    }
+
+    public ObjectNode createAddObjectNode(String pathName, ObjectNode value) {
         ObjectNode node = createAddNode(pathName);
         node.put("value", value);
         return node;
